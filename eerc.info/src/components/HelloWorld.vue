@@ -80,9 +80,9 @@
         </a>
       </li>
     </ul>
-    <h2>
-      @Will f**k the sister
-      </h2>
+    <h1>
+      EERC Website.
+      </h1>
   </div>
 </template>
 
