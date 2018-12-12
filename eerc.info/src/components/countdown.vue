@@ -1,7 +1,7 @@
 <template>
   <div class="countdown">
     <p class="title">{{name}}</p>
-    <p class="deadline">{{deadline.toLocaleDateString('en-gb',dateOptions)}}</p>
+    <p class="deadline">{{deadline.toLocaleDateString(undefined,dateOptions)}}</p>
     <div class="timer">
       <div class="value">
         <h1>{{days(difference) | twoDigits}}</h1>

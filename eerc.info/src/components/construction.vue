@@ -69,8 +69,8 @@
       </div>
       <div class="mainRight">
         <countdown
-          :deadline="new Date(2019,0,20,18,45,0,0)"
-          name="WEC - Watkins Glen International - Project Cars 2 - Season 4"
+          :deadline="new Date(Date.UTC(2019,0,20,18,45,0,0))"
+          name="Project Cars 2 - Season 4 - Watkins Glen International"
         ></countdown>
       </div>
     </div>
