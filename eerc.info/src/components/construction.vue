@@ -27,7 +27,7 @@
     </div>
     <div class="main">
       <div class="mainLeft">
-        <button @click="gotosite('https://discord.gg/m2Dfpdj')" class="externalLink">
+        <!-- <button @click="gotosite('https://discord.gg/m2Dfpdj')" class="externalLink">
           <h2>Join our Discord Server</h2>
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
             <path d="M0 0h24v24H0z" fill="none"></path>
@@ -35,8 +35,7 @@
               d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"
             ></path>
           </svg>
-        </button>
-        
+        </button>-->
         <button @click="gotosite('https://goo.gl/forms/NcFb4z5KcKfn2lWo2')" class="externalLink">
           <h2>Apply to be a WEC Driver (Project Cars 2)</h2>
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
