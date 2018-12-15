@@ -65,6 +65,29 @@
             ></path>
           </svg>
         </button>
+
+        <div class="externalLink paypal">
+          <h3>Help fund the league by donating via PayPal</h3>
+          <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+            <input type="hidden" name="cmd" value="_s-xclick">
+            <input type="hidden" name="hosted_button_id" value="WT96RWAPDAZ8S">
+            <input
+              type="image"
+              src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif"
+              border="0"
+              name="submit"
+              title="PayPal - The safer, easier way to pay online!"
+              alt="Donate with PayPal button"
+            >
+            <img
+              alt
+              border="0"
+              src="https://www.paypal.com/en_GB/i/scr/pixel.gif"
+              width="1"
+              height="1"
+            >
+          </form>
+        </div>
       </div>
       <div class="mainRight">
         <countdown
@@ -139,6 +162,10 @@ a {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+}
+.externalLink .paypal {
+  justify-content: center;
+  align-items: center;
 }
 .externalLink:hover {
   background-color: #12181f;
