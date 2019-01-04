@@ -24,7 +24,6 @@
 </template>
 
 <script>
-let interval = null;
 export default {
   name: "countdown",
   props: {
@@ -33,6 +32,7 @@ export default {
   },
   data() {
     return {
+      interval: null,
       now: Math.trunc(new Date().getTime() / 1000),
       difference: 0,
       date: null,
@@ -49,7 +49,7 @@ export default {
   },
   created() {
     this.date = Math.trunc(this.deadline / 1000);
-    interval = setInterval(() => {
+    this.interval = setInterval(() => {
       this.now = Math.trunc(new Date().getTime() / 1000);
     }, 1000);
   },
@@ -58,13 +58,20 @@ export default {
       this.difference = this.date - this.now;
       if (this.difference <= 0) {
         this.difference = 0;
-        clearInterval(interval);
+        clearInterval(this.interval);
         //Tick onto next timer, raise event? I Dunno.
+        this.$emit("elapsed");
       }
+    },
+    deadline(val) {
+      this.date = Math.trunc(this.deadline / 1000);
+      this.interval = setInterval(() => {
+        this.now = Math.trunc(new Date().getTime() / 1000);
+      }, 1000);
     }
   },
   destroyed() {
-    clearInterval(interval);
+    clearInterval(this.interval);
   },
   methods: {
     seconds(date) {

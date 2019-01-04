@@ -1,10 +1,10 @@
 <template>
   <div class="body">
     <div class="header">
-      <img id="logoMain" src="/static/assets/eerclogo_0.png">
-      <img id="logoSub" src="/static/assets/eercf1.png">
-      <img id="logoSub" src="/static/assets/eercwec.png">
-      <img id="logoSub" src="/static/assets/eercfe.png">
+      <img id="logoMain" src="/img/eerclogo_0.png">
+      <img id="logoSub" src="/img/eercf1.png">
+      <img id="logoSub" src="/img/eercwec.png">
+      <img id="logoSub" src="/img/eercfe.png">
       <div class="textHeader">
         <h1>UNDER CONSTRUCTION</h1>
         <p>
@@ -90,20 +90,248 @@
         </div>
       </div>
       <div class="mainRight">
+        <series-countdown :series="calendar[0]"></series-countdown>
         <countdown
-          :deadline="new Date(Date.UTC(2019,0,20,18,45,0,0))"
-          name="Project Cars 2 - Season 4 - Watkins Glen International"
+          :deadline="new Date(Date.UTC(2019,0,18,19,0,0,0))"
+          name="F1 2018 - Season 4 - German Grand Prix"
         ></countdown>
+        <countdown
+          :deadline="new Date(Date.UTC(2019,0,16,20,30,0,0))"
+          name="RFactor2 - Season 1 - Buenos Aires"
+        ></countdown>
+        {{new Date(Date.UTC(2019,0,20,18,45,0,0))}}
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import SeriesCountdown from "@/components/series-countdown.vue";
 import Countdown from "@/components/countdown.vue";
 export default {
+  data() {
+    return {
+      calendar: [
+        {
+          series: "Test Series",
+          game: "life",
+          seasons: [
+            {
+              seasonName: "season 1",
+              events: [
+                {
+                  location: "web",
+                  track: "on1",
+                  utcDateTime: "2019-01-04T19:55:00.000Z",
+                  duration: 1
+                },
+                {
+                  location: "web2",
+                  track: "on2",
+                  utcDateTime: "2019-01-04T19:57:00.000Z",
+                  duration: 1
+                },
+                {
+                  location: "web3",
+                  track: "on3",
+                  utcDateTime: "2019-01-04T19:59:00.000Z",
+                  duration: 1
+                },
+                {
+                  location: "web4",
+                  track: "on4",
+                  utcDateTime: "2019-01-04T20:02:00.000Z",
+                  duration: 1
+                },
+                {
+                  location: "web",
+                  track: "on5",
+                  utcDateTime: "2019-01-04T20:04:00.000Z",
+                  duration: 1
+                },
+                {
+                  location: "web",
+                  track: "on6",
+                  utcDateTime: "2019-01-04T20:06:00.000Z",
+                  duration: 1
+                },
+                {
+                  location: "web",
+                  track: "on7",
+                  utcDateTime: "2019-01-04T20:10:00.000Z",
+                  duration: 1
+                }
+              ]
+            },
+            {
+              seasonName: "season 2",
+              events: [
+                {
+                  location: "web",
+                  track: "on1",
+                  utcDateTime: "2019-01-04T20:15:00.000Z",
+                  duration: 1
+                },
+                {
+                  location: "web2",
+                  track: "on2",
+                  utcDateTime: "2019-01-04T20:17:00.000Z",
+                  duration: 1
+                },
+                {
+                  location: "web3",
+                  track: "on3",
+                  utcDateTime: "2019-01-04T20:19:00.000Z",
+                  duration: 1
+                },
+                {
+                  location: "web4",
+                  track: "on4",
+                  utcDateTime: "2019-01-04T20:21:00.000Z",
+                  duration: 1
+                },
+                {
+                  location: "web",
+                  track: "on5",
+                  utcDateTime: "2019-01-04T20:23:00.000Z",
+                  duration: 1
+                },
+                {
+                  location: "web",
+                  track: "on6",
+                  utcDateTime: "2019-01-04T20:25:00.000Z",
+                  duration: 1
+                },
+                {
+                  location: "web",
+                  track: "on7",
+                  utcDateTime: "2019-01-04T20:27:00.000Z",
+                  duration: 1
+                }
+              ]
+            }
+          ]
+        },
+        // Array of series' to form a calendar grouped by series, seasons and events
+        {
+          series: "WEC", // the name of the series
+          game: "Project Cars 2", //The game the series is for
+          seasons: [
+            //Array of season
+            {
+              seasonName: "Season 4",
+              events: [
+                //Array of events in season
+                {
+                  location: "USA", //Location (meta data)
+                  track: "Watkins Glen International", //track the event is one
+                  utcDateTime: "2019-01-20T18:45:00.000Z", //UTC formatted date and time
+                  duration: 75 //mins
+                },
+                {
+                  location: "USA",
+                  track: "Circuit of the Americas",
+                  utcDateTime: "2019-01-27T18:45:00.000Z",
+                  duration: 75
+                },
+                {
+                  location: "USA",
+                  track: "Mazda Raceway Laguna Seca",
+                  utcDateTime: "2019-02-19T18:45:00.000Z",
+                  duration: 75
+                },
+                {
+                  location: "Australia",
+                  track: "Bathurst Mount Panorama",
+                  utcDateTime: "2019-02-10T18:45:00.000Z",
+                  duration: 75
+                },
+                {
+                  location: "Dubai",
+                  track: "Dubai Autodrome GP",
+                  utcDateTime: "2019-02-17T18:45:00.000Z",
+                  duration: 75
+                },
+                {
+                  location: "Czech Republic",
+                  track: "Brno",
+                  utcDateTime: "2019-02-24T18:45:00.000Z",
+                  duration: 75
+                },
+                {
+                  location: "Germany",
+                  track: "Hockeimring",
+                  utcDateTime: "2019-03-03T18:45:00.000Z",
+                  duration: 75
+                },
+                {
+                  location: "Germany",
+                  track: "Nürburgring  Nordschleife Combined",
+                  utcDateTime: "2019-03-10T18:45:00.000Z",
+                  duration: 75
+                },
+                {
+                  location: "Belgium",
+                  track: "Circuit de Spa-Francorchamps",
+                  utcDateTime: "2019-03-19T18:45:00.000Z",
+                  duration: 75
+                },
+                {
+                  location: "France",
+                  track: "24h Le Mans",
+                  utcDateTime: "2019-03-24T18:45:00.000Z",
+                  duration: 150
+                }
+              ]
+            }
+          ]
+        },
+        {
+          //TODO F1
+          series: "F1",
+          game: "F1 2018",
+          seasons: [
+            //Array of season
+            {
+              seasonName: "Season 4",
+              events: [
+                //Array of events in season
+                {
+                  location: "USA", //Location (meta data)
+                  track: "Watkins Glen International", //track the event is one
+                  utcDateTime: "2019-01-20T18:45:00.000Z", //UTC formatted date and time
+                  duration: 75 //mins
+                }
+              ]
+            }
+          ]
+        },
+        {
+          //TODO RF2 FE
+          sereies: "FE",
+          game: "RFactor2",
+          seasons: [
+            //Array of season
+            {
+              seasonName: "Season 1",
+              events: [
+                //Array of events in season
+                {
+                  location: "USA", //Location (meta data)
+                  track: "Watkins Glen International", //track the event is one
+                  utcDateTime: "2019-01-20T18:45:00.000Z", //UTC formatted date and time
+                  duration: 75 //mins
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    };
+  },
   components: {
-    Countdown
+    Countdown,
+    SeriesCountdown
   },
   methods: {
     gotosite: site => {
