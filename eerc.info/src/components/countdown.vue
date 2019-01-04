@@ -49,9 +49,15 @@ export default {
   },
   created() {
     this.date = Math.trunc(this.deadline / 1000);
-    this.interval = setInterval(() => {
-      this.now = Math.trunc(new Date().getTime() / 1000);
-    }, 1000);
+    this.difference = this.date - this.now;
+    if (this.difference <= 0) {
+      this.difference = 0;
+      this.$emit("elapsed");
+    } else {
+      this.interval = setInterval(() => {
+        this.now = Math.trunc(new Date().getTime() / 1000);
+      }, 1000);
+    }
   },
   watch: {
     now(value) {
@@ -65,9 +71,15 @@ export default {
     },
     deadline(val) {
       this.date = Math.trunc(this.deadline / 1000);
-      this.interval = setInterval(() => {
-        this.now = Math.trunc(new Date().getTime() / 1000);
-      }, 1000);
+      this.difference = this.date - this.now;
+      if (this.difference <= 0) {
+        this.dfference = 0;
+        this.$emit("elapsed");
+      } else {
+        this.interval = setInterval(() => {
+          this.now = Math.trunc(new Date().getTime() / 1000);
+        }, 1000);
+      }
     }
   },
   destroyed() {

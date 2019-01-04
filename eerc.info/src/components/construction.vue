@@ -90,8 +90,8 @@
         </div>
       </div>
       <div class="mainRight">
-        <series-countdown :series="calendar[0]"></series-countdown>
-        <countdown
+        <series-countdown v-for="(series,index) in calendar" :key="index" :series="series"></series-countdown>
+        <!-- <countdown
           :deadline="new Date(Date.UTC(2019,0,18,19,0,0,0))"
           name="F1 2018 - Season 4 - German Grand Prix"
         ></countdown>
@@ -99,7 +99,7 @@
           :deadline="new Date(Date.UTC(2019,0,16,20,30,0,0))"
           name="RFactor2 - Season 1 - Buenos Aires"
         ></countdown>
-        {{new Date(Date.UTC(2019,0,20,18,45,0,0))}}
+        {{new Date(Date.UTC(2019,0,20,18,45,0,0))}}-->
       </div>
     </div>
   </div>
@@ -114,7 +114,7 @@ export default {
       calendar: [
         {
           series: "Test Series",
-          game: "life",
+          game: "Test Countdown",
           seasons: [
             {
               seasonName: "season 1",
@@ -169,44 +169,122 @@ export default {
                 {
                   location: "web",
                   track: "on1",
-                  utcDateTime: "2019-01-04T20:15:00.000Z",
-                  duration: 1
+                  utcDateTime: "2019-01-04T21:55:00.000Z",
+                  duration: 2
                 },
                 {
-                  location: "web2",
+                  location: "web",
                   track: "on2",
-                  utcDateTime: "2019-01-04T20:17:00.000Z",
-                  duration: 1
+                  utcDateTime: "2019-01-04T22:00:00.000Z",
+                  duration: 2
                 },
                 {
-                  location: "web3",
+                  location: "web",
                   track: "on3",
-                  utcDateTime: "2019-01-04T20:19:00.000Z",
-                  duration: 1
+                  utcDateTime: "2019-01-04T22:05:00.000Z",
+                  duration: 2
                 },
                 {
-                  location: "web4",
+                  location: "web",
                   track: "on4",
-                  utcDateTime: "2019-01-04T20:21:00.000Z",
-                  duration: 1
+                  utcDateTime: "2019-01-04T22:10:00.000Z",
+                  duration: 2
                 },
                 {
                   location: "web",
                   track: "on5",
-                  utcDateTime: "2019-01-04T20:23:00.000Z",
-                  duration: 1
+                  utcDateTime: "2019-01-04T22:15:00.000Z",
+                  duration: 2
                 },
                 {
                   location: "web",
                   track: "on6",
-                  utcDateTime: "2019-01-04T20:25:00.000Z",
-                  duration: 1
+                  utcDateTime: "2019-01-04T22:20:00.000Z",
+                  duration: 2
                 },
                 {
                   location: "web",
                   track: "on7",
-                  utcDateTime: "2019-01-04T20:27:00.000Z",
-                  duration: 1
+                  utcDateTime: "2019-01-04T22:25:00.000Z",
+                  duration: 2
+                },
+                {
+                  location: "web",
+                  track: "on8",
+                  utcDateTime: "2019-01-04T22:30:00.000Z",
+                  duration: 2
+                },
+                {
+                  location: "web",
+                  track: "on9",
+                  utcDateTime: "2019-01-04T22:35:00.000Z",
+                  duration: 2
+                },
+                {
+                  location: "web",
+                  track: "on10",
+                  utcDateTime: "2019-01-04T22:40:00.000Z",
+                  duration: 2
+                },
+                {
+                  location: "web",
+                  track: "on11",
+                  utcDateTime: "2019-01-04T22:45:00.000Z",
+                  duration: 2
+                },
+                {
+                  location: "web",
+                  track: "on12",
+                  utcDateTime: "2019-01-04T22:50:00.000Z",
+                  duration: 2
+                },
+                {
+                  location: "web",
+                  track: "on13",
+                  utcDateTime: "2019-01-04T22:55:00.000Z",
+                  duration: 2
+                },
+                {
+                  location: "web",
+                  track: "on14",
+                  utcDateTime: "2019-01-04T23:00:00.000Z",
+                  duration: 2
+                },
+                {
+                  location: "web",
+                  track: "on15",
+                  utcDateTime: "2019-01-04T23:05:00.000Z",
+                  duration: 2
+                },
+                {
+                  location: "web",
+                  track: "on16",
+                  utcDateTime: "2019-01-04T23:10:00.000Z",
+                  duration: 2
+                },
+                {
+                  location: "web",
+                  track: "on17",
+                  utcDateTime: "2019-01-04T23:15:00.000Z",
+                  duration: 2
+                },
+                {
+                  location: "web",
+                  track: "on18",
+                  utcDateTime: "2019-01-04T23:20:00.000Z",
+                  duration: 2
+                },
+                {
+                  location: "web",
+                  track: "on19",
+                  utcDateTime: "2019-01-04T23:25:00.000Z",
+                  duration: 2
+                },
+                {
+                  location: "web",
+                  track: "on20",
+                  utcDateTime: "2019-01-04T23:30:00.000Z",
+                  duration: 2
                 }
               ]
             }
@@ -226,61 +304,61 @@ export default {
                   location: "USA", //Location (meta data)
                   track: "Watkins Glen International", //track the event is one
                   utcDateTime: "2019-01-20T18:45:00.000Z", //UTC formatted date and time
-                  duration: 75 //mins
+                  duration: 85 //mins
                 },
                 {
                   location: "USA",
                   track: "Circuit of the Americas",
                   utcDateTime: "2019-01-27T18:45:00.000Z",
-                  duration: 75
+                  duration: 85
                 },
                 {
                   location: "USA",
                   track: "Mazda Raceway Laguna Seca",
                   utcDateTime: "2019-02-19T18:45:00.000Z",
-                  duration: 75
+                  duration: 85
                 },
                 {
                   location: "Australia",
                   track: "Bathurst Mount Panorama",
                   utcDateTime: "2019-02-10T18:45:00.000Z",
-                  duration: 75
+                  duration: 85
                 },
                 {
                   location: "Dubai",
                   track: "Dubai Autodrome GP",
                   utcDateTime: "2019-02-17T18:45:00.000Z",
-                  duration: 75
+                  duration: 85
                 },
                 {
                   location: "Czech Republic",
                   track: "Brno",
                   utcDateTime: "2019-02-24T18:45:00.000Z",
-                  duration: 75
+                  duration: 85
                 },
                 {
                   location: "Germany",
                   track: "Hockeimring",
                   utcDateTime: "2019-03-03T18:45:00.000Z",
-                  duration: 75
+                  duration: 85
                 },
                 {
                   location: "Germany",
                   track: "Nürburgring  Nordschleife Combined",
                   utcDateTime: "2019-03-10T18:45:00.000Z",
-                  duration: 75
+                  duration: 85
                 },
                 {
                   location: "Belgium",
                   track: "Circuit de Spa-Francorchamps",
                   utcDateTime: "2019-03-19T18:45:00.000Z",
-                  duration: 75
+                  duration: 85
                 },
                 {
                   location: "France",
                   track: "24h Le Mans",
                   utcDateTime: "2019-03-24T18:45:00.000Z",
-                  duration: 150
+                  duration: 165
                 }
               ]
             }
@@ -297,10 +375,58 @@ export default {
               events: [
                 //Array of events in season
                 {
-                  location: "USA", //Location (meta data)
-                  track: "Watkins Glen International", //track the event is one
-                  utcDateTime: "2019-01-20T18:45:00.000Z", //UTC formatted date and time
-                  duration: 75 //mins
+                  location: "Germany", //Location (meta data)
+                  track: "German Grand Prix", //track the event is one
+                  utcDateTime: "2019-01-18T19:00:00.000Z", //UTC formatted date and time
+                  duration: 80 //mins
+                },
+                {
+                  location: "Hungary", //Location (meta data)
+                  track: "Hungarian Grand Prix", //track the event is one
+                  utcDateTime: "2019-01-25T19:00:00.000Z", //UTC formatted date and time
+                  duration: 80 //mins
+                },
+                {
+                  location: "Belgium", //Location (meta data)
+                  track: "Belgian Grand Prix", //track the event is one
+                  utcDateTime: "2019-02-01T19:00:00.000Z", //UTC formatted date and time
+                  duration: 80 //mins
+                },
+                {
+                  location: "Italian", //Location (meta data)
+                  track: "Italian Grand Prix", //track the event is one
+                  utcDateTime: "2019-02-08T19:00:00.000Z", //UTC formatted date and time
+                  duration: 80 //mins
+                },
+                {
+                  location: "Japan", //Location (meta data)
+                  track: "Japanese Grand Prix", //track the event is one
+                  utcDateTime: "2019-02-15T19:00:00.000Z", //UTC formatted date and time
+                  duration: 80 //mins
+                },
+                {
+                  location: "Brazil", //Location (meta data)
+                  track: "Brazilian Grand Prix", //track the event is one
+                  utcDateTime: "2019-02-22T19:00:00.000Z", //UTC formatted date and time
+                  duration: 80 //mins
+                },
+                {
+                  location: "Britain", //Location (meta data)
+                  track: "British Grand Prix", //track the event is one
+                  utcDateTime: "2019-03-01T19:00:00.000Z", //UTC formatted date and time
+                  duration: 80 //mins
+                },
+                {
+                  location: "Spain", //Location (meta data)
+                  track: "Spanish Grand Prix", //track the event is one
+                  utcDateTime: "2019-03-08T19:00:00.000Z", //UTC formatted date and time
+                  duration: 80 //mins
+                },
+                {
+                  location: "Monaco", //Location (meta data)
+                  track: "Monégasque Grand Prix", //track the event is one
+                  utcDateTime: "2019-03-15T19:00:00.000Z", //UTC formatted date and time
+                  duration: 80 //mins
                 }
               ]
             }
@@ -308,7 +434,7 @@ export default {
         },
         {
           //TODO RF2 FE
-          sereies: "FE",
+          series: "FE",
           game: "RFactor2",
           seasons: [
             //Array of season
@@ -317,10 +443,76 @@ export default {
               events: [
                 //Array of events in season
                 {
+                  location: "Germany", //Location (meta data)
+                  track: "Berlin City", //track the event is one
+                  utcDateTime: "2018-10-24T20:30:00.000Z", //UTC formatted date and time
+                  duration: 70 //mins
+                },
+                {
+                  location: "France", //Location (meta data)
+                  track: "Paris", //track the event is one
+                  utcDateTime: "2018-10-31T20:30:00.000Z", //UTC formatted date and time
+                  duration: 70 //mins
+                },
+                {
+                  location: "Morocco", //Location (meta data)
+                  track: "Marrakesch", //track the event is one
+                  utcDateTime: "2018-11-07T20:30:00.000Z", //UTC formatted date and time
+                  duration: 70 //mins
+                },
+                {
+                  location: "Monaco", //Location (meta data)
+                  track: "Monaco", //track the event is one
+                  utcDateTime: "2018-11-14T20:30:00.000Z", //UTC formatted date and time
+                  duration: 70 //mins
+                },
+                {
+                  location: "Germany", //Location (meta data)
+                  track: "Norisring", //track the event is one
+                  utcDateTime: "2018-11-21T20:30:00.000Z", //UTC formatted date and time
+                  duration: 70 //mins
+                },
+                {
+                  location: "Britain", //Location (meta data)
+                  track: "London", //track the event is one
+                  utcDateTime: "2018-11-28T20:30:00.000Z", //UTC formatted date and time
+                  duration: 70 //mins
+                },
+                {
+                  location: "Russia", //Location (meta data)
+                  track: "Moscow", //track the event is one
+                  utcDateTime: "2018-12-05T20:30:00.000Z", //UTC formatted date and time
+                  duration: 70 //mins
+                },
+                {
+                  location: "Germany", //Location (meta data)
+                  track: "Berlin Tempelhof", //track the event is one
+                  utcDateTime: "2018-12-12T20:30:00.000Z", //UTC formatted date and time
+                  duration: 70 //mins
+                },
+                {
+                  location: "Argentina", //Location (meta data)
+                  track: "Buenos Aires", //track the event is one
+                  utcDateTime: "2019-01-16T20:30:00.000Z", //UTC formatted date and time
+                  duration: 70 //mins
+                },
+                {
+                  location: "Mexico", //Location (meta data)
+                  track: "Mexico City", //track the event is one
+                  utcDateTime: "2019-01-23T20:30:00.000Z", //UTC formatted date and time
+                  duration: 70 //mins
+                },
+                {
                   location: "USA", //Location (meta data)
-                  track: "Watkins Glen International", //track the event is one
-                  utcDateTime: "2019-01-20T18:45:00.000Z", //UTC formatted date and time
-                  duration: 75 //mins
+                  track: "New York", //track the event is one
+                  utcDateTime: "2019-01-30T20:30:00.000Z", //UTC formatted date and time
+                  duration: 70 //mins
+                },
+                {
+                  location: "China", //Location (meta data)
+                  track: "Macau", //track the event is one
+                  utcDateTime: "2019-02-06T20:30:00.000Z", //UTC formatted date and time
+                  duration: 70 //mins
                 }
               ]
             }
