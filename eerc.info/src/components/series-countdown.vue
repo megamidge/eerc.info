@@ -7,6 +7,13 @@
       :name="series.game +' - '+series.series+' - ' + currentSeason.seasonName + ' - ' + currentEvent.track"
       @elapsed="elapsed"
     ></countdown>
+    <div v-else-if="noevent" class="inprogress">
+      <p class="title">Coming Soon</p>
+      <p class="onnow">More Events</p>
+      <div class="watch">
+        <p>We'll announce the next season of {{series.series}} soon!</p>
+      </div>
+    </div>
     <div v-else class="inprogress">
       <p
         class="title"
@@ -43,7 +50,8 @@ export default {
         timeZoneName: "short"
       },
       interval: null,
-      inProgress: false
+      inProgress: false,
+      noevent: false
     };
     4;
   },
@@ -83,6 +91,10 @@ export default {
         } else {
           this.currentEventIndex = 0;
           this.currentSeasonIndex++;
+        }
+        if (this.currentSeriesIndex >= this.series.season.length - 1) {
+          this.inProgress = false;
+          this.noevent = true;
         }
       }
     }
