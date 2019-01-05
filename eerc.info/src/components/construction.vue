@@ -112,23 +112,7 @@ export default {
   data() {
     return {
       calendar: [
-        {
-          series:"CHEC",
-          game:"ifactor 2018",
-          seasons:[
-            {
-              seasonName:"test",
-              events:[
-                {
-                  location:"null",
-                  track:"null",
-                  utcDateTime:"2019-01-01T18:00:00.000Z",
-                  duration:525600
-                }
-              ]
-            }
-          ]
-        },
+        
         // Array of series' to form a calendar grouped by series, seasons and events
         {
           series: "WEC", // the name of the series
