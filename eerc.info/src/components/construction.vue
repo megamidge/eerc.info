@@ -1,5 +1,5 @@
 <template>
-  <div class="body" style="overflow:scroll;">
+  <div class="body" style="overflow:auto;">
     <div class="header">
       <img id="logoMain" src="/img/eerclogo_0.png">
       <img id="logoSub" src="/img/eercf1.png">

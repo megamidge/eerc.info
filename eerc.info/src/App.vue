@@ -18,5 +18,8 @@ body {
   margin: 0;
   padding: 0;
   background-color: #2c3e50;
+  background: url('/img/eerc_background.png') #2c3e50 no-repeat fixed;
+  background-position:center top;
+  background-size:150%;
 }
 </style>
