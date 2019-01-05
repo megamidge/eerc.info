@@ -1,5 +1,5 @@
 <template>
-  <div class="body">
+  <div class="body" style="overflow:scroll;">
     <div class="header">
       <img id="logoMain" src="/img/eerclogo_0.png">
       <img id="logoSub" src="/img/eercf1.png">
@@ -395,7 +395,7 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  align-items: center;
+  align-items:center;
   background: #18222c;
   border-style: solid;
   border-width: 0 0 0.6rem 0;
@@ -432,22 +432,43 @@ a {
 .externalLink svg {
   fill: #d1d1d1;
 }
+@media screen and (min-width:600px) and (max-width:700px){
+  .externalLink{
+    flex-direction:column;
+  }
+}
+@media screen and (max-width:360px){
+  .externalLink{
+    flex-direction:column;
+  }
+}
 .main {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   width: 100%;
 }
+@media screen and (max-width:600px){
+  .main{
+    flex-direction:column;
+  }
+  .mainLeft{
+    order:2;
+  }
+  .mainRight{
+    order:1;
+  }
+}
 .mainLeft {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  width: 50%;
+  /* width: 50%; */
 }
 .mainRight {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  width: 50%;
+  /* width: 50%; */
 }
 </style>
