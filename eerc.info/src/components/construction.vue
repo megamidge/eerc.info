@@ -25,6 +25,42 @@
         ></path>
       </svg>
     </div>
+    <div class="stream-wrapper">
+      <div class="stream">
+        <div class="stream-video">
+          <!-- <img style="margin:0; width:100%;" src="img/vid_thumbnail.png"> -->
+          <div data-v-3c149061 class="stream-video">
+            <iframe
+              data-v-3c149061
+              width="100%"
+              height="500em"
+              src="https://www.youtube.com/embed/rPxRVdOV7Iw"
+              frameborder="0"
+              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen="allowfullscreen"
+            ></iframe>
+          </div>
+        </div>
+        <div class="stream-info">
+          <h1>Stream info</h1>
+          <p>Event info, how long left, etc etc</p>
+        </div>
+      </div>
+      <div>
+        <h2
+          style="margin:0.2rem;font-weight:bolder;position:relative;display:flex;flex-direction:row;justify-content:center;"
+        >Scroll
+          <div
+            style="border-left:1px solid #fff;
+                  border-bottom:1px solid #fff; 
+                  transform: rotate(-45deg);
+                  width:1rem;
+                  height:1rem;
+                  margin-left:1rem;"
+          ></div>
+        </h2>
+      </div>
+    </div>
     <div class="main">
       <div class="mainLeft">
         <!-- <button @click="gotosite('https://discord.gg/m2Dfpdj')" class="externalLink">
@@ -112,7 +148,6 @@ export default {
   data() {
     return {
       calendar: [
-        
         // Array of series' to form a calendar grouped by series, seasons and events
         {
           series: "WEC", // the name of the series
@@ -345,7 +380,6 @@ export default {
     };
   },
   components: {
-    Countdown,
     SeriesCountdown
   },
   methods: {
@@ -357,6 +391,33 @@ export default {
 </script>
 
 <style scoped>
+.stream-wrapper {
+  width: 95%;
+  margin: 1rem;
+  background-color: #12181f;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-around;
+}
+.stream {
+  width: 100%;
+  background-color: #12181f;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: space-around;
+}
+.stream-video {
+  flex-grow: 30;
+  background-color: #000000;
+  margin-right: 0.2rem;
+}
+.stream-info {
+  flex-grow: 4;
+  background-color: #18222c;
+  margin-left: 0.2rem;
+}
 .body {
   padding: 0;
   display: flex;
@@ -379,7 +440,7 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  align-items:center;
+  align-items: center;
   background: #18222c;
   border-style: solid;
   border-width: 0 0 0.6rem 0;
@@ -416,14 +477,14 @@ a {
 .externalLink svg {
   fill: #d1d1d1;
 }
-@media screen and (min-width:600px) and (max-width:700px){
-  .externalLink{
-    flex-direction:column;
+@media screen and (min-width: 600px) and (max-width: 700px) {
+  .externalLink {
+    flex-direction: column;
   }
 }
-@media screen and (max-width:360px){
-  .externalLink{
-    flex-direction:column;
+@media screen and (max-width: 360px) {
+  .externalLink {
+    flex-direction: column;
   }
 }
 .main {
@@ -432,15 +493,15 @@ a {
   justify-content: space-evenly;
   width: 100%;
 }
-@media screen and (max-width:600px){
-  .main{
-    flex-direction:column;
+@media screen and (max-width: 600px) {
+  .main {
+    flex-direction: column;
   }
-  .mainLeft{
-    order:2;
+  .mainLeft {
+    order: 2;
   }
-  .mainRight{
-    order:1;
+  .mainRight {
+    order: 1;
   }
 }
 .mainLeft {
