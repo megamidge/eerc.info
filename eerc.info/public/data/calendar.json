@@ -1,0 +1,223 @@
+{
+    "calendar": [
+        {
+            "series": "WEC",
+            "game": "Project Cars 2",
+            "seasons": [
+                {
+                    "seasonName": "Season 4",
+                    "events": [
+                        {
+                            "location": "USA",
+                            "track": "Watkins Glen International",
+                            "utcDateTime": "2019-01-20T18:45:00.000Z",
+                            "duration": 85
+                        },
+                        {
+                            "location": "USA",
+                            "track": "Circuit of the Americas",
+                            "utcDateTime": "2019-01-27T18:45:00.000Z",
+                            "duration": 85
+                        },
+                        {
+                            "location": "Australia",
+                            "track": "Bathurst Mount Panorama",
+                            "utcDateTime": "2019-02-19T18:45:00.000Z",
+                            "duration": 85
+                        },
+                        {
+                            "location": "Dubai",
+                            "track": "Dubai Autodrome GP",
+                            "utcDateTime": "2019-02-10T18:45:00.000Z",
+                            "duration": 85
+                        },
+                        {
+                            "location": "Japan",
+                            "track": "Sakkito GP",
+                            "utcDateTime": "2019-02-17T18:45:00.000Z",
+                            "duration": 85
+                        },
+                        {
+                            "location": "Germany",
+                            "track": "Hockeimring",
+                            "utcDateTime": "2019-02-24T18:45:00.000Z",
+                            "duration": 85
+                        },
+                        {
+                            "location": "Germany",
+                            "track": "Nürburgring  Nordschleife Combined",
+                            "utcDateTime": "2019-03-03T18:45:00.000Z",
+                            "duration": 85
+                        },
+                        {
+                            "location": "Belgium",
+                            "track": "Circuit de Spa-Francorchamps",
+                            "utcDateTime": "2019-03-10T18:45:00.000Z",
+                            "duration": 85
+                        },
+                        {
+                            "location": "United Kingdom",
+                            "track": "Silverstone GP",
+                            "utcDateTime": "2019-03-19T18:45:00.000Z",
+                            "duration": 85
+                        },
+                        {
+                            "location": "France",
+                            "track": "24h Le Mans",
+                            "utcDateTime": "2019-03-24T18:45:00.000Z",
+                            "duration": 165
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "series": "F1",
+            "game": "F1 2018",
+            "seasons": [
+                {
+                    "seasonName": "Season 4",
+                    "events": [
+                        {
+                            "location": "Germany",
+                            "track": "German Grand Prix",
+                            "utcDateTime": "2019-01-18T19:00:00.000Z",
+                            "duration": 80
+                        },
+                        {
+                            "location": "Hungary",
+                            "track": "Hungarian Grand Prix",
+                            "utcDateTime": "2019-01-25T19:00:00.000Z",
+                            "duration": 80
+                        },
+                        {
+                            "location": "Belgium",
+                            "track": "Belgian Grand Prix",
+                            "utcDateTime": "2019-02-01T19:00:00.000Z",
+                            "duration": 80
+                        },
+                        {
+                            "location": "Italian",
+                            "track": "Italian Grand Prix",
+                            "utcDateTime": "2019-02-08T19:00:00.000Z",
+                            "duration": 80
+                        },
+                        {
+                            "location": "Japan",
+                            "track": "Japanese Grand Prix",
+                            "utcDateTime": "2019-02-15T19:00:00.000Z",
+                            "duration": 80
+                        },
+                        {
+                            "location": "Brazil",
+                            "track": "Brazilian Grand Prix",
+                            "utcDateTime": "2019-02-22T19:00:00.000Z",
+                            "duration": 80
+                        },
+                        {
+                            "location": "Britain",
+                            "track": "British Grand Prix",
+                            "utcDateTime": "2019-03-01T19:00:00.000Z",
+                            "duration": 80
+                        },
+                        {
+                            "location": "Spain",
+                            "track": "Spanish Grand Prix",
+                            "utcDateTime": "2019-03-08T19:00:00.000Z",
+                            "duration": 80
+                        },
+                        {
+                            "location": "Monaco",
+                            "track": "Monégasque Grand Prix",
+                            "utcDateTime": "2019-03-15T19:00:00.000Z",
+                            "duration": 80
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "series": "FE",
+            "game": "RFactor2",
+            "seasons": [
+                {
+                    "seasonName": "Season 1",
+                    "events": [
+                        {
+                            "location": "Germany",
+                            "track": "Berlin City",
+                            "utcDateTime": "2018-10-24T20:30:00.000Z",
+                            "duration": 70
+                        },
+                        {
+                            "location": "France",
+                            "track": "Paris",
+                            "utcDateTime": "2018-10-31T20:30:00.000Z",
+                            "duration": 70
+                        },
+                        {
+                            "location": "Morocco",
+                            "track": "Marrakesch",
+                            "utcDateTime": "2018-11-07T20:30:00.000Z",
+                            "duration": 70
+                        },
+                        {
+                            "location": "Monaco",
+                            "track": "Monaco",
+                            "utcDateTime": "2018-11-14T20:30:00.000Z",
+                            "duration": 70
+                        },
+                        {
+                            "location": "Germany",
+                            "track": "Norisring",
+                            "utcDateTime": "2018-11-21T20:30:00.000Z",
+                            "duration": 70
+                        },
+                        {
+                            "location": "Britain",
+                            "track": "London",
+                            "utcDateTime": "2018-11-28T20:30:00.000Z",
+                            "duration": 70
+                        },
+                        {
+                            "location": "Russia",
+                            "track": "Moscow",
+                            "utcDateTime": "2018-12-05T20:30:00.000Z",
+                            "duration": 70
+                        },
+                        {
+                            "location": "Germany",
+                            "track": "Berlin Tempelhof",
+                            "utcDateTime": "2018-12-12T20:30:00.000Z",
+                            "duration": 70
+                        },
+                        {
+                            "location": "Argentina",
+                            "track": "Buenos Aires",
+                            "utcDateTime": "2019-01-16T20:30:00.000Z",
+                            "duration": 70
+                        },
+                        {
+                            "location": "Mexico",
+                            "track": "Mexico City",
+                            "utcDateTime": "2019-01-23T20:30:00.000Z",
+                            "duration": 70
+                        },
+                        {
+                            "location": "USA",
+                            "track": "New York",
+                            "utcDateTime": "2019-01-30T20:30:00.000Z",
+                            "duration": 70
+                        },
+                        {
+                            "location": "China",
+                            "track": "Macau",
+                            "utcDateTime": "2019-02-06T20:30:00.000Z",
+                            "duration": 70
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

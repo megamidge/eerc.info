@@ -1,5 +1,5 @@
 <template>
-  <div class="body" style="overflow:auto;">
+  <div class="body" ref="body">
     <div class="header">
       <img id="logoMain" src="/img/eerclogo_0.png">
       <img id="logoSub" src="/img/eercf1.png">
@@ -29,15 +29,15 @@
       <div class="stream">
         <div class="stream-video">
           <!-- <img style="margin:0; width:100%;" src="img/vid_thumbnail.png"> -->
-          <div data-v-3c149061 class="stream-video">
+          <div class="stream-video">
             <iframe
-              data-v-3c149061
+              ref="ytstream"
               width="100%"
-              height="500em"
-              src="https://www.youtube.com/embed/rPxRVdOV7Iw"
+              height="720"
+              src="https://www.youtube.com/embed/ox6w_NYRe7s"
               frameborder="0"
               allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen="allowfullscreen"
+              allowfullscreen
             ></iframe>
           </div>
         </div>
@@ -46,10 +46,8 @@
           <p>Event info, how long left, etc etc</p>
         </div>
       </div>
-      <div>
-        <h2
-          style="margin:0.2rem;font-weight:bolder;position:relative;display:flex;flex-direction:row;justify-content:center;"
-        >Scroll
+      <div class="sticky" ref="sticky">
+        <h2 class="scroll">Scroll
           <div
             style="border-left:1px solid #fff;
                   border-bottom:1px solid #fff; 
@@ -144,253 +142,75 @@
 <script>
 import SeriesCountdown from "@/components/series-countdown.vue";
 import Countdown from "@/components/countdown.vue";
+import Ajax from "@/ajax.js";
 export default {
   data() {
     return {
-      calendar: [
-        // Array of series' to form a calendar grouped by series, seasons and events
-        {
-          series: "WEC", // the name of the series
-          game: "Project Cars 2", //The game the series is for
-          seasons: [
-            //Array of season
-            {
-              seasonName: "Season 4",
-              events: [
-                //Array of events in season
-                {
-                  location: "USA", //Location (meta data)
-                  track: "Watkins Glen International", //track the event is one
-                  utcDateTime: "2019-01-20T18:45:00.000Z", //UTC formatted date and time
-                  duration: 85 //mins
-                },
-                {
-                  location: "USA",
-                  track: "Circuit of the Americas",
-                  utcDateTime: "2019-01-27T18:45:00.000Z",
-                  duration: 85
-                },
-                {
-                  location: "USA",
-                  track: "Mazda Raceway Laguna Seca",
-                  utcDateTime: "2019-02-19T18:45:00.000Z",
-                  duration: 85
-                },
-                {
-                  location: "Australia",
-                  track: "Bathurst Mount Panorama",
-                  utcDateTime: "2019-02-10T18:45:00.000Z",
-                  duration: 85
-                },
-                {
-                  location: "Dubai",
-                  track: "Dubai Autodrome GP",
-                  utcDateTime: "2019-02-17T18:45:00.000Z",
-                  duration: 85
-                },
-                {
-                  location: "Czech Republic",
-                  track: "Brno",
-                  utcDateTime: "2019-02-24T18:45:00.000Z",
-                  duration: 85
-                },
-                {
-                  location: "Germany",
-                  track: "Hockeimring",
-                  utcDateTime: "2019-03-03T18:45:00.000Z",
-                  duration: 85
-                },
-                {
-                  location: "Germany",
-                  track: "Nürburgring  Nordschleife Combined",
-                  utcDateTime: "2019-03-10T18:45:00.000Z",
-                  duration: 85
-                },
-                {
-                  location: "Belgium",
-                  track: "Circuit de Spa-Francorchamps",
-                  utcDateTime: "2019-03-19T18:45:00.000Z",
-                  duration: 85
-                },
-                {
-                  location: "France",
-                  track: "24h Le Mans",
-                  utcDateTime: "2019-03-24T18:45:00.000Z",
-                  duration: 165
-                }
-              ]
-            }
-          ]
-        },
-        {
-          //TODO F1
-          series: "F1",
-          game: "F1 2018",
-          seasons: [
-            //Array of season
-            {
-              seasonName: "Season 4",
-              events: [
-                //Array of events in season
-                {
-                  location: "Germany", //Location (meta data)
-                  track: "German Grand Prix", //track the event is one
-                  utcDateTime: "2019-01-18T19:00:00.000Z", //UTC formatted date and time
-                  duration: 80 //mins
-                },
-                {
-                  location: "Hungary", //Location (meta data)
-                  track: "Hungarian Grand Prix", //track the event is one
-                  utcDateTime: "2019-01-25T19:00:00.000Z", //UTC formatted date and time
-                  duration: 80 //mins
-                },
-                {
-                  location: "Belgium", //Location (meta data)
-                  track: "Belgian Grand Prix", //track the event is one
-                  utcDateTime: "2019-02-01T19:00:00.000Z", //UTC formatted date and time
-                  duration: 80 //mins
-                },
-                {
-                  location: "Italian", //Location (meta data)
-                  track: "Italian Grand Prix", //track the event is one
-                  utcDateTime: "2019-02-08T19:00:00.000Z", //UTC formatted date and time
-                  duration: 80 //mins
-                },
-                {
-                  location: "Japan", //Location (meta data)
-                  track: "Japanese Grand Prix", //track the event is one
-                  utcDateTime: "2019-02-15T19:00:00.000Z", //UTC formatted date and time
-                  duration: 80 //mins
-                },
-                {
-                  location: "Brazil", //Location (meta data)
-                  track: "Brazilian Grand Prix", //track the event is one
-                  utcDateTime: "2019-02-22T19:00:00.000Z", //UTC formatted date and time
-                  duration: 80 //mins
-                },
-                {
-                  location: "Britain", //Location (meta data)
-                  track: "British Grand Prix", //track the event is one
-                  utcDateTime: "2019-03-01T19:00:00.000Z", //UTC formatted date and time
-                  duration: 80 //mins
-                },
-                {
-                  location: "Spain", //Location (meta data)
-                  track: "Spanish Grand Prix", //track the event is one
-                  utcDateTime: "2019-03-08T19:00:00.000Z", //UTC formatted date and time
-                  duration: 80 //mins
-                },
-                {
-                  location: "Monaco", //Location (meta data)
-                  track: "Monégasque Grand Prix", //track the event is one
-                  utcDateTime: "2019-03-15T19:00:00.000Z", //UTC formatted date and time
-                  duration: 80 //mins
-                }
-              ]
-            }
-          ]
-        },
-        {
-          //TODO RF2 FE
-          series: "FE",
-          game: "RFactor2",
-          seasons: [
-            //Array of season
-            {
-              seasonName: "Season 1",
-              events: [
-                //Array of events in season
-                {
-                  location: "Germany", //Location (meta data)
-                  track: "Berlin City", //track the event is one
-                  utcDateTime: "2018-10-24T20:30:00.000Z", //UTC formatted date and time
-                  duration: 70 //mins
-                },
-                {
-                  location: "France", //Location (meta data)
-                  track: "Paris", //track the event is one
-                  utcDateTime: "2018-10-31T20:30:00.000Z", //UTC formatted date and time
-                  duration: 70 //mins
-                },
-                {
-                  location: "Morocco", //Location (meta data)
-                  track: "Marrakesch", //track the event is one
-                  utcDateTime: "2018-11-07T20:30:00.000Z", //UTC formatted date and time
-                  duration: 70 //mins
-                },
-                {
-                  location: "Monaco", //Location (meta data)
-                  track: "Monaco", //track the event is one
-                  utcDateTime: "2018-11-14T20:30:00.000Z", //UTC formatted date and time
-                  duration: 70 //mins
-                },
-                {
-                  location: "Germany", //Location (meta data)
-                  track: "Norisring", //track the event is one
-                  utcDateTime: "2018-11-21T20:30:00.000Z", //UTC formatted date and time
-                  duration: 70 //mins
-                },
-                {
-                  location: "Britain", //Location (meta data)
-                  track: "London", //track the event is one
-                  utcDateTime: "2018-11-28T20:30:00.000Z", //UTC formatted date and time
-                  duration: 70 //mins
-                },
-                {
-                  location: "Russia", //Location (meta data)
-                  track: "Moscow", //track the event is one
-                  utcDateTime: "2018-12-05T20:30:00.000Z", //UTC formatted date and time
-                  duration: 70 //mins
-                },
-                {
-                  location: "Germany", //Location (meta data)
-                  track: "Berlin Tempelhof", //track the event is one
-                  utcDateTime: "2018-12-12T20:30:00.000Z", //UTC formatted date and time
-                  duration: 70 //mins
-                },
-                {
-                  location: "Argentina", //Location (meta data)
-                  track: "Buenos Aires", //track the event is one
-                  utcDateTime: "2019-01-16T20:30:00.000Z", //UTC formatted date and time
-                  duration: 70 //mins
-                },
-                {
-                  location: "Mexico", //Location (meta data)
-                  track: "Mexico City", //track the event is one
-                  utcDateTime: "2019-01-23T20:30:00.000Z", //UTC formatted date and time
-                  duration: 70 //mins
-                },
-                {
-                  location: "USA", //Location (meta data)
-                  track: "New York", //track the event is one
-                  utcDateTime: "2019-01-30T20:30:00.000Z", //UTC formatted date and time
-                  duration: 70 //mins
-                },
-                {
-                  location: "China", //Location (meta data)
-                  track: "Macau", //track the event is one
-                  utcDateTime: "2019-02-06T20:30:00.000Z", //UTC formatted date and time
-                  duration: 70 //mins
-                }
-              ]
-            }
-          ]
-        }
-      ]
+      ytstream: null,
+      calendar: []
     };
   },
   components: {
     SeriesCountdown
   },
+  beforeMount() {
+    Ajax.request("/data/calendar.json")
+      .as("json")
+      .then(response => {
+        console.log(response);
+        this.calendar = response.calendar;
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  },
   methods: {
     gotosite: site => {
       window.open(site);
+    },
+    resizeStream() {
+      let width = this.$refs["ytstream"].clientWidth;
+      let aspectX = 16;
+      let aspectY = 9;
+
+      let wx = width * aspectY;
+      let height = wx / aspectX;
+      this.$refs["ytstream"].height = height;
+    }
+  },
+  mounted() {
+    this.$nextTick(() => {
+      window.addEventListener("resize", () => {
+        this.ytstream = this.$refs["ytstream"].clientWidth;
+      });
+      window.addEventListener("scroll", () => {
+        console.log(this.$refs["body"].scrollTop);
+      });
+      this.resizeStream();
+    });
+  },
+  watch: {
+    ytstream() {
+      this.resizeStream();
     }
   }
 };
 </script>
 
 <style scoped>
+.sticky {
+  position: sticky;
+  position: -webkit-sticky;
+  bottom: 0;
+}
+.scroll {
+  font-weight: bolder;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background: #12181fef;
+  margin: 0;
+}
 .stream-wrapper {
   width: 95%;
   margin: 1rem;
