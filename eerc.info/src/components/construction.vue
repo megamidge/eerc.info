@@ -25,10 +25,9 @@
         ></path>
       </svg>
     </div>
-    <div class="stream-wrapper">
+    <div class="stream-wrapper" v-show="streaming">
       <div class="stream">
         <div class="stream-video">
-          <!-- <img style="margin:0; width:100%;" src="img/vid_thumbnail.png"> -->
           <div class="stream-video">
             <iframe
               ref="ytstream"
@@ -124,7 +123,12 @@
         </div>
       </div>
       <div class="mainRight">
-        <series-countdown v-for="(series,index) in calendar" :key="index" :series="series"></series-countdown>
+        <series-countdown
+          v-for="(series,index) in calendar"
+          :key="index"
+          :series="series"
+          @inProgress="changeInProgress($event)"
+        ></series-countdown>
         <!-- <countdown
           :deadline="new Date(Date.UTC(2019,0,18,19,0,0,0))"
           name="F1 2018 - Season 4 - German Grand Prix"
@@ -147,24 +151,62 @@ export default {
   data() {
     return {
       ytstream: null,
-      calendar: []
+      calendar: [],
+      streaming: false,
+      inProgresses: []
     };
   },
   components: {
     SeriesCountdown
   },
+  watch: {
+    ytstream() {
+      this.resizeStream();
+    },
+    inProgresses(array) {
+      if (array.some(e => e.inProgress === true)) {
+        this.streaming = true;
+        this.$nextTick(() => {
+          this.ytstream = this.$refs["ytstream"].clientWidth;
+        });
+      } else {
+        this.streaming = false;
+      }
+    }
+  },
   beforeMount() {
     Ajax.request("/data/calendar.json")
       .as("json")
       .then(response => {
-        console.log(response);
         this.calendar = response.calendar;
       })
       .catch(error => {
         console.log(error);
       });
   },
+  mounted() {
+    this.$nextTick(() => {
+      window.addEventListener("resize", () => {
+        this.ytstream = this.$refs["ytstream"].clientWidth;
+      });
+      window.addEventListener("scroll", () => {
+        //console.log(this.$refs["body"].scrollTop);
+      });
+      this.resizeStream();
+    });
+  },
   methods: {
+    changeInProgress(event) {
+      let series = event.series;
+      let inProgress = event.inProgress;
+      if (this.inProgresses.some(e => e.series === series)) {
+        this.inProgresses.filter(
+          e => e.series === series
+        )[0].inProgress = inProgress;
+      } else {
+        this.inProgresses.push({ series: series, inProgress: inProgress });
+      }
+    },
     gotosite: site => {
       window.open(site);
     },
@@ -176,22 +218,6 @@ export default {
       let wx = width * aspectY;
       let height = wx / aspectX;
       this.$refs["ytstream"].height = height;
-    }
-  },
-  mounted() {
-    this.$nextTick(() => {
-      window.addEventListener("resize", () => {
-        this.ytstream = this.$refs["ytstream"].clientWidth;
-      });
-      window.addEventListener("scroll", () => {
-        console.log(this.$refs["body"].scrollTop);
-      });
-      this.resizeStream();
-    });
-  },
-  watch: {
-    ytstream() {
-      this.resizeStream();
     }
   }
 };
