@@ -33,7 +33,7 @@
               ref="ytstream"
               width="100%"
               height="720"
-              src="https://www.youtube.com/embed/ox6w_NYRe7s"
+              src="https://www.youtube.com/embed/live_stream?channel=UC4kk8xdkgP1arwEgD7G4Nlw"
               frameborder="0"
               allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
               allowfullscreen
@@ -41,8 +41,8 @@
           </div>
         </div>
         <div class="stream-info">
-          <h1>Stream info</h1>
-          <p>Event info, how long left, etc etc</p>
+          <h1 v-if="currentSeries">{{currentSeries.series}} {{currentSeries.game}}</h1>
+          <p>Live now.</p>
         </div>
       </div>
       <div class="sticky" ref="sticky">
@@ -153,7 +153,8 @@ export default {
       ytstream: null,
       calendar: [],
       streaming: false,
-      inProgresses: []
+      inProgresses: [],
+      currentSeries: null
     };
   },
   components: {
@@ -169,6 +170,11 @@ export default {
         this.$nextTick(() => {
           this.ytstream = this.$refs["ytstream"].clientWidth;
         });
+        let currentSeriesName = array.filter(e => e.inProgress === true)[0]
+          .series;
+        this.currentSeries = this.calendar.filter(
+          ser => ser.series === currentSeriesName
+        )[0];
       } else {
         this.streaming = false;
       }
