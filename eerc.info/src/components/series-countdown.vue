@@ -4,7 +4,7 @@
       v-if="!inProgress"
       :deadline="new Date(currentEvent.utcDateTime)"
       :duration="currentEvent.duration"
-      :name="series.game +' - '+series.series+' - ' + currentSeason.seasonName + ' - ' + currentEvent.track"
+      :name="series.game +' - '+series.series+' - ' + currentSeason.seasonName + ' - ' + 'Round ' + (currentEventIndex+1) + ' - ' + currentEvent.track"
       @elapsed="elapsed"
     ></countdown>
     <div v-else-if="noevent" class="inprogress">
