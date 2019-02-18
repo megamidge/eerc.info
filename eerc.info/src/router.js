@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Construction from './views/Home.vue'
-
+import Home from './views/Home.vue'
+import Header from './components/header.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -10,8 +10,18 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Construction',
-      component: Construction
+      component: Header,
+      children: [
+        {
+          path: '',
+          name: 'Home',
+          component: Home
+        }
+      ]
+    },
+    {
+      path: '*',
+      component: Header
     }
   ]
 })
