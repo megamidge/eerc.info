@@ -1,17 +1,17 @@
 <template>
   <div>
     <countdown
-      v-if="!inProgress"
+      v-if="!inProgress && !noevent"
       :deadline="new Date(currentEvent.utcDateTime)"
       :duration="currentEvent.duration"
       :name="series.game +' - '+series.series+' - ' + currentSeason.seasonName + ' - ' + 'Round ' + (currentEventIndex+1) + ' - ' + currentEvent.track"
       @elapsed="elapsed"
     ></countdown>
     <div v-else-if="noevent" class="inprogress">
-      <p class="title">Coming Soon</p>
-      <p class="onnow">More Events</p>
+      <p class="title">{{series.game}} - {{series.series}} - Season {{currentSeasonIndex + 1}}</p>
+      <p class="onnow">Coming Soon...</p>
       <div class="watch">
-        <p>We'll announce the next season of {{series.series}} soon!</p>
+        <p>We'll announce the next season of {{series.game}} {{series.series}} soon!</p>
       </div>
     </div>
     <div v-else class="inprogress">
@@ -149,12 +149,13 @@ export default {
         ) {
           this.currentEventIndex++;
         } else {
+          if (this.currentSeasonIndex + 1 >= this.series.seasons.length - 1) {
+            this.inProgress = false;
+            this.noevent = true;
+            this.currentEventIndex = 0;
+          }
           this.currentEventIndex = 0;
           this.currentSeasonIndex++;
-        }
-        if (this.currentSeriesIndex >= this.series.seasons.length - 1) {
-          this.inProgress = false;
-          this.noevent = true;
         }
       }
     }
