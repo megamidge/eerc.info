@@ -2,15 +2,16 @@
   <div>
     <div class="header">
       <img src="img/eerclogo_0.png" style="height:auto;width:4rem;margin:0.5rem;">
-      <nav class="menu">
+      <!-- <nav class="menu">
         <ul>
           <li>Home</li>
           <li>Leagues/Series</li>
           <li>Gallery</li>
           <li>About</li>
         </ul>
-      </nav>
+      </nav>-->
       <h4>This site is under construction.</h4>
+      <h5>Check back often to see frequent changes.</h5>
     </div>
     <router-view></router-view>
   </div>
