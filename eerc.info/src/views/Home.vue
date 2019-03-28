@@ -35,16 +35,31 @@
     </div>
     <div class="main">
       <div class="mainLeft">
+        <button @click="gotosite('https://forms.gle/SW8G6r5kKbPaGBZp7')" class="externalLink">
+          <h2>
+            <span style="color:#cc0000">
+              [NEW!]
+            </span> 
+            Apply to be a driver in the World Rally Championship (DiRT Rally)
+          </h2>
+          <img src="img/svg/externLink.svg" width="24" height="24" alt="[external link]">
+        </button>
         <button @click="gotosite('https://goo.gl/forms/kLcXJ1S7GPCX8gDA3')" class="externalLink">
           <h2>
-            <span style="color:#cc0000">[NEW!]</span> Apply to be a driver in the Ginetta GT4 Supercup (Project Cars 2)
+            <span style="color:#cc0000">
+              [NEW!]
+            </span>
+            Apply to be a driver in the Ginetta GT4 Supercup (Project Cars 2)
           </h2>
           <img src="img/svg/externLink.svg" width="24" height="24" alt="[external link]">
         </button>
         
         <button @click="gotosite('https://goo.gl/forms/spPDvr4aaUVZMKAk1')" class="externalLink">
           <h2>
-            <span style="color:#cc0000">[NEW!]</span> Apply to be a GT Series driver. (Assetto Corsa Competizione)
+            <span style="color:#cc0000">
+              [NEW!]
+            </span>
+            Apply to be a GT Series driver. (Assetto Corsa Competizione)
           </h2>
           <img src="img/svg/externLink.svg" width="24" height="24" alt="[external link]">
         </button>

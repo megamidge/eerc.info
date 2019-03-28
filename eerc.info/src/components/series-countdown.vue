@@ -8,7 +8,7 @@
       @elapsed="elapsed"
     ></countdown>
     <div v-else-if="noevent" class="inprogress">
-      <p class="title">{{series.game}} - {{series.series}} - Season {{currentSeasonIndex + 1}}</p>
+      <p class="title">{{series.game}} - {{series.series}} - Next Season</p>
       <p class="onnow">Coming Soon...</p>
       <div class="watch">
         <p>We'll announce the next season of {{series.game}} {{series.series}} soon!</p>
@@ -56,6 +56,9 @@ export default {
   components: {
     countdown
   },
+  props: {
+    series: Object
+  },
   data() {
     return {
       currentSeasonIndex: 0,
@@ -78,9 +81,6 @@ export default {
     };
     4;
   },
-  props: {
-    series: Object
-  },
   computed: {
     currentEvent() {
       return this.series.seasons[this.currentSeasonIndex].events[
@@ -90,14 +90,6 @@ export default {
     currentSeason() {
       return this.series.seasons[this.currentSeasonIndex];
     }
-  },
-  mounted() {
-    this.$nextTick(() => {
-      this.$emit("inProgress", {
-        series: this.series.series,
-        inProgress: this.inProgress
-      });
-    });
   },
   watch: {
     now(value) {
@@ -124,6 +116,14 @@ export default {
         inProgress: value
       });
     }
+  },
+  mounted() {
+    this.$nextTick(() => {
+      this.$emit("inProgress", {
+        series: this.series.series,
+        inProgress: this.inProgress
+      });
+    });
   },
   methods: {
     gotosite: site => {
