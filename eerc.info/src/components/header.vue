@@ -1,29 +1,17 @@
 <template>
   <div>
     <div class="header">
-      <img src="img/eerclogo_0.png" style="height:auto;width:4rem;margin:0.5rem;">
+      <img src="/img/eerclogo_0.png" style="height:auto;width:4rem;margin:0.5rem;">
       <nav class="menu">
         <ul>
-          <li>Home</li>
-          <li id="leagues">Leagues/Series
+          <li @click="$router.push('/')">Home</li>
+          <li id="leagues">
+            Leagues/Series
             <ul class="series-menu">
-              <li>
-                <div class="test" style="background-image: url('/img/eercwec.png');">WEC</div>
-              </li>
-              <li>
-                <div class="test" style="background-image: url('/img/eercf1.png');">F1</div>
-              </li>
-              <li>
-                <div class="test" style="background-image: url('/img/eercfe.png');">FE</div>
-              </li>
-              <li>
-                <div class="test">GT</div>
-              </li>
-              <li>
-                <div class="test">GIN</div>
-              </li>
-              <li>
-                <div class="test">WRC</div>
+              <li v-for="(serie,index) in this.series" :key="index">
+                <router-link :to="'/league/' + serie.name">
+                  <div class="test" :style="serie.logo"></div>
+                </router-link>
               </li>
             </ul>
           </li>
@@ -39,7 +27,40 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      series: [
+        {
+          name: "WEC",
+          logo: { backgroundImage: "url('/img/logos/eercwec.png')" }
+        },
+        {
+          name: "F1",
+          logo: {
+            backgroundImage: "url('/img/logos/eercf1.png')"
+          }
+        },
+        {
+          name: "FE",
+          logo: { backgroundImage: "url('/img/logos/eercfe.png')" }
+        },
+        {
+          name: "GT",
+          logo: { backgroundImage: "url('/img/logos/GTseries.png')" }
+        },
+        {
+          name: "GIN",
+          logo: { backgroundImage: "url('/img/logos/ginetta.png')" }
+        },
+        {
+          name: "DiRT",
+          logo: { backgroundImage: "url('/img/logos/DirtRoundel.png')" }
+        }
+      ]
+    };
+  }
+};
 </script>
 
 <style>
@@ -65,6 +86,7 @@ export default {};
   list-style: none;
   padding: 0;
   margin: 0;
+  cursor: pointer;
 }
 .menu li {
   margin-left: 0.5rem;
@@ -74,6 +96,11 @@ export default {};
   width: auto;
   height: 100%;
   padding: 3rem 0 3rem 0;
+  transition: background 0.2s;
+}
+.menu li:hover {
+  background: #1c2e3f;
+  transition: background 0.2s;
 }
 .series-menu {
   position: absolute;
@@ -106,10 +133,20 @@ export default {};
   width: 100%;
   position: relative;
 }
+.series-menu li:hover {
+  background: unset;
+}
 .series-menu li:before {
   content: "";
   display: block;
   padding-top: 100%;
+  transition: background 0.4s;
+  border-radius: 50% 0 50% 0;
+}
+.series-menu li:hover:before {
+  border-radius: 50% 0 50% 0;
+  background: #1c2e3f;
+  transition: background 0.2s;
 }
 .test {
   display: flex;
@@ -122,5 +159,6 @@ export default {};
   left: 0;
   right: 0;
   bottom: 0;
+  margin: 0.8rem;
 }
 </style>
