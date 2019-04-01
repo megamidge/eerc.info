@@ -8,13 +8,13 @@
                     "seasonName": "Season 4",
                     "events": [
                         {
-                            "location": "USA",
+                            "location": "United States of America",
                             "track": "Watkins Glen International",
                             "utcDateTime": "2019-01-20T18:45:00.000Z",
                             "duration": 85
                         },
                         {
-                            "location": "USA",
+                            "location": "United States of America",
                             "track": "Circuit of the Americas",
                             "utcDateTime": "2019-01-27T18:45:00.000Z",
                             "duration": 85
@@ -65,6 +65,89 @@
                             "location": "France",
                             "track": "24h Le Mans",
                             "utcDateTime": "2019-03-24T18:15:00.000Z",
+                            "duration": 165
+                        }
+                    ]
+                },
+                {
+                    "seasonName": "Season 5",
+                    "events": [
+                        {
+                            "location": "United States of America",
+                            "track": "Daytona Road Course",
+                            "utcDateTime": "2019-04-28T18:45:00.000Z",
+                            "duration": 85
+                        },
+                        {
+                            "location": "France",
+                            "track": "Le Mans Bugatti",
+                            "utcDateTime": "2019-05-05T18:45:00.000Z",
+                            "duration": 85
+                        },
+                        {
+                            "location": "Germany",
+                            "track": "Nürburgring GP",
+                            "utcDateTime": "2019-05-12T18:45:00.000Z",
+                            "duration": 85
+                        },
+                        {
+                            "location": "Japan",
+                            "track": "Fuji",
+                            "utcDateTime": "2019-05-19T18:45:00.000Z",
+                            "duration": 85
+                        },
+                        {
+                            "location": "United States of America",
+                            "track": "Tax Motor Speedway Road Course",
+                            "utcDateTime": "2019-05-26T18:45:00.000Z",
+                            "duration": 85
+                        },
+                        {
+                            "location": "Japan",
+                            "track": "Sakitto",
+                            "utcDateTime": "2019-06-02T18:45:00.000Z",
+                            "duration": 85
+                        },
+                        {
+                            "location": "China",
+                            "track": "Zhuhai International Circuit",
+                            "utcDateTime": "2019-06-09T18:45:00.000Z",
+                            "duration": 85
+                        },
+                        {
+                            "location": "Barcelona",
+                            "track": "Circuit de Barcelona-Catalunya",
+                            "utcDateTime": "2019-06-16T18:45:00.000Z",
+                            "duration": 85
+                        },
+                        {
+                            "location": "Italy",
+                            "track": "Autodromo Internazionale Enzo e Dino Ferrari Imola",
+                            "utcDateTime": "2019-06-23T18:45:00.000Z",
+                            "duration": 85
+                        },
+                        {
+                            "location": "United States of America",
+                            "track": "Indianapolis Motor Speedway Road Course",
+                            "utcDateTime": "2019-06-30T18:45:00.000Z",
+                            "duration": 85
+                        },
+                        {
+                            "location": "Autodromo Nazionale Monza",
+                            "track": "Nürburgring GP",
+                            "utcDateTime": "2019-07-07T18:45:00.000Z",
+                            "duration": 85
+                        },
+                        {
+                            "location": "Germany",
+                            "track": "Nürburgring Nordschleife Combined",
+                            "utcDateTime": "2019-07-14T18:45:00.000Z",
+                            "duration": 85
+                        },
+                        {
+                            "location": "France",
+                            "track": "24h Le Mans",
+                            "utcDateTime": "2019-07-21T18:15:00.000Z",
                             "duration": 165
                         }
                     ]

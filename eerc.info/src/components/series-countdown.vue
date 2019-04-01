@@ -149,7 +149,7 @@ export default {
         ) {
           this.currentEventIndex++;
         } else {
-          if (this.currentSeasonIndex + 1 >= this.series.seasons.length - 1) {
+          if (this.currentSeasonIndex + 1 > this.series.seasons.length - 1) {
             this.inProgress = false;
             this.noevent = true;
             this.currentEventIndex = 0;
