@@ -21,7 +21,8 @@
         </div>
       </div>
       <div class="sticky" ref="sticky">
-        <h2 class="scroll">Scroll
+        <h2 class="scroll">
+          Scroll
           <div
             style="border-left:1px solid #fff;
                   border-bottom:1px solid #fff; 
@@ -37,43 +38,37 @@
       <div class="mainLeft">
         <button @click="gotosite('https://forms.gle/SW8G6r5kKbPaGBZp7')" class="externalLink">
           <h2>
-            <span style="color:#cc0000">
-              [NEW!]
-            </span> 
+            <span style="color:#cc0000">[NEW!]</span>
             Apply to be a driver in the World Rally Championship (DiRT Rally)
           </h2>
           <img src="img/svg/externLink.svg" width="24" height="24" alt="[external link]">
         </button>
         <button @click="gotosite('https://goo.gl/forms/kLcXJ1S7GPCX8gDA3')" class="externalLink">
           <h2>
-            <span style="color:#cc0000">
-              [NEW!]
-            </span>
+            <span style="color:#cc0000">[NEW!]</span>
             Apply to be a driver in the Ginetta GT4 Supercup (Project Cars 2)
           </h2>
           <img src="img/svg/externLink.svg" width="24" height="24" alt="[external link]">
         </button>
-        
+
         <button @click="gotosite('https://goo.gl/forms/spPDvr4aaUVZMKAk1')" class="externalLink">
           <h2>
-            <span style="color:#cc0000">
-              [NEW!]
-            </span>
+            <span style="color:#cc0000">[NEW!]</span>
             Apply to be a GT Series driver. (Assetto Corsa Competizione)
           </h2>
           <img src="img/svg/externLink.svg" width="24" height="24" alt="[external link]">
         </button>
-        
+
         <button @click="gotosite('https://goo.gl/forms/NcFb4z5KcKfn2lWo2')" class="externalLink">
           <h2>Apply to be a WEC driver (Project Cars 2)</h2>
           <img src="img/svg/externLink.svg" width="24" height="24" alt="[external link]">
         </button>
-        
+
         <button @click="gotosite('https://goo.gl/forms/myjKb4lxI3XKYZmm2')" class="externalLink">
           <h2>Apply to be a Formula 1 driver (F1 2018)</h2>
           <img src="img/svg/externLink.svg" width="24" height="24" alt="[external link]">
         </button>
-        
+
         <button @click="gotosite('https://goo.gl/forms/DrkrJIC2Ssjmo5bj2')" class="externalLink">
           <h2>Apply to be a Formula E driver (rFactor 2)</h2>
           <img src="img/svg/externLink.svg" width="24" height="24" alt="[external link]">

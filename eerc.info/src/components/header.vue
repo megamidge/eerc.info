@@ -16,7 +16,9 @@
             </ul>
           </li>
           <li>Gallery</li>
-          <li>About</li>
+          <li>
+            <router-link :to="'/about'">About</router-link>
+          </li>
         </ul>
       </nav>
       <h4>This site is under construction.</h4>
@@ -54,7 +56,7 @@ export default {
           logo: { backgroundImage: "url('/img/logos/ginetta.png')" }
         },
         {
-          name: "DiRT",
+          name: "DIRT",
           logo: { backgroundImage: "url('/img/logos/DirtRoundel.png')" }
         }
       ]
@@ -91,6 +93,8 @@ export default {
 .menu li {
   margin-left: 0.5rem;
   margin-right: 0.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
   float: left;
   /* position: relative; */
   width: auto;
@@ -117,6 +121,7 @@ export default {
   visibility: collapse;
   transition: 0s visibility;
   transition-delay: 0.3s;
+  z-index: 100;
 }
 #leagues:hover .series-menu {
   visibility: visible;
@@ -128,7 +133,7 @@ export default {
 }
 .series-menu li {
   padding: 0;
-  margin: 0;
+  margin: 1rem;
   flex-grow: 1;
   width: 100%;
   position: relative;
@@ -140,13 +145,13 @@ export default {
   content: "";
   display: block;
   padding-top: 100%;
-  transition: background 0.4s;
-  border-radius: 50% 0 50% 0;
+  transition: all 0.4s;
+  border-radius: 50%;
 }
 .series-menu li:hover:before {
-  border-radius: 50% 0 50% 0;
   background: #1c2e3f;
-  transition: background 0.2s;
+  border-radius: 25%;
+  transition: all 0.2s;
 }
 .test {
   display: flex;
@@ -154,11 +159,23 @@ export default {
   align-items: center;
   /* border: solid 1px #00ff00; */
   background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   margin: 0.8rem;
+}
+a {
+  color: unset;
+  text-decoration: none;
+}
+a:visited {
+  color: unset;
+}
+a:hover {
+  color: unset;
 }
 </style>

@@ -1,0 +1,40 @@
+{
+    "leagues": [
+        {
+            "code": "WEC",
+            "name": "World Endurance Championship",
+            "game": "Project Cars 2",
+            "logo": "eercwec.png"
+        },
+        {
+            "code": "FE",
+            "name": "Formula E",
+            "game": "RFactor2",
+            "logo": "eercfe.png"
+        },
+        {
+            "code": "F1",
+            "name": "Formula 1",
+            "game": "F1 (Codemasters)",
+            "logo": "eercf1.png"
+        },
+        {
+            "code": "GT",
+            "name": "GT Series",
+            "game": "Assetto Corsa Competizione",
+            "logo": "GTseries.png"
+        },
+        {
+            "code": "GIN",
+            "name": "Ginneta G40 Supercup",
+            "game": "Project Cars 2",
+            "logo": "ginetta.png"
+        },
+        {
+            "code": "DIRT",
+            "name": "DiRT World Rally Championship",
+            "game": "DiRT Rally",
+            "logo": "DirtRoundel.png"
+        }
+    ]
+}

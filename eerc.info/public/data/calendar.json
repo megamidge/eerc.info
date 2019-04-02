@@ -5,6 +5,71 @@
             "game": "Project Cars 2",
             "seasons": [
                 {
+                    "seasonName": "Season 3",
+                    "events": [
+                        {
+                            "location": "Australia",
+                            "track": "Bathurst Mount Panoramal",
+                            "utcDateTime": "2018-09-18T18:45:00.000Z",
+                            "duration": 85
+                        },
+                        {
+                            "location": "United States of America",
+                            "track": "Road America",
+                            "utcDateTime": "2018-09-30T18:45:00.000Z",
+                            "duration": 85
+                        },
+                        {
+                            "location": "United Kingdom",
+                            "track": "Silverstone GP",
+                            "utcDateTime": "2018-10-07T18:45:00.000Z",
+                            "duration": 85
+                        },
+                        {
+                            "location": "United Kingdom",
+                            "track": "Brands Hatch GP",
+                            "utcDateTime": "2018-10-14T18:45:00.000Z",
+                            "duration": 85
+                        },
+                        {
+                            "location": "Belgium",
+                            "track": "Circuit de Spa-Francorchamps",
+                            "utcDateTime": "2018-10-18T18:45:00.000Z",
+                            "duration": 85
+                        },
+                        {
+                            "location": "Germany",
+                            "track": "Nürburgring Nordschleife Combined",
+                            "utcDateTime": "2018-11-04T18:45:00.000Z",
+                            "duration": 85
+                        },
+                        {
+                            "location": "Austria",
+                            "track": "Red Bull Ring",
+                            "utcDateTime": "2018-11-11T18:45:00.000Z",
+                            "duration": 85
+                        },
+                        {
+                            "location": "Italy",
+                            "track": "Monza",
+                            "utcDateTime": "2018-11-18T18:45:00.000Z",
+                            "duration": 85
+                        },
+                        {
+                            "location": "Spain",
+                            "track": "Barcelona-Catalunya",
+                            "utcDateTime": "2018-11-25T18:45:00.000Z",
+                            "duration": 85
+                        },
+                        {
+                            "location": "France",
+                            "track": "24h Le Mans",
+                            "utcDateTime": "2018-12-18T18:15:00.000Z",
+                            "duration": 165
+                        }
+                    ]
+                },
+                {
                     "seasonName": "Season 4",
                     "events": [
                         {
@@ -111,43 +176,43 @@
                         {
                             "location": "China",
                             "track": "Zhuhai International Circuit",
-                            "utcDateTime": "2019-06-09T18:45:00.000Z",
+                            "utcDateTime": "2019-06-06T18:45:00.000Z",
                             "duration": 85
                         },
                         {
                             "location": "Barcelona",
                             "track": "Circuit de Barcelona-Catalunya",
-                            "utcDateTime": "2019-06-16T18:45:00.000Z",
+                            "utcDateTime": "2019-06-23T18:45:00.000Z",
                             "duration": 85
                         },
                         {
                             "location": "Italy",
                             "track": "Autodromo Internazionale Enzo e Dino Ferrari Imola",
-                            "utcDateTime": "2019-06-23T18:45:00.000Z",
+                            "utcDateTime": "2019-06-30T18:45:00.000Z",
                             "duration": 85
                         },
                         {
                             "location": "United States of America",
                             "track": "Indianapolis Motor Speedway Road Course",
-                            "utcDateTime": "2019-06-30T18:45:00.000Z",
+                            "utcDateTime": "2019-07-07T18:45:00.000Z",
                             "duration": 85
                         },
                         {
                             "location": "Autodromo Nazionale Monza",
                             "track": "Nürburgring GP",
-                            "utcDateTime": "2019-07-07T18:45:00.000Z",
+                            "utcDateTime": "2019-07-14T18:45:00.000Z",
                             "duration": 85
                         },
                         {
                             "location": "Germany",
                             "track": "Nürburgring Nordschleife Combined",
-                            "utcDateTime": "2019-07-14T18:45:00.000Z",
+                            "utcDateTime": "2019-07-21T18:45:00.000Z",
                             "duration": 85
                         },
                         {
                             "location": "France",
                             "track": "24h Le Mans",
-                            "utcDateTime": "2019-07-21T18:15:00.000Z",
+                            "utcDateTime": "2019-07-28T18:15:00.000Z",
                             "duration": 165
                         }
                     ]
