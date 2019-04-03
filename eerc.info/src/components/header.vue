@@ -119,17 +119,21 @@ export default {
   border-style: solid;
   border-width: 0 0 0.6rem 0;
   visibility: collapse;
-  transition: 0s visibility;
-  transition-delay: 0.3s;
+  /* transition: 0s visibility; */
   z-index: 100;
+  transform:scaleY(0);
+  transform-origin: top;
+  opacity:0;
+  transition: 0.2s all;
+  transition-delay: .4s;
 }
 #leagues:hover .series-menu {
   visibility: visible;
-  transition-delay: 0.1s;
-}
-.series-menu:hover {
-  visibility: visible;
-  transition-delay: 0.1s;
+  transform:scaleY(1);
+  transform-origin: top;
+  opacity:100;
+  transition: 0.2s all;
+  transition-delay: .2s;
 }
 .series-menu li {
   padding: 0;
@@ -137,6 +141,8 @@ export default {
   flex-grow: 1;
   width: 100%;
   position: relative;
+  border-radius:25%;
+  background:#131e29;
 }
 .series-menu li:hover {
   background: unset;
