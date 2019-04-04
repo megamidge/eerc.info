@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="header">
+    <div class="header" ref="header">
       <img src="/img/eerclogo_0.png" style="height:auto;width:4rem;margin:0.5rem;">
       <nav class="menu">
         <ul>
@@ -76,6 +76,7 @@ export default {
   border-width: 0 0 0.6rem 0;
   width: 100%;
   position: relative;
+  z-index: 100;
 }
 .menu {
   padding: 0;
@@ -112,28 +113,42 @@ export default {
   justify-content: space-evenly;
   align-items: center;
   width: 100%;
+  height: 0;
   height: auto;
-  top: 90%;
+  top: 100%;
   left: 0;
   background: #18222c;
   border-style: solid;
   border-width: 0 0 0.6rem 0;
   visibility: collapse;
   /* transition: 0s visibility; */
+  transition: visibility 0.4s;
+  transition-delay: 0.3s;
+  transition: 0s visibility;
+  transition-delay: 0.3s;
+  /* transition: 0s visibility; */
   z-index: 100;
-  transform:scaleY(0);
+  z-index: 100;
+  transform: scaleY(0);
   transform-origin: top;
-  opacity:0;
+  opacity: 0;
   transition: 0.2s all;
-  transition-delay: .4s;
+  transition-delay: 0.4s;
 }
 #leagues:hover .series-menu {
   visibility: visible;
-  transform:scaleY(1);
+  transform: scaleY(1);
   transform-origin: top;
-  opacity:100;
+  opacity: 100;
   transition: 0.2s all;
-  transition-delay: .2s;
+  transition-delay: 0.2s;
+}
+.series-menu:hover {
+  visibility: visible;
+  transition-delay: 0.1s;
+}
+.series-menu:hover {
+  transition: visibility 0.4s;
 }
 .series-menu li {
   padding: 0;
@@ -141,8 +156,8 @@ export default {
   flex-grow: 1;
   width: 100%;
   position: relative;
-  border-radius:25%;
-  background:#131e29;
+  border-radius: 25%;
+  background: #131e29;
 }
 .series-menu li:hover {
   background: unset;
