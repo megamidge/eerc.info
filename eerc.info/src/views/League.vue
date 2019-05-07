@@ -128,6 +128,7 @@ export default {
           this.seasons = calendar.find(
             e => e.series === this.$route.params.leagueCode
           ).seasons;
+          this.showingIndex = this.seasons.length - 1;
         })
         .catch(error => {
           console.log(error);
