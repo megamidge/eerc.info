@@ -7,16 +7,51 @@
         class="season"
         v-for="(season,index) in seasons"
         :key="index"
-        style="width:100%;text-align:left;"
+        style="margin-left:0.5rem;margin-right:0.5rem;background:#25415d;padding:0.4rem"
       >
-        <h4>{{season.seasonName}}</h4>
-        <div class="event" v-for="(event,index) in season.events" :key="index">
-          <h5>Race {{index+1}}</h5>
-          <p>{{event.location}}</p>
-          <p>{{event.track}}</p>
-          <p>{{event.duration}} mins</p>
-          <p>{{event.utcDateTime}}</p>
+        <div
+          style="display:flex;flex-direction:row;justify-content:space-between;cursor:pointer;"
+          @click="seasonClick(index)"
+        >
+          <h4>{{season.seasonName}}</h4>
+          <p v-if="index===showingIndex">&#8593</p>
+          <p v-else>&#8595</p>
         </div>
+        <hr style="width:100%">
+        <div v-if="index === showingIndex" style="padding:0.8rem;background:#4b6987;">
+          <div class="event" v-for="(event,eventIndex) in season.events" :key="eventIndex">
+            <div style="display:flex;flex-direction:row;justify-content:flex-start;">
+              <div style="display:flex;flex-direction:column;">
+                <h4>Race {{index+1}}</h4>
+                <h3>{{event.track}}</h3>
+                <h4>{{event.location}}</h4>
+                <p>
+                  <small>{{new Date(event.utcDateTime).toLocaleDateString(undefined,dateOptions)}}</small>
+                </p>
+                <p>
+                  <small>{{event.duration}} mins</small>
+                </p>
+              </div>
+              <div
+                style="display:flex;flex-direction:column;text-align:right;
+  margin-left: auto;"
+              >
+                <h3>1. [First Place]</h3>
+                <h5>2. [Second Place]</h5>
+                <h6>3. [Second Place]</h6>
+                <p>[X] entrants</p>
+                <p>
+                  <small>
+                    <i>[View full classification]</i>
+                  </small>
+                </p>
+              </div>
+              <div class="trackmap"></div>
+            </div>
+            <hr style="width:100%" v-if="eventIndex!=season.events.length-1">
+          </div>
+        </div>
+        <hr style="width:100%">
       </div>
     </div>
     <div class="panel leagueinfo">
@@ -42,7 +77,17 @@ export default {
   data() {
     return {
       league: {},
-      seasons: []
+      seasons: [],
+      dateOptions: {
+        // weekday: "short",
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "numeric",
+        minute: "numeric",
+        timeZoneName: "short"
+      },
+      showingIndex: -1
     };
   },
   computed: {
@@ -83,10 +128,15 @@ export default {
           this.seasons = calendar.find(
             e => e.series === this.$route.params.leagueCode
           ).seasons;
+          this.showingIndex = this.seasons.length - 1;
         })
         .catch(error => {
           console.log(error);
         });
+    },
+    seasonClick(index) {
+      if (index != this.showingIndex) this.showingIndex = index;
+      else this.showingIndex = -1;
     }
   }
 };
@@ -114,11 +164,13 @@ export default {
   position: sticky;
   position: -webkit-sticky;
   top: 0.5rem;
-  flex-shrink: 0; /*has no effect????*/
   width: 15%; /*stops the shrinking*/
+  height: calc(100vh - 1.5rem);
 }
 .seasons {
   flex-grow: 8; /*space distribution*/
+  align-items: stretch;
+  text-align: left;
 }
 a {
   color: #d1d1d1;
@@ -145,11 +197,26 @@ p {
   margin-top: 0.2rem;
   margin-bottom: 0.2rem;
 }
-h3 {
+h3,
+h4,
+h5,
+h6 {
   margin-top: 0.4rem;
   margin-bottom: 0.4rem;
 }
 hr {
   width: 90%;
+}
+.trackmap {
+  background-image: url("/img/bathurst_orig.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-origin: content-box;
+  padding: 1rem;
+  width: 20%;
+}
+.trackmap:after {
+  content: "PLACE-HOLDER TRACKMAP";
 }
 </style>
