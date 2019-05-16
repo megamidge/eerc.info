@@ -140,43 +140,43 @@
                         {
                             "location": "United States of America",
                             "track": "Daytona Road Course",
-                            "utcDateTime": "2019-04-28T18:45:00.000Z",
+                            "utcDateTime": "2019-04-28T17:45:00.000Z",
                             "duration": 85
                         },
                         {
                             "location": "France",
                             "track": "Le Mans Bugatti",
-                            "utcDateTime": "2019-05-05T18:45:00.000Z",
+                            "utcDateTime": "2019-05-05T17:45:00.000Z",
                             "duration": 85
                         },
                         {
                             "location": "Germany",
                             "track": "Nürburgring GP",
-                            "utcDateTime": "2019-05-12T18:45:00.000Z",
+                            "utcDateTime": "2019-05-12T17:45:00.000Z",
                             "duration": 85
                         },
                         {
                             "location": "Japan",
                             "track": "Fuji",
-                            "utcDateTime": "2019-05-19T18:45:00.000Z",
+                            "utcDateTime": "2019-05-19T17:45:00.000Z",
                             "duration": 85
                         },
                         {
                             "location": "United States of America",
                             "track": "Tax Motor Speedway Road Course",
-                            "utcDateTime": "2019-05-26T18:45:00.000Z",
+                            "utcDateTime": "2019-05-26T17:45:00.000Z",
                             "duration": 85
                         },
                         {
                             "location": "Japan",
                             "track": "Sakitto",
-                            "utcDateTime": "2019-06-02T18:45:00.000Z",
+                            "utcDateTime": "2019-06-02T17:45:00.000Z",
                             "duration": 85
                         },
                         {
                             "location": "China",
                             "track": "Zhuhai International Circuit",
-                            "utcDateTime": "2019-06-06T18:45:00.000Z",
+                            "utcDateTime": "2019-06-06T17:45:00.000Z",
                             "duration": 85
                         },
                         {
@@ -188,31 +188,31 @@
                         {
                             "location": "Italy",
                             "track": "Autodromo Internazionale Enzo e Dino Ferrari Imola",
-                            "utcDateTime": "2019-06-30T18:45:00.000Z",
+                            "utcDateTime": "2019-06-30T17:45:00.000Z",
                             "duration": 85
                         },
                         {
                             "location": "United States of America",
                             "track": "Indianapolis Motor Speedway Road Course",
-                            "utcDateTime": "2019-07-07T18:45:00.000Z",
+                            "utcDateTime": "2019-07-07T17:45:00.000Z",
                             "duration": 85
                         },
                         {
                             "location": "Autodromo Nazionale Monza",
                             "track": "Nürburgring GP",
-                            "utcDateTime": "2019-07-14T18:45:00.000Z",
+                            "utcDateTime": "2019-07-14T17:45:00.000Z",
                             "duration": 85
                         },
                         {
                             "location": "Germany",
                             "track": "Nürburgring Nordschleife Combined",
-                            "utcDateTime": "2019-07-21T18:45:00.000Z",
+                            "utcDateTime": "2019-07-21T17:45:00.000Z",
                             "duration": 85
                         },
                         {
                             "location": "France",
                             "track": "24h Le Mans",
-                            "utcDateTime": "2019-07-28T18:15:00.000Z",
+                            "utcDateTime": "2019-07-28T17:15:00.000Z",
                             "duration": 165
                         }
                     ]
@@ -361,6 +361,83 @@
                             "location": "China",
                             "track": "Macau",
                             "utcDateTime": "2019-02-06T20:30:00.000Z",
+                            "duration": 70
+                        }
+                    ]
+                },
+                {
+                    "seasonName": "Season 2",
+                    "events": [
+                        {
+                            "location": "Morocco",
+                            "track": "Marrakesch",
+                            "utcDateTime": "2019-05-15T19:30:00.000Z",
+                            "duration": 70
+                        },
+                        {
+                            "location": "Saudi Arabia",
+                            "track": "Ad Diriyah",
+                            "utcDateTime": "2019-05-22T19:30:00.000Z",
+                            "duration": 70
+                        },
+                        {
+                            "location": "Uruguay",
+                            "track": "Punta del Este",
+                            "utcDateTime": "2019-05-29T19:30:00.000Z",
+                            "duration": 70
+                        },
+                        {
+                            "location": "Mexico",
+                            "track": "Mexico City",
+                            "utcDateTime": "2019-06-05T19:30:00.000Z",
+                            "duration": 70
+                        },
+                        {
+                            "location": "United States of America",
+                            "track": "New York",
+                            "utcDateTime": "2019-06-12T19:30:00.000Z",
+                            "duration": 70
+                        },
+                        {
+                            "location": "Canada",
+                            "track": "Montreal",
+                            "utcDateTime": "2019-06-19T19:30:00.000Z",
+                            "duration": 70
+                        },
+                        {
+                            "location": "Italy",
+                            "track": "Rome",
+                            "utcDateTime": "2019-06-26T19:30:00.000Z",
+                            "duration": 70
+                        },
+                        {
+                            "location": "Switzerland",
+                            "track": "Zurich",
+                            "utcDateTime": "2019-07-03T19:30:00.000Z",
+                            "duration": 70
+                        },
+                        {
+                            "location": "Germany",
+                            "track": "Berlin Tempelhof",
+                            "utcDateTime": "2019-07-10T19:30:00.000Z",
+                            "duration": 70
+                        },
+                        {
+                            "location": "France",
+                            "track": "Paris",
+                            "utcDateTime": "2019-07-17T19:30:00.000Z",
+                            "duration": 70
+                        },
+                        {
+                            "location": "Monaco",
+                            "track": "Monte Carlo",
+                            "utcDateTime": "2019-07-24T19:30:00.000Z",
+                            "duration": 70
+                        },
+                        {
+                            "location": "Singapore",
+                            "track": "Marina Bay Street Circuit",
+                            "utcDateTime": "2019-07-31T19:30:00.000Z",
                             "duration": 70
                         }
                     ]
