@@ -35,6 +35,12 @@
             "name": "DiRT World Rally Championship",
             "game": "DiRT Rally",
             "logo": "DirtRoundel.png"
+        },
+        {
+            "code": "INDY",
+            "name": "EERC Indycar Series",
+            "game": "RFactor2",
+            "logo": "Indy_logo.png"
         }
     ]
 }

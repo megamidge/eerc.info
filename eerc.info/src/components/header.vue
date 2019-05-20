@@ -59,6 +59,10 @@ export default {
         {
           name: "DIRT",
           logo: { backgroundImage: "url('/img/logos/DirtRoundel.png')" }
+        },
+        {
+          name: "INDY",
+          logo: { backgroundImage: "url('img/logos/Indy_Logo.png')" }
         }
       ]
     };
@@ -169,6 +173,7 @@ export default {
   margin: 0;
   background-position: center;
   background-size: contain;
+  background-repeat: no-repeat;
   margin-right: 0.4rem;
   transition: all 0.2s;
 }
