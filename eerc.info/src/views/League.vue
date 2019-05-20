@@ -11,15 +11,15 @@
         <div style="display:flex;flex-direction:row;justify-content:space-between;cursor:pointer;"
           @click="seasonClick(index)">
           <h4>{{season.seasonName}}</h4>
-          <p v-if="index===showingIndex">&#8593</p>
-          <p v-else>&#8595</p>
+          <p v-if="index===showingIndex">&#8593;</p>
+          <p v-else>&#8595;</p>
         </div>
         <hr style="width:100%">
-        <div v-if="index === showingIndex" style="padding:0.8rem;background:#4b6987;">
+        <div v-if="index === showingIndex" class="season">
           <div class="event" v-for="(event,eventIndex) in season.events" :key="eventIndex">
             <div style="display:flex;flex-direction:row;justify-content:flex-start;">
               <div style="display:flex;flex-direction:column;">
-                <h4>Race {{index+1}}</h4>
+                <h4>Round {{eventIndex+1}}</h4>
                 <h3>{{event.track}}</h3>
                 <h4>{{event.location}}</h4>
                 <p>
@@ -191,6 +191,10 @@ export default {
   flex-grow: 8; /*space distribution*/
   align-items: stretch;
   text-align: left;
+}
+.season {
+  padding:0.8rem;
+  background:#4b6987;
 }
 a {
   color: #d1d1d1;
