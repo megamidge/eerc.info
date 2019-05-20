@@ -4,6 +4,7 @@ import Home from './views/Home.vue'
 import About from './views/About.vue'
 import Header from './components/header.vue'
 import League from './views/League.vue'
+import Gallery from './views/Gallery.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -18,6 +19,11 @@ export default new Router({
           path: '',
           name: 'Home',
           component: Home
+        },
+        {
+          path: 'Gallery',
+          name: 'Gallery',
+          component: Gallery
         },
         {
           path: 'About',

@@ -16,7 +16,7 @@
               </li>
             </ul>
           </li>
-          <li>Gallery</li>
+          <li @click="$router.push('/gallery')">Gallery</li>
           <li>
             <router-link :to="'/about'">About</router-link>
           </li>
