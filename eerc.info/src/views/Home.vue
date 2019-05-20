@@ -161,7 +161,7 @@ export default {
   mounted() {
     this.$nextTick(() => {
       window.addEventListener("resize", () => {
-        this.ytstream = this.$refs["ytstream"].clientWidth;
+        //this.ytstream = this.$refs["ytstream"].clientWidth;
       });
       window.addEventListener("scroll", () => {
         //console.log(this.$refs["body"].scrollTop);

@@ -7,9 +7,12 @@
         class="season"
         v-for="(season,index) in seasons"
         :key="index"
-        style="margin-left:0.5rem;margin-right:0.5rem;background:#25415d;padding:0.4rem">
-        <div style="display:flex;flex-direction:row;justify-content:space-between;cursor:pointer;"
-          @click="seasonClick(index)">
+        style="margin-left:0.5rem;margin-right:0.5rem;background:#25415d;padding:0.4rem"
+      >
+        <div
+          style="display:flex;flex-direction:row;justify-content:space-between;cursor:pointer;"
+          @click="seasonClick(index)"
+        >
           <h4>{{season.seasonName}}</h4>
           <p v-if="index===showingIndex">&#8593;</p>
           <p v-else>&#8595;</p>
@@ -40,7 +43,10 @@
                   </small>
                 </p>
               </div>
-              <div class="trackmap" :style="{backgroundImage: `url(/img/tracks/${(event.trackImage||'placeholder.png')})`}"></div>
+              <div
+                class="trackmap"
+                :style="{backgroundImage: `url(/img/tracks/${(event.trackImage||'placeholder.png')})`}"
+              ></div>
             </div>
             <hr style="width:100%" v-if="eventIndex!=season.events.length-1">
           </div>
@@ -101,8 +107,8 @@ export default {
 
   watch: {
     $route(to, from) {
-      this.league = {}
-      this.seasons = []
+      this.league = {};
+      this.seasons = [];
       this.GetThisLeague();
     }
   },
@@ -129,11 +135,9 @@ export default {
           let calendar = response.calendar;
           let seasonsResult = calendar.find(
             e => e.series === this.$route.params.leagueCode
-          )
-          if(!seasonsResult.seasons)
-            this.season = []
-          else
-          {
+          );
+          if (!seasonsResult.seasons) this.season = [];
+          else {
             this.seasons = seasonsResult.seasons;
             this.showingIndex = this.seasons.length - 1;
           }
@@ -148,7 +152,7 @@ export default {
     },
     gotosite: site => {
       window.open(site);
-    },
+    }
   }
 };
 </script>
@@ -177,14 +181,14 @@ export default {
   top: 0.5rem;
   width: 15%; /*stops the shrinking*/
   height: calc(100vh - 1.5rem);
-  display:flex;
+  display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: stretch;
   text-align: left;
-  padding:0.4rem;
+  padding: 0.4rem;
 }
-.centertext{
+.centertext {
   text-align: center;
 }
 .seasons {
@@ -193,8 +197,8 @@ export default {
   text-align: left;
 }
 .season {
-  padding:0.8rem;
-  background:#4b6987;
+  padding: 0.8rem;
+  background: #4b6987;
 }
 a {
   color: #d1d1d1;

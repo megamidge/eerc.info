@@ -16,10 +16,8 @@
               </li>
             </ul>
           </li>
-          <li @click="$router.push('/gallery')">Gallery</li>
-          <li>
-            <router-link :to="'/about'">About</router-link>
-          </li>
+          <li @click="$router.push('/Gallery')">Gallery</li>
+          <li @click="$router.push('/About')">About</li>
         </ul>
       </nav>
       <h4>This site is under construction.</h4>
@@ -59,10 +57,6 @@ export default {
         {
           name: "DIRT",
           logo: { backgroundImage: "url('/img/logos/DirtRoundel.png')" }
-        },
-        {
-          name: "INDY",
-          logo: { backgroundImage: "url('img/logos/Indy_Logo.png')" }
         }
       ]
     };
@@ -173,7 +167,6 @@ export default {
   margin: 0;
   background-position: center;
   background-size: contain;
-  background-repeat: no-repeat;
   margin-right: 0.4rem;
   transition: all 0.2s;
 }

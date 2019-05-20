@@ -23,7 +23,7 @@ export default new Router({
         {
           path: 'Gallery',
           name: 'Gallery',
-          component: Gallery
+          component: Gallery,
         },
         {
           path: 'About',
