@@ -3,12 +3,9 @@
     <h1 style="margin:0;">Gallery</h1>
     <h4 style="margin:0;">(Prototype)</h4>
     <div class="gallery-panel">
-        <div class="image-view" v-for="(image,index) in images" :key="index">
-            <p class="image-text">{{image.text}}</p>
-            <div class="image-container">
+            <div class="image-container" v-for="(image,index) in images" :key="index" :class="{wide:index===9}">
                 <img :src="`img/${image.image}`">
             </div>
-        </div>
     </div>
 </div>
 </template>
@@ -56,6 +53,10 @@ export default {
                     text:"Speeb."
                 },
                 {
+                    image:"gallery/ss182955 - sam smith.jpg",
+                    text:"Battling on the straight."
+                },
+                {
                     image:"gallery/ss010150 - Ronzio Pilato.jpg",
                     text:"Wet."
                 },
@@ -64,15 +65,13 @@ export default {
                     text:"Racing."
                 },
                 {
-                    image:"gallery/ss182955 - sam smith.jpg",
-                    text:"Battling on the straight."
-                },
-                {
                     image:"gallery/ss195655 - Hansje 53.jpg",
                     text:"Oh no."
                 }
             ]
         }
+    },
+    methods: {
     }
 }
 </script>
@@ -84,38 +83,26 @@ export default {
     background:#18222c7F;
 }
 .gallery-panel {
-    display:flex;
-    flex-direction:row;
-    flex-wrap:wrap;
-    justify-content: flex-start;
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap:1rem;
+    grid-auto-flow: row dense;
+    grid-auto-rows: min-content;
+    padding:1rem;
 }
-.image-view {
-    background: #18222c;
-    height:18rem;
-    display:flex;
-    flex-direction:row;
-    justify-content: space-between;
-    align-items: stretch;
-    max-width:100%;
-    min-width:10rem;
-    margin:1rem;
+.image-container {
+    grid-column: auto/span 1;
+    background:black;
 }
-.image-view .image-container {
-    /* height:100%;
-    max-height:100%; */
-    display:flex;
-    flex-direction: row;
-    /* max-width:80%; */
-    max-height:100%;
+.wide {
+    grid-column: auto/span 3;
+    grid-row: auto/span 2;
 }
-.image-view .image-container img{
-    /* align-self:flex-start;
-    width:100%;
-    height:auto; */
-    object-fit: contain;
-    max-height:100%;
-    max-width:100%;
-    
+.image-container img{
+    display: block;
+    object-fit: cover;
+    width:100%; 
+    height:100%;
 }
 .image-view .image-text {
     margin: 0.8rem;
