@@ -127,10 +127,16 @@ export default {
         .as("json")
         .then(response => {
           let calendar = response.calendar;
-          this.seasons = calendar.find(
+          let seasonsResult = calendar.find(
             e => e.series === this.$route.params.leagueCode
-          ).seasons;
-          this.showingIndex = this.seasons.length - 1;
+          )
+          if(!seasonsResult.seasons)
+            this.season = []
+          else
+          {
+            this.seasons = seasonsResult.seasons;
+            this.showingIndex = this.seasons.length - 1;
+          }
         })
         .catch(error => {
           console.log(error);
