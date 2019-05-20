@@ -7,12 +7,9 @@
         class="season"
         v-for="(season,index) in seasons"
         :key="index"
-        style="margin-left:0.5rem;margin-right:0.5rem;background:#25415d;padding:0.4rem"
-      >
-        <div
-          style="display:flex;flex-direction:row;justify-content:space-between;cursor:pointer;"
-          @click="seasonClick(index)"
-        >
+        style="margin-left:0.5rem;margin-right:0.5rem;background:#25415d;padding:0.4rem">
+        <div style="display:flex;flex-direction:row;justify-content:space-between;cursor:pointer;"
+          @click="seasonClick(index)">
           <h4>{{season.seasonName}}</h4>
           <p v-if="index===showingIndex">&#8593</p>
           <p v-else>&#8595</p>
@@ -32,10 +29,7 @@
                   <small>{{event.duration}} mins</small>
                 </p>
               </div>
-              <div
-                style="display:flex;flex-direction:column;text-align:right;
-  margin-left: auto;"
-              >
+              <div style="display:flex;flex-direction:column;text-align:right;margin-left: auto;">
                 <h3>1. [First Place]</h3>
                 <h5>2. [Second Place]</h5>
                 <h6>3. [Second Place]</h6>
@@ -46,18 +40,24 @@
                   </small>
                 </p>
               </div>
-              <div class="trackmap"></div>
+              <div class="trackmap" :style="{backgroundImage: `url(/img/tracks/${(event.trackImage||'placeholder.png')})`}"></div>
             </div>
             <hr style="width:100%" v-if="eventIndex!=season.events.length-1">
           </div>
         </div>
-        <hr style="width:100%">
+      </div>
+      <div v-if="!seasons || seasons.length < 1">
+        <i>No seasons yet.</i>
       </div>
     </div>
     <div class="panel leagueinfo">
-      <h2>{{league.name}}</h2>
+      <h2 class="centertext">{{league.name}}</h2>
       <div class="logo" :style="logoStyle"></div>
       <hr>
+      <button @click="gotosite(league.registration)" class="externalLink">
+        <h2>Apply to drive</h2>
+        <img src="/img/svg/externLink.svg" width="24" height="24" alt="[external link]">
+      </button>
       <h3>Information:</h3>
       <p>
         <b>Game:</b>
@@ -101,6 +101,8 @@ export default {
 
   watch: {
     $route(to, from) {
+      this.league = {}
+      this.seasons = []
       this.GetThisLeague();
     }
   },
@@ -137,7 +139,10 @@ export default {
     seasonClick(index) {
       if (index != this.showingIndex) this.showingIndex = index;
       else this.showingIndex = -1;
-    }
+    },
+    gotosite: site => {
+      window.open(site);
+    },
   }
 };
 </script>
@@ -166,6 +171,15 @@ export default {
   top: 0.5rem;
   width: 15%; /*stops the shrinking*/
   height: calc(100vh - 1.5rem);
+  display:flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  text-align: left;
+  padding:0.4rem;
+}
+.centertext{
+  text-align: center;
 }
 .seasons {
   flex-grow: 8; /*space distribution*/
@@ -208,7 +222,6 @@ hr {
   width: 90%;
 }
 .trackmap {
-  background-image: url("/img/bathurst_orig.png");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -216,7 +229,17 @@ hr {
   padding: 1rem;
   width: 20%;
 }
-.trackmap:after {
-  content: "PLACE-HOLDER TRACKMAP";
+.externalLink {
+  background-color: #25415d;
+  padding: 0 0.6rem 0 0.6rem;
+  border-radius: 0.2rem;
+  outline: none;
+  border: none;
+  color: #d1d1d1;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 </style>

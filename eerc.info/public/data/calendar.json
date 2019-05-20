@@ -140,6 +140,7 @@
                         {
                             "location": "United States of America",
                             "track": "Daytona Road Course",
+                            "trackImage": "daytona-road-circuit.png",
                             "utcDateTime": "2019-04-28T17:45:00.000Z",
                             "duration": 85
                         },
@@ -163,7 +164,7 @@
                         },
                         {
                             "location": "United States of America",
-                            "track": "Tax Motor Speedway Road Course",
+                            "track": "Texas Motor Speedway Road Course",
                             "utcDateTime": "2019-05-26T17:45:00.000Z",
                             "duration": 85
                         },
@@ -445,45 +446,39 @@
             ]
         },
         {
-            "series": "EERC DiRT World Rally Championship",
+            "series": "DIRT",
             "game": "DiRT Rally",
             "seasons": [
                 {
                     "seasonName": "Season 1",
                     "events": [
                         {
-                            "location": "'Finland'",
-                            "track": "Stage 1: Hämelahti (L)",
+                            "location": "Finland",
                             "utcDateTime": "2019-05-16T16:00:00.000Z",
                             "duration": 1440
                         },
                         {
                             "location": "Wales",
-                            "track": "Stage 1: Pant Mawr (S)",
                             "utcDateTime": "2019-05-23T16:00:00.000Z",
                             "duration": 1440
                         },
                         {
                             "location": "Germany",
-                            "track": "Stage 1: Waldaufstieg (S)",
                             "utcDateTime": "2019-05-31T16:00:00.000Z",
                             "duration": 1440
                         },
                         {
                             "location": "Greece",
-                            "track": "Stage 1: Kathodo Leontiou (L)",
                             "utcDateTime": "2019-06-07T16:00:00.000Z",
                             "duration": 1440
                         },
                         {
                             "location": "Sweden",
-                            "track": "Stage 1: Stor-jangen Sprint (S)",
                             "utcDateTime": "2019-06-14T16:00:00.000Z",
                             "duration": 1440
                         },
                         {
                             "location": "Monaco",
-                            "track": "Stage 1: Pra d’Alart (L)",
                             "utcDateTime": "2019-06-21T16:00:00.000Z",
                             "duration": 1440
                         }
@@ -492,7 +487,7 @@
             ]
         },
         {
-            "series": "EERC Indycar Series",
+            "series": "INDY",
             "game": "RFactor2",
             "seasons": [
                 {

@@ -4,7 +4,7 @@
       v-if="!inProgress && !noevent"
       :deadline="new Date(currentEvent.utcDateTime)"
       :duration="currentEvent.duration"
-      :name="series.game +' - '+series.series+' - ' + currentSeason.seasonName + ' - ' + 'Round ' + (currentEventIndex+1) + ' - ' + currentEvent.track"
+      :name="currentEventName"
       @elapsed="elapsed"
     ></countdown>
     <div v-else-if="noevent" class="inprogress">
@@ -17,7 +17,7 @@
     <div v-else class="inprogress">
       <p
         class="title"
-      >{{series.game +' - '+series.series+' - ' + currentSeason.seasonName + ' - ' + currentEvent.track}}</p>
+      >{{currentEventName}}</p>
       <p class="onnow">Event On Now!</p>
       <div class="watch">
         <div
@@ -89,6 +89,9 @@ export default {
     },
     currentSeason() {
       return this.series.seasons[this.currentSeasonIndex];
+    },
+    currentEventName () {
+      return `${this.series.game} - ${this.series.series} - ${this.currentSeason.seasonName} - Round ${this.currentEventIndex + 1} - ${this.currentEvent.track||this.currentEvent.location||''}`
     }
   },
   watch: {
