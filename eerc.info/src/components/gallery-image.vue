@@ -2,7 +2,9 @@
   <div
     class="image-container"
     :class="{wide:displayType === 'wide', square:displayType==='square', tall:displayType==='tall'}"
+    
   >
+    <img class="lowres" :src="imageMeta.lowres">
     <img ref="image" :src="`img/gallery/${image}`">
     <div class="text">
       <h5>{{image}}</h5>
@@ -24,7 +26,9 @@ export default {
   data() {
     return {
       displayType: "default",
-      hover: false
+      hover: false,
+      imageHeight: 0,
+      imageWidth: 0
     };
   },
   mounted() {
@@ -37,6 +41,8 @@ export default {
     imageDisplayType() {
       let img = this.$refs.image;
       let gcd = this.gcd(img.naturalWidth, img.naturalHeight);
+      this.imageHeight = img.naturalHeight
+      this.imageWidth = img.naturalWidth
       let ar = {
         x: img.naturalWidth / gcd,
         y: img.naturalHeight / gcd
@@ -60,6 +66,8 @@ export default {
   position: relative;
   overflow: hidden;
   cursor: pointer;
+  background-size: cover;
+  /* width:100%; */
 }
 .wide {
   grid-column: auto/span 3;
@@ -73,13 +81,19 @@ export default {
   grid-row: auto/span 2;
 }
 .image-container img {
-  background: black;
+  /* background: black; */
   display: block;
   object-fit: cover;
   width: 100%;
   height: 100%;
   transition: all 0.4s;
   transition-delay: 0.2s;
+  z-index:1;
+}
+.image-container .lowres {
+  position: absolute;
+  z-index:-2;
+  image-rendering:pixelated;
 }
 @media screen and (max-width: 460px) {
   .wide {
@@ -87,6 +101,7 @@ export default {
     grid-row: auto/span 1;
   }
 }
+
 .text {
   position: absolute;
   background: #000000aa;
