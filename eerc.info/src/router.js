@@ -5,6 +5,7 @@ import About from './views/About.vue'
 import Header from './components/header.vue'
 import League from './views/League.vue'
 import Gallery from './views/Gallery.vue'
+import FullscreenImage from '@/components/fullscreen-image'
 Vue.use(Router)
 
 export default new Router({
@@ -18,27 +19,34 @@ export default new Router({
         {
           path: '',
           name: 'Home',
-          component: Home
+          component: Home,
         },
         {
           path: 'Gallery',
           name: 'Gallery',
           component: Gallery,
+          alias: 'Gallery/*',
+          children: [
+            {
+              path: ':image',
+              component: FullscreenImage,
+            },
+          ],
         },
         {
           path: 'About',
           name: 'About',
-          component: About
+          component: About,
         },
         {
-          path: "league/:leagueCode",
-          component: League
-        }
-      ]
+          path: 'league/:leagueCode',
+          component: League,
+        },
+      ],
     },
     {
       path: '*',
-      component: Header
-    }
-  ]
+      component: Header,
+    },
+  ],
 })

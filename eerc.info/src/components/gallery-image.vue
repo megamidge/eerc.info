@@ -1,5 +1,6 @@
 <template>
 	<div
+		@click="goFullscreen"
 		class="image-container"
 		:class="{wide:displayType === 'wide', square:displayType==='square', tall:displayType==='tall'}"
 	>
@@ -43,6 +44,10 @@ export default {
 			if (xPerc > yPerc * 2) this.displayType = 'wide'
 			if (yPerc > xPerc) this.displayType = 'tall'
 			if (xPerc >= yPerc - 0.08 && xPerc <= yPerc + 0.08) this.displayType = 'square'
+		},
+		goFullscreen() {
+			console.log('Fullscreen', this.image)
+			this.$router.push({ path: `Gallery/${this.image}`, query: { image: `img/gallery/${this.image}` } })
 		},
 	},
 }
@@ -91,6 +96,7 @@ export default {
 	transition-delay: 0.2s;
 	backface-visibility: hidden;
 	display: block;
+	z-index: 3;
 }
 .image-container:hover .lazy-image {
 	transform: rotateY(180deg);
