@@ -38,10 +38,11 @@ export default {
 	},
 	methods: {
 		imageDisplayType(ar) {
-			// if (ar.x > 16 && ar.y >= 9 && ar.y < ar.x) this.displayType = 'wide'
-			if (ar.y < ar.x && Math.abs(1 - ar.y / ar.x) > 0.5) this.displayType = 'wide'
-			if (Math.abs(1 - ar.x / ar.y) < 0.4) this.displayType = 'tall'
-			if (Math.abs(1 - ar.x / ar.y) < 0.2 && Math.abs(1 - ar.y / ar.x) < 0.2) this.displayType = 'square'
+			let xPerc = Math.abs(1 - ar.x / ar.y)
+			let yPerc = Math.abs(1 - ar.y / ar.x)
+			if (xPerc > yPerc * 2) this.displayType = 'wide'
+			if (yPerc > xPerc) this.displayType = 'tall'
+			if (xPerc >= yPerc - 0.08 && xPerc <= yPerc + 0.08) this.displayType = 'square'
 		},
 	},
 }
