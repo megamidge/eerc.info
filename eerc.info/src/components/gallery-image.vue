@@ -4,8 +4,8 @@
     :class="{wide:displayType === 'wide', square:displayType==='square', tall:displayType==='tall'}"
     
   >
-    <img class="lowres" :src="imageMeta.lowres">
-    <img ref="image" :src="`img/gallery/${image}`">
+    <img ref="image" class="lowres" :src="imageMeta.lowres">
+    <img :src="`img/gallery/${image}`">
     <div class="text">
       <h5>{{image}}</h5>
       <p>{{imageMeta.text}}</p>
@@ -28,7 +28,7 @@ export default {
       displayType: "default",
       hover: false,
       imageHeight: 0,
-      imageWidth: 0
+      imageWidth: 0,
     };
   },
   mounted() {
