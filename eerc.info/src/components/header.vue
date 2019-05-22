@@ -76,6 +76,7 @@ export default {
   width: 100%;
   position: relative;
   z-index: 100;
+  overflow:hidden;
 }
 .menu {
   padding: 0;
@@ -207,11 +208,11 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-   border: solid 1px #00ff00; 
+   border: solid 1px #00ff00;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-   position: absolute; 
+   position: absolute;
   top: 0;
   left: 0;
   right: 0;

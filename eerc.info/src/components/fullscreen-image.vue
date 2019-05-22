@@ -1,10 +1,13 @@
 <template>
 	<div class="fullscreen-image" @click.self="$router.push('/Gallery')">
-		<div class="wrapper">
-			<div class="image">
+		<div class="wrapper" @click.self="toggleTextMobile">
+			<div class="image" @click.stop="toggleTextMobile">
+				<div class="controls">
+					<p @click.stop="$router.push('/Gallery')">&#10006;</p>
+				</div>
 				<lazy-image :lowres="`${imageItem.lowres}`" :source="`${galleryPath}${$route.params.image}`"/>
 			</div>
-			<div class="text">
+			<div class="text" :class="{hidden:!showTextMobile}">
 				<div class="controls">
 					<p @click.stop="$router.push('/Gallery')">&#10006;</p>
 				</div>
@@ -23,11 +26,22 @@ export default {
 	components: {
 		LazyImage,
 	},
+	data() {
+		return {
+			showTextMobile: true,
+		}
+	},
 	computed: {
 		...mapState(['routeQuery']),
 		...mapGetters(['getImageByName', 'galleryPath']),
 		imageItem() {
 			return this.getImageByName(this.$route.params.image)
+		},
+	},
+	methods: {
+		toggleTextMobile() {
+			console.log(this.showTextMobile)
+			this.showTextMobile = !this.showTextMobile
 		},
 	},
 }
@@ -71,6 +85,10 @@ export default {
 .image {
 	width: 100%;
 }
+.image .controls {
+	visibility: collapse;
+	position: absolute;
+}
 .image img {
 	object-fit: contain;
 }
@@ -93,5 +111,42 @@ export default {
 .controls p:hover {
 	color: #797979;
 	cursor: pointer;
+}
+@media screen and (max-width: 660px) {
+	.wrapper {
+		height: 100vh;
+		width: 100vh;
+		flex-flow: column;
+		justify-content: center;
+	}
+	.text {
+		min-width: 0;
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		background-color: #18222cee;
+		max-height: 100%;
+		transition: all 0.4s;
+	}
+	.text .controls {
+		visibility: collapse;
+		height: 0px;
+		width: 0px;
+	}
+	.hidden {
+		transform: translateY(100%);
+		opacity: 0;
+		transition: all 0.4s;
+	}
+	.image {
+		max-height: 100%;
+	}
+	.image .controls {
+		visibility: visible;
+		top: 0;
+		left: 0;
+		right: 0;
+	}
 }
 </style>

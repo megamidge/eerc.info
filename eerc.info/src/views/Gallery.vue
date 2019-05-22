@@ -52,7 +52,7 @@ export default {
 		grid-template-columns: repeat(5, 1fr);
 	}
 }
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 800px) {
 	.gallery-panel {
 		grid-template-columns: repeat(3, 1fr);
 	}
