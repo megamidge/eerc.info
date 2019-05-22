@@ -9,44 +9,44 @@ import FullscreenImage from '@/components/fullscreen-image'
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history',
-  base: process.env.BASE_URL,
-  routes: [
-    {
-      path: '/',
-      component: Header,
-      children: [
+    mode: 'history',
+    base: process.env.BASE_URL,
+    routes: [
         {
-          path: '',
-          name: 'Home',
-          component: Home,
+            path: '/',
+            component: Header,
+            children: [
+                {
+                    path: '',
+                    name: 'Home',
+                    component: Home,
+                },
+                {
+                    path: 'Gallery',
+                    name: 'Gallery',
+                    component: Gallery,
+                    alias: 'Gallery/*',
+                    children: [
+                        {
+                            path: ':image',
+                            component: FullscreenImage,
+                        },
+                    ],
+                },
+                {
+                    path: 'About',
+                    name: 'About',
+                    component: About,
+                },
+                {
+                    path: 'league/:leagueCode',
+                    component: League,
+                },
+            ],
         },
         {
-          path: 'Gallery',
-          name: 'Gallery',
-          component: Gallery,
-          alias: 'Gallery/*',
-          children: [
-            {
-              path: ':image',
-              component: FullscreenImage,
-            },
-          ],
+            path: '*',
+            component: Header,
         },
-        {
-          path: 'About',
-          name: 'About',
-          component: About,
-        },
-        {
-          path: 'league/:leagueCode',
-          component: League,
-        },
-      ],
-    },
-    {
-      path: '*',
-      component: Header,
-    },
-  ],
+    ],
 })

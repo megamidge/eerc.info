@@ -1,6 +1,7 @@
 <template>
-	<img class="lazy-image" ref="small" :src="lowres" :class="{lowres:!ready}">
-	<!-- <img class="lazy-image" v-show="ready" ref="image" :src="source"> -->
+	<!-- <transition name="crossfade" mode="in-out"> -->
+	<img class="lazy-image" ref="small" :src="imageSource" :class="{lowres:!ready}" :key="imageSource">
+	<!-- </transition> -->
 </template>
 
 <script>
@@ -15,6 +16,12 @@ export default {
 			ready: false,
 		}
 	},
+	computed: {
+		imageSource() {
+			if (this.ready) return this.source
+			return this.lowres
+		},
+	},
 	mounted() {
 		this.$nextTick(() => {
 			if (this.$refs.small.complete) this.aspectRatio()
@@ -24,12 +31,12 @@ export default {
 			mainImg.src = this.source
 			if (mainImg.complete) {
 				this.ready = true
-				this.$refs.small.src = this.source
+				// this.$refs.small.src = this.source
 			} else
 				mainImg.addEventListener('load', () => {
 					this.ready = true
-					this.$refs.small.src = this.source
-					this.$refs.small.removeEventListener('load', this.aspectRatio)
+					// this.$refs.small.src = this.source
+					// this.$refs.small.removeEventListener('load', this.aspectRatio)
 				})
 		})
 	},
@@ -52,6 +59,14 @@ export default {
 </script>
 
 <style scoped>
+.crossfade-enter-active,
+.crossfade-leave-active {
+	position: absolute;
+}
+.crossfade-enter,
+.crossfade-leave-to {
+	opacity: 0;
+}
 img {
 	display: block;
 	object-fit: cover;
@@ -59,7 +74,6 @@ img {
 	height: 100%;
 }
 .lowres {
-	z-index: -2;
 	image-rendering: pixelated;
 }
 </style>

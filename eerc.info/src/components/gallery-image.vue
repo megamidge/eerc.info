@@ -8,7 +8,7 @@
 		<img v-show="showMain" ref="mainImage" :src="`img/gallery/${image}`">-->
 		<lazy-image
 			:lowres="imageMeta.lowres"
-			:source="`img/gallery/${image}`"
+			:source="`${galleryPath}${image}`"
 			@aspectRatioResolved="imageDisplayType"
 		/>
 		<div class="text">
@@ -20,6 +20,7 @@
 
 <script>
 import LazyImage from '@/components/lazy-image.vue'
+import { mapGetters } from 'vuex'
 export default {
 	name: 'GalleryImage',
 	components: {
@@ -37,6 +38,9 @@ export default {
 			displayType: 'default',
 		}
 	},
+	computed: {
+		...mapGetters(['galleryPath']),
+	},
 	methods: {
 		imageDisplayType(ar) {
 			let xPerc = Math.abs(1 - ar.x / ar.y)
@@ -46,8 +50,7 @@ export default {
 			if (xPerc >= yPerc - 0.08 && xPerc <= yPerc + 0.08) this.displayType = 'square'
 		},
 		goFullscreen() {
-			console.log('Fullscreen', this.image)
-			this.$router.push({ path: `Gallery/${this.image}`, query: { image: `img/gallery/${this.image}` } })
+			this.$router.push(`/Gallery/${this.image}`)
 		},
 	},
 }
