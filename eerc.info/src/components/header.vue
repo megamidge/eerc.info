@@ -93,13 +93,15 @@ export default {
 	margin: 0;
 	height: 100%;
 }
-.menu ul {
-	display: flex;
+.menu > ul {
 	flex-direction: row;
+}
+.menu ul {
 	list-style: none;
 	padding: 0;
 	margin: 0;
 	cursor: pointer;
+	display: flex;
 }
 .menu li {
 	margin-left: 0.5rem;
