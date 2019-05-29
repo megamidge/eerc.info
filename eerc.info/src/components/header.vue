@@ -26,15 +26,45 @@
 			</div>
 			<button @click="gotosite('https://discord.gg/U2KrZGP')" class="externalLink">
 				<h2 id="externalLinkText">Join the EERC Discord</h2>
-				<img id="externalLinkIcon" src="img/svg/discord-logo.svg" alt="[external link]">
+				<img id="externalLinkIcon" src="/img/svg/discord-logo.svg" alt="[external link]">
 			</button>
+			<nav class="mobile-menu">
+				<menu-icon
+					@toggle="showMobileMenu"
+					:toggled="mobileMenuToggle"
+					style="z-index:110;margin:.6rem"
+				></menu-icon>
+				<transition name="slide">
+					<ul v-if="mobileMenuToggle">
+						<div :style="{height:`${mobNavHeight}px`}"></div>
+						<li @click="$router.push('/')">Home</li>
+						<li id="leagues" style="position:relative;">
+							Leagues/Series
+							<ul class="series-menu">
+								<li v-for="(serie,index) in this.series" :key="index">
+									<router-link :to="'/league/' + serie.name">
+										<div class="series-logo" :style="serie.logo"></div>
+										<p>{{serie.name}}</p>
+									</router-link>
+								</li>
+							</ul>
+						</li>
+						<li @click="$router.push('/Gallery')">Gallery</li>
+						<li @click="$router.push('/About')">About</li>
+					</ul>
+				</transition>
+			</nav>
 		</div>
 		<router-view></router-view>
 	</div>
 </template>
 
 <script>
+import MenuIcon from '@/components/menu-icon'
 export default {
+	components: {
+		MenuIcon,
+	},
 	data() {
 		return {
 			series: [
@@ -65,11 +95,22 @@ export default {
 					logo: { backgroundImage: "url('/img/logos/DirtRoundel.png')" },
 				},
 			],
+			mobileMenuToggle: false,
+			mobNavHeight: 0,
 		}
 	},
 	methods: {
-		gotosite: (site) => {
+		gotosite(site) {
 			window.open(site)
+		},
+		showMobileMenu(toggle) {
+			this.mobileMenuToggle = toggle
+			this.mobNavHeight = this.$refs.header.clientHeight
+		},
+	},
+	watch: {
+		$route(to, from) {
+			this.mobileMenuToggle = false
 		},
 	},
 }
@@ -96,14 +137,16 @@ export default {
 .menu > ul {
 	flex-direction: row;
 }
-.menu ul {
+.menu ul,
+.mobile-menu ul {
 	list-style: none;
 	padding: 0;
 	margin: 0;
 	cursor: pointer;
 	display: flex;
 }
-.menu li {
+.menu li,
+.mobile-menu li {
 	margin-left: 0.5rem;
 	margin-right: 0.5rem;
 	margin-top: 0.5rem;
@@ -115,7 +158,8 @@ export default {
 	padding: 3rem 0 3rem 0;
 	transition: background 0.2s;
 }
-.menu li:hover {
+.menu li:hover,
+.mobile-menu li:hover {
 	background: #1c2e3f;
 	transition: background 0.2s;
 }
@@ -220,6 +264,38 @@ a:hover {
 	width: 32px;
 	height: 32px;
 }
+.mobile-menu {
+	display: none;
+	position: relative;
+	user-select: none;
+}
+.mobile-menu > ul {
+	position: absolute;
+	right: 0;
+	background: #18222c;
+	top: 0;
+	width: 50vw;
+	height: 100vh;
+	position: fixed;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: stretch;
+}
+.mobile-menu li {
+	margin: 0.2rem;
+	padding: 0.4rem;
+	height: unset;
+	font-size: 1.2rem;
+}
+.slide-enter,
+.slide-leave-to {
+	transform: translateX(100%);
+}
+.slide-enter-active,
+.slide-leave-active {
+	transition: all 0.2s;
+}
 @media screen and (max-width: 640px) {
 	.externalLink #externalLinkText {
 		display: none;
@@ -229,10 +305,10 @@ a:hover {
 		height: 64px;
 	}
 	.menu ul {
-		flex-direction: column;
+		display: none;
 	}
-	.menu li {
-		padding: 0.2rem;
+	.mobile-menu {
+		display: block;
 	}
 }
 </style>
