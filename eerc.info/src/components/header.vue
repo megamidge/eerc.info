@@ -20,8 +20,14 @@
 					<li @click="$router.push('/About')">About</li>
 				</ul>
 			</nav>
-			<h4>This site is under construction.</h4>
-			<h5>Check back often to see frequent changes.</h5>
+			<div>
+				<h5>This site is under construction.</h5>
+				<h6>Check back often to see frequent changes.</h6>
+			</div>
+			<button @click="gotosite('https://discord.gg/U2KrZGP')" class="externalLink">
+				<h2 id="externalLinkText">Join the EERC Discord</h2>
+				<img id="externalLinkIcon" src="img/svg/discord-logo.svg" alt="[external link]">
+			</button>
 		</div>
 		<router-view></router-view>
 	</div>
@@ -61,10 +67,15 @@ export default {
 			],
 		}
 	},
+	methods: {
+		gotosite: (site) => {
+			window.open(site)
+		},
+	},
 }
 </script>
 
-<style>
+<style scoped>
 .header {
 	display: flex;
 	flex-direction: row;
@@ -84,7 +95,7 @@ export default {
 }
 .menu ul {
 	display: flex;
-	/* flex-direction: row; */
+	flex-direction: row;
 	list-style: none;
 	padding: 0;
 	margin: 0;
@@ -174,49 +185,6 @@ export default {
 	display: block;
 	padding-top: 100%;
 }
-/* .series-menu li {
-  padding: 0;
-  margin: 1rem;
-  flex-grow: 1;
-  width: 100%;
-  position: relative;
-}
-.series-menu.series-logo {
-  display: flex;
-  flex-direction: row;
-  border-radius: 25%;
-  background: #131e29;
-}
-.series-menu.series-logo {
-  background: unset;
-}
-.series-menu.series-logo {
-  content: "";
-  display: block;
-  padding-top: 100%;
-  transition: all 0.4s;
-  border-radius: 50%;
-}
-.series-menu.series-logo {
-  background: #1c2e3f;
-  border-radius: 25%;
-  transition: all 0.2s;
-}
-.series-logo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-   border: solid 1px #00ff00;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin: 0.8rem;
-} */
 a {
 	color: unset;
 	text-decoration: none;
@@ -226,5 +194,43 @@ a:visited {
 }
 a:hover {
 	color: unset;
+}
+
+.externalLink {
+	background-color: #18222c;
+	padding: 10px;
+	border-radius: 0.2rem;
+	margin: 1rem;
+	outline: none;
+	border: none;
+	color: #d1d1d1;
+	cursor: pointer;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	border-bottom: 0.2rem solid;
+}
+.externalLink:hover {
+	background-color: #12181f;
+}
+#externalLinkIcon {
+	width: 32px;
+	height: 32px;
+}
+@media screen and (max-width: 640px) {
+	.externalLink #externalLinkText {
+		display: none;
+	}
+	.externalLink #externalLinkIcon {
+		width: 64px;
+		height: 64px;
+	}
+	.menu ul {
+		flex-direction: column;
+	}
+	.menu li {
+		padding: 0.2rem;
+	}
 }
 </style>
