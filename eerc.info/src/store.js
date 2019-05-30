@@ -6,11 +6,15 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state: {
         calendar: [],
-        gallery: { pubdir: '', images: [] }
+        gallery: { pubdir: '', images: [] },
+        leagues: []
     },
     mutations: {
         gallery(state, gallery) {
             state.gallery = gallery
+        },
+        setLeagues(state, leagues) {
+            state.leagues = leagues
         }
     },
     getters: {
@@ -22,6 +26,10 @@ export default new Vuex.Store({
         },
         galleryPath: state => {
             return state.gallery.pubdir
+        },
+        series: state => {
+            console.log(state.leagues)
+            return state.leagues
         }
     },
     actions: {

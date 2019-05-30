@@ -48,6 +48,13 @@
             "game": "RFactor2",
             "logo": "Indy_logo.png",
             "registration": "https://forms.gle/pKWikhdpDvtkGecu9"
+        },
+        {
+            "code": "M1E",
+            "name": "EERC mouseOne Endurance League",
+            "game": "RFactor2",
+            "logo": "m1logo.png",
+            "registration": "https://forms.gle/NSewf3JRVPY96oVP8"
         }
     ]
 }

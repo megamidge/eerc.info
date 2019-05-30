@@ -222,7 +222,7 @@
         },
         {
             "series": "F1",
-            "game": "F1 2018",
+            "game": "F1",
             "seasons": [
                 {
                     "seasonName": "Season 4",
@@ -456,37 +456,37 @@
                             "location": "Finland",
                             "trackImage": "finland-rally-route-1.jpg",
                             "utcDateTime": "2019-05-16T16:00:00.000Z",
-                            "duration": 1440
+                            "duration": 4140
                         },
                         {
                             "location": "Wales",
                             "trackImage": "wales-rally-route-1.jpg",
                             "utcDateTime": "2019-05-23T16:00:00.000Z",
-                            "duration": 1440
+                            "duration": 4140
                         },
                         {
                             "location": "Germany",
-                            "trackImage" :"germany-rally-route-1.jpg", 
+                            "trackImage": "germany-rally-route-1.jpg",
                             "utcDateTime": "2019-05-30T16:00:00.000Z",
-                            "duration": 1440
+                            "duration": 4140
                         },
                         {
                             "location": "Greece",
                             "trackImage": "greece-rally-route-1.jpg",
                             "utcDateTime": "2019-06-07T16:00:00.000Z",
-                            "duration": 1440
+                            "duration": 4140
                         },
                         {
                             "location": "Sweden",
                             "trackImage": "sweden-rally-route-1.jpg",
                             "utcDateTime": "2019-06-14T16:00:00.000Z",
-                            "duration": 1440
+                            "duration": 4140
                         },
                         {
                             "location": "Monaco",
                             "trackImage": "monaco-rally-route-1.jpg",
                             "utcDateTime": "2019-06-21T16:00:00.000Z",
-                            "duration": 1440
+                            "duration": 4140
                         }
                     ]
                 }
@@ -612,6 +612,65 @@
                             "track": "Grand Prix of Monterey",
                             "utcDateTime": "2019-09-20T19:20:00.000Z",
                             "duration": 80
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "series": "M1E",
+            "game": "RFactor2",
+            "seasons": [
+                {
+                    "seasonName": "Season 1",
+                    "events": [
+                        {
+                            "location": "France",
+                            "track": "24h Le Mans",
+                            "utcDateTime": "2019-06-29T00:00:00.000Z",
+                            "duration": 1440
+                        },
+                        {
+                            "location": "Shanghai",
+                            "track": "6h of Shanghai",
+                            "utcDateTime": "2019-07-20T00:00:00.000Z",
+                            "duration": 360
+                        },
+                        {
+                            "location": "United States of America",
+                            "track": "To be decided (8h)",
+                            "utcDateTime": "2019-08-17T00:00:00.00Z",
+                            "duration": 480
+                        },
+                        {
+                            "location": "Italy",
+                            "track": "12h of Autodromo Nazionale Monza",
+                            "utcDateTime": "2019-08-31T00:00:00.00Z",
+                            "duration": 720
+                        },
+                        {
+                            "location": "Bahrain",
+                            "track": "24h of Bahrain",
+                            "utcDateTime": "2019-09-28T00:00:00.00Z",
+                            "duration": 1440
+                        },
+                        {
+                            "location": "United States of America",
+                            "track": "6h of Watkins Glen",
+                            "utcDateTime": "2019-10-19T00:00:00.000Z",
+                            "duration": 360
+                        },
+                        {
+                            "location": "United States of America",
+                            "track": "To be decided (8h)",
+                            "utcDateTime": "2019-11-09",
+                            "duration": 480
+                        },
+                        {
+                            "location": "United States of America",
+                            "track": "24h of Daytona",
+                            "utcDateTime": "2019-11-30T00:00:00.00Z",
+                            "duration": 1440
                         }
                     ]
                 }

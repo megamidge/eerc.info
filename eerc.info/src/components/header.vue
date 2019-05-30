@@ -9,9 +9,9 @@
 						Leagues/Series
 						<ul class="series-menu">
 							<li v-for="(serie,index) in this.series" :key="index">
-								<router-link :to="'/league/' + serie.name">
-									<div class="series-logo" :style="serie.logo"></div>
-									<p>{{serie.name}}</p>
+								<router-link :to="'/league/' + serie.code">
+									<div class="series-logo" :style="{backgroundImage:`url('/img/logos/${serie.logo}')`}"></div>
+									<p>{{serie.code}}</p>
 								</router-link>
 							</li>
 						</ul>
@@ -42,9 +42,9 @@
 							Leagues/Series
 							<ul class="series-menu">
 								<li v-for="(serie,index) in this.series" :key="index">
-									<router-link :to="'/league/' + serie.name">
-										<div class="series-logo" :style="serie.logo"></div>
-										<p>{{serie.name}}</p>
+									<router-link :to="'/league/' + serie.code">
+										<div class="series-logo" :style="{backgroundImage:`url('/img/logos/${serie.logo}')`}"></div>
+										<p>{{serie.code}}</p>
 									</router-link>
 								</li>
 							</ul>
@@ -61,43 +61,19 @@
 
 <script>
 import MenuIcon from '@/components/menu-icon'
+import { mapGetters } from 'vuex'
 export default {
 	components: {
 		MenuIcon,
 	},
 	data() {
 		return {
-			series: [
-				{
-					name: 'WEC',
-					logo: { backgroundImage: "url('/img/logos/eercwec.png')" },
-				},
-				{
-					name: 'F1',
-					logo: {
-						backgroundImage: "url('/img/logos/eercf1.png')",
-					},
-				},
-				{
-					name: 'FE',
-					logo: { backgroundImage: "url('/img/logos/eercfe.png')" },
-				},
-				{
-					name: 'GT',
-					logo: { backgroundImage: "url('/img/logos/GTseries.png')" },
-				},
-				{
-					name: 'GIN',
-					logo: { backgroundImage: "url('/img/logos/ginetta.png')" },
-				},
-				{
-					name: 'DIRT',
-					logo: { backgroundImage: "url('/img/logos/DirtRoundel.png')" },
-				},
-			],
 			mobileMenuToggle: false,
 			mobNavHeight: 0,
 		}
+	},
+	computed: {
+		...mapGetters(['series']),
 	},
 	methods: {
 		gotosite(site) {
@@ -221,6 +197,7 @@ export default {
 	position: relative;
 	padding: 0;
 	margin: 0;
+	background-repeat: no-repeat;
 	background-position: center;
 	background-size: contain;
 	margin-right: 0.4rem;

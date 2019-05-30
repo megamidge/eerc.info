@@ -36,10 +36,10 @@
 		</div>
 		<div class="main">
 			<div class="mainLeft">
-				<button @click="gotosite('https://forms.gle/SW8G6r5kKbPaGBZp7')" class="externalLink">
+				<button @click="gotosite('https://forms.gle/NSewf3JRVPY96oVP8')" class="externalLink">
 					<h2>
 						<span style="color:#cc0000">[NEW!]</span>
-						Apply to be a driver in the World Rally Championship (DiRT Rally)
+						Apply to be a driver in the EERC mouseOne Endurance League (rFactor 2)
 					</h2>
 					<img src="img/svg/externLink.svg" width="24" height="24" alt="[external link]">
 				</button>
@@ -59,6 +59,10 @@
 					<img src="img/svg/externLink.svg" width="24" height="24" alt="[external link]">
 				</button>
 
+				<button @click="gotosite('https://forms.gle/SW8G6r5kKbPaGBZp7')" class="externalLink">
+					<h2>Apply to be a driver in the World Rally Championship (DiRT Rally)</h2>
+					<img src="img/svg/externLink.svg" width="24" height="24" alt="[external link]">
+				</button>
 				<button @click="gotosite('https://goo.gl/forms/NcFb4z5KcKfn2lWo2')" class="externalLink">
 					<h2>Apply to be a WEC driver (Project Cars 2)</h2>
 					<img src="img/svg/externLink.svg" width="24" height="24" alt="[external link]">
