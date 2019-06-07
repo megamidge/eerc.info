@@ -28,7 +28,6 @@ export default new Vuex.Store({
             return state.gallery.pubdir
         },
         series: state => {
-            console.log(state.leagues)
             return state.leagues
         }
     },

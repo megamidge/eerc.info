@@ -103,7 +103,6 @@ store.commit('gallery', {
 Ajax.request("/data/leagues.json")
     .as("json")
     .then(response => {
-        console.log(response)
         store.commit('setLeagues', response.leagues)
     })
 new Vue({
