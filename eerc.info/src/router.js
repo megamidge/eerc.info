@@ -6,6 +6,7 @@ import Header from './components/header.vue'
 import League from './views/League.vue'
 import Gallery from './views/Gallery.vue'
 import FullscreenImage from '@/components/fullscreen-image'
+import BasePage from '@/components/base-page'
 Vue.use(Router)
 
 export default new Router({
@@ -14,7 +15,7 @@ export default new Router({
     routes: [
         {
             path: '/',
-            component: Header,
+            component: BasePage,
             children: [
                 {
                     path: '',

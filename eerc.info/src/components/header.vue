@@ -1,16 +1,45 @@
 <template>
-	<div>
-		<div class="header" ref="header">
-			<img src="/img/eerclogo_0.png" style="height:auto;width:4rem;margin:0.5rem;">
-			<nav class="menu">
-				<ul>
+	<!-- <div> -->
+	<div class="header" ref="header">
+		<img src="/img/eerclogo_0.png" style="height:auto;width:4rem;margin:0.5rem;" />
+		<nav class="menu">
+			<ul>
+				<li @click="$router.push('/')">Home</li>
+				<li id="leagues" style="position:relative;">
+					Leagues/Series
+					<ul class="series-menu">
+						<li v-for="(serie,index) in this.series" :key="index">
+							<router-link :to="'/league/' + serie.code">
+								<div class="series-logo" :style="{backgroundImage:`url(img/logos/${serie.logo})`}"></div>
+								<p>{{serie.code}}</p>
+							</router-link>
+						</li>
+					</ul>
+				</li>
+				<li @click="$router.push('/Gallery')">Gallery</li>
+				<li @click="$router.push('/About')">About</li>
+			</ul>
+		</nav>
+		<div>
+			<h5>This site is under construction.</h5>
+			<h6>Check back often to see frequent changes.</h6>
+		</div>
+		<button @click="gotosite('https://discord.gg/U2KrZGP')" class="externalLink">
+			<h2 id="externalLinkText">Join the EERC Discord</h2>
+			<img id="externalLinkIcon" src="/img/svg/discord-logo.svg" alt="[external link]" />
+		</button>
+		<nav class="mobile-menu">
+			<menu-icon @toggle="showMobileMenu" :toggled="mobileMenuToggle" style="z-index:110;margin:.6rem"></menu-icon>
+			<transition name="slide">
+				<ul v-if="mobileMenuToggle">
+					<div :style="{height:`${mobNavHeight}px`}"></div>
 					<li @click="$router.push('/')">Home</li>
 					<li id="leagues" style="position:relative;">
 						Leagues/Series
 						<ul class="series-menu">
 							<li v-for="(serie,index) in this.series" :key="index">
 								<router-link :to="'/league/' + serie.code">
-									<div class="series-logo" :style="{backgroundImage:`url('/img/logos/${serie.logo}')`}"></div>
+									<div class="series-logo" :style="serie.logo"></div>
 									<p>{{serie.code}}</p>
 								</router-link>
 							</li>
@@ -19,44 +48,11 @@
 					<li @click="$router.push('/Gallery')">Gallery</li>
 					<li @click="$router.push('/About')">About</li>
 				</ul>
-			</nav>
-			<div>
-				<h5>This site is under construction.</h5>
-				<h6>Check back often to see frequent changes.</h6>
-			</div>
-			<button @click="gotosite('https://discord.gg/U2KrZGP')" class="externalLink">
-				<h2 id="externalLinkText">Join the EERC Discord</h2>
-				<img id="externalLinkIcon" src="/img/svg/discord-logo.svg" alt="[external link]">
-			</button>
-			<nav class="mobile-menu">
-				<menu-icon
-					@toggle="showMobileMenu"
-					:toggled="mobileMenuToggle"
-					style="z-index:110;margin:.6rem"
-				></menu-icon>
-				<transition name="slide">
-					<ul v-if="mobileMenuToggle">
-						<div :style="{height:`${mobNavHeight}px`}"></div>
-						<li @click="$router.push('/')">Home</li>
-						<li id="leagues" style="position:relative;">
-							Leagues/Series
-							<ul class="series-menu">
-								<li v-for="(serie,index) in this.series" :key="index">
-									<router-link :to="'/league/' + serie.code">
-										<div class="series-logo" :style="{backgroundImage:`url('/img/logos/${serie.logo}')`}"></div>
-										<p>{{serie.code}}</p>
-									</router-link>
-								</li>
-							</ul>
-						</li>
-						<li @click="$router.push('/Gallery')">Gallery</li>
-						<li @click="$router.push('/About')">About</li>
-					</ul>
-				</transition>
-			</nav>
-		</div>
-		<router-view></router-view>
+			</transition>
+		</nav>
 	</div>
+	<!-- <router-view></router-view> -->
+	<!-- </div> -->
 </template>
 
 <script>
@@ -98,7 +94,7 @@ export default {
 	flex-direction: row;
 	justify-content: space-evenly;
 	align-items: center;
-	background: #18222c;
+	background: var(--colour-main);
 	border-style: solid;
 	border-width: 0 0 0.6rem 0;
 	width: 100%;
@@ -149,7 +145,7 @@ export default {
 	top: 100%;
 	left: 0;
 	right: 0;
-	background: #18222c;
+	background: var(--colour-main);
 	border-style: solid;
 	border-width: 0 0 0.6rem 0;
 	visibility: collapse;
@@ -197,7 +193,6 @@ export default {
 	position: relative;
 	padding: 0;
 	margin: 0;
-	background-repeat: no-repeat;
 	background-position: center;
 	background-size: contain;
 	margin-right: 0.4rem;
@@ -220,13 +215,13 @@ a:hover {
 }
 
 .externalLink {
-	background-color: #18222c;
+	background-color: var(--colour-main);
 	padding: 10px;
 	border-radius: 0.2rem;
 	margin: 1rem;
 	outline: none;
 	border: none;
-	color: #d1d1d1;
+	color: var(--text);
 	cursor: pointer;
 	display: flex;
 	flex-direction: row;
@@ -235,7 +230,7 @@ a:hover {
 	border-bottom: 0.2rem solid;
 }
 .externalLink:hover {
-	background-color: #12181f;
+	background-color: var(--accent-dark);
 }
 #externalLinkIcon {
 	width: 32px;
@@ -249,7 +244,7 @@ a:hover {
 .mobile-menu > ul {
 	position: absolute;
 	right: 0;
-	background: #18222c;
+	background: var(--colour-main);
 	top: 0;
 	width: 50vw;
 	height: 100vh;

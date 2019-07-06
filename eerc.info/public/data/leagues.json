@@ -1,8 +1,8 @@
 {
     "leagues": [
         {
-            "code": "WEC",
-            "name": "World Endurance Championship",
+            "code": "MSR",
+            "name": "Multiclass Sprint Racing",
             "game": "Project Cars 2",
             "logo": "eercwec.png",
             "registration": "https://goo.gl/forms/NcFb4z5KcKfn2lWo2"
@@ -29,25 +29,11 @@
             "registration": "https://goo.gl/forms/spPDvr4aaUVZMKAk1"
         },
         {
-            "code": "GIN",
-            "name": "Ginneta G40 Supercup",
-            "game": "Project Cars 2",
-            "logo": "ginetta.png",
-            "registration": "https://goo.gl/forms/kLcXJ1S7GPCX8gDA3"
-        },
-        {
             "code": "DIRT",
             "name": "DiRT World Rally Championship",
             "game": "DiRT Rally",
             "logo": "DirtRoundel.png",
             "registration": "https://forms.gle/SW8G6r5kKbPaGBZp7"
-        },
-        {
-            "code": "INDY",
-            "name": "EERC Indycar Series",
-            "game": "RFactor2",
-            "logo": "indylogo.png",
-            "registration": "https://forms.gle/pKWikhdpDvtkGecu9"
         },
         {
             "code": "M1E",

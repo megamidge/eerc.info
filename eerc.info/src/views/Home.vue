@@ -37,18 +37,8 @@
 		<div class="main">
 			<div class="mainLeft">
 				<button @click="gotosite('https://forms.gle/NSewf3JRVPY96oVP8')" class="externalLink">
-					<h2>
-						<span style="color:#cc0000">[NEW!]</span>
-						Apply to be a driver in the EERC mouseOne Endurance League (rFactor 2)
-					</h2>
-					<img src="img/svg/externLink.svg" width="24" height="24" alt="[external link]">
-				</button>
-				<button @click="gotosite('https://goo.gl/forms/kLcXJ1S7GPCX8gDA3')" class="externalLink">
-					<h2>
-						<span style="color:#cc0000">[NEW!]</span>
-						Apply to be a driver in the Ginetta GT4 Supercup (Project Cars 2)
-					</h2>
-					<img src="img/svg/externLink.svg" width="24" height="24" alt="[external link]">
+					<h2>Apply to be a driver in the EERC mouseOne Endurance League (rFactor 2)</h2>
+					<img src="img/svg/externLink.svg" width="24" height="24" alt="[external link]" />
 				</button>
 
 				<button @click="gotosite('https://goo.gl/forms/spPDvr4aaUVZMKAk1')" class="externalLink">
@@ -56,47 +46,27 @@
 						<span style="color:#cc0000">[NEW!]</span>
 						Apply to be a GT Series driver. (Assetto Corsa Competizione)
 					</h2>
-					<img src="img/svg/externLink.svg" width="24" height="24" alt="[external link]">
+					<img src="img/svg/externLink.svg" width="24" height="24" alt="[external link]" />
 				</button>
 
 				<button @click="gotosite('https://forms.gle/SW8G6r5kKbPaGBZp7')" class="externalLink">
 					<h2>Apply to be a driver in the World Rally Championship (DiRT Rally)</h2>
-					<img src="img/svg/externLink.svg" width="24" height="24" alt="[external link]">
+					<img src="img/svg/externLink.svg" width="24" height="24" alt="[external link]" />
 				</button>
 				<button @click="gotosite('https://goo.gl/forms/NcFb4z5KcKfn2lWo2')" class="externalLink">
 					<h2>Apply to be a WEC driver (Project Cars 2)</h2>
-					<img src="img/svg/externLink.svg" width="24" height="24" alt="[external link]">
+					<img src="img/svg/externLink.svg" width="24" height="24" alt="[external link]" />
 				</button>
 
 				<button @click="gotosite('https://goo.gl/forms/myjKb4lxI3XKYZmm2')" class="externalLink">
 					<h2>Apply to be a Formula 1 driver (F1 2018)</h2>
-					<img src="img/svg/externLink.svg" width="24" height="24" alt="[external link]">
+					<img src="img/svg/externLink.svg" width="24" height="24" alt="[external link]" />
 				</button>
 
 				<button @click="gotosite('https://goo.gl/forms/DrkrJIC2Ssjmo5bj2')" class="externalLink">
 					<h2>Apply to be a Formula E driver (rFactor 2)</h2>
-					<img src="img/svg/externLink.svg" width="24" height="24" alt="[external link]">
+					<img src="img/svg/externLink.svg" width="24" height="24" alt="[external link]" />
 				</button>
-				<button @click="gotosite('https://discord.gg/U2KrZGP')" class="externalLink">
-					<h2>Join the EERC Discord</h2>
-					<img src="img/svg/externLink.svg" width="24" height="24" alt="[external link]">
-				</button>
-				<div class="externalLink paypal">
-					<h3>Help fund the league by donating via PayPal</h3>
-					<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-						<input type="hidden" name="cmd" value="_s-xclick">
-						<input type="hidden" name="hosted_button_id" value="WT96RWAPDAZ8S">
-						<input
-							type="image"
-							src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif"
-							border="0"
-							name="submit"
-							title="PayPal - The safer, easier way to pay online!"
-							alt="Donate with PayPal button"
-						>
-						<img alt border="0" src="https://www.paypal.com/en_GB/i/scr/pixel.gif" width="1" height="1">
-					</form>
-				</div>
 			</div>
 			<div class="mainRight">
 				<series-countdown
@@ -247,7 +217,7 @@ export default {
 }
 a {
 	text-decoration: none;
-	color: #ffffff;
+	color: var(--text);
 	font-weight: bold;
 }
 .externalLink {
