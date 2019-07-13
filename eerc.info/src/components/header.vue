@@ -24,10 +24,6 @@
 			<h5>This site is under construction.</h5>
 			<h6>Check back often to see frequent changes.</h6>
 		</div>
-		<button @click="gotosite('https://discord.gg/U2KrZGP')" class="externalLink">
-			<h2 id="externalLinkText">Join the EERC Discord</h2>
-			<img id="externalLinkIcon" src="/img/svg/discord-logo.svg" alt="[external link]" />
-		</button>
 		<nav class="mobile-menu">
 			<menu-icon @toggle="showMobileMenu" :toggled="mobileMenuToggle" style="z-index:110;margin:.6rem"></menu-icon>
 			<transition name="slide">

@@ -31,7 +31,13 @@
 </template>
 
 <script>
-export default {}
+export default {
+	methods: {
+		gotosite(site) {
+			window.open(site)
+		},
+	},
+}
 </script>
 
 <style scoped>
