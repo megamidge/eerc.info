@@ -1,7 +1,7 @@
 <template>
 	<div class="footer">
 		<div class="row">
-			<small>European Electronic Racing Championships</small>
+			<small>European Electronic Racing Community</small>
 			<button @click="gotosite('https://discord.gg/U2KrZGP')" class="externalLink">
 				<h2 id="externalLinkText">Join the EERC Discord</h2>
 				<img id="externalLinkIcon" src="/img/svg/discord-logo.svg" alt="[external link]" />
