@@ -3,7 +3,7 @@
 		<div class="panel seasons">
 			<series-countdown v-if="series.seasons" :series="series"></series-countdown>
 			<h1>Seasons:</h1>
-			<hr>
+			<hr />
 			<div
 				class="season"
 				v-for="(season,index) in seasons"
@@ -18,7 +18,7 @@
 					<p v-if="index===showingIndex">&#8593;</p>
 					<p v-else>&#8595;</p>
 				</div>
-				<hr style="width:100%">
+				<hr style="width:100%" />
 				<div v-if="index === showingIndex" class="season">
 					<div class="event" v-for="(event,eventIndex) in season.events" :key="eventIndex">
 						<div style="display:flex;flex-direction:row;justify-content:flex-start;">
@@ -33,7 +33,7 @@
 									<small>{{event.duration}} mins</small>
 								</p>
 							</div>
-							<div style="display:flex;flex-direction:column;text-align:right;margin-left: auto;">
+							<!-- <div style="display:flex;flex-direction:column;text-align:right;margin-left: auto;">
 								<h3>1. [First Place]</h3>
 								<h5>2. [Second Place]</h5>
 								<h6>3. [Second Place]</h6>
@@ -43,13 +43,13 @@
 										<i>[View full classification]</i>
 									</small>
 								</p>
-							</div>
-							<div
+							</div>-->
+							<!-- <div
 								class="trackmap"
 								:style="{backgroundImage: `url(/img/tracks/${(event.trackImage||'placeholder.png')})`}"
-							></div>
+							></div>-->
 						</div>
-						<hr style="width:100%" v-if="eventIndex!= season.events.length-1">
+						<hr style="width:100%" v-if="eventIndex!= season.events.length-1" />
 					</div>
 				</div>
 			</div>
@@ -60,10 +60,10 @@
 		<div class="panel leagueinfo">
 			<h2 class="centertext">{{league.name}}</h2>
 			<div class="logo" :style="logoStyle"></div>
-			<hr>
+			<hr />
 			<button @click="gotosite(league.registration)" class="externalLink">
 				<h2>Apply to drive</h2>
-				<img src="/img/svg/externLink.svg" width="24" height="24" alt="[external link]">
+				<img src="/img/svg/externLink.svg" width="24" height="24" alt="[external link]" />
 			</button>
 			<h3>Information:</h3>
 			<p>

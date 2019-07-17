@@ -5,6 +5,7 @@ import About from './views/About.vue'
 import Header from './components/header.vue'
 import League from './views/League.vue'
 import Gallery from './views/Gallery.vue'
+import TermsOfService from './views/TermsOfService.vue'
 import FullscreenImage from '@/components/fullscreen-image'
 import BasePage from '@/components/base-page'
 Vue.use(Router)
@@ -43,6 +44,10 @@ export default new Router({
                     path: 'league/:leagueCode',
                     component: League,
                 },
+                {
+                    path: 'TOS',
+                    component: TermsOfService,
+                }
             ],
         },
         {
