@@ -6,7 +6,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state: {
         calendar: [],
-        gallery: { pubdir: '', images: [] },
+        gallery: null,
         leagues: []
     },
     mutations: {
@@ -15,17 +15,17 @@ export default new Vuex.Store({
         },
         setLeagues(state, leagues) {
             state.leagues = leagues
+        },
+        setGallery(state, gallery) {
+            state.gallery = gallery
         }
     },
     getters: {
         getImageByName: (state) => (name) => {
-            return state.gallery.images.find(image => image.image === name)
+            return state.gallery.find(image => image.name === name)
         },
         galleryImages: state => {
-            return state.gallery.images
-        },
-        galleryPath: state => {
-            return state.gallery.pubdir
+            return state.gallery
         },
         series: state => {
             return state.leagues

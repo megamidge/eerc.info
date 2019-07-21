@@ -8,6 +8,8 @@ import Gallery from './views/Gallery.vue'
 import TermsOfService from './views/TermsOfService.vue'
 import FullscreenImage from '@/components/fullscreen-image'
 import BasePage from '@/components/base-page'
+
+import SecretTesting from './views/SecretTesting.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -47,6 +49,9 @@ export default new Router({
                 {
                     path: 'TOS',
                     component: TermsOfService,
+                }, {
+                    path: 'SecretTesting',
+                    component: SecretTesting,
                 }
             ],
         },

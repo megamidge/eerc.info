@@ -7,13 +7,13 @@
 		<!-- <img v-show="!showMain" ref="image" class="lowres" :src="imageMeta.lowres">
 		<img v-show="showMain" ref="mainImage" :src="`img/gallery/${image}`">-->
 		<lazy-image
-			:lowres="imageMeta.lowres"
-			:source="`${galleryPath}${image}`"
+			:lowres="imageMeta.lowRes"
+			:source="`${image}`"
 			@aspectRatioResolved="imageDisplayType"
 		/>
 		<div class="text">
 			<h5>{{image}}</h5>
-			<p>{{imageMeta.text}}</p>
+			<p>{{imageMeta.description}}</p>
 		</div>
 	</div>
 </template>
@@ -50,7 +50,7 @@ export default {
 			if (xPerc >= yPerc - 0.08 && xPerc <= yPerc + 0.08) this.displayType = 'square'
 		},
 		goFullscreen() {
-			this.$router.push(`/Gallery/${this.image}`)
+			this.$router.push(`/Gallery/${this.imageMeta.name}`)
 		},
 	},
 }

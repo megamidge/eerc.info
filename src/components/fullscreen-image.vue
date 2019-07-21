@@ -5,26 +5,54 @@
 				<div class="controls">
 					<p @click.stop="$router.push('/Gallery')">&#10006;</p>
 				</div>
-				<lazy-image :lowres="`${imageItem.lowres}`" :source="`${galleryPath}${$route.params.image}`"/>
+				<lazy-image :lowres="`${imageItem.lowRes}`" :source="`/img/gallery/${$route.params.image}`" />
 			</div>
 			<div class="text" :class="{hidden:!showTextMobile}">
 				<div class="controls">
 					<p @click.stop="$router.push('/Gallery')">&#10006;</p>
 				</div>
-				<h4>{{imageItem.image}}</h4>
-				<p>{{imageItem.text}}</p>
+				<h4>{{imageItem.name}}</h4>
+				<div class="meta" v-for="key in metaData" :key="key">
+					<go-kart-track class="meta-item icon" v-if="key == 'track'" />
+					<ticket-confirmation class="meta-item icon" v-else-if="key=='race'" />
+					<calendar-text class="meta-item icon" v-else-if="key == 'season'" />
+					<card-text class="meta-item icon" v-else-if="key == 'description'" />
+					<code-braces class="meta-item icon" v-else-if="key == 'league'" />
+					<square class="meta-item icon" v-else />
+					<p class="meta-item">{{imageItem[key]}}</p>
+				</div>
+				<div class="tags icon" v-if="tags">
+					<pound-box />
+					<div class="tags-div">
+						<p v-for="tag in tags" :key="tag">{{tag}}</p>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
 </template>
 
 <script>
+import PoundBox from 'vue-material-design-icons/PoundBox.vue'
+import GoKartTrack from 'vue-material-design-icons/GoKartTrack.vue'
+import TicketConfirmation from 'vue-material-design-icons/TicketConfirmation.vue'
+import CalendarText from 'vue-material-design-icons/CalendarText.vue'
+import CardText from 'vue-material-design-icons/CardText.vue'
+import CodeBraces from 'vue-material-design-icons/CodeBraces.vue'
+import Square from 'vue-material-design-icons/Square.vue'
 import LazyImage from '@/components/lazy-image'
 import { mapState } from 'vuex'
 import { mapGetters } from 'vuex'
 export default {
 	components: {
 		LazyImage,
+		PoundBox,
+		GoKartTrack,
+		TicketConfirmation,
+		CalendarText,
+		CardText,
+		CodeBraces,
+		Square,
 	},
 	data() {
 		return {
@@ -37,10 +65,15 @@ export default {
 		imageItem() {
 			return this.getImageByName(this.$route.params.image)
 		},
+		metaData() {
+			return Object.keys(this.imageItem).filter((k) => k != 'image' && k != 'name' && k != 'lowRes' && k != 'tags')
+		},
+		tags() {
+			return this.imageItem.tags
+		},
 	},
 	methods: {
 		toggleTextMobile() {
-			console.log(this.showTextMobile)
 			this.showTextMobile = !this.showTextMobile
 		},
 	},
@@ -81,6 +114,10 @@ export default {
 	justify-self: flex-end;
 	min-width: 20rem;
 	position: relative;
+	text-align: left;
+}
+.text h4 {
+	text-align: center;
 }
 .image {
 	width: 100%;
@@ -111,6 +148,41 @@ export default {
 .controls p:hover {
 	color: #797979;
 	cursor: pointer;
+}
+.tags {
+	display: grid;
+	grid-template-columns: 1rem auto;
+}
+.tags p {
+	margin: 0.1rem;
+	background: var(--accent-dark);
+	padding: 0.28rem;
+	border-radius: 0.1rem;
+	white-space: nowrap;
+}
+.tags-div {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+.tags .icon {
+	padding: 0;
+}
+.meta {
+	display: grid;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+	grid-template-columns: 1rem auto;
+}
+.meta-item {
+	margin: 0.1rem;
+	padding: 0.2rem;
+	border-radius: 0.1rem;
+}
+.meta .icon {
+	padding: 0;
+	background: none;
 }
 @media screen and (max-width: 660px) {
 	.wrapper {
