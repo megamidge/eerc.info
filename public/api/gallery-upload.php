@@ -83,9 +83,9 @@ if(isset($_POST["submit"])) {
         $uploadOk = 0;
     }
     //Check is supported file type
-    if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif"){
-        array_push($_SESSION['messages'], "Sorry, only <b>JPG, JPEG, PNG & GIF</b> files are allowed.<br/>");
-        echo "Sorry, only <b>JPG, JPEG, PNG & GIF</b> files are allowed.<br/>";
+    if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif" && $imageFileType != "webp"){
+        array_push($_SESSION['messages'], "Sorry, only <b>JPG, JPEG, PNG, WEBP & GIF</b> files are allowed.<br/>");
+        echo "Sorry, only <b>JPG, JPEG, PNG, WEBP & GIF</b> files are allowed.<br/>";
         $uploadOk = 0;
     }
     //Upload
@@ -124,6 +124,8 @@ if(isset($_POST["submit"])) {
         $image = imagecreatefromjpeg($target_file);
     else if($imageFileType == 'gif')
         $image = imagecreatefromgif($target_file);
+    else if($imageFileType == 'webp')
+        $image = imagecreatefromwebp($target_file);
     if(!$image){
         unlink($target_file);
 
@@ -142,6 +144,8 @@ if(isset($_POST["submit"])) {
         $res = imagejpeg($dst,'temp.'.$imageFileType);
     else if($imageFileType == 'gif')
         $res = imagegif($dst,'temp.gif');
+    else if($imageFileType == 'webp')
+        $res = imagewebp($dst,'temp.webp');
     imagedestroy($dst);
     imagedestroy($image);
     if(!$res){

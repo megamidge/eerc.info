@@ -9,7 +9,7 @@
                     "events": [
                         {
                             "location": "Australia",
-                            "track": "Bathurst Mount Panoramal",
+                            "track": "Bathurst Mount Panorama",
                             "utcDateTime": "2018-09-18T18:45:00.000Z",
                             "duration": 85
                         },
@@ -204,7 +204,7 @@
         },
         {
             "series": "F1",
-            "game": "F1",
+            "game": "F1 2019",
             "seasons": [
                 {
                     "seasonName": "Season 4",
@@ -560,7 +560,7 @@
                         },
                         {
                             "location": "United States of America",
-                            "track": "To be decided (8h)",
+                            "track": "8h of Road America",
                             "utcDateTime": "2019-08-17T00:00:00.00Z",
                             "duration": 480
                         },
@@ -583,8 +583,8 @@
                             "duration": 360
                         },
                         {
-                            "location": "United States of America",
-                            "track": "To be decided (8h)",
+                            "location": "Belgium",
+                            "track": "8h of Spa",
                             "utcDateTime": "2019-11-09",
                             "duration": 480
                         },

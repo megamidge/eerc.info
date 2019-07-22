@@ -59,7 +59,7 @@
 				</button>
 
 				<button @click="gotosite('https://goo.gl/forms/myjKb4lxI3XKYZmm2')" class="externalLink">
-					<h2>Apply to be a Formula 1 driver (F1 2018)</h2>
+					<h2>Apply to be a Formula 1 driver (F1 2019)</h2>
 					<img src="img/svg/externLink.svg" width="24" height="24" alt="[external link]" />
 				</button>
 

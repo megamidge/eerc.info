@@ -6,7 +6,7 @@
 			<ul>
 				<li @click="$router.push('/')">Home</li>
 				<li id="leagues" style="position:relative;">
-					Leagues/Series
+					Leagues
 					<ul class="series-menu">
 						<li v-for="(serie,index) in this.series" :key="index">
 							<router-link :to="'/league/' + serie.code">
@@ -138,6 +138,7 @@ export default {
 	flex-wrap: nowrap;
 	/* justify-content: space-between; */
 	/* align-items: center; */
+	min-width: 8rem;
 	top: 100%;
 	left: 0;
 	right: 0;
