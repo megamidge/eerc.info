@@ -1,155 +1,112 @@
 export default class Ajax {
-  static request(url, args) {
-    // build request
-    let request = Ajax._getRequest(args);
+    static request(url, options) {
+        return new AjaxPromise(GetResponse(url, options))
+    }
 
-    // build URL
-    let href;
+    static send(url, options) {
+        return GetResponse(url, options)
+    }
+}
+
+class AjaxPromise {
+    constructor(promise) {
+        this.promise = promise
+    }
+
+    as(type) {
+        return this.promise.then(response => {
+            switch (type.toLowerCase()) {
+                case 'json':
+                    return response.json()
+
+                case 'svg':
+                    return new DOMParser().parseFromString(response.text(), "image/svg+xml")
+
+                case 'html':
+                    return new DOMParser().parseFromString(response.text(), "text/html")
+
+                case 'document':
+                case 'xml':
+                    return new DOMParser().parseFromString(response.text(), "application/xml")
+
+                case 'blob':
+                case 'image':
+                case 'jpeg':
+                case 'jpg':
+                case 'png':
+                case 'bmp':
+                case 'gif':
+                    return response.blob()
+
+                case 'text':
+                    return response.text()
+
+                default:
+                    throw new Error(`${type} is not a valid response format`)
+            }
+        });
+    }
+
+    then(callback, error = null) {
+        if (!error)
+            return this.promise.then(callback)
+
+        return this.promise.then(callback, error)
+    }
+
+    catch(callback) {
+        return this.promise.catch(callback)
+    }
+}
+
+function GetResponse(url, options) {
+    const request = GetOptions(url, options)
+
+    return fetch(request.url, request)
+        .then(response => {
+            if (!response.ok)
+                throw response
+
+            return response
+        })
+}
+
+function GetOptions(url, options) {
+    if (typeof options == 'undefined')
+        return { url }
+
+    const request = {
+        cache: options.cache && options.cache.toLowerCase() || 'default',
+        credentials: options.credentials && options.credentials.toLowerCase() || 'same-origin',
+        method: options.method && options.method.toLowerCase() || 'get',
+        redirect: options.redirect && options.redirect.toLowerCase() || 'follow',
+        mode: options.mode && options.mode.toLowerCase() || undefined,
+        headers: options.headers || {},
+        body: options.body || undefined,
+        url: options.url || url,
+    }
 
     // append query string to url
-    if (
-      typeof request.method === "undefined" ||
-      request.method === "get" ||
-      request.method === "head"
-    ) {
-      href = url + "?" + Ajax._getArgs(args);
+    if (request.method === 'get' || request.method === 'head') {
+        request.url = url + '?' + GetArgs(options);
+        request.body = undefined
     }
 
-    // use default url
-    else {
-      href = url;
-
-      // use args as body instead if body not specified
-      if (typeof request.body === "undefined") {
-        if (typeof request.headers === "undefined") request.headers = {};
-
-        request.headers["Content-Type"] = "application/x-www-form-urlencoded";
-        request.body = Ajax._getArgs(args);
-      }
+    // post args if body empty
+    else if (!request.body) {
+        request.headers['Content-Type'] = 'application/x-www-form-urlencoded'
+        request.body = GetArgs(options)
     }
 
-    // perform fetch request
-    let promise = fetch(href, request).then(function(response) {
-      // throw error if not successful
-      if (!response.ok) throw response;
+    return request
+}
 
-      return response;
-    });
+function GetArgs(options) {
+    if (!options || typeof options.args !== 'object')
+        return ''
 
-    promise.as = function(type) {
-      return this.then(function(response) {
-        switch (type.toLowerCase()) {
-          case "json":
-            return response.json();
-
-          case "svg":
-            return response.text().then(function(data) {
-              return new DOMParser().parseFromString(data, "image/svg+xml");
-            });
-
-          case "html":
-            return response.text().then(function(data) {
-              return new DOMParser().parseFromString(
-                response.text(),
-                "text/html"
-              );
-            });
-
-          case "document":
-          case "xml":
-            return response.text().then(function(data) {
-              new DOMParser().parseFromString(
-                stringContainingHTMLSource,
-                "application/xml"
-              );
-            });
-
-          case "blob":
-          case "image":
-          case "jpeg":
-          case "jpg":
-          case "png":
-          case "bmp":
-          case "gif":
-            return response.blob();
-
-          case "text":
-          default:
-            return response.text();
-        }
-      });
-    };
-
-    return promise;
-  }
-
-  static send(url, args) {
-    // build URL
-    let href = url + Ajax._getArgs(args);
-
-    // build request
-    let request = Ajax._getRequest(args);
-
-    // override request method
-    request.method = "post";
-
-    // perform fetch request
-    return fetch(href, request).then(function() {
-      // throw error if not successful
-      if (!(response.status >= 200 && response.status < 300))
-        throw response.statusText;
-
-      return response;
-    });
-  }
-
-  static _getArgs(options) {
-    if (typeof options == "undefined" || typeof options.args !== "object")
-      return "";
-
-    return Object.keys(options.args)
-      .map(function(k) {
-        return (
-          encodeURIComponent(k) + "=" + encodeURIComponent(options.args[k])
-        );
-      })
-      .join("&");
-  }
-
-  static _getRequest(options) {
-    let request = {};
-
-    // return empty request if no options given
-    if (typeof options == "undefined") return request;
-
-    // cache rule
-    if (typeof options.cache !== "undefined")
-      request.cache = options.cache.toLowerCase();
-
-    // request method
-    if (typeof options.method !== "undefined")
-      request.method = options.method.toLowerCase();
-    else request.method = "get";
-
-    // request headers
-    if (typeof options.headers !== "undefined")
-      request.headers = options.headers;
-
-    // message body
-    if (typeof options.body !== "undefined") request.body = options.body;
-
-    // cross origin policy
-    if (typeof options.mode !== "undefined")
-      request.mode = options.mode.toLowerCase();
-
-    // send cookies and data
-    if (typeof options.credentials !== "undefined")
-      request.credentials = options.credentials.toLowerCase();
-
-    // action on redirect
-    if (typeof options.redirect !== "undefined")
-      request.redirect = options.redirect.toLowerCase();
-
-    return request;
-  }
+    return Object
+        .keys(options.args)
+        .map((k) => encodeURIComponent(k) + '=' + encodeURIComponent(options.args[k]))
+        .join('&')
 }

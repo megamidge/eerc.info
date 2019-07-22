@@ -18,6 +18,9 @@ export default new Vuex.Store({
         },
         setGallery(state, gallery) {
             state.gallery = gallery
+        },
+        setCalendar(state, calendar) {
+            state.calendar = calendar
         }
     },
     getters: {

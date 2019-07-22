@@ -8,7 +8,7 @@ import Gallery from './views/Gallery.vue'
 import TermsOfService from './views/TermsOfService.vue'
 import FullscreenImage from '@/components/fullscreen-image'
 import BasePage from '@/components/base-page'
-
+import GalleryUpload from '@/management/GalleryUpload'
 import SecretTesting from './views/SecretTesting.vue'
 Vue.use(Router)
 
@@ -54,6 +54,17 @@ export default new Router({
                     component: SecretTesting,
                 }
             ],
+        },
+        {
+            path: "/Admin",
+            component: BasePage,
+            children: [
+                {
+                    path: 'GalleryUpload',
+                    component: GalleryUpload
+
+                }
+            ]
         },
         {
             path: '*',
