@@ -128,8 +128,10 @@ export default {
 				.then((response) => {
 					let calendar = response.calendar
 					let seasonsResult = calendar.find((e) => e.series === this.$route.params.leagueCode)
-					if (!seasonsResult) this.series = {}
-					else {
+					if (!seasonsResult) {
+                        this.series = {}
+                        this.$router.replace('/league')
+					} else {
 						this.series = seasonsResult
 						this.showingIndex = this.seasons.length - 1
 					}
