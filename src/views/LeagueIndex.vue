@@ -2,7 +2,12 @@
 	<div class="wrapper">
 		<h1>Leagues</h1>
 		<div class="holder">
-			<router-link v-for="league in leagues" :key="league.code" :to="league.code" class="league-item">
+			<router-link
+				v-for="league in leagues"
+				:key="league.code"
+				:to="`/league/${league.code}`"
+				class="league-item"
+			>
 				<div class="title">
 					<h3>{{league.name}}</h3>
 				</div>

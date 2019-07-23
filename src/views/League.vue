@@ -115,7 +115,7 @@ export default {
 				.then((response) => {
 					let leagues = response.leagues
 					this.league = leagues.find((e) => e.code === this.$route.params.leagueCode)
-
+					if (!this.league) this.$router.replace('/league')
 					this.GetThisLeagueSeasons()
 				})
 				.catch((error) => {
@@ -129,8 +129,7 @@ export default {
 					let calendar = response.calendar
 					let seasonsResult = calendar.find((e) => e.series === this.$route.params.leagueCode)
 					if (!seasonsResult) {
-                        this.series = {}
-                        this.$router.replace('/league')
+						this.series = {}
 					} else {
 						this.series = seasonsResult
 						this.showingIndex = this.seasons.length - 1
