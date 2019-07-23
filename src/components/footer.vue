@@ -6,7 +6,16 @@
 				<h2 id="externalLinkText">Join the EERC Discord</h2>
 				<img id="externalLinkIcon" src="/img/svg/discord-logo.svg" alt="[external link]" />
 			</button>
-			<div class="sharethis-inline-follow-buttons"></div>
+			<div class="follow">
+				<p>Follow us:</p>
+				<a id="twitter" target="_blank" href="https://twitter.com/EERC_Official"></a>
+				<a id="insta" target="_blank" href="https://www.instagram.com/eerc_official/"></a>
+				<a
+					id="yt"
+					target="_blank"
+					href="https://www.youtube.com/channel/UC4kk8xdkgP1arwEgD7G4Nlw?sub_confirmation=1"
+				></a>
+			</div>
 		</div>
 		<div class="row">
 			<div class="paypal">
@@ -51,6 +60,7 @@ export default {
 	background: var(--colour-main);
 	border-style: solid;
 	border-width: 0.6rem 0 0 0;
+	overflow: hidden;
 }
 .row {
 	width: 100%;
@@ -86,6 +96,34 @@ export default {
 	width: 32px;
 	height: 32px;
 }
+.follow {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+}
+.follow a {
+	width: 1.4rem;
+	height: 1.4rem;
+	border-radius: 0.2rem;
+	margin-right: 0.1rem;
+}
+.follow p {
+	margin: 0;
+}
+a[href*='twitter.com/'] {
+	background: var(--accent-bright) url(https://twitter.com/favicon.ico) no-repeat center;
+	background-size: contain;
+}
+
+a[href*='instagram.com/'] {
+	background: var(--accent-bright) url(https://instagram.com/favicon.ico) no-repeat center;
+	background-size: contain;
+}
+a[href*='youtube.com/'] {
+	background: var(--accent-bright) url(https://youtube.com/favicon.ico) no-repeat center;
+	background-size: contain;
+}
 @media screen and (max-width: 640px) {
 	.externalLink #externalLinkText {
 		display: none;
@@ -93,6 +131,13 @@ export default {
 	.externalLink #externalLinkIcon {
 		width: 64px;
 		height: 64px;
+	}
+	.follow {
+		flex-direction: column;
+	}
+	.follow p {
+		transform: rotate(90deg) translateY(-100%) translateX(50%);
+		white-space: nowrap;
 	}
 }
 </style>

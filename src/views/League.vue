@@ -33,21 +33,6 @@
 									<small>{{event.duration}} mins</small>
 								</p>
 							</div>
-							<!-- <div style="display:flex;flex-direction:column;text-align:right;margin-left: auto;">
-								<h3>1. [First Place]</h3>
-								<h5>2. [Second Place]</h5>
-								<h6>3. [Second Place]</h6>
-								<p>[X] entrants</p>
-								<p>
-									<small>
-										<i>[View full classification]</i>
-									</small>
-								</p>
-							</div>-->
-							<!-- <div
-								class="trackmap"
-								:style="{backgroundImage: `url(/img/tracks/${(event.trackImage||'placeholder.png')})`}"
-							></div>-->
 						</div>
 						<hr style="width:100%" v-if="eventIndex!= season.events.length-1" />
 					</div>
@@ -58,8 +43,10 @@
 			</div>
 		</div>
 		<div class="panel leagueinfo">
-			<h2 class="centertext">{{league.name}}</h2>
-			<div class="logo" :style="logoStyle"></div>
+			<div class="logo-title">
+				<h2 class="centertext">{{league.name}}</h2>
+				<div class="logo" :style="logoStyle"></div>
+			</div>
 			<hr />
 			<button @click="gotosite(league.registration)" class="externalLink">
 				<h2>Apply to drive</h2>
@@ -165,27 +152,27 @@ export default {
 <style scoped>
 .body {
 	padding: 0;
-	display: flex;
-	flex-direction: row;
-	justify-content: space-evenly;
-	align-items: flex-start;
+	margin: 0.4rem;
+	/* display: flex; */
+	display: grid;
+	grid-template-columns: auto 18rem;
+	background: #18222c;
+	grid-gap: 0;
 }
 .panel {
-	background: #18222c;
 	margin: 0.5rem;
 	padding: 0.2rem;
 	/* flex-grow: 1; */
 	display: flex;
 	flex-direction: column;
-	align-items: flex-start;
+	align-items: stretch;
+	/* width: 100%; */
 }
 .leagueinfo {
-	flex-grow: 1.5; /*space distribution*/
 	position: sticky;
 	position: -webkit-sticky;
 	top: 0.5rem;
-	width: 15%; /*stops the shrinking*/
-	height: calc(100vh - 1.5rem);
+	height: calc(100vh - 2rem);
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
@@ -197,7 +184,6 @@ export default {
 	text-align: center;
 }
 .seasons {
-	flex-grow: 8; /*space distribution*/
 	align-items: stretch;
 	text-align: left;
 }
@@ -249,7 +235,7 @@ hr {
 	width: 20%;
 }
 .externalLink {
-	background-color: #25415d;
+	background-color: var(--accent-bright-alt);
 	padding: 0 0.6rem 0 0.6rem;
 	border-radius: 0.2rem;
 	outline: none;
@@ -260,5 +246,34 @@ hr {
 	flex-direction: row;
 	align-items: center;
 	justify-content: space-between;
+}
+
+@media screen and (max-width: 640px) {
+	.body {
+		grid-template-rows: auto auto;
+		grid-template-columns: auto;
+	}
+	.leagueinfo {
+		grid-row: 1;
+		height: auto;
+
+		position: static;
+		background: var(--accent-bright);
+		border-radius: 0.2rem;
+	}
+	.leagueinfo .logo-title {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+	}
+	.leagueinfo .logo-title .logo {
+		padding: 0.1rem;
+		height: 5rem;
+		width: 5rem;
+	}
+	.seasons {
+		grid-row: 2;
+	}
 }
 </style>

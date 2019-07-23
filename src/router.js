@@ -4,6 +4,7 @@ import Home from './views/Home.vue'
 import About from './views/About.vue'
 import Header from './components/header.vue'
 import League from './views/League.vue'
+import LeagueIndex from './views/LeagueIndex.vue'
 import Gallery from './views/Gallery.vue'
 import TermsOfService from './views/TermsOfService.vue'
 import FullscreenImage from '@/components/fullscreen-image'
@@ -41,6 +42,12 @@ export default new Router({
                     path: 'About',
                     name: 'About',
                     component: About,
+                },
+                {
+                    path: 'league',
+                    name: 'leagueindex',
+                    component: LeagueIndex,
+
                 },
                 {
                     path: 'league/:leagueCode',

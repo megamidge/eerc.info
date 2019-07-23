@@ -6,15 +6,17 @@
 			<ul>
 				<li @click="$router.push('/')">Home</li>
 				<li id="leagues" style="position:relative;">
-					Leagues
-					<ul class="series-menu">
-						<li v-for="(serie,index) in this.series" :key="index">
-							<router-link :to="'/league/' + serie.code">
-								<div class="series-logo" :style="{backgroundImage:`url(img/logos/${serie.logo})`}"></div>
-								<p>{{serie.code}}</p>
-							</router-link>
-						</li>
-					</ul>
+					<router-link :to="'/league'">
+						Leagues
+						<ul class="series-menu">
+							<li v-for="(serie,index) in this.series" :key="index">
+								<router-link :to="'/league/' + serie.code">
+									<div class="series-logo" :style="{backgroundImage:`url(img/logos/${serie.logo})`}"></div>
+									<p>{{serie.code}}</p>
+								</router-link>
+							</li>
+						</ul>
+					</router-link>
 				</li>
 				<li @click="$router.push('/Gallery')">Gallery</li>
 				<li @click="$router.push('/About')">About</li>
