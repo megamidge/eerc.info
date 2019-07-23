@@ -36,6 +36,9 @@
 				<small>Donators may be entered into exclusive prize draws and more</small>
 			</div>
 		</div>
+		<div class="row">
+			<router-link to="/Feedback">Give us feedback or report a problem</router-link>
+		</div>
 	</div>
 </template>
 
@@ -61,6 +64,7 @@ export default {
 	border-style: solid;
 	border-width: 0.6rem 0 0 0;
 	overflow: hidden;
+	bottom: 0;
 }
 .row {
 	width: 100%;
@@ -139,5 +143,15 @@ a[href*='youtube.com/'] {
 		transform: rotate(90deg) translateY(-100%) translateX(50%);
 		white-space: nowrap;
 	}
+}
+a {
+	color: unset;
+	text-decoration: none;
+}
+a:visited {
+	color: unset;
+}
+a:hover {
+	color: var(--text-hover);
 }
 </style>

@@ -138,15 +138,12 @@ export default {
 	},
 	methods: {
 		fileChange(e) {
-			console.log(e)
 			var files = e.target.files || e.dataTransfer.files
-			console.log(files)
 			if (!files.length) return
 			this.image = files[0]
 			this.previewImage = URL.createObjectURL(this.image)
 		},
 		uploadImage() {
-			console.log('image', this.image)
 			let formData = new FormData()
 			formData.append('file', this.image)
 			formData.append('password', this.password)
@@ -158,13 +155,12 @@ export default {
 			formData.append('tags', this.tags)
 
 			axios
-				.post('/api/gallery-upload-test.php', formData, {
+				.post('/api/gallery-upload.php', formData, {
 					headers: {
 						'Content-Type': 'multipart/form-data',
 					},
 				})
 				.then((response) => {
-					console.log(response, response.data)
 					this.responseData = response.data
 				})
 				.catch((error) => {

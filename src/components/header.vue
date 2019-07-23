@@ -1,7 +1,11 @@
 <template>
 	<!-- <div> -->
 	<div class="header" ref="header">
-		<img src="/img/eerclogo_0.png" style="height:auto;width:4rem;margin:0.5rem;" />
+		<img
+			src="/img/eerclogo_0.png"
+			style="height:auto;width:4rem;margin:0.5rem;cursor:pointer;"
+			@click="$router.push('/')"
+		/>
 		<nav class="menu">
 			<ul>
 				<li @click="$router.push('/')">Home</li>

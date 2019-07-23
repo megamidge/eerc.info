@@ -1,8 +1,8 @@
 <template>
-	<div>
+	<div id="basepage">
 		<header-component></header-component>
 		<router-view></router-view>
-		<footer-component></footer-component>
+		<footer-component id="footerID"></footer-component>
 	</div>
 </template>
 
@@ -18,5 +18,14 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+#basepage {
+	min-height: 100vh;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+}
+#footerID {
+	flex-grow: 1;
+}
 </style>

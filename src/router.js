@@ -10,6 +10,7 @@ import TermsOfService from './views/TermsOfService.vue'
 import FullscreenImage from '@/components/fullscreen-image'
 import BasePage from '@/components/base-page'
 import GalleryUpload from '@/management/GalleryUpload'
+import FeedbackOrReport from '@/views/FeedbackOrReport'
 import SecretTesting from './views/SecretTesting.vue'
 Vue.use(Router)
 
@@ -56,6 +57,9 @@ export default new Router({
                 {
                     path: 'TOS',
                     component: TermsOfService,
+                }, {
+                    path: 'Feedback',
+                    component: FeedbackOrReport
                 }, {
                     path: 'SecretTesting',
                     component: SecretTesting,
