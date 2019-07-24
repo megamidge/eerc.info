@@ -18,7 +18,13 @@
 				v-model="message"
 				:placeholder="placeholder"
 			></textarea>
-			<input type="submit" value="Submit" name="submit" class="submit" />
+			<input
+				:disabled="feedbackType=='none'||message.length <= 24"
+				type="submit"
+				value="Submit"
+				name="submit"
+				class="submit"
+			/>
 		</form>
 	</div>
 </template>
@@ -42,6 +48,8 @@ export default {
 	},
 	methods: {
 		sendForm() {
+			if (this.feedbackType == 'none') return
+			if (this.message.length < 24) return
 			let formData = new FormData()
 			formData.append('type', this.feedbackType)
 			formData.append('message', this.message)
@@ -95,6 +103,11 @@ input {
 }
 .submit:active {
 	background-color: var(--accent-bright);
+}
+.submit:disabled {
+	background-color: var(--accent-dark);
+	color: var(--text-hover);
+	cursor: default;
 }
 select {
 	border: none;

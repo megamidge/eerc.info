@@ -34,14 +34,14 @@
 				<ul v-if="mobileMenuToggle">
 					<div :style="{height:`${mobNavHeight}px`}"></div>
 					<li @click="$router.push('/')">Home</li>
-					<li id="leagues" style="position:relative;">
-						Leagues/Series
+					<li @click="$router.push('/league')" id="leagues" style="position:relative;">
+						Leagues
 						<ul class="series-menu">
 							<li v-for="(serie,index) in this.series" :key="index">
-								<router-link :to="'/league/' + serie.code">
+								<a @click.stop="$router.push(`/league/${serie.code}`)">
 									<div class="series-logo" :style="serie.logo"></div>
 									<p>{{serie.code}}</p>
-								</router-link>
+								</a>
 							</li>
 						</ul>
 					</li>
