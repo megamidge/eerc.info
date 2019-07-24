@@ -10,5 +10,6 @@ foreach($fileList as &$file){
     $json[] = json_decode($fileContents,true);
 }
 
-
+if(!isset($json))
+    exit('[]');
 echo json_encode($json,JSON_PRETTY_PRINT);

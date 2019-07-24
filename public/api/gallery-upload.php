@@ -47,6 +47,38 @@ if($uploadOk == 0){
         die("Unknown error uploading file.<br/>");
     }
 }
+//create thumbnail size (not for gifs tho)
+$thumbnailImg = file_get_contents($target_file);
+list($thumbWidthOrig, $thumbHeightOrig) = getimagesize($target_file);
+if($imageFileType!='gif' && $thumbWidthOrig>400){
+    $targetwidth = 400;
+    $targetheight = $thumbHeightOrig / ($thumbWidthOrig / 400);
+    if($imageFileType == 'png')
+        $imageThumb = imagecreatefrompng($target_file);
+    else if($imageFileType == 'jpeg' || $imageFileType == 'jpg')
+        $imageThumb = imagecreatefromjpeg($target_file);
+    else if($imageFileType == 'webp')
+        $imageThumb = imagecreatefromwebp($target_file);
+    if(!$imageThumb){
+        unlink($target_file);
+        die("Unhandled image error. Aborting. The uploaded image has been deleted.");
+    }
+    $thumbDst = imagecreatetruecolor($targetwidth, $targetheight);
+    imagecopyresampled($thumbDst, $imageThumb, 0,0,0,0,$targetwidth,$targetheight, $thumbWidthOrig, $thumbHeightOrig);
+    if($imageFileType == 'png')
+        $thumbRes = imagepng($thumbDst, $target_file . '-thumbnail.png');
+    else if($imageFileType == 'jpeg' || $imageFileType == 'jpg')
+        $thumbRes = imagejpeg($thumbDst, $target_file . '-thumbnail.'.$imageFileType);
+    else if($imageFileType == 'webp')
+        $thumbRes = imagewebp($thumbDst, $target_file . '-thumbnail.webp');
+    imagedestroy($thumbDst);
+    imagedestroy($imageThumb);
+    if(!$thumbRes){
+        die("Unkown image error. Image might have uploaded properly but something has failed. Shrug reacts only.");
+    }
+    $thumbnailUrl = $target_file . '-thumbnail.'.$imageFileType;
+}
+
 //get imgData as base64...
 $img = file_get_contents($target_file);
 list($width, $height) = getimagesize($target_file);
@@ -71,7 +103,6 @@ if(!$image){
     die("Unhandled image error. Aborting. The uploaded image has been deleted.");
 }
 $dst = imagecreatetruecolor($arX, $arY);
-echo $arX . "   " . $arY;
 imagecopyresampled($dst, $image, 0,0,0,0,$arX,$arY, $width, $height);
 
 
@@ -96,6 +127,9 @@ $metaFile = fopen($target_file . ".json","w");
 $object = new stdClass();
 $object->image = "/img/gallery/" . $target_file_name;
 $object->name = $target_file_name;
+if(isset($thumbnailUrl)){
+    $object->thumbnail = $thumbnailUrl;
+}
 if($_POST["description"] != "")
     $object->description = $_POST['description'];
 if($_POST["league"] != "")

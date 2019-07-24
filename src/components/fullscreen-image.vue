@@ -18,8 +18,8 @@
 					<calendar-text class="meta-item icon" v-else-if="key == 'season'" />
 					<card-text class="meta-item icon" v-else-if="key == 'description'" />
 					<code-braces class="meta-item icon" v-else-if="key == 'league'" />
-					<square class="meta-item icon" v-else />
-					<p class="meta-item">{{imageItem[key]}}</p>
+					<square class="meta-item icon" v-else-if="key!='thumbnail'" />
+					<p class="meta-item" v-if="key!='thumbnail'">{{imageItem[key]}}</p>
 				</div>
 				<div class="tags icon" v-if="tags">
 					<pound-box />

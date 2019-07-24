@@ -1,12 +1,24 @@
 <template>
 	<!-- <transition name="crossfade" mode="in-out"> -->
-	<img class="lazy-image" ref="small" :src="imageSource" :class="{lowres:!ready}" :key="imageSource">
+	<intersect @enter="intersected" @leave="unintersected">
+		<img
+			class="lazy-image"
+			ref="small"
+			:src="imageSource"
+			:class="{lowres:!ready}"
+			:key="imageSource"
+		/>
+	</intersect>
 	<!-- </transition> -->
 </template>
 
 <script>
+import Intersect from 'vue-intersect'
 export default {
 	name: 'lazy-image',
+	components: {
+		Intersect,
+	},
 	props: {
 		lowres: '',
 		source: '',
@@ -14,10 +26,12 @@ export default {
 	data() {
 		return {
 			ready: false,
+			inView: false,
 		}
 	},
 	computed: {
 		imageSource() {
+			if (this.source == '') return
 			if (this.ready) return this.source
 			return this.lowres
 		},
@@ -26,21 +40,28 @@ export default {
 		this.$nextTick(() => {
 			if (this.$refs.small.complete) this.aspectRatio()
 			else this.$refs.small.addEventListener('load', this.aspectRatio)
-
-			let mainImg = new Image()
-			mainImg.src = this.source
-			if (mainImg.complete) {
-				this.ready = true
-				// this.$refs.small.src = this.source
-			} else
-				mainImg.addEventListener('load', () => {
-					this.ready = true
-					// this.$refs.small.src = this.source
-					// this.$refs.small.removeEventListener('load', this.aspectRatio)
-				})
 		})
 	},
 	methods: {
+		intersected() {
+			this.inView = true
+			if (this.ready) return
+			setInterval(() => {
+				if (!this.inView) return
+				let mainImg = new Image()
+				mainImg.src = this.source
+				if (mainImg.complete) {
+					this.ready = true
+				} else {
+					mainImg.addEventListener('load', () => {
+						this.ready = true
+					})
+				}
+			}, 80)
+		},
+		unintersected() {
+			this.inView = false
+		},
 		aspectRatio() {
 			let img = this.$refs.small
 			let gcd = this.greatestCommonDenominator(img.naturalWidth, img.naturalHeight)

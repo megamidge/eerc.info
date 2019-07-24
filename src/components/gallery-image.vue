@@ -8,7 +8,7 @@
 		<img v-show="showMain" ref="mainImage" :src="`img/gallery/${image}`">-->
 		<lazy-image
 			:lowres="imageMeta.lowRes"
-			:source="`${image}`"
+			:source="imageSource"
 			@aspectRatioResolved="imageDisplayType"
 		/>
 		<div class="text">
@@ -40,6 +40,10 @@ export default {
 	},
 	computed: {
 		...mapGetters(['galleryPath']),
+		imageSource() {
+			if (this.imageMeta.thumbnail) return this.imageMeta.thumbnail
+			return this.image
+		},
 	},
 	methods: {
 		imageDisplayType(ar) {
