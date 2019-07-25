@@ -199,6 +199,71 @@
                             "duration": 165
                         }
                     ]
+                },
+                {
+                    "seasonName": "Season 6",
+                    "events": [
+                        {
+                            "location": "New Zealand",
+                            "track": "Ruapuna Park GP",
+                            "utcDateTime": "2019-08-11T17:45:00.000Z",
+                            "duration": 85
+                        },
+                        {
+                            "location": "Japan",
+                            "track": "Sportsland Sugo",
+                            "utcDateTime": "2019-08-18T17:45:00.000Z",
+                            "duration": 85
+                        },
+                        {
+                            "location": "United States of America",
+                            "track": "Sonoma Raceway GP",
+                            "utcDateTime": "2019-08-25T17:45:00.000Z",
+                            "duration": 85
+                        },
+                        {
+                            "location": "United States of America",
+                            "track": "Long Beach Street Circuit",
+                            "utcDateTime": "2019-09-08T17:45:00.000Z",
+                            "duration": 85
+                        },
+                        {
+                            "location": "Italy",
+                            "track": "Autodromo Nazionale Monza GP",
+                            "utcDateTime": "2019-09-15T17:45:00.000Z",
+                            "duration": 85
+                        },
+                        {
+                            "location": "Austria",
+                            "track": "Red Bull Ring GP",
+                            "utcDateTime": "2019-09-22T17:45:00.000Z",
+                            "duration": 85
+                        },
+                        {
+                            "location": "Germany",
+                            "track": "Motorsport Aerna Oschersleben A Course",
+                            "utcDateTime": "2019-10-06T17:45:00.000Z",
+                            "duration": 85
+                        },
+                        {
+                            "location": "United Kingdom",
+                            "track": "Snetterton 300",
+                            "utcDateTime": "2019-10-13T17:45:00.000Z",
+                            "duration": 85
+                        },
+                        {
+                            "location": "United Kingdom",
+                            "track": "Donington Park GP",
+                            "utcDateTime": "2019-10-20T17:45:00.000Z",
+                            "duration": 85
+                        },
+                        {
+                            "location": "France",
+                            "track": "Duex Heures de Le Mans",
+                            "utcDateTime": "2019-11-03T18:45:00.000Z",
+                            "duration": 165
+                        }
+                    ]
                 }
             ]
         },
@@ -593,6 +658,82 @@
                             "track": "24h of Daytona",
                             "utcDateTime": "2019-11-30T00:00:00.00Z",
                             "duration": 1440
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "series": "GT",
+            "game": "Assetto Corsa Competizione",
+            "seasons": [
+                {
+                    "seasonName": "Pre-Season 1 Sprints",
+                    "events": [
+                        {
+                            "location": "Belgium",
+                            "track": "Zolder",
+                            "utcDateTime": "2019-07-21T17:45:00.000Z",
+                            "duration": 85
+                        },
+                        {
+                            "location": "United Kingdom",
+                            "track": "Brands Hatch",
+                            "utcDateTime": "2019-07-28T17:45:00.000Z",
+                            "duration": 85
+                        },
+                        {
+                            "location": "Italy",
+                            "track": "Misano",
+                            "utcDateTime": "2019-08-04T17:45:00.000Z",
+                            "duration": 85
+                        },
+                        {
+                            "location": "Hungary",
+                            "track": "Hungaroring",
+                            "utcDateTime": "2019-08-11T17:45:00.000Z",
+                            "duration": 85
+                        },
+                        {
+                            "location": "Germany",
+                            "track": "Nürburgring",
+                            "utcDateTime": "2019-08-18T17:45:00.000Z",
+                            "duration": 85
+                        }
+                    ]
+                },
+                {
+                    "seasonName": "Season 1",
+                    "events": [
+                        {
+                            "location": "Italy",
+                            "track": "3h of Autodromo Nazionale Monza GP",
+                            "utcDateTime": "2019-09-01T12:00:00.000Z",
+                            "duration": 200
+                        },
+                        {
+                            "location": "United Kingdom",
+                            "track": "3h of Silverstone GP",
+                            "utcDateTime": "2019-09-29T12:00:00.000Z",
+                            "duration": 200
+                        },
+                        {
+                            "location": "France",
+                            "track": "3h of Circuit Paul Ricard",
+                            "utcDateTime": "2019-10-27T13:00:00.000Z",
+                            "duration": 200
+                        },
+                        {
+                            "location": "Spain",
+                            "track": "3h of Circuit de Barcelona Catalunya",
+                            "utcDateTime": "2019-11-24T13:00:00.000Z",
+                            "duration": 200
+                        },
+                        {
+                            "location": "Belgium",
+                            "track": "6h of Spa-Francorchamps",
+                            "utcDateTime": "2019-12-15T13:00:00.000Z",
+                            "duration": 400
                         }
                     ]
                 }
