@@ -19,12 +19,17 @@
 				</div>
 			</router-link>
 		</div>
+		<calendar></calendar>
 	</div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
+import Calendar from '@/components/calendar'
 export default {
+	components: {
+		Calendar,
+	},
 	computed: {
 		...mapState(['leagues']),
 	},

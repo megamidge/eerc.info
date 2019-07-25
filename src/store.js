@@ -32,6 +32,9 @@ export default new Vuex.Store({
         },
         series: state => {
             return state.leagues
+        },
+        leagueColour: (state) => (leagueCode) => {
+            return state.leagues.find(l => l.code == leagueCode).colour
         }
     },
     actions: {

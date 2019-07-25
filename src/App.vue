@@ -23,7 +23,6 @@ body {
 	--background: #2c3e50;
 	--text: #d1d1d1;
 	--text-hover: #797979;
-
 	margin: 0;
 	padding: 0;
 	background-color: var(--background);

@@ -5,6 +5,7 @@
             "name": "Multiclass Sprint Racing",
             "game": "Project Cars 2",
             "logo": "eercwec.png",
+            "colour": "#97C00E",
             "registration": "https://goo.gl/forms/NcFb4z5KcKfn2lWo2"
         },
         {
@@ -12,6 +13,7 @@
             "name": "Formula E",
             "game": "RFactor2",
             "logo": "eercfe.png",
+            "colour": "#00DBFF",
             "registration": "https://goo.gl/forms/DrkrJIC2Ssjmo5bj2"
         },
         {
@@ -19,6 +21,7 @@
             "name": "Formula 1",
             "game": "F1 2019",
             "logo": "eercf1.png",
+            "colour": "#FF1E00",
             "registration": "https://goo.gl/forms/myjKb4lxI3XKYZmm2"
         },
         {
@@ -26,6 +29,7 @@
             "name": "GT Series",
             "game": "Assetto Corsa Competizione",
             "logo": "GTseries.png",
+            "colour": "#E40514",
             "registration": "https://goo.gl/forms/spPDvr4aaUVZMKAk1"
         },
         {
@@ -33,6 +37,7 @@
             "name": "DiRT World Rally Championship",
             "game": "DiRT Rally",
             "logo": "DirtRoundel.png",
+            "colour": "#BCAA6C",
             "registration": "https://forms.gle/SW8G6r5kKbPaGBZp7"
         },
         {
@@ -40,6 +45,7 @@
             "name": "EERC mouseOne Endurance League",
             "game": "RFactor2",
             "logo": "m1logo.png",
+            "colour": "#0370FF",
             "registration": "https://forms.gle/NSewf3JRVPY96oVP8"
         }
     ]
