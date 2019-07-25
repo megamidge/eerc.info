@@ -95,7 +95,8 @@ export default {
 	/* overflow: scroll; */
 }
 .wrapper {
-	background-color: #18222ccc;
+	background-color: var(--colour-main);
+	opacity: 0.8;
 	width: 95%;
 	height: 95%;
 	display: flex;
@@ -108,7 +109,7 @@ export default {
 .text {
 	/* height: 100%; */
 	/* width: 40%; */
-	background-color: #18222c;
+	background-color: var(--colour-main);
 	padding: 0.4rem;
 	box-sizing: border-box;
 	justify-self: flex-end;
@@ -146,7 +147,7 @@ export default {
 	margin: 0;
 }
 .controls p:hover {
-	color: #797979;
+	color: var(--text-hover);
 	cursor: pointer;
 }
 .tags {
@@ -197,7 +198,8 @@ export default {
 		bottom: 0;
 		left: 0;
 		right: 0;
-		background-color: #18222cee;
+		background-color: var(--colour-main);
+		opacity: 0.93;
 		max-height: 100%;
 		transition: all 0.4s;
 	}

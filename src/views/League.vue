@@ -4,12 +4,7 @@
 			<series-countdown v-if="series.seasons" :series="series"></series-countdown>
 			<h1>Seasons:</h1>
 			<hr />
-			<div
-				class="season"
-				v-for="(season,index) in seasons"
-				:key="index"
-				style="margin-left:0.5rem;margin-right:0.5rem;background:#25415d;padding:0.4rem"
-			>
+			<div class="season" v-for="(season,index) in seasons" :key="index" style>
 				<div
 					style="display:flex;flex-direction:row;justify-content:space-between;cursor:pointer;"
 					@click="seasonClick(index)"
@@ -19,7 +14,7 @@
 					<p v-else>&#8595;</p>
 				</div>
 				<hr style="width:100%" />
-				<div v-if="index === showingIndex" class="season">
+				<div v-if="index === showingIndex" class="season-item">
 					<div class="event" v-for="(event,eventIndex) in season.events" :key="eventIndex">
 						<div style="display:flex;flex-direction:row;justify-content:flex-start;">
 							<div style="display:flex;flex-direction:column;">
@@ -157,7 +152,7 @@ export default {
 	/* display: flex; */
 	display: grid;
 	grid-template-columns: auto 18rem;
-	background: #18222c;
+	background: var(--colour-main);
 	grid-gap: 0;
 }
 .panel {
@@ -189,23 +184,30 @@ export default {
 	text-align: left;
 }
 .season {
+	/* padding: 0.8rem; */
+	background: var(--accent-dark);
+	/* margin-left: 0.5rem;
+	margin-right: 0.5rem; */
+	padding: 0.4rem;
+}
+.season-item {
 	padding: 0.8rem;
-	background: #4b6987;
+	background: var(--accent-bright-alt);
 }
 a {
-	color: #d1d1d1;
+	color: var(--text);
 	text-decoration: none;
 }
 a:visited {
 	color: unset;
 }
 a:hover {
-	color: #797979;
+	color: var(--text-hover);
 }
 .logo {
 	height: 15rem;
 	margin: 0;
-	background: #25415d;
+	background: var(--accent-bright);
 	background-size: contain;
 	background-repeat: no-repeat;
 	background-position: center;
@@ -241,7 +243,7 @@ hr {
 	border-radius: 0.2rem;
 	outline: none;
 	border: none;
-	color: #d1d1d1;
+	color: var(--text);
 	cursor: pointer;
 	display: flex;
 	flex-direction: row;

@@ -174,13 +174,14 @@ export default {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
-	background: #12181fef;
+	background: var(--accent-dark);
+	opacity: 0.93;
 	margin: 0;
 }
 .stream-wrapper {
 	width: 95%;
 	margin: 1rem;
-	background-color: #12181f;
+	background-color: var(--accent-dark);
 	display: flex;
 	flex-direction: column;
 	align-items: stretch;
@@ -188,7 +189,7 @@ export default {
 }
 .stream {
 	width: 100%;
-	background-color: #12181f;
+	background-color: var(--accent-dark);
 	display: flex;
 	flex-direction: row;
 	align-items: stretch;
@@ -196,12 +197,12 @@ export default {
 }
 .stream-video {
 	flex-grow: 30;
-	background-color: #000000;
+	background-color: var(--accent-dark);
 	margin-right: 0.2rem;
 }
 .stream-info {
 	flex-grow: 4;
-	background-color: #18222c;
+	background-color: var(--colour-main);
 	margin-left: 0.2rem;
 }
 .body {
@@ -221,13 +222,13 @@ a {
 	font-weight: bold;
 }
 .externalLink {
-	background-color: #18222c;
+	background-color: var(--colour-main);
 	padding: 10px;
 	border-radius: 0.2rem;
 	margin: 1rem;
 	outline: none;
 	border: none;
-	color: #d1d1d1;
+	color: var(--text);
 	cursor: pointer;
 	display: flex;
 	flex-direction: row;
@@ -239,7 +240,7 @@ a {
 	align-items: center;
 }
 .externalLink:hover {
-	background-color: #12181f;
+	background-color: var(--accent-dark);
 }
 @media screen and (min-width: 600px) and (max-width: 700px) {
 	.externalLink {

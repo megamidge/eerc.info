@@ -1,23 +1,25 @@
 <template>
-	<div class="countdown">
-		<p class="title">{{name}}</p>
-		<p class="deadline">{{deadline.toLocaleDateString(undefined,dateOptions)}}</p>
-		<div class="timer">
-			<div class="value">
-				<h1>{{days(difference) | twoDigits}}</h1>
-				<p>days</p>
-			</div>
-			<div class="value">
-				<h1>{{hours(difference) | twoDigits}}</h1>
-				<p>hours</p>
-			</div>
-			<div class="value">
-				<h1>{{minutes(difference) | twoDigits}}</h1>
-				<p>minutes</p>
-			</div>
-			<div class="value">
-				<h1>{{seconds(difference) | twoDigits}}</h1>
-				<p>seconds</p>
+	<div class="wrapper">
+		<div class="countdown">
+			<p class="title">{{name}}</p>
+			<p class="deadline">{{deadline.toLocaleDateString(undefined,dateOptions)}}</p>
+			<div class="timer">
+				<div class="value">
+					<h1>{{days(difference) | twoDigits}}</h1>
+					<p>days</p>
+				</div>
+				<div class="value">
+					<h1>{{hours(difference) | twoDigits}}</h1>
+					<p>hours</p>
+				</div>
+				<div class="value">
+					<h1>{{minutes(difference) | twoDigits}}</h1>
+					<p>minutes</p>
+				</div>
+				<div class="value">
+					<h1>{{seconds(difference) | twoDigits}}</h1>
+					<p>seconds</p>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -111,13 +113,16 @@ export default {
 </script>
 
 <style scoped>
+.wrapper {
+	padding: 1rem;
+}
 .countdown {
-	background: #18222c;
+	background: var(--colour-main);
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	margin: 1rem;
+	/* margin: 1rem; */
 	padding-left: 1rem;
 	padding-right: 1rem;
 }
@@ -126,7 +131,7 @@ export default {
 	flex-direction: row;
 	justify-content: space-evenly;
 	width: 100%;
-	background: #12181f;
+	background: var(--accent-dark);
 	margin-left: 1rem;
 	margin-right: 1rem;
 	margin-bottom: 1rem;
