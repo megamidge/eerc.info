@@ -41,7 +41,7 @@ export default {
 	computed: {
 		...mapGetters(['galleryPath']),
 		imageSource() {
-			if (this.imageMeta.thumbnail) return this.imageMeta.thumbnail
+			if (this.imageMeta.thumbnail && this.displayType == 'default') return this.imageMeta.thumbnail
 			return this.image
 		},
 	},

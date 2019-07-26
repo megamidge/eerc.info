@@ -3,7 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import Ajax from "@/ajax.js"
-import "vue-material-design-icons/styles.css"
+// import "vue-material-design-icons/styles.css"
 Vue.config.productionTip = false
 
 Ajax.request("/data/leagues.json")

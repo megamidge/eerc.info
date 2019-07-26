@@ -1,9 +1,9 @@
 <template>
 	<div class="calendar">
 		<div class="calendar-header">
-			<chevron-left :size="48" class="nav-icon" style="cursor:pointer;" @click="subtractMonth"></chevron-left>
+			<chevron-left :size="32" class="nav-icon" style="cursor:pointer;" @click="subtractMonth"></chevron-left>
 			<h4>{{month + ' - ' + year}}</h4>
-			<chevon-right :size="48" class="nav-icon" style="cursor:pointer;" @click="addMonth"></chevon-right>
+			<chevon-right :size="32" class="nav-icon" style="cursor:pointer;" @click="addMonth"></chevon-right>
 		</div>
 		<!-- <ul class="weekdays"></ul> -->
 		<ul class="dates">
@@ -296,18 +296,6 @@ export default {
 ul {
 	list-style: none;
 	padding: 0;
-}
-.material-design-icon > .material-design-icon__svg {
-	height: 2rem;
-	width: 2rem;
-}
-.material-design-icon.nav-icon {
-	height: 2rem;
-	width: 2rem;
-}
-.material-design-icon.nav-icon > .material-design-icon__svg {
-	height: 2rem;
-	width: 2rem;
 }
 @media screen and (max-width: 800px) {
 	.event .info-row .event-info {
