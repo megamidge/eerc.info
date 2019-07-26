@@ -297,7 +297,10 @@ ul {
 	list-style: none;
 	padding: 0;
 }
-
+.material-design-icon > .material-design-icon__svg {
+	height: 2rem;
+	width: 2rem;
+}
 .material-design-icon.nav-icon {
 	height: 2rem;
 	width: 2rem;

@@ -95,8 +95,8 @@ export default {
 	/* overflow: scroll; */
 }
 .wrapper {
-	background-color: var(--colour-main);
-	opacity: 0.8;
+	background-color: rgba(var(--colour-main), 0.8);
+	/* opacity: 0.8; */
 	width: 95%;
 	height: 95%;
 	display: flex;
@@ -109,7 +109,7 @@ export default {
 .text {
 	/* height: 100%; */
 	/* width: 40%; */
-	background-color: var(--colour-main);
+	background-color: rgba(var(--colour-main), 1);
 	padding: 0.4rem;
 	box-sizing: border-box;
 	justify-self: flex-end;
@@ -198,8 +198,8 @@ export default {
 		bottom: 0;
 		left: 0;
 		right: 0;
-		background-color: var(--colour-main);
-		opacity: 0.93;
+		background-color: rgba(var(--colour-main), 0.93);
+		/* opacity: 0.93; */
 		max-height: 100%;
 		transition: all 0.4s;
 	}

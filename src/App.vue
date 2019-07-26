@@ -19,7 +19,7 @@ body {
 	--accent-bright: #25415d;
 	--accent-bright-alt: #4b6987;
 	--alert: #cc0000;
-	--colour-main: #18222c;
+	--colour-main: 24, 34, 44 /*#18222c*/;
 	--background: #2c3e50;
 	--text: #d1d1d1;
 	--text-hover: #797979;
