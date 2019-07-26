@@ -140,7 +140,7 @@ export default {
 	max-width: 35%;
 }
 .filter {
-	background: var(--colour-main);
+	background: rgb(var(--colour-main));
 	margin: 1rem;
 	display: flex;
 	flex-direction: row;
@@ -176,7 +176,7 @@ export default {
 .filter-item.tags input {
 	min-width: 6.4rem;
 	color: var(--text);
-	background: var(--colour-main);
+	background: rgb(var(--colour-main));
 	border: none;
 	border-bottom: solid 2px var(--accent-dark);
 }

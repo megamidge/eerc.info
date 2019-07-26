@@ -197,7 +197,7 @@ export default {
 
 <style scoped>
 .calendar {
-	background: var(--colour-main);
+	background: rgb(var(--colour-main));
 	padding: 0.2rem;
 	margin: 1rem;
 	/* display: flex; */

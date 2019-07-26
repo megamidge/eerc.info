@@ -202,7 +202,7 @@ export default {
 }
 .stream-info {
 	flex-grow: 4;
-	background-color: var(--colour-main);
+	background-color: rgb(var(--colour-main));
 	margin-left: 0.2rem;
 }
 .body {
@@ -222,7 +222,7 @@ a {
 	font-weight: bold;
 }
 .externalLink {
-	background-color: var(--colour-main);
+	background-color: rgb(var(--colour-main));
 	padding: 10px;
 	border-radius: 0.2rem;
 	margin: 1rem;

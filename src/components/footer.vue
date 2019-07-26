@@ -60,7 +60,7 @@ export default {
 	width: 100%;
 	padding-top: 1rem;
 	padding-bottom: 2rem;
-	background: var(--colour-main);
+	background: rgb(var(--colour-main));
 	border-style: solid;
 	border-width: 0.6rem 0 0 0;
 	overflow: hidden;
@@ -80,7 +80,7 @@ export default {
 	flex-direction: column;
 }
 .externalLink {
-	background-color: var(--colour-main);
+	background-color: rgb(var(--colour-main));
 	padding: 10px;
 	border-radius: 0.2rem;
 	outline: none;

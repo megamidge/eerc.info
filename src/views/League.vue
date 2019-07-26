@@ -152,7 +152,7 @@ export default {
 	/* display: flex; */
 	display: grid;
 	grid-template-columns: auto 18rem;
-	background: var(--colour-main);
+	background: rgb(var(--colour-main));
 	grid-gap: 0;
 }
 .panel {

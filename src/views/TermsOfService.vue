@@ -80,7 +80,7 @@
 </template>
 <style scoped>
 .wrapper {
-	background: var(--colour-main);
+	background: rgb(var(--colour-main));
 	padding: 0.4rem;
 	margin: 0.4rem;
 	display: flex;

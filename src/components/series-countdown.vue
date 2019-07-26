@@ -198,7 +198,7 @@ export default {
 	background-color: var(--accent-dark);
 }
 .inprogress {
-	background: var(--colour-main);
+	background: rgb(var(--colour-main));
 	display: flex;
 	flex-direction: column;
 	justify-content: center;

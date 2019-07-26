@@ -94,7 +94,7 @@ export default {
 	flex-direction: row;
 	justify-content: space-evenly;
 	align-items: center;
-	background: var(--colour-main);
+	background: rgb(var(--colour-main));
 	border-style: solid;
 	border-width: 0 0 0.6rem 0;
 	width: 100%;
@@ -146,7 +146,7 @@ export default {
 	top: 100%;
 	left: 0;
 	right: 0;
-	background: var(--colour-main);
+	background: rgb(var(--colour-main));
 	border-style: solid;
 	border-width: 0 0 0.6rem 0;
 	visibility: collapse;
@@ -216,7 +216,7 @@ a:hover {
 }
 
 .externalLink {
-	background-color: var(--colour-main);
+	background-color: rgb(var(--colour-main));
 	padding: 10px;
 	border-radius: 0.2rem;
 	margin: 1rem;
@@ -245,7 +245,7 @@ a:hover {
 .mobile-menu > ul {
 	position: absolute;
 	right: 0;
-	background: var(--colour-main);
+	background: rgb(var(--colour-main));
 	top: 0;
 	width: 50vw;
 	height: 100vh;

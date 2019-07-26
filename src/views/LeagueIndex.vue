@@ -54,7 +54,7 @@ a:hover {
 }
 
 .wrapper h1 {
-	background: var(--colour-main);
+	background: rgb(var(--colour-main));
 	margin: 0.4rem;
 	padding: 0.2rem;
 }
@@ -79,7 +79,7 @@ a:hover {
 	/* margin: 0.4rem; */
 }
 .league-item:hover {
-	background: var(--colour-main);
+	background: rgb(var(--colour-main));
 	transform: translateY(1px);
 }
 .title {
