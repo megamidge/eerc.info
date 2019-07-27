@@ -94,7 +94,7 @@ export default {
 	/* border-bottom: 0.2rem solid; */
 }
 .externalLink:hover {
-	background-color: var(--accent-dark);
+	background-color: rgb(var(--accent-dark));
 }
 #externalLinkIcon {
 	width: 32px;

@@ -69,7 +69,7 @@ a:hover {
 .league-item {
 	/* width: 15rem; */
 	height: 15rem;
-	background: var(--accent-dark);
+	background: rgb(var(--accent-dark));
 	padding: 0.2rem;
 	display: flex;
 	flex-direction: column;

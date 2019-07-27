@@ -131,7 +131,7 @@ export default {
 	flex-direction: row;
 	justify-content: space-evenly;
 	width: 100%;
-	background: var(--accent-dark);
+	background: rgb(var(--accent-dark));
 	margin-left: 1rem;
 	margin-right: 1rem;
 	margin-bottom: 1rem;

@@ -15,7 +15,7 @@
 	padding: 0;
 }
 body {
-	--accent-dark: #12181f;
+	--accent-dark: 18, 24, 31;
 	--accent-bright: #25415d;
 	--accent-bright-alt: #4b6987;
 	--alert: #cc0000;

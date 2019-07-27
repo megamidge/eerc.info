@@ -156,7 +156,7 @@ export default {
 .filter-item select {
 	border: none;
 	color: var(--text);
-	background: var(--accent-dark);
+	background: rgb(var(--accent-dark));
 	outline: none;
 }
 .filter-item select[disabled] {
@@ -178,11 +178,11 @@ export default {
 	color: var(--text);
 	background: rgb(var(--colour-main));
 	border: none;
-	border-bottom: solid 2px var(--accent-dark);
+	border-bottom: solid 2px rgb(var(--accent-dark));
 }
 .filter-item button {
 	color: var(--text);
-	background: var(--accent-dark);
+	background: rgb(var(--accent-dark));
 	border: none;
 }
 .filter-item button:focus {

@@ -156,7 +156,7 @@ export default {
 }
 .tags p {
 	margin: 0.1rem;
-	background: var(--accent-dark);
+	background: rgb(var(--accent-dark));
 	padding: 0.28rem;
 	border-radius: 0.1rem;
 	white-space: nowrap;

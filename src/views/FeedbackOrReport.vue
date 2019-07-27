@@ -90,7 +90,7 @@ export default {
 	margin: 0.2rem;
 }
 input {
-	background: var(--accent-dark);
+	background: rgb(var(--accent-dark));
 	border: none;
 	border-bottom: solid 0.1rem var(--accent-bright);
 	color: var(--text);
@@ -105,18 +105,18 @@ input {
 	background-color: var(--accent-bright);
 }
 .submit:disabled {
-	background-color: var(--accent-dark);
+	background-color: rgb(var(--accent-dark));
 	color: var(--text-hover);
 	cursor: default;
 }
 select {
 	border: none;
 	color: var(--text);
-	background: var(--accent-dark);
+	background: rgb(var(--accent-dark));
 	outline: none;
 }
 textarea {
-	background: var(--accent-dark);
+	background: rgb(var(--accent-dark));
 	color: var(--text);
 	border: none;
 	padding: 0.4rem;

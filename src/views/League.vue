@@ -185,7 +185,7 @@ export default {
 }
 .season {
 	/* padding: 0.8rem; */
-	background: var(--accent-dark);
+	background: rgb(var(--accent-dark));
 	/* margin-left: 0.5rem;
 	margin-right: 0.5rem; */
 	padding: 0.4rem;

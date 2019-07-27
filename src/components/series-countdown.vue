@@ -195,7 +195,7 @@ export default {
 	font-style: italic;
 }
 .stream:hover {
-	background-color: var(--accent-dark);
+	background-color: rgb(var(--accent-dark));
 }
 .inprogress {
 	background: rgb(var(--colour-main));
@@ -212,7 +212,7 @@ export default {
 	flex-direction: row;
 	justify-content: space-evenly;
 	width: 100%;
-	background: var(--accent-dark);
+	background: rgb(var(--accent-dark));
 	margin-left: 1rem;
 	margin-right: 1rem;
 	margin-bottom: 1rem;

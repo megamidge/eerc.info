@@ -174,14 +174,14 @@ export default {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
-	background: var(--accent-dark);
+	background: rgb(var(--accent-dark));
 	opacity: 0.93;
 	margin: 0;
 }
 .stream-wrapper {
 	width: 95%;
 	margin: 1rem;
-	background-color: var(--accent-dark);
+	background-color: rgb(var(--accent-dark));
 	display: flex;
 	flex-direction: column;
 	align-items: stretch;
@@ -189,7 +189,7 @@ export default {
 }
 .stream {
 	width: 100%;
-	background-color: var(--accent-dark);
+	background-color: rgb(var(--accent-dark));
 	display: flex;
 	flex-direction: row;
 	align-items: stretch;
@@ -197,7 +197,7 @@ export default {
 }
 .stream-video {
 	flex-grow: 30;
-	background-color: var(--accent-dark);
+	background-color: rgb(var(--accent-dark));
 	margin-right: 0.2rem;
 }
 .stream-info {
@@ -240,7 +240,7 @@ a {
 	align-items: center;
 }
 .externalLink:hover {
-	background-color: var(--accent-dark);
+	background-color: rgb(var(--accent-dark));
 }
 @media screen and (min-width: 600px) and (max-width: 700px) {
 	.externalLink {
