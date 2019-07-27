@@ -48,6 +48,7 @@
 				<img src="/img/svg/externLink.svg" width="24" height="24" alt="[external link]" />
 			</button>
 			<h3>Information:</h3>
+			<p>{{league.description}}</p>
 			<p>
 				<b>Game:</b>
 				{{league.game}}
