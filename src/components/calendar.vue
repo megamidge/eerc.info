@@ -451,7 +451,7 @@ ul {
 	}
 }
 @media screen and (max-width: 600px) {
-	.event .info-row .event-time {
+	.event .info-row .event-finish-time {
 		display: none;
 	}
 }

@@ -22,7 +22,7 @@
 								<h3>{{event.track}}</h3>
 								<h4>{{event.location}}</h4>
 								<p>
-									<small>{{new Date(event.utcDateTime).toLocaleDateString(undefined,dateOptions)}}</small>
+									<small>{{new Date(event.utcDateTime).toLocaleDateString('en-GB',dateOptions)}}</small>
 								</p>
 								<p>
 									<small>{{event.duration}} mins</small>
