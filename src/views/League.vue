@@ -239,7 +239,7 @@ hr {
 	width: 20%;
 }
 .externalLink {
-	background-color: var(--accent-bright-alt);
+	background-color: var(--highlight);
 	padding: 0 0.6rem 0 0.6rem;
 	border-radius: 0.2rem;
 	outline: none;

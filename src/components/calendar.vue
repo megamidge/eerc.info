@@ -324,7 +324,7 @@ export default {
 	position: relative;
 }
 .dates .current-day {
-	background: var(--accent-bright);
+	background: var(--highlight);
 	border-radius: 0.2rem;
 }
 .dates .weekday {
