@@ -17,7 +17,7 @@
 body {
 	--accent-dark: 32, 34, 37;
 	--accent-bright: #676767;
-	--accent-bright-alt: #2c3e50;
+	--accent-bright-alt: #1e2429;
 	--highlight: #d65a31;
 	--alert: #cc0000;
 	--colour-main: 22, 22, 26;
@@ -27,7 +27,7 @@ body {
 	margin: 0;
 	padding: 0;
 	background-color: rgb(var(--background));
-	background: linear-gradient(rgba(var(--background), 0.45), rgba(var(--background), 0.45)), url('/img/eerc_background.png') no-repeat fixed,
+	background: linear-gradient(rgba(var(--background), 0.65), rgba(var(--background), 0.65)), url('/img/eerc_background.png') no-repeat fixed,
 		rgb(var(--background));
 	background-position: center top;
 	background-size: 150%;

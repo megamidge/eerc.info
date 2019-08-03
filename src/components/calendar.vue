@@ -301,8 +301,13 @@ export default {
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
-	margin-left: 2rem;
-	margin-right: 2rem;
+	padding-left: 2rem;
+	padding-right: 2rem;
+	position: -webkit-sticky;
+	position: sticky;
+	top: 0;
+	z-index: 1;
+	background: rgb(var(--colour-main));
 }
 .weekdays {
 	display: grid;
