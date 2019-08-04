@@ -16,7 +16,7 @@
 }
 body {
 	--accent-dark: 32, 34, 37;
-	--accent-bright: #676767;
+	--accent-bright: #313131;
 	--accent-bright-alt: #1e2429;
 	--highlight: #d65a31;
 	--alert: #cc0000;
@@ -31,5 +31,9 @@ body {
 		rgb(var(--background));
 	background-position: center top;
 	background-size: 150%;
+}
+@font-face {
+	font-family: 'Vipnagorgialla';
+	src: url('/font/vipnagorgialla.ttf');
 }
 </style>

@@ -132,7 +132,7 @@ export default {
 }
 .menu li:hover,
 .mobile-menu li:hover {
-	background: #1c2e3f;
+	background: rgb(var(--accent-dark));
 	transition: background 0.2s;
 }
 .series-menu {

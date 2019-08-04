@@ -24,21 +24,29 @@
 						:class="[{'event-before':dateContainsEvent(eventsOnDate(new Date(`${year}-${lastMonthInt}-${dayInt(lastMonthDay(date-1))}`)),event)},{'event-after':lastMonthDay(date)==daysInLastMonth ? dateContainsEvent(eventsOnDate(new Date(`${year}-${monthInt}-${dayInt(1)}`)),event) :dateContainsEvent(eventsOnDate(new Date(`${year}-${lastMonthInt}-${dayInt(lastMonthDay(date+1))}`)),event)}]"
 						@click="$router.push(`/league/${event.league}`)"
 					>
-						<div class="info-row">
-							{{event.league}}
-							<div
-								class="event-info"
-								:style="{visibility:(lastMonthDay(date)==daysInLastMonth ? dateContainsEvent(eventsOnDate(new Date(`${year}-${monthInt}-${dayInt(1)}`)),event):dateContainsEvent(eventsOnDate(new Date(`${year}-${lastMonthInt}-${dayInt(lastMonthDay(date+1))}`)),event)) ? 'hidden' : 'visible'}"
-							>{{event.event.track || event.event.location}}</div>
+						<div class="flag-column">
+							<img
+								:style="{width:(dateContainsEvent(eventsOnDate(new Date(`${year}-${lastMonthInt}-${dayInt(lastMonthDay(date - 1))}`)),event)) ? '0' : ''}"
+								:src="`/img/flag/round/${eventLocation(event.event.location)}.svg`"
+							/>
 						</div>
-						<div class="info-row">
-							<div class="event-time">{{getTime(event.event.utcDateTime)}}</div>
-							<div
-								class="event-finish-time"
-								:style="{visibility:(lastMonthDay(date)==daysInLastMonth ? dateContainsEvent(eventsOnDate(new Date(`${year}-${monthInt}-${dayInt(1)}`)),event):dateContainsEvent(eventsOnDate(new Date(`${year}-${lastMonthInt}-${dayInt(lastMonthDay(date+1))}`)),event)) ? 'hidden' : 'visible'}"
-							>- {{getTime(finishTime(event.event))}}</div>
+						<div class="info-column">
+							<div class="info-row">
+								<div class="event-league">{{event.league}}</div>
+								<div
+									class="event-info"
+									:style="{display:(lastMonthDay(date)==daysInLastMonth ? dateContainsEvent(eventsOnDate(new Date(`${year}-${monthInt}-${dayInt(1)}`)),event):dateContainsEvent(eventsOnDate(new Date(`${year}-${lastMonthInt}-${dayInt(lastMonthDay(date+1))}`)),event)) ? 'none' : 'static'}"
+								>{{event.event.track || event.event.location}}</div>
+							</div>
+							<div class="info-row">
+								<div class="event-time">{{getTime(event.event.utcDateTime)}}</div>
+								<div
+									class="event-finish-time"
+									:style="{visibility:(lastMonthDay(date)==daysInLastMonth ? dateContainsEvent(eventsOnDate(new Date(`${year}-${monthInt}-${dayInt(1)}`)),event):dateContainsEvent(eventsOnDate(new Date(`${year}-${lastMonthInt}-${dayInt(lastMonthDay(date+1))}`)),event)) ? 'hidden' : 'visible'}"
+								>- {{getTime(finishTime(event.event))}}</div>
+							</div>
 						</div>
-						<div class="spanner"></div>
+						<div class="spanner" :style="{visibility: event.league=='DIRT' ? 'visible':'hidden'}"></div>
 					</div>
 				</span>
 				&nbsp;
@@ -58,25 +66,34 @@
 						:class="[{'event-before':date == 1 ? dateContainsEvent(eventsOnDate(new Date(`${year}-${monthInt-1}-${dayInt(daysInLastMonth)}`)),event) : dateContainsEvent(eventsOnDate(new Date(`${year}-${monthInt}-${dayInt(date-1)}`)),event)},{'event-after':date==daysInMonth?dateContainsEvent(eventsOnDate(new Date(`${year}-${nextMonthInt}-${dayInt(1)}`)),event) :dateContainsEvent(eventsOnDate(new Date(`${year}-${monthInt}-${dayInt(date+1)}`)),event)}]"
 						@click="$router.push(`/league/${event.league}`)"
 					>
-						<div class="info-row">
-							{{event.league}}
-							<div
-								class="event-info"
-								:style="{visibility:(date==daysInMonth ? dateContainsEvent(eventsOnDate(new Date(`${year}-${nextMonthInt}-${dayInt(1)}`)),event) : dateContainsEvent(eventsOnDate(new Date(`${year}-${monthInt}-${dayInt(date+1)}`)),event)) ? 'hidden' : 'visible'}"
-							>{{event.event.track || event.event.location}}</div>
+						<div class="flag-column">
+							<img
+								:style="{width:(date==1 ? dateContainsEvent(eventsOnDate(new Date(`${year}-${lastMonthInt}-${dayInt(daysInLastMonth)}`)),event) : dateContainsEvent(eventsOnDate(new Date(`${year}-${monthInt}-${dayInt(date-1)}`)),event)) ? '0' : ''}"
+								:src="`/img/flag/round/${eventLocation(event.event.location)}.svg`"
+							/>
 						</div>
-						<div class="info-row">
-							<div class="event-time">{{getTime(event.event.utcDateTime)}}</div>
-							<div
-								class="event-finish-time"
-								:style="{visibility:(date==daysInMonth ? dateContainsEvent(eventsOnDate(new Date(`${year}-${nextMonthInt}-${dayInt(1)}`)),event) : dateContainsEvent(eventsOnDate(new Date(`${year}-${monthInt}-${dayInt(date+1)}`)),event)) ? 'hidden' : 'visible'}"
-							>- {{getTime(finishTime(event.event))}}</div>
+						<div class="info-column">
+							<div class="info-row">
+								<div class="event-league">{{event.league}}</div>
+								<div
+									class="event-info"
+									:style="{display:(date==daysInMonth ? dateContainsEvent(eventsOnDate(new Date(`${year}-${nextMonthInt}-${dayInt(1)}`)),event) : dateContainsEvent(eventsOnDate(new Date(`${year}-${monthInt}-${dayInt(date+1)}`)),event)) ? 'none' : 'static'}"
+								>{{event.event.track || event.event.location}}</div>
+							</div>
+							<div class="info-row">
+								<div class="event-time">{{getTime(event.event.utcDateTime)}}</div>
+								<div
+									class="event-finish-time"
+									:style="{display:(date==daysInMonth ? dateContainsEvent(eventsOnDate(new Date(`${year}-${nextMonthInt}-${dayInt(1)}`)),event) : dateContainsEvent(eventsOnDate(new Date(`${year}-${monthInt}-${dayInt(date+1)}`)),event)) ? 'none' : 'static'}"
+								>- {{getTime(finishTime(event.event))}}</div>
+							</div>
 						</div>
+
 						<div
 							class="gapfill"
 							:style="{background:event.league == 'DIRT' ? '#00000000' : leagueColour(event.league)}"
 						></div>
-						<div class="spanner"></div>
+						<div class="spanner" :style="{visibility: event.league=='DIRT' ? 'visible':'hidden'}"></div>
 					</div>
 				</span>
 				&nbsp;
@@ -97,25 +114,33 @@
 						:class="[{'event-before':date+1 == 1 ? dateContainsEvent(eventsOnDate(new Date(`${year}-${nextMonthInt-1}-${dayInt(daysInMonth)}`)),event) : dateContainsEvent(eventsOnDate(new Date(`${year}-${nextMonthInt}-${dayInt(date)}`)),event)},{'event-after':dateContainsEvent(eventsOnDate(new Date(`${year}-${nextMonthInt}-${dayInt(date+2)}`)),event)}]"
 						@click="$router.push(`/league/${event.league}`)"
 					>
-						<div class="info-row">
-							{{event.league}}
-							<div
-								class="event-info"
-								:style="{visibility:dateContainsEvent(eventsOnDate(new Date(`${year}-${nextMonthInt}-${dayInt(date+2)}`)),event) ? 'hidden' : 'visible'}"
-							>{{event.event.track || event.event.location}}</div>
+						<div class="flag-column">
+							<img
+								:style="{width:(date+1==1 ? dateContainsEvent(eventsOnDate(new Date(`${year}-${monthInt}-${dayInt(daysInMonth)}`)),event) : dateContainsEvent(eventsOnDate(new Date(`${year}-${nextMonthInt}-${dayInt(date-1)}`)),event)) ? '0' : ''}"
+								:src="`/img/flag/round/${eventLocation(event.event.location)}.svg`"
+							/>
 						</div>
-						<div class="info-row">
-							<div class="event-time">{{getTime(event.event.utcDateTime)}}</div>
-							<div
-								class="event-finish-time"
-								:style="{visibility:dateContainsEvent(eventsOnDate(new Date(`${year}-${nextMonthInt}-${dayInt(date+2)}`)),event) ? 'hidden' : 'visible'}"
-							>- {{getTime(finishTime(event.event))}}</div>
+						<div class="info-column">
+							<div class="info-row">
+								<div class="event-league">{{event.league}}</div>
+								<div
+									class="event-info"
+									:style="{display:dateContainsEvent(eventsOnDate(new Date(`${year}-${nextMonthInt}-${dayInt(date+2)}`)),event) ? 'none' : 'static'}"
+								>{{event.event.track || event.event.location}}</div>
+							</div>
+							<div class="info-row">
+								<div class="event-time">{{getTime(event.event.utcDateTime)}}</div>
+								<div
+									class="event-finish-time"
+									:style="{visibility:dateContainsEvent(eventsOnDate(new Date(`${year}-${nextMonthInt}-${dayInt(date+2)}`)),event) ? 'hidden' : 'visible'}"
+								>- {{getTime(finishTime(event.event))}}</div>
+							</div>
 						</div>
 						<div
 							class="gapfill"
 							:style="{background:event.league == 'DIRT' ? '#00000000' : leagueColour(event.league)}"
 						></div>
-						<div class="spanner"></div>
+						<div class="spanner" :style="{visibility: event.league=='DIRT' ? 'visible':'hidden'}"></div>
 					</div>
 				</span>
 				&nbsp;
@@ -281,6 +306,9 @@ export default {
 			d.setMinutes(d.getMinutes() + event.duration)
 			return d
 		},
+		eventLocation(location) {
+			return location.replace(/\s/gi, '-')
+		},
 	},
 }
 </script>
@@ -325,8 +353,9 @@ export default {
 }
 .dates li {
 	background: rgb(var(--accent-dark));
-	width: 100%;
+	/* width: 100%; */
 	position: relative;
+	min-width: 0;
 }
 .dates .current-day {
 	background: var(--highlight);
@@ -361,22 +390,29 @@ export default {
 	flex-grow: 1;
 	background: var(--accent-bright);
 	margin: 0.1rem;
-	border-radius: 0.2rem;
+	/* border-radius: 0.2rem; */
+	border-radius: 1.2rem;
 	font-size: 0.9rem;
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
 	justify-content: flex-start;
-	padding: 0.1rem;
+	padding: 0.2rem;
 	cursor: pointer;
 	color: rgb(var(--accent-dark));
 	font-weight: bold;
 	order: 2;
+	position: relative;
+	white-space: nowrap;
 }
 .event.event-before {
 	order: 1;
+	border-radius: 0 1.2rem 1.2rem 0;
 }
-.event {
-	position: relative;
+.event.event-after {
+	border-radius: 1.2rem 0 0 1.2rem;
+}
+.event.event-before.event-after {
+	border-radius: 0;
 }
 .event .spanner {
 	border-radius: 0.2rem;
@@ -385,7 +421,7 @@ export default {
 	bottom: 0;
 }
 .event.event-before .gapfill {
-	right: 100%;
+	right: 98%;
 	left: -1rem;
 	top: 0;
 	bottom: 0;
@@ -398,7 +434,7 @@ export default {
 	border-color: inherit;
 	left: -1rem;
 	right: -0.1rem;
-	border-radius: 0 0.2rem 0.2rem 0;
+	border-radius: 0 1.2rem 1.2rem 0;
 }
 .event.event-after .spanner {
 	border-left: solid;
@@ -407,7 +443,7 @@ export default {
 	border-color: inherit;
 	right: -1rem;
 	left: -0.1rem;
-	border-radius: 0.2rem 0 0 0.2rem;
+	border-radius: 1.2rem 0 0 1.2rem;
 }
 .event.event-before.event-after .spanner {
 	border-top: solid;
@@ -418,6 +454,22 @@ export default {
 	left: -1rem;
 	border-radius: 0;
 }
+.event .flag-column img {
+	height: 2.2rem;
+	width: 2.2rem;
+	display: block;
+}
+.event .info-column {
+	padding-left: 0.2rem;
+	padding-right: 1.2rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	flex-grow: 1;
+	max-width: 65%;
+	margin-left: auto;
+	align-self: flex-end;
+}
 .event .info-row {
 	display: flex;
 	flex-direction: row;
@@ -426,6 +478,10 @@ export default {
 .event .info-row .event-info {
 	display: block;
 	text-align: right;
+	max-width: 100%;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	margin-left: auto;
 }
 .event .info-row .event-time {
 	display: block;
@@ -443,27 +499,49 @@ export default {
 	background: var(--accent-bright-alt);
 	/* transform: translateY(1px); */
 }
-.event.event-before .info-row {
-	visibility: hidden;
+.event.event-before .info-row .event-time,
+.event.event-before .info-row .event-league,
+.event.event-before.event-after .info-row .event-info {
+	display: none;
+}
+.event.event-before .info-row .event-finish-time {
+	visibility: visible;
 }
 ul {
 	list-style: none;
 	padding: 0;
 }
-@media screen and (max-width: 800px) {
-	.event .info-row .event-info {
+.event-finish-time {
+	white-space: nowrap;
+}
+@media screen and (max-width: 1200px) {
+	.event .info-column .info-row .event-info {
 		display: none;
 	}
+	.event .info-row .event-time,
+	.event .info-row .event-finish-time {
+		font-size: 0.8rem;
+	}
 }
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 1000px) {
 	.event .info-row .event-finish-time {
 		display: none;
 	}
 }
-@media screen and (max-width: 360px) {
+@media screen and (max-width: 700px) {
+	.event .flag-column img {
+		height: 1.1rem;
+		width: 1.1rem;
+	}
+	.event .info-column {
+		padding-right: 0.2rem;
+	}
 	.dates .weekday {
 		font-size: 0.6rem;
 		padding: 0.1rem;
+	}
+	.event .info-row .event-time {
+		font-size: 0.5rem;
 	}
 	.event {
 		font-size: 0.5rem;

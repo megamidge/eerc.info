@@ -38,6 +38,17 @@
 		</div>
 		<div class="row">
 			<router-link to="/Feedback">Give us feedback or report a problem</router-link>
+			<small>
+				<i>
+					Flag Icons made by
+					<b>
+						<a href="https://www.freepik.com/home">Freepik</a>
+					</b> from
+					<b>
+						<a href="http://www.flaticon.com/">www.flaticon.com</a>
+					</b>
+				</i>
+			</small>
 		</div>
 	</div>
 </template>
