@@ -307,7 +307,7 @@ export default {
 			return d
 		},
 		eventLocation(location) {
-			return location.replace(/\s/gi, '-')
+			return location.replace(/\s/gi, '-').toLowerCase()
 		},
 	},
 }
@@ -391,12 +391,12 @@ export default {
 	background: var(--accent-bright);
 	margin: 0.1rem;
 	/* border-radius: 0.2rem; */
-	border-radius: 1.2rem;
+	border-radius: 1.3rem;
 	font-size: 0.9rem;
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-start;
-	padding: 0.2rem;
+	padding: 0.1rem;
 	cursor: pointer;
 	color: rgb(var(--accent-dark));
 	font-weight: bold;
@@ -453,6 +453,18 @@ export default {
 	border-color: inherit;
 	left: -1rem;
 	border-radius: 0;
+}
+
+.event .flag-column {
+	background-color: var(--accent-bright);
+	border-radius: 1.2rem;
+	border: 0.16rem solid var(--accent-bright);
+	padding: 0;
+}
+.event.event-before .flag-column {
+	border: none;
+	padding: 0.16rem;
+	background: none;
 }
 .event .flag-column img {
 	height: 2.2rem;
@@ -526,6 +538,9 @@ ul {
 @media screen and (max-width: 1000px) {
 	.event .info-row .event-finish-time {
 		display: none;
+	}
+	.event .info-column {
+		align-self: center;
 	}
 }
 @media screen and (max-width: 700px) {
