@@ -42,10 +42,10 @@
 				<i>
 					Flag Icons made by
 					<b>
-						<a href="https://www.freepik.com/home">Freepik</a>
+						<a target="blank_" href="https://www.freepik.com/home">Freepik</a>
 					</b> from
 					<b>
-						<a href="http://www.flaticon.com/">www.flaticon.com</a>
+						<a target="blank_" href="http://www.flaticon.com/">www.flaticon.com</a>
 					</b>
 				</i>
 			</small>
