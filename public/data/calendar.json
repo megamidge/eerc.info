@@ -554,6 +554,83 @@
                             "duration": 70
                         }
                     ]
+                },
+                {
+                    "seasonName": "Season 3",
+                    "events": [
+                        {
+                            "location": "United States of America",
+                            "track": "New York",
+                            "utcDateTime": "2019-09-18T18:00:00.000Z",
+                            "duration": 70
+                        },
+                        {
+                            "location": "Chile",
+                            "track": "Santiago",
+                            "utcDateTime": "2019-09-25T18:00:00.000Z",
+                            "duration": 70
+                        },
+                        {
+                            "location": "Mexico",
+                            "track": "Mexico City",
+                            "utcDateTime": "2019-10-02T18:00:00.000Z",
+                            "duration": 70
+                        },
+                        {
+                            "location": "China",
+                            "track": "Sanya",
+                            "utcDateTime": "2019-10-09T18:00:00.000Z",
+                            "duration": 70
+                        },
+                        {
+                            "location": "Argentina",
+                            "track": "Buenos Aires",
+                            "utcDateTime": "2019-10-16T18:00:00.000Z",
+                            "duration": 70
+                        },
+                        {
+                            "location": "Switzerland",
+                            "track": "Bern",
+                            "utcDateTime": "2019-10-23T18:00:00.000Z",
+                            "duration": 70
+                        },
+                        {
+                            "location": "Italy",
+                            "track": "Rome",
+                            "utcDateTime": "2019-10-30T18:00:00.000Z",
+                            "duration": 70
+                        },
+                        {
+                            "location": "Switzerland",
+                            "track": "Zurich",
+                            "utcDateTime": "2019-11-06T18:00:00.000Z",
+                            "duration": 70
+                        },
+                        {
+                            "location": "Germany",
+                            "track": "Berlin Tempelhof 2019",
+                            "utcDateTime": "2019-11-13T19:00:00.000Z",
+                            "duration": 70
+                        },
+                        {
+                            "location": "Germany",
+                            "track": "Berlin Tempelhof 2015",
+                            "utcDateTime": "2019-11-20T18:00:00.000Z",
+                            "duration": 70
+                        },
+                        {
+                            "location": "Germany",
+                            "track": "Norisring",
+                            "utcDateTime": "2019-11-27T18:00:00.000Z",
+                            "duration": 70
+                        },
+                        {
+                            "location": "China",
+                            "track": "Macau",
+                            "utcDateTime": "2019-12-04T18:00:00.000Z",
+                            "duration": 70
+                        }
+                    ]
                 }
             ]
         },
@@ -664,7 +741,7 @@
             ]
         },
         {
-            "series": "GT",
+            "series": "GTE",
             "game": "Assetto Corsa Competizione",
             "seasons": [
                 {
@@ -708,31 +785,31 @@
                         {
                             "location": "Italy",
                             "track": "3h of Autodromo Nazionale Monza GP",
-                            "utcDateTime": "2019-09-01T16:45:00.000Z",
-                            "duration": 200
+                            "utcDateTime": "2019-09-29T16:45:00.000Z",
+                            "duration": 220
                         },
                         {
                             "location": "United Kingdom",
                             "track": "3h of Silverstone GP",
-                            "utcDateTime": "2019-09-29T14:14:45.000Z",
-                            "duration": 200
+                            "utcDateTime": "2019-10-27T14:45:00.000Z",
+                            "duration": 220
                         },
                         {
                             "location": "France",
                             "track": "3h of Circuit Paul Ricard",
-                            "utcDateTime": "2019-10-27T13:00:00.000Z",
-                            "duration": 200
+                            "utcDateTime": "2019-11-24T12:00:00.000Z",
+                            "duration": 220
                         },
                         {
                             "location": "Spain",
                             "track": "3h of Circuit de Barcelona Catalunya",
-                            "utcDateTime": "2019-11-24T13:00:00.000Z",
-                            "duration": 200
+                            "utcDateTime": "2019-12-15T13:00:00.000Z",
+                            "duration": 220
                         },
                         {
                             "location": "Belgium",
                             "track": "6h of Spa-Francorchamps",
-                            "utcDateTime": "2019-12-15T11:30:00.000Z",
+                            "utcDateTime": "2020-01-12T10:30:00.000Z",
                             "duration": 400
                         }
                     ]

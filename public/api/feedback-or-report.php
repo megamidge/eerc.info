@@ -3,6 +3,8 @@ if(!isset($_POST['type']) || !isset($_POST['message']))
     die('Both type and message must be defined!');
 if($_POST['type'] == 'none' || $_POST['message'] = '')
     die('Feedback type or message cannot be empty.');
+if($_POST['message'] == null)
+    die('Message is null');
 session_start();//Start a session
 if(isset($_SESSION['lastSend']) && time() - $_SESSION['lastSend'] < 60 * 60) {//1 hour
     //Dont send it
@@ -23,6 +25,5 @@ else{
     else{
         $_SESSION['lastSend'] = time();
         exit('Thank you for your ' . $_POST['type'] . ' submission. Your ' . $_POST['type'] . ' is much appreciated.');
-        //After-success:
     }
 }

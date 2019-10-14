@@ -25,7 +25,7 @@
 									<small>{{new Date(event.utcDateTime).toLocaleDateString('en-GB',dateOptions)}}</small>
 								</p>
 								<p>
-									<small>{{event.duration}} mins</small>
+									<small>{{duration(event.duration)}}</small>
 								</p>
 							</div>
 						</div>
@@ -141,6 +141,11 @@ export default {
 		},
 		gotosite: (site) => {
 			window.open(site)
+		},
+		duration(dur) {
+			var hours = Math.trunc(dur / 60)
+			var mins = dur - hours * 60
+			return `${hours}h ${mins}m`
 		},
 	},
 }

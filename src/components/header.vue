@@ -2,7 +2,7 @@
 	<!-- <div> -->
 	<div class="header" ref="header">
 		<img
-			src="/img/eerclogo_0.png"
+			src="/img/Logo_V5_Light_svg.svg"
 			style="height:auto;width:4rem;margin:0.5rem;cursor:pointer;"
 			@click="$router.push('/')"
 		/>

@@ -116,7 +116,7 @@
 					>
 						<div class="flag-column">
 							<img
-								:style="{width:(date+1==1 ? dateContainsEvent(eventsOnDate(new Date(`${year}-${monthInt}-${dayInt(daysInMonth)}`)),event) : dateContainsEvent(eventsOnDate(new Date(`${year}-${nextMonthInt}-${dayInt(date-1)}`)),event)) ? '0' : ''}"
+								:style="{width:(date+1==1 ? dateContainsEvent(eventsOnDate(new Date(`${year}-${monthInt}-${dayInt(daysInMonth)}`)),event) : dateContainsEvent(eventsOnDate(new Date(`${year}-${nextMonthInt}-${dayInt(date)}`)),event)) ? '0' : ''}"
 								:src="`/img/flag/round/${eventLocation(event.event.location)}.svg`"
 							/>
 						</div>
@@ -560,6 +560,25 @@ ul {
 	}
 	.event {
 		font-size: 0.5rem;
+	}
+}
+@media screen and (max-width: 500px) {
+	.event .flag-column img {
+		height: 0.6rem;
+		width: 0.6rem;
+	}
+	.event .info-column {
+		margin-left: 0;
+		padding-left: 0.05rem;
+		z-index: 2;
+	}
+	.event .info-row .event-time {
+		display: none;
+	}
+}
+@media screen and (max-width: 380px) {
+	.event .info-column {
+		overflow: hidden;
 	}
 }
 </style>

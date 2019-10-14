@@ -28,13 +28,22 @@
             "description": "Take to the track in a Fomrula 1 car. 18 minute qualifying with races run at 50% distance."
         },
         {
-            "code": "GT",
-            "name": "GT Series",
+            "code": "GTE",
+            "name": "GT Endurance Series",
             "game": "Assetto Corsa Competizione",
             "logo": "GTseries.png",
             "colour": "#E0E0E0",
             "registration": "https://goo.gl/forms/spPDvr4aaUVZMKAk1",
-            "description": "Can you make it through a race of attrition? Endurance style events have you endure atleast 3hours of racing within a team. Driver swaps included. "
+            "description": "Can you make it through a race of attrition? Endurance style events have you endure at least 3hours of racing within a team. Driver swaps included. "
+        },
+        {
+            "code": "GTS",
+            "name": "GT Sprint Series",
+            "game": "Assetto Corsa Competizione",
+            "logo": "GTseries.png",
+            "colour": "#E0E0E0",
+            "registration": "https://goo.gl/forms/spPDvr4aaUVZMKAk1",
+            "description": "2 back to back sprint races of 45 minutes each. 2nd race starts with reverse classification of 1st race. Are you fast enough?"
         },
         {
             "code": "DIRT",
@@ -42,7 +51,7 @@
             "game": "DiRT Rally",
             "logo": "DirtRoundel.png",
             "colour": "#BCAA6C",
-            "registration": "https://forms.gle/SW8G6r5kKbPaGBZp7",
+            "registration": "https://forms.gle/ZVj15Cg16RR7HrCv6",
             "description": "Up to the challenge of differing road surfaces? Slide into our rally league. Complete a number of stages over the course of a few days at your own leisure, quickest time when the window closes wins the event."
         },
         {
