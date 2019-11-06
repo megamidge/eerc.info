@@ -54,7 +54,7 @@
 					<img src="img/svg/externLink.svg" width="24" height="24" alt="[external link]" />
 				</button>
 				<button @click="gotosite('https://goo.gl/forms/NcFb4z5KcKfn2lWo2')" class="externalLink">
-					<h2>Apply to be a WEC driver (Project Cars 2)</h2>
+					<h2>Apply to be an MSR driver (Project Cars 2)</h2>
 					<img src="img/svg/externLink.svg" width="24" height="24" alt="[external link]" />
 				</button>
 
