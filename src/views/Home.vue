@@ -36,20 +36,23 @@
 		</div>
 		<div class="main">
 			<div class="mainLeft">
-				<button @click="gotosite('https://forms.gle/NSewf3JRVPY96oVP8')" class="externalLink">
-					<h2>Apply to be a driver in the EERC mouseOne Endurance League (rFactor 2)</h2>
+				<button @click="gotosite('https://forms.gle/Pnnu4Vw6uhTWTeDX8')" class="externalLink">
+					<span style="color:#cc0000">[NEW!]</span>
+					<h2>Apply to be a driver in the EERC Endurance League (rFactor 2)</h2>
 					<img src="img/svg/externLink.svg" width="24" height="24" alt="[external link]" />
 				</button>
 
 				<button @click="gotosite('https://goo.gl/forms/spPDvr4aaUVZMKAk1')" class="externalLink">
-					<h2>
-						<span style="color:#cc0000">[NEW!]</span>
-						Apply to be a GT Series driver. (Assetto Corsa Competizione)
-					</h2>
+					<h2>Apply to be a GT Endurance Series driver. (Assetto Corsa Competizione)</h2>
 					<img src="img/svg/externLink.svg" width="24" height="24" alt="[external link]" />
 				</button>
 
-				<button @click="gotosite('https://forms.gle/SW8G6r5kKbPaGBZp7')" class="externalLink">
+				<button @click="gotosite('https://forms.gle/2UM4vxKsoKYDfNfbA')" class="externalLink">
+					<h2>Apply to be a GT Sprint Series driver. (Assetto Corsa Competizione)</h2>
+					<img src="img/svg/externLink.svg" width="24" height="24" alt="[external link]" />
+				</button>
+
+				<button @click="gotosite('https://forms.gle/zZ9ztZWH8TjNZmTaA')" class="externalLink">
 					<h2>Apply to be a driver in the World Rally Championship (DiRT Rally)</h2>
 					<img src="img/svg/externLink.svg" width="24" height="24" alt="[external link]" />
 				</button>

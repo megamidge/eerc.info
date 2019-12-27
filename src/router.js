@@ -27,12 +27,18 @@ export default new Router({
                     path: '',
                     name: 'Home',
                     component: Home,
+                    meta: {
+                        title: 'Home'
+                    }
                 },
                 {
                     path: 'Gallery',
                     name: 'Gallery',
                     component: Gallery,
                     alias: 'Gallery/*',
+                    meta: {
+                        title: 'Gallery'
+                    },
                     children: [
                         {
                             path: ':image',
@@ -44,37 +50,59 @@ export default new Router({
                     path: 'About',
                     name: 'About',
                     component: About,
+                    meta: {
+                        title: 'About'
+                    }
                 },
                 {
                     path: 'league',
                     name: 'leagueindex',
                     component: LeagueIndex,
-
+                    meta: {
+                        title: 'Leagues'
+                    }
                 },
                 {
                     path: 'league/:leagueCode',
                     component: League,
+                    meta: {
+                        title: ':leagueCode'
+                    }
                 },
                 {
                     path: 'TOS',
                     component: TermsOfService,
+                    meta: {
+                        title: 'Terms of Service'
+                    }
                 }, {
                     path: 'Feedback',
-                    component: FeedbackOrReport
+                    component: FeedbackOrReport,
+                    meta: {
+                        title: 'Feedback'
+                    }
                 }, {
                     path: 'SecretTesting',
                     component: SecretTesting,
+                    meta: {
+                        title: 'Secret Testing'
+                    }
                 }
             ],
         },
         {
             path: "/Admin",
             component: BasePage,
+            meta: {
+                title: 'Admin'
+            },
             children: [
                 {
                     path: 'GalleryUpload',
-                    component: GalleryUpload
-
+                    component: GalleryUpload,
+                    meta: {
+                        title: 'Gallery Upload'
+                    }
                 }
             ]
         },

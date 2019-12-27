@@ -28,22 +28,22 @@
             "description": "Take to the track in a Fomrula 1 car. 18 minute qualifying with races run at 50% distance."
         },
         {
-            "code": "GTE",
+            "code": "GTe",
             "name": "GT Endurance Series",
             "game": "Assetto Corsa Competizione",
-            "logo": "GTseries.png",
+            "logo": "GTEseries.png",
             "colour": "#E0E0E0",
             "registration": "https://goo.gl/forms/spPDvr4aaUVZMKAk1",
             "description": "Can you make it through a race of attrition? Endurance style events have you endure at least 3hours of racing within a team. Driver swaps included. "
         },
         {
-            "code": "GTS",
+            "code": "GTs",
             "name": "GT Sprint Series",
             "game": "Assetto Corsa Competizione",
-            "logo": "GTseries.png",
-            "colour": "#E0E0E0",
-            "registration": "https://goo.gl/forms/spPDvr4aaUVZMKAk1",
-            "description": "2 back to back sprint races of 45 minutes each. 2nd race starts with reverse classification of 1st race. Are you fast enough?"
+            "logo": "GTSseries.png",
+            "colour": "#E40514",
+            "registration": "https://forms.gle/2UM4vxKsoKYDfNfbA",
+            "description": "Short 1 hour sprint races in GT cars."
         },
         {
             "code": "DIRT",
@@ -51,17 +51,17 @@
             "game": "DiRT Rally",
             "logo": "DirtRoundel.png",
             "colour": "#BCAA6C",
-            "registration": "https://forms.gle/ZVj15Cg16RR7HrCv6",
+            "registration": "https://forms.gle/zZ9ztZWH8TjNZmTaA",
             "description": "Up to the challenge of differing road surfaces? Slide into our rally league. Complete a number of stages over the course of a few days at your own leisure, quickest time when the window closes wins the event."
         },
         {
-            "code": "M1E",
-            "name": "EERC mouseOne Endurance League",
+            "code": "EEL",
+            "name": "EERC Endurance League",
             "game": "RFactor2",
-            "logo": "m1logo.png",
-            "colour": "#0370FF",
-            "registration": "https://forms.gle/NSewf3JRVPY96oVP8",
-            "description": "EERC Sponsored endurance league. Races last between 6 and 24 hours at a multitude of circuits. Multiclass means LMP1, LMP2 and GTE all share the track."
+            "logo": "eellogo.png",
+            "colour": "#FF6600",
+            "registration": "https://forms.gle/Pnnu4Vw6uhTWTeDX8",
+            "description": "EERC endurance league. Races last between 6 and 24 hours at a multitude of circuits. Multiclass events."
         }
     ]
 }

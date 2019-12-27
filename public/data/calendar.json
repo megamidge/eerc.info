@@ -260,7 +260,7 @@
                         {
                             "location": "France",
                             "track": "Deux Heures de Le Mans",
-                            "utcDateTime": "2019-11-03T18:45:00.000Z",
+                            "utcDateTime": "2019-11-03T15:45:00.000Z",
                             "duration": 165
                         }
                     ]
@@ -676,65 +676,6 @@
                             "trackImage": "monaco-rally-route-1.jpg",
                             "utcDateTime": "2019-06-20T16:00:00.000Z",
                             "duration": 4080
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "series": "M1E",
-            "game": "RFactor2",
-            "seasons": [
-                {
-                    "seasonName": "Season 2",
-                    "events": [
-                        {
-                            "location": "France",
-                            "track": "24h Le Mans",
-                            "utcDateTime": "2019-06-29T12:00:00.000Z",
-                            "duration": 1440
-                        },
-                        {
-                            "location": "China",
-                            "track": "6h of Shanghai",
-                            "utcDateTime": "2019-07-20T15:00:00.000Z",
-                            "duration": 360
-                        },
-                        {
-                            "location": "United States of America",
-                            "track": "8h of Sebring",
-                            "utcDateTime": "2019-08-17T15:00:00.00Z",
-                            "duration": 480
-                        },
-                        {
-                            "location": "Italy",
-                            "track": "12h of Autodromo Nazionale Monza",
-                            "utcDateTime": "2019-08-31T15:00:00.00Z",
-                            "duration": 720
-                        },
-                        {
-                            "location": "Bahrain",
-                            "track": "24h of Bahrain",
-                            "utcDateTime": "2019-09-28T12:00:00.00Z",
-                            "duration": 1440
-                        },
-                        {
-                            "location": "United States of America",
-                            "track": "6h of Watkins Glen",
-                            "utcDateTime": "2019-10-19T15:00:00.000Z",
-                            "duration": 360
-                        },
-                        {
-                            "location": "Belgium",
-                            "track": "8h of Spa",
-                            "utcDateTime": "2019-11-09T16:00:00.000Z",
-                            "duration": 480
-                        },
-                        {
-                            "location": "United States of America",
-                            "track": "24h of Daytona",
-                            "utcDateTime": "2019-11-30T13:00:00.00Z",
-                            "duration": 1440
                         }
                     ]
                 }
