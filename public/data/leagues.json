@@ -1,5 +1,14 @@
 {
     "leagues": [
+	{
+	    "code":"S7C",
+	    "name":"Super 7 Cup",
+	    "game":"Project Cars 2",
+            "logo":"eercs7c.png",
+	    "colour":"#04490a",
+	    "registration":"https://forms.gle/Vg4jkMv1d7Jvj4b47",
+            "description":"Race around in the light-weight Caterham 620 R. This league runs a revised points system that aims to keep competition tighter and increase enjoyment. As such, enjoy."
+	},
         {
             "code": "MSR",
             "name": "Multiclass Sprint Racing",

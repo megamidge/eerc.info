@@ -1,5 +1,88 @@
 {
     "calendar": [
+{
+            "series": "S7C",
+            "game":"Project Cars 2",
+            "seasons":[
+                {
+                    "seasonName":"Season 1",
+                    "events":[
+                        {
+                            "location": "New Zealand",
+                            "track": "Ruapuna Park",
+                            "utcDateTime":"2020-05-03T17:30:00.000Z",
+                            "duration":70
+                        },
+                        {
+                            "location":"Japan",
+                            "track":"Sakkito",
+                            "utcDateTime":"2020-05-10T17:30:00.000Z",
+                            "duration":70
+                        },
+                        {
+                            "location":"United States of America",
+                            "track":"Willow Springs",
+                            "utcDateTime":"2020-05-17T17:30:00.000Z",
+                            "duration":70
+                        },
+                        {
+                            "location":"United States of America",
+                            "track":"Watkins Glen",
+                            "utcDateTime":"2020-05-24T17:30:00.000Z",
+                            "duration":70
+                        },
+                        {
+                            "location":"United Kingdom",
+                            "track":"Oulton Park",
+                            "utcDateTime":"2020-05-31T17:30:00.000Z",
+                            "duration":70
+                        },
+                        {
+                            "location":"United Kingdom",
+                            "track":"Donington Park",
+                            "utcDateTime":"2020-06-07T17:30:00.000Z",
+                            "duration":70
+                        },
+                        {
+                            "location":"United Kingdom",
+                            "track":"Silverstone",
+                            "utcDateTime":"2020-06-14T17:30:00.000Z",
+                            "duration":70
+                        },
+                        {
+                            "location":"United Kingdom",
+                            "track":"Snetterton",
+                            "utcDateTime":"2020-06-21T17:30:00.000Z",
+                            "duration":70
+                        },
+                        {
+                            "location":"United Kingdom",
+                            "track":"Brands Hatch",
+                            "utcDateTime":"2020-06-28T17:30:00.000Z",
+                            "duration":70
+                        },
+                        {
+                            "location":"Germany",
+                            "track":"Motorsport Arena Oschersleben",
+                            "utcDateTime":"2020-07-05T17:30:00.000Z",
+                            "duration":70
+                        },
+                        {
+                            "location":"Germany",
+                            "track":"Hockenheimring",
+                            "utcDateTime":"2020-07-12T17:30:00.000Z",
+                            "duration":70
+                        },
+                        {
+                            "location":"Austria",
+                            "track":"Red Bull Ring",
+                            "utcDateTime":"2020-07-19T17:30:00.000Z",
+		            "duration":70
+                        }
+                    ]
+                }
+            ]
+        },
         {
             "series": "MSR",
             "game": "Project Cars 2",

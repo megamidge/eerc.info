@@ -86,7 +86,7 @@ export default {
 						})
 					}
 				})
-				return arr
+				return arr.reverse()
 				//this block of code should redone at some point as it is really shit. (but it works)
 			}
 
