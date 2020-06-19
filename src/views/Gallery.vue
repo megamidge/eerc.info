@@ -86,11 +86,11 @@ export default {
 						})
 					}
 				})
-				return arr.reverse()
+				return arr
 				//this block of code should redone at some point as it is really shit. (but it works)
 			}
 
-			return filtered
+			return filtered.slice().reverse()
 		},
 		leagues() {
 			return [...new Set(this.images.map((i) => i.league))].filter((e) => e != null && e != '').sort()
