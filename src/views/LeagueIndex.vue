@@ -1,9 +1,12 @@
 <template>
 	<div class="wrapper">
-		<h1>Leagues</h1>
+		<div class="top-title">
+			<h1>Leagues</h1>
+			<Toggle v-model="showInactiveLeagues">Show Inactive Leagues</Toggle>
+		</div>
 		<div class="holder">
 			<router-link
-				v-for="league in leagues"
+				v-for="league in filtLeagues"
 				:key="league.code"
 				:to="`/league/${league.code}`"
 				class="league-item"
@@ -24,13 +27,26 @@
 </template>
 
 <script>
+import Toggle from '@/components/toggle-button'
 import { mapState } from 'vuex'
 import Calendar from '@/components/calendar'
 export default {
 	components: {
 		Calendar,
+		Toggle
+	},
+	data(){
+		return {
+			showInactiveLeagues:false
+		}
 	},
 	computed: {
+		filtLeagues(){
+			if(this.showInactiveLeagues)
+				return this.leagues
+			else
+				return this.leagues.filter(l=>l.active)
+		},
 		...mapState(['leagues']),
 	},
 	methods: {
@@ -81,6 +97,17 @@ a:hover {
 .league-item:hover {
 	background: rgb(var(--colour-main));
 	transform: translateY(1px);
+}
+.top-title{
+	display:flex;
+	justify-content: space-between;
+	background:rgb(var(--colour-main));
+	padding:0.2rem;
+	margin:0.4rem;
+}
+.active-button{
+	margin:0.4rem;
+
 }
 .title {
 	display: flex;

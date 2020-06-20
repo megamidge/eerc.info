@@ -1,15 +1,17 @@
 {
     "leagues": [
-	{
-	    "code":"S7C",
-	    "name":"Super 7 Cup",
-	    "game":"Project Cars 2",
+	    {
+            "active":true,
+	        "code":"S7C",
+	        "name":"Super 7 Cup",
+	        "game":"Project Cars 2",
             "logo":"eercs7c.png",
-	    "colour":"#04490a",
-	    "registration":"https://forms.gle/Vg4jkMv1d7Jvj4b47",
+	        "colour":"#04490a",
+	        "registration":"https://forms.gle/Vg4jkMv1d7Jvj4b47",
             "description":"Race around in the light-weight Caterham 620 R. This league runs a revised points system that aims to keep competition tighter and increase enjoyment. As such, enjoy."
-	},
+	    },
         {
+            "active":false,
             "code": "MSR",
             "name": "Multiclass Sprint Racing",
             "game": "Project Cars 2",
@@ -19,6 +21,7 @@
             "description": "Take on the challenge of a multiclass sprint race. 15 minute qualifying followed by a 1 hour race. Exceptions made for longer events like our seasonal 2 hour race at Le Mans."
         },
         {
+            "active":false,
             "code": "FE",
             "name": "Formula E",
             "game": "RFactor2",
@@ -28,6 +31,7 @@
             "description": "Navigate your electric Formula E car around tight streets all while managing your battery. Qualifying consists of 4 laps (out lap, 2 fast laps, in lap). 45 minute races."
         },
         {
+            "active":false,
             "code": "F1",
             "name": "Formula 1",
             "game": "F1 2019",
@@ -37,6 +41,7 @@
             "description": "Take to the track in a Fomrula 1 car. 18 minute qualifying with races run at 50% distance."
         },
         {
+            "active":false,
             "code": "GTe",
             "name": "GT Endurance Series",
             "game": "Assetto Corsa Competizione",
@@ -45,7 +50,8 @@
             "registration": "https://goo.gl/forms/spPDvr4aaUVZMKAk1",
             "description": "Can you make it through a race of attrition? Endurance style events have you endure at least 3hours of racing within a team. Driver swaps included. "
         },
-        {
+        {            
+            "active":false,
             "code": "GTs",
             "name": "GT Sprint Series",
             "game": "Assetto Corsa Competizione",
@@ -54,7 +60,8 @@
             "registration": "https://forms.gle/2UM4vxKsoKYDfNfbA",
             "description": "Short 1 hour sprint races in GT cars."
         },
-        {
+        {            
+            "active":true,
             "code": "DIRT",
             "name": "DiRT World Rally Championship",
             "game": "DiRT Rally",
@@ -63,7 +70,8 @@
             "registration": "https://forms.gle/zZ9ztZWH8TjNZmTaA",
             "description": "Up to the challenge of differing road surfaces? Slide into our rally league. Complete a number of stages over the course of a few days at your own leisure, quickest time when the window closes wins the event."
         },
-        {
+        {            
+            "active":true,
             "code": "EEL",
             "name": "EERC Endurance League",
             "game": "RFactor2",
