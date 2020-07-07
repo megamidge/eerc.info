@@ -1,8 +1,10 @@
 <template>
-  <q-page class="flex flex-center">
+  <q-page class="flex flex-center flex-row">
+    <h1>Admin area</h1>
     <img
       alt="Quasar logo"
-      src="~assets/quasar-logo-full.svg"
+      src="~assets/eerc.png"
+      class="logo"
     >
   </q-page>
 </template>
@@ -12,3 +14,9 @@ export default {
   name: 'PageIndex'
 }
 </script>
+
+<style>
+.logo{
+  max-width:15rem;
+}
+</style>

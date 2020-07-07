@@ -83,7 +83,18 @@ module.exports = function (/* ctx */) {
     framework: {
       iconSet: 'material-icons', // Quasar icon set
       lang: 'en-us', // Quasar language pack
-      config: {},
+      config: {
+        brand: {
+          primary: '#35374f',
+          secondary: '#eb6b26',
+          accent: '#e03131',
+          dark: '#4a4a4a',
+          positive: '#23873a',
+          negative: '#8f2935',
+          info: '#1accf0',
+          warning: '#d828f7'
+        }
+      },
 
       // Possible values for "importStrategy":
       // * 'auto' - (DEFAULT) Auto-import needed Quasar components & directives
@@ -106,10 +117,12 @@ module.exports = function (/* ctx */) {
     // https://quasar.dev/quasar-cli/developing-pwa/configuring-pwa
     pwa: {
       workboxPluginMode: 'GenerateSW', // 'GenerateSW' or 'InjectManifest'
-      workboxOptions: {}, // only for GenerateSW
+      workboxOptions: {
+        skipWaiting:true
+      }, // only for GenerateSW
       manifest: {
-        name: 'EERC.INFO',
-        short_name: 'EERC.INFO',
+        name: 'eerc.info',
+        short_name: 'eerc.info',
         description: 'EERC website',
         display: 'standalone',
         orientation: 'portrait',
