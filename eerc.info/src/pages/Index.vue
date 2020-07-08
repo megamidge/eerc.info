@@ -1,5 +1,5 @@
 <template>
-  <q-page class="flex flex-center flex-row">
+  <q-page class="flex flex-center row">
     <h1>Admin area</h1>
     <img
       alt="Quasar logo"
@@ -16,7 +16,7 @@ export default {
 </script>
 
 <style>
-.logo{
-  max-width:15rem;
+.logo {
+  max-width: 15rem;
 }
 </style>

@@ -2,7 +2,7 @@
   <q-item
     clickable
     tag="a"
-    target="_blank"
+    :target="target"
     :href="link"
   >
     <q-item-section
@@ -37,12 +37,22 @@ export default {
 
     link: {
       type: String,
-      default: '#'
+      default: ''
     },
 
     icon: {
       type: String,
       default: ''
+    },
+
+    openInNewTab: {
+      type: Boolean,
+      default: false
+    }
+  },
+  computed: {
+    target () {
+      return this.openInNewTab ? '_blank' : ''
     }
   }
 }

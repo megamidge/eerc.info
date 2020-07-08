@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "eerc-a5a53"
+    "default": "eerc-a5a53",
+    "eerc": "eerc-a5a53"
   }
 }

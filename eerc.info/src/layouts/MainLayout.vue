@@ -21,17 +21,13 @@
       v-model="leftDrawerOpen"
       show-if-above
       bordered
-      content-class="bg-grey-1"
     >
       <q-list>
-        <q-item-label
-          header
-          class="text-grey-8"
-        >
-          Essential Links
+        <q-item-label header>
+          Navigation
         </q-item-label>
         <EssentialLink
-          v-for="link in essentialLinks"
+          v-for="link in links"
           :key="link.title"
           v-bind="link"
         />
@@ -57,12 +53,29 @@ export default {
   data () {
     return {
       leftDrawerOpen: false,
-      essentialLinks: [
+      links: [
+        {
+          title: 'Dashboard',
+          icon: 'home'
+        },
+        {
+          title: 'Leagues',
+          caption: 'View and manage leagues',
+          icon: 'list',
+          link: 'leagues'
+        },
+        {
+          title: 'Gallery',
+          caption: 'Manage the gallery',
+          icon: 'image',
+          link: 'gallery'
+        },
         {
           title: 'Current Website',
           caption: 'eerc.info',
           icon: 'public',
-          link: 'https://eerc.info'
+          link: 'https://eerc.info',
+          openInNewTab: true
         }
       ]
     }
