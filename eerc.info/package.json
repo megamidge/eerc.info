@@ -1,8 +1,8 @@
 {
   "name": "eerc.info",
   "version": "0.0.1",
-  "description": "EERC website",
-  "productName": "EERC.INFO",
+  "description": "The best website in the world.",
+  "productName": "eerc.info",
   "author": "EERC",
   "private": true,
   "scripts": {
