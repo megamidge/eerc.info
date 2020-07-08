@@ -21,17 +21,22 @@
       v-model="leftDrawerOpen"
       show-if-above
       bordered
+
+      :mini="miniState"
     >
-      <q-list>
-        <q-item-label header>
-          Navigation
-        </q-item-label>
-        <EssentialLink
-          v-for="link in links"
-          :key="link.title"
-          v-bind="link"
-        />
-      </q-list>
+        <q-list>
+          <q-item-label header>
+            Navigation
+          </q-item-label>
+          <EssentialLink
+            v-for="link in links"
+            :key="link.title"
+            v-bind="link"
+          />
+        </q-list>
+        <div class="fixed-bottom full-width flex justify-end">
+          <q-btn :icon="miniState ? 'chevron_right' : 'chevron_left'" @click="miniState = !miniState" unelevated/>
+        </div>
     </q-drawer>
 
     <q-page-container>
@@ -53,6 +58,7 @@ export default {
   data () {
     return {
       leftDrawerOpen: false,
+      miniState: true,
       links: [
         {
           title: 'Dashboard',
