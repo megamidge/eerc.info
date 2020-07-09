@@ -16,6 +16,7 @@
     "@quasar/extras": "^1.0.0",
     "core-js": "^3.6.5",
     "eslint": "^7.4.0",
+    "firebase": "^7.15.5",
     "quasar": "^1.0.0"
   },
   "devDependencies": {

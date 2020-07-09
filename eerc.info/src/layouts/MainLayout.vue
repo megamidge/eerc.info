@@ -34,7 +34,7 @@
             v-bind="link"
           />
         </q-list>
-        <div class="fixed-bottom full-width flex justify-end">
+        <div class="fixed-bottom full-width flex justify-end desktop-only">
           <q-btn :icon="miniState ? 'chevron_right' : 'chevron_left'" @click="miniState = !miniState" unelevated/>
         </div>
     </q-drawer>

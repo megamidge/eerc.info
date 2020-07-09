@@ -1,6 +1,7 @@
-
+import store from '../store/index'
 const routes = [
   {
+    nane: 'top',
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
@@ -8,6 +9,24 @@ const routes = [
       { path: 'leagues', component: () => import('pages/Leagues.vue') },
       { path: 'gallery', component: () => import('pages/Gallery.vue') }
     ]
+  },
+  {
+    path: '/login',
+    component: () => import('layouts/LoginLayout.vue'),
+    children: [
+      {
+        path: '', component: () => import('pages/Login.vue')
+      }
+    ],
+    beforeEnter (to, from, next) {
+      if (store().getters['user/getUser'])
+        if (!from)
+          next({ path: '/' })
+        else
+          next(from)
+      else
+        next()
+    }
   },
   // Always leave this as last one,
   // but you can also remove it
