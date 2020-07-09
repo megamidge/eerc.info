@@ -60,6 +60,11 @@
 <script>
 import { mapGetters } from 'vuex'
 export default {
+  meta: {
+    title: 'Login | admin.eerc.info',
+    description: { name: 'description', content: 'Log into the EERC Admin portal' },
+    equiv: { 'http-equiv': 'Content-Type', content: 'text/html; charset=UTF-8' }
+  },
   data () {
     return {
       email: '',

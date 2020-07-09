@@ -7,7 +7,12 @@
 
 <script>
 export default {
-  name: 'Gallery'
+  name: 'Gallery',
+  meta: {
+    title: 'Gallery | admin.eerc.info',
+    description: { name: 'description', content: 'Gallery management page for EERC Admin portal.' },
+    equiv: { 'http-equiv': 'Content-Type', content: 'text/html; charset=UTF-8' }
+  }
 }
 </script>
 

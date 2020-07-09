@@ -11,7 +11,12 @@
 
 <script>
 export default {
-  name: 'PageIndex'
+  name: 'PageIndex',
+  meta: {
+    title: 'Admin Portal | admin.eerc.info',
+    description: { name: 'description', content: 'EERC Admin Portal.' },
+    equiv: { 'http-equiv': 'Content-Type', content: 'text/html; charset=UTF-8' }
+  }
 }
 </script>
 
