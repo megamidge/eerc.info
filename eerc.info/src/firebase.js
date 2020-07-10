@@ -6,6 +6,7 @@ import 'firebase/firestore'
 import 'firebase/functions'
 
 import config from './firebaseConfig.js'
+import { Notify } from 'quasar'
 
 // initialize firebase
 const app = firebase.initializeApp(config.firebase)
@@ -14,9 +15,9 @@ let firestore = app.firestore()
 firestore.enablePersistence({ synchronizeTabs: true })
 
 export default {
-    api: firebase,
-    app,
-    auth: app.auth(),
-    firestore,
-    functions: app.functions('europe-west2')
+  api: firebase,
+  app,
+  auth: app.auth(),
+  firestore,
+  functions: app.functions('europe-west2'),
 }

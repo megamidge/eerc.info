@@ -1,4 +1,4 @@
-import store from 'store/index'
+// import store from 'store/index'
 const routes = [
   {
     nane: 'top',
@@ -17,16 +17,16 @@ const routes = [
       {
         path: '', component: () => import('pages/Login.vue')
       }
-    ],
-    beforeEnter (to, from, next) {
-      if (store().getters['user/getUser'])
-        if (!from)
-          next({ path: '/' })
-        else
-          next(from)
-      else
-        next()
-    }
+    ]
+    // beforeEnter (to, from, next) {
+    //   if (store().getters['auth/getUser'])
+    //     if (!from)
+    //       next({ path: '/' })
+    //     else
+    //       next(from)
+    //   else
+    //     next()
+    // }
   },
   // Always leave this as last one,
   // but you can also remove it

@@ -15,10 +15,14 @@ export async function register ({ commit }, payload) {
   })
 }
 export async function signIn ({ commit }, payload) {
+  console.log('Here we are', payload)
   const email = payload.email
   const password = payload.password
-
-  await firebase.auth.signInWithEmailAndPassword(email, password).catch(error => {
+  await firebase.auth.signInWithEmailAndPassword(email, password).then(() => {
+  }).catch(error => {
+    console.log('fug')
     throw new Error(`${error.code}: ${error.message}`)
   })
+
+  console.log('logged in')
 }
