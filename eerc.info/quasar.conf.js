@@ -3,6 +3,7 @@
  * the ES6 features that are supported by your Node version. https://node.green/
  */
 
+const path = require('path')
 // Configuration for your app
 // https://quasar.dev/quasar-cli/quasar-conf-js
 /* eslint-env node */
@@ -69,6 +70,12 @@ module.exports = function (/* ctx */) {
           loader: 'eslint-loader',
           exclude: /node_modules/
         })
+        cfg.resolve.alias = {
+          ...cfg.resolve.alias, // Add existing alias'
+
+          // Add own alias
+          store: path.resolve(__dirname, './src/store')
+        }
       }
     },
 

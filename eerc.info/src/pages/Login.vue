@@ -1,4 +1,10 @@
 <template>
+  <!-- Init login idea:
+    If not logged in, redirect to login page (this will always happen upon first connecting)
+    On login page, wait for the store to have 'init' set to true - this will be me applied for firebase authOnStateChanged.
+    From there, we can check if we are logged in. If we aren't, prompt the user for log in.
+    When going to login page then, show a spinner and maybe text sayingbundleRenderer.
+    Once login action is done, redirect back to target. -->
   <q-page class="flex justify-center items-center column">
     <h5>admin.eerc.info</h5>
     <div class="flex row items-center justify-center">
