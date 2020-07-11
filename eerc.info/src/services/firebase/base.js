@@ -26,6 +26,7 @@ export const isAuthenticated = (store) => {
 }
 
 export const logoutUser = () => {
+  console.log('base')
   return auth().signOut()
 }
 

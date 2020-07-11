@@ -14,44 +14,24 @@
       </q-card-section>
     </q-card>
     <div class="flex q-pa-md justify-start q-gutter-md">
-      <q-card>
+      <q-card v-for="league in leagues" :key="league.id">
         <q-card-section class="q-pb-xs row items-center justify-between">
-          <h5 class="q-my-none q-mx-xs">Super 7 Cup</h5>
-          <q-badge class="text-caption">S7C</q-badge>
+          <h5 class="q-my-none q-mx-xs">{{ league.name }}</h5>
+          <q-badge class="text-caption">{{ league.id }}</q-badge>
         </q-card-section>
         <q-card-section class="q-pt-xs">
-          <p>Brief descriptor</p>
+          <p>{{ league.description_short }}</p>
         </q-card-section>
         <q-card-section class="q-py-xs">
           <div>
-            <p>10 events</p>
-            <p><b>Next event:</b></p>
-            <p>Redbull Ring - 17/05/2020 18:50BST</p>
+            {{ league }}
           </div>
         </q-card-section>
         <q-card-section class="flex justify-end q-pt-xs">
           <q-btn icon="settings"/>
         </q-card-section>
       </q-card>
-      <q-card>
-        <q-card-section class="q-pb-xs row items-center justify-between">
-          <h5 class="q-my-none q-mx-xs">DiRT World Rally Championship</h5>
-          <q-badge class="text-caption">DIRT</q-badge>
-        </q-card-section>
-        <q-card-section class="q-pt-xs">
-          <p>Brief descriptor</p>
-        </q-card-section>
-        <q-card-section class="q-py-xs">
-          <div>
-            <p>8 events</p>
-            <p><b>Next event:</b></p>
-            <p>Finland - 17/05/2020 18:50BST</p>
-          </div>
-        </q-card-section>
-        <q-card-section class="flex justify-end q-pt-xs">
-          <q-btn icon="settings"/>
-        </q-card-section>
-      </q-card>
+
     </div>
   </q-page>
 </template>
@@ -67,6 +47,14 @@ export default {
   data () {
     return {
     }
+  },
+  computed: {
+    leagues () {
+      return this.$store.state.data.leagues
+    }
+  },
+  created () {
+    this.$fb.listenLeagues(this.$store)
   }
 }
 </script>

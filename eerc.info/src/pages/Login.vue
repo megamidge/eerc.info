@@ -40,17 +40,23 @@
           :type="isPwd ? 'password' : 'text'"
           filled>
         </q-input>
-      </template>
-      <template v-if="!isRegister">
-        <q-btn class="bg-primary" type="submit" label="Login" @click="login"/>
+        <q-btn class="bg-primary" type="submit" :label="registering ? '' : 'Register'" @click="register">
+          <q-spinner-dots v-if="registering"
+            :thickness="4"/>
+        </q-btn>
       </template>
       <!-- Login form -->
       <template v-else>
-        <q-btn class="bg-primary" type="submit" label="Register" @click="register"/>
+        <q-btn class="bg-primary" type="submit" :label="loggingIn ? '' : 'Login'" @click="login">
+          <q-spinner-dots v-if="loggingIn"
+            :thickness="4"/>
+        </q-btn>
+
       </template>
 
       <q-separator />
 
+      <!-- Both of these are just used to change between registering and logging in, they do not perform the actions of logging in or registering -->
       <!-- Login form -->
       <template v-if="!isRegister">
         <q-btn class="bg-primary" label="Register" @click="isRegister = true"/>
@@ -76,12 +82,17 @@ export default {
       password: '',
       passwordConfirm: '',
       isPwd: true,
-      isRegister: false
+      isRegister: false,
+      loggingIn: false,
+      registering: false
     }
   },
   methods: {
     login () {
+      if (this.loggingIn)
+        return
       console.log('Login')
+      this.loggingIn = true
       this.$store.dispatch('auth/signIn', { email: this.email, password: this.password })
         .then(() => {
           this.$q.notify({ type: 'positive', message: 'Logged in.' })
@@ -89,23 +100,30 @@ export default {
           if (this.$route.query && this.$route.query.source) {
             path = this.$route.query.source
           }
+          this.loggingIn = false
           this.$router.push(path)
         })
         .catch((err) => {
+          this.loggingIn = false
           this.$q.notify({ type: 'negative', message: `Failed to log in: ${err.message}` })
         })
     },
     register () {
+      if (this.registering)
+        return
       console.log('Register')
+      this.registering = true
       this.$store.dispatch('auth/register', { email: this.email, password: this.password, passwordConfirm: this.passwordConfirm })
         .then(() => {
           let path = '/'
           if (this.$route.query && this.$route.query.source) {
             path = this.$route.query.source
           }
+          this.registering = false
           this.$router.push(path)
           this.$q.notify({ type: 'positive', message: 'Successfully registered.' })
         }).catch(err => {
+          this.registering = false
           this.$q.notify({ type: 'negative', message: `Failed to register: ${err.message}` })
         })
     }

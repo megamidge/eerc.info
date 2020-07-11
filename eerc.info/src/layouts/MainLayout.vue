@@ -14,18 +14,10 @@
         <q-toolbar-title>
           EERC.INFO
         </q-toolbar-title>
-        <!-- <q-chip
-          square
-          class="truncate-chip-labels"
-          :label="email"
-          icon="account_circle"
-          style="max-width:30%"
-          clickable>
-        </q-chip> -->
         <q-chip
           :label="email"
           icon="account_circle"
-          class="truncate-chip-labels"
+          class="truncate-chip-labels cursor-pointer"
           style="max-width:30%; border-radius:0"
           square
         >
