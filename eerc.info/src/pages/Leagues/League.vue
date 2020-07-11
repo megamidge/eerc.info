@@ -11,9 +11,11 @@
             @focus="titleEdit = true"
             @blur="titleEdit = false"
             :filled="titleEdit"
+            :style="{width:`${titleInput.length/2+3}em`, minWidth:'6rem', maxWidth:'100%'}"
+            :loading="loading"
+            :readonly="loading"
             borderless
-            class="text-h6"
-            :style="{width:`${titleInput.length/2+3}em`, minWidth:'6rem', maxWidth:'100%'}">
+            class="text-h6">
             <template v-slot:append>
               <q-icon v-if="titleHover && !titleEdit" name="edit"/>
             </template>
@@ -37,7 +39,8 @@ export default {
     return {
       titleHover: false,
       titleEdit: false,
-      titleInput: ''
+      titleInput: '',
+      loading: false
     }
   },
   computed: {
@@ -50,13 +53,25 @@ export default {
   },
   methods: {
     submitNewTitle () {
-      console.log('New title:', this.titleInput)
       this.titleEdit = false
+      if (this.titleInput === this.league.name)
+        return
+      this.loading = true
+      this.$fb.firestore().collection('leagues').doc(this.league.id).update({
+        name: this.titleInput
+      }).then(() => this.$q.notify({ message: 'Title updated', color: 'positive' }))
+        .catch(error => this.$q.notify({ message: `UwU somethings fucky wucky. ${error.message}` }))
+        .then(() => {
+          this.loading = false
+        })
     }
+  },
+  mounted () {
+    if (this.league)
+      this.titleInput = this.league.name
   },
   watch: {
     league (newVal) {
-      console.log('watch', newVal)
       if (newVal) {
         console.log('this.titleInput = this.league.name')
         this.titleInput = this.league.name

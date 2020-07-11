@@ -1,6 +1,9 @@
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 
+export const firestore = () => {
+  return firebase.firestore()
+}
 export const fsInit = (app) => {
   return firebase.firestore(app)
 }
