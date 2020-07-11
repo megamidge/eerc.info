@@ -1,6 +1,7 @@
 const exec = require('child_process').execSync
 let buildType = 'eerc'
 const [potentialBtype] = process.argv.slice(2)
+const [buildMessage] = process.argv.slice(3)
 if (potentialBtype) {
   buildType = potentialBtype
 }
@@ -18,7 +19,7 @@ Promise.resolve()
   })
   //deploy app
   .then(() => {
-    exec('firebase deploy --only hosting', { stdio: [0, 1, 2] })
+    exec(`firebase deploy --only hosting -m "${buildMessage}"`, { stdio: [0, 1, 2] })
   })
   .catch(err => {
     console.error('ERROR:', err)

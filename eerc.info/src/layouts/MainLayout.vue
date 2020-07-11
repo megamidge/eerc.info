@@ -14,6 +14,35 @@
         <q-toolbar-title>
           EERC.INFO
         </q-toolbar-title>
+        <!-- <q-chip
+          square
+          class="truncate-chip-labels"
+          :label="email"
+          icon="account_circle"
+          style="max-width:30%"
+          clickable>
+        </q-chip> -->
+        <q-chip
+          :label="email"
+          icon="account_circle"
+          class="truncate-chip-labels"
+          style="max-width:30%; border-radius:0"
+          square
+        >
+          <q-menu
+            anchor="bottom right"
+            self="top right"
+            square>
+            <q-btn
+            no-caps
+            size="md"
+            label="Logout"
+            icon="logout"
+            @click="logout"
+            v-close-popup
+            />
+          </q-menu>
+        </q-chip>
       </q-toolbar>
     </q-header>
 
@@ -84,6 +113,18 @@ export default {
           openInNewTab: true
         }
       ]
+    }
+  },
+  computed: {
+    email () {
+      return this.$fb.auth().currentUser.email
+    }
+  },
+  methods: {
+    logout () {
+      this.$fb.logoutUser().then(() => {
+        this.$q.notify({ color: 'neutral', message: 'Logged out' })
+      })
     }
   }
 }

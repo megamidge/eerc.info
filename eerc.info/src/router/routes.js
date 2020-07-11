@@ -4,6 +4,9 @@ const routes = [
     nane: 'top',
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
+    meta: {
+      requiresAuth: true
+    },
     children: [
       { path: '', component: () => import('pages/Index.vue') },
       { path: 'leagues', component: () => import('pages/Leagues.vue') },

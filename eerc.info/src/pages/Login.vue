@@ -64,7 +64,6 @@
 </template>
 
 <script>
-import { mapGetters, mapState } from 'vuex'
 export default {
   meta: {
     title: 'Login | admin.eerc.info',
@@ -80,21 +79,17 @@ export default {
       isRegister: false
     }
   },
-  computed: {
-    ...mapGetters('auth', [
-      'getUser' // -> this.user
-    ]),
-    ...mapState('auth', [
-      'authReady'
-    ])
-  },
   methods: {
     login () {
       console.log('Login')
       this.$store.dispatch('auth/signIn', { email: this.email, password: this.password })
         .then(() => {
           this.$q.notify({ type: 'positive', message: 'Logged in.' })
-          this.$router.push('/')
+          let path = '/'
+          if (this.$route.query && this.$route.query.source) {
+            path = this.$route.query.source
+          }
+          this.$router.push(path)
         })
         .catch((err) => {
           this.$q.notify({ type: 'negative', message: `Failed to log in: ${err.message}` })
@@ -105,27 +100,14 @@ export default {
       this.$store.dispatch('auth/register', { email: this.email, password: this.password, passwordConfirm: this.passwordConfirm })
         .then(() => {
           let path = '/'
-          if (this.$route.query && this.$route.query.redirect) {
-            path = this.$route.query.redirect
+          if (this.$route.query && this.$route.query.source) {
+            path = this.$route.query.source
           }
           this.$router.push(path)
           this.$q.notify({ type: 'positive', message: 'Successfully registered.' })
         }).catch(err => {
           this.$q.notify({ type: 'negative', message: `Failed to register: ${err.message}` })
         })
-    }
-  },
-  watch: {
-    authReady (newVal) {
-      if (newVal) {
-        let toPath = '/'
-        if (this.$route.query && this.$route.query.redirect) {
-          toPath = this.$route.query.redirect
-        }
-        console.log('Path', toPath)
-        if (this.getUser)
-          this.$router.push({ path: toPath })
-      }
     }
   }
 }
