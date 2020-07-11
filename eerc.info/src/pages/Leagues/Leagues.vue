@@ -14,25 +14,41 @@
       </q-card-section>
     </q-card>
     <div class="flex q-pa-md justify-start q-gutter-md">
-      <q-card v-for="league in leagues" :key="league.id">
+      <q-card v-for="league in leagues" :key="league.id" class="bg-primary">
         <q-card-section class="q-pb-xs row items-center justify-between">
           <h5 class="q-my-none q-mx-xs">{{ league.name }}</h5>
-          <q-badge class="text-caption">{{ league.id }}</q-badge>
+          <q-badge class="text-caption" color="dark">{{ league.id }}</q-badge>
         </q-card-section>
         <q-card-section class="q-pt-xs">
           <p>{{ league.description_short }}</p>
         </q-card-section>
-        <q-card-section class="q-py-xs">
-          <div>
-            {{ league }}
-          </div>
+        <q-card-section>
+          <q-markup-table class="no-shadow">
+            <tbody>
+              <tr>
+                <td>Game</td>
+                <td></td>
+                <td>{{ league.game }}</td>
+              </tr>
+              <tr v-if="league.seasons">
+                <td>Seasons</td>
+                <td></td>
+                <td>{{ league.seasons.length }}</td>
+              </tr>
+              <tr>
+                <td>Next Event</td>
+                <td>//LOCATION//</td>
+                <td>//DATE-TIME//</td>
+              </tr>
+            </tbody>
+          </q-markup-table>
         </q-card-section>
-        <q-card-section class="flex justify-end q-pt-xs">
-          <q-btn icon="settings"/>
-        </q-card-section>
+        <q-card-actions align="right">
+          <q-btn icon="edit" @click="editLeague(league)"/>
+        </q-card-actions>
       </q-card>
-
     </div>
+    <router-view/>
   </q-page>
 </template>
 
@@ -53,8 +69,18 @@ export default {
       return this.$store.state.data.leagues
     }
   },
+  methods: {
+    editLeague (league) {
+      this.$router.push({
+        name: 'league',
+        params: {
+          leagueId: league.id
+        }
+      })
+    }
+  },
   created () {
-    this.$fb.listenLeagues(this.$store)
+    // this.$fb.listenLeagues(this.$store)
   }
 }
 </script>

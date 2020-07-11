@@ -14,8 +14,8 @@
         color="white"
         text-color="blue"
         unelevated
-        to="/"
-        label="Go Home"
+        @click="$router.go(-1)"
+        label="Go Back"
         no-caps
       />
     </div>

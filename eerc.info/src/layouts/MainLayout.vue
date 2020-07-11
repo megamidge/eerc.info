@@ -49,11 +49,23 @@
           <q-item-label header>
             Navigation
           </q-item-label>
-          <EssentialLink
+          <q-item
             v-for="link in links"
             :key="link.title"
-            v-bind="link"
-          />
+            clickable
+            :to="link.link"
+            :active="false"
+            dark>
+            <q-item-section avatar>
+              <q-icon :name="link.icon"/>
+            </q-item-section>
+            <q-item-section>
+              <q-item-label>{{ link.title }}</q-item-label>
+              <q-item-label caption>
+                {{ link.caption }}
+              </q-item-label>
+            </q-item-section>
+          </q-item>
         </q-list>
         <div class="fixed-bottom full-width flex justify-end desktop-only">
           <q-btn :icon="miniState ? 'chevron_right' : 'chevron_left'" @click="miniState = !miniState" unelevated/>
@@ -67,13 +79,13 @@
 </template>
 
 <script>
-import EssentialLink from 'components/EssentialLink.vue'
+// import EssentialLink from 'components/EssentialLink.vue'
 
 export default {
   name: 'MainLayout',
 
   components: {
-    EssentialLink
+    // EssentialLink
   },
 
   data () {
@@ -83,26 +95,20 @@ export default {
       links: [
         {
           title: 'Dashboard',
-          icon: 'home'
+          icon: 'home',
+          link: '/'
         },
         {
           title: 'Leagues',
           caption: 'View and manage leagues',
           icon: 'list',
-          link: 'leagues'
+          link: '/leagues'
         },
         {
           title: 'Gallery',
           caption: 'Manage the gallery',
           icon: 'image',
-          link: 'gallery'
-        },
-        {
-          title: 'Current Website',
-          caption: 'eerc.info',
-          icon: 'public',
-          link: 'https://eerc.info',
-          openInNewTab: true
+          link: '/gallery'
         }
       ]
     }

@@ -9,7 +9,21 @@ const routes = [
     },
     children: [
       { path: '', component: () => import('pages/Index.vue') },
-      { path: 'leagues', component: () => import('pages/Leagues.vue') },
+      {
+        path: 'leagues',
+        component: () => import('pages/Leagues/LeaguesPassthrough.vue'),
+        children: [
+          {
+            path: '',
+            component: () => import('pages/Leagues/Leagues.vue')
+          },
+          {
+            name: 'league',
+            path: 'league/:leagueId',
+            component: () => import('pages/Leagues/League.vue')
+          }
+        ]
+      },
       { path: 'gallery', component: () => import('pages/Gallery.vue') }
     ]
   },
