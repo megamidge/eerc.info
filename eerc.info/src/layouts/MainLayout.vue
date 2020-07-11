@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
+  <q-layout view="hHh Lpr lFf">
     <q-header elevated>
       <q-toolbar>
         <q-btn
@@ -54,7 +54,7 @@
             :key="link.title"
             clickable
             :to="link.link"
-            :active="false"
+            exact
             dark>
             <q-item-section avatar>
               <q-icon :name="link.icon"/>
@@ -127,3 +127,9 @@ export default {
   }
 }
 </script>
+
+<style>
+.q-item.q-router-link--active, .q-item--active {
+  color: var(--q-color-secondary)
+}
+</style>
