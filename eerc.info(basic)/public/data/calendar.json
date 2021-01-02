@@ -52,32 +52,32 @@
                         {
                             "location":"United Kingdom",
                             "track":"Snetterton",
-                            "utcDateTime":"2020-06-21T17:30:00.000Z",
+                            "utcDateTime":"2020-06-28T17:30:00.000Z",
                             "duration":70
                         },
                         {
                             "location":"United Kingdom",
                             "track":"Brands Hatch",
-                            "utcDateTime":"2020-06-28T17:30:00.000Z",
-                            "duration":70
-                        },
-                        {
-                            "location":"Germany",
-                            "track":"Motorsport Arena Oschersleben",
                             "utcDateTime":"2020-07-05T17:30:00.000Z",
                             "duration":70
                         },
                         {
                             "location":"Germany",
-                            "track":"Hockenheimring",
+                            "track":"Motorsport Arena Oschersleben",
                             "utcDateTime":"2020-07-12T17:30:00.000Z",
+                            "duration":70
+                        },
+                        {
+                            "location":"Germany",
+                            "track":"Hockenheimring",
+                            "utcDateTime":"2020-07-19T17:30:00.000Z",
                             "duration":70
                         },
                         {
                             "location":"Austria",
                             "track":"Red Bull Ring",
-                            "utcDateTime":"2020-07-19T17:30:00.000Z",
-		            "duration":70
+                            "utcDateTime":"2020-07-26T17:30:00.000Z",
+		                    "duration":70
                         }
                     ]
                 }
@@ -722,7 +722,7 @@
             "game": "DiRT Rally",
             "seasons": [
                 {
-                    "seasonName": "Season 1",
+                    "seasonName": "Season 1 (Dirt Rally)",
                     "events": [
                         {
                             "location": "Finland",
@@ -761,11 +761,101 @@
                             "duration": 4080
                         }
                     ]
+                },
+                {
+                    "seasonName": "Season 1 (Dirt Rally 2.0)",
+                    "events":[
+                        {
+                            "location": "Spain",
+                            "utcDateTime": "2020-03-29T16:00:00.000Z",
+                            "duration":10080
+                        },
+                        {
+                            "location":"New Zealand",
+                            "utcDateTime": "2020-04-05T16:00:00.000Z",
+                            "duration":10080
+                        },
+                        {
+                            "location":"Poland",
+                            "utcDateTime": "2020-04-12T16:00:00.000Z",
+                            "duration":10080
+                        },
+                        {
+                            "location":"United States of America",
+                            "utcDateTime": "2020-04-19T16:00:00.000Z",
+                            "duration":10080
+                        },
+                        {
+                            "location":"Australia",
+                            "utcDateTime": "2020-04-26T16:00:00.000Z",
+                            "duration":10080
+                        },
+                        {
+                            "location":"Argentina",
+                            "utcDateTime": "2020-05-03T16:00:00.000Z",
+                            "duration":10080
+                        },
+                        {
+                            "location":"Poland",
+                            "utcDateTime": "2020-05-10T16:00:00.000Z",
+                            "duration":10080
+                        },
+                        {
+                            "location":"New Zealand",
+                            "utcDateTime": "2020-05-10T16:00:00.000Z",
+                            "duration":10080
+                        }
+                    ]
+                },
+                {
+                    "seasonName": "Season 2 (Dirt Rally 2.0)",
+                    "events":[
+                        {
+                            "location":"Spain",
+                            "utcDateTime": "2020-06-21T16:00:00.000Z",
+                            "duration":10080
+                        },
+                        {
+                            "location":"Finland",
+                            "utcDateTime":"2020-06-28T16:00:00.000Z",
+                            "duration":10080
+                        },
+                        {
+                            "location":"Poland",
+                            "utcDateTime":"2020-07-05T16:00:00.000Z",
+                            "duration":10080
+                        },
+                        {
+                            "location":"United States of America",
+                            "utcDateTime":"2020-07-12T16:00:00.000Z",
+                            "duration":10080
+                        },
+                        {
+                            "location":"Scotland",
+                            "utcDateTime":"2020-07-19T16:00:00.000Z",
+                            "duration":10080
+                        },
+                        {
+                            "location":"New Zealand",
+                            "utcDateTime":"2020-07-26T16:00:00.000Z",
+                            "duration":10080
+                        },
+                        {
+                            "location":"Argentina",
+                            "utcDateTime":"2020-08-02T16:00:00.000Z",
+                            "duration":10080
+                        },
+                        {
+                            "location":"Sweden",
+                            "utcDateTime":"2020-08-09T16:00:00.000Z",
+                            "duration":10080
+                        }
+                    ]
                 }
             ]
         },
         {
-            "series": "GTE",
+            "series": "GTe",
             "game": "Assetto Corsa Competizione",
             "seasons": [
                 {
@@ -835,6 +925,130 @@
                             "track": "6h of Spa-Francorchamps",
                             "utcDateTime": "2020-01-12T10:30:00.000Z",
                             "duration": 400
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "series":"EEC",
+            "game":"RFactor2",
+            "seasons":[
+                {
+                    "seasonName":"Season 1",
+                    "events":[
+                        {
+                            "location":"Turkey",
+                            "track":"6h of Istanbul",
+                            "utcDateTime":"2020-02-15T13:00:00.000Z",
+                            "duration":420
+                        },
+                        {
+                            "location":"Japan",
+                            "track":"8h of Fuji",
+                            "utcDateTime":"2020-03-14T13:00:00.000Z",
+                            "duration":540
+                        },
+                        {
+                            "location":"United Kingdom",
+                            "track":"8h of Silverstone",
+                            "utcDateTime":"2020-04-11T12:00:00.000Z",
+                            "duration":540
+                        },
+                        {
+                            "location":"United States of America",
+                            "track":"10h of Road Atlanta",
+                            "utcDateTime":"2020-05-09T12:00:00.000Z",
+                            "duration":660
+                        },
+                        {
+                            "location":"Germany",
+                            "track":"6h of Hockenheimring",
+                            "utcDateTime":"2020-06-13T12:00:00.000Z",
+                            "duration":420
+                        },
+                        {
+                            "location":"France",
+                            "track":"24h of La Sarthe (Le Mans)",
+                            "utcDateTime":"2020-07-11T12:00:00.000Z",
+                            "duration":1500
+                        },
+                        {
+                            "location":"United States of America",
+                            "track":"6h of Circuit of the Americas",
+                            "utcDateTime":"2020-08-08T12:00:00.000Z",
+                            "duration":420
+                        },
+                        {
+                            "location":"United States of America",
+                            "track":"Road America",
+                            "utcDateTime":"2020-09-12T12:00:00.000Z",
+                            "duration":1500
+                        }
+                    ]
+                },
+                {
+                    "seasonName":"Season 2",
+                    "events":[
+                        {
+                            "location":"United States of America",
+                            "track":"4h of Nola",
+                            "utcDateTime":"2021-01-09T13:00:00.000Z",
+                            "duration":300
+                        },
+                        {
+                            "location":"United States of America",
+                            "track":"12h of Daytona",
+                            "utcDateTime":"2021-01-30T13:00:00.000Z",
+                            "duration":780
+                        },
+                        {
+                            "location":"United States of America",
+                            "track":"1000 miles of Sebring",
+                            "utcDateTime":"2021-03-06T13:00:00.000Z",
+                            "duration":700
+                        },
+                        {
+                            "location":"Japan",
+                            "track":"24h of Suzuka",
+                            "utcDateTime":"2021-04-03T12:00:00.000Z",
+                            "duration":1500
+                        },
+                        {
+                            "location":"France",
+                            "track":"12h of Le Mans",
+                            "utcDateTime":"2021-05-15T12:00:00.000Z",
+                            "duration":780
+                        },
+                        {
+                            "location":"Portugal",
+                            "track":"6h of Portimao",
+                            "utcDateTime":"2021-06-19T12:00:00.000Z",
+                            "duration":420
+                        },
+                        {
+                            "location":"Italy",
+                            "track":"8h of Mugello",
+                            "utcDateTime":"2021-07-17T12:00:00.000Z",
+                            "duration":540
+                        },
+                        {
+                            "location":"South Korea",
+                            "track":"Korea",
+                            "utcDateTime":"2021-08-21T12:00:00.000Z",
+                            "duration":540
+                        },
+                        {
+                            "location":"United States of America",
+                            "track":"Laguna Seca",
+                            "utcDateTime":"2021-09-18T12:00:00.000Z",
+                            "duration":780
+                        },
+                        {
+                            "location":"Belgium",
+                            "track":"Spa-Francorchamps",
+                            "utcDateTime":"2021-10-16T12:00:00.000Z",
+                            "duration":1500
                         }
                     ]
                 }

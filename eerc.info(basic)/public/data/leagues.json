@@ -72,8 +72,8 @@
         },
         {            
             "active":true,
-            "code": "EEL",
-            "name": "EERC Endurance League",
+            "code": "EEC",
+            "name": "EERC Endurance Championship",
             "game": "RFactor2",
             "logo": "eellogo.png",
             "colour": "#FF6600",
