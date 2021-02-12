@@ -3,6 +3,7 @@
  * the ES6 features that are supported by your Node version. https://node.green/
  */
 
+const path = require('path')
 // Configuration for your app
 // https://quasar.dev/quasar-cli/quasar-conf-js
 /* eslint-env node */
@@ -18,7 +19,9 @@ module.exports = function (/* ctx */) {
     // app boot file (/src/boot)
     // --> boot files are part of "main.js"
     // https://quasar.dev/quasar-cli/boot-files
-    boot: [],
+    boot: [
+      'firebase'
+    ],
 
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css
     css: ['app.scss'],
@@ -65,6 +68,13 @@ module.exports = function (/* ctx */) {
           loader: 'eslint-loader',
           exclude: /node_modules/
         })
+        cfg.resolve.alias = {
+          ...cfg.resolve.alias, // Add existing alias'
+
+          // Add own alias
+          store: path.resolve(__dirname, './src/store'),
+          services: path.resolve(__dirname, './src/services')
+        }
       }
     },
 
@@ -78,7 +88,7 @@ module.exports = function (/* ctx */) {
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-framework
     framework: {
       iconSet: 'mdi-v5', // Quasar icon set
-      lang: 'en-us', // Quasar language pack
+      lang: 'en-gb', // Quasar language pack
 
       config: {
         notify: {
@@ -88,9 +98,9 @@ module.exports = function (/* ctx */) {
         dark: true,
         brand: {
           primary: '#35374f',
-          secondary: '#eb6b26',
-          accent: '#e03131',
-          dark: '#4a4a4a',
+          secondary: '#1e2429',
+          accent: '#eb6b26',
+          dark: '#3a3a3a',
           positive: '#23873a',
           negative: '#8f2935',
           info: '#1accf0',
@@ -111,7 +121,7 @@ module.exports = function (/* ctx */) {
       // directives: [],
 
       // Quasar plugins
-      plugins: []
+      plugins: ['Notify']
     },
 
     // animations: 'all', // --- includes all animations

@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "eerc-a5a53"
+  },
+  "targets": {
+    "eerc-a5a53": {
+      "hosting": {
+        "beta": [
+          "eerc-info-beta"
+        ]
+      }
+    }
   }
 }

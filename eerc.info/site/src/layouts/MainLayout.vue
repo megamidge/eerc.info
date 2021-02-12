@@ -2,7 +2,7 @@
   <q-layout view="lHh Lpr lFf">
     <q-header elevated>
       <q-toolbar>
-        <q-img src="/logos/logo_dark.svg" :ratio="1 / 1" class="logo q-ma-md" style="cursor:pointer;" to="/"/>
+        <q-img src="/logos/logo_dark.svg" :ratio="1 / 1" class="logo q-ma-md" style="cursor:pointer;" @click="$router.push('/')"/>
         <q-btn
           v-for="headerLink in headerLinks"
           :key="headerLink.label"
@@ -41,6 +41,16 @@
           <small>Help fund the league by donating via PayPal</small>
           <small>Donators may be entered into exclusive prize draws and more</small>
           </div>
+      </q-toolbar>
+      <q-toolbar class="bg-black">
+        Primary<q-icon color="primary" name="mdi-circle"/>,
+        Secondary<q-icon color="secondary" name="mdi-circle"/>,
+        Accent<q-icon color="accent" name="mdi-circle"/>,
+        Dark<q-icon color="dark" name="mdi-circle"/>,
+        Positive<q-icon color="positive" name="mdi-circle"/>,
+        Negative<q-icon color="negative" name="mdi-circle"/>,
+        Info<q-icon color="info" name="mdi-circle"/>,
+        Warning<q-icon color="warning" name="mdi-circle"/>
       </q-toolbar>
     </q-footer>
   </q-layout>
