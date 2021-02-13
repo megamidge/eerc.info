@@ -1,22 +1,7 @@
 <template>
   <q-page class="column" v-if="league">
-      <q-card class="row no-wrap q-ma-md">
-        <q-card-section class="q-pa-md col-3 flex flex-center">
-            <q-img :src="leagueImage" :ratio="1" contain/>
-        </q-card-section>
-        <q-card-section class="column items-start col-9">
-            <p class="q-ma-none q-mb-xs text-h6">{{ league.name }}</p>
-            <p class="q-ma-none text-body2 text-weight-light">{{ league.description }}</p>
-            <q-btn color="accent" label="Take part" class="full-width q-my-md" @click="openURL(league.signupLink)"/>
-            <q-space/>
-            <div class="row no-wrap">
-                <div class="row items-center">
-                <p class="q-ma-none text-subtitle1">Game:</p>
-                <p class="q-ma-none q-ml-sm text-subtitle1 text-weight-light">{{ league.game }}</p>
-                </div>
-            </div>
-        </q-card-section>
-      </q-card>
+      <league-info :league="league" :seasons="leagueSeasons.length"/>
+      <league-seasons :seasons="leagueSeasons" v-if="leagueSeasons.length > 0"/>
   </q-page>
   <q-page v-else class="flex flex-center">
       <q-spinner size="25vw" />
@@ -24,40 +9,36 @@
 </template>
 
 <script>
-import { openURL } from 'quasar'
+import LeagueInfo from 'src/components/leagues/LeagueInfo.vue'
+import LeagueSeasons from 'src/components/leagues/LeagueSeasons.vue'
 export default {
-  data () {
-    return {
-      leagueImage: '',
-      openURL: openURL
-    }
-  },
+  components: { LeagueInfo, LeagueSeasons },
   created () {
-    if (!this.league) this.$store.dispatch('data/getLeagues')
+    // fetch the extra information for this league (seasons and events).
+    if (!this.league) { this.leagueWatcher = this.$watch('league', this.leagueDispatch, { immediate: true }) } else this.leagueDispatch()
   },
   computed: {
     league () {
       return this.$store.getters['data/league'](this.$route.params.league)
-    }
-  },
-  mounted () {
-    if (this.league) this.imageSource()
-  },
-  watch: {
-    league () {
-      if (this.league) this.imageSource()
+    },
+    leagueSeasons () {
+      return this.$store.getters[`${this.league.id}/seasons`] || []
     }
   },
   methods: {
-    imageSource () {
-      this.$firebase.leagueStorageRef().child(`${this.league.id}.png`)
-        .getDownloadURL()
-        .then(url => {
-          this.leagueImage = url
+    leagueDispatch () {
+      if (this.league) {
+        this.$store.dispatch('data/registerLeagueModule', this.league).then(() => {
+          // the module should be registered, so we can tell it to do shit.
+          this.$store.dispatch(`${this.league.id}/fetchLeague`, this.league.id)
         })
-        .catch(error => {
-          console.error(error.message)
-        })
+        if (this.leagueWatcher) { this.leagueWatcher() }
+      }
+    }
+  },
+  data () {
+    return {
+      leagueWatcher: null
     }
   }
 }

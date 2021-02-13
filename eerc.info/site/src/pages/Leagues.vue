@@ -20,9 +20,6 @@
 import leagueItem from 'src/components/leagues/leagueItem.vue'
 export default {
   components: { leagueItem },
-  created () {
-    this.$store.dispatch('data/getLeagues')
-  },
   computed: {
     leagues () {
       return this.$store.getters['data/leagues']

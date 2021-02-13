@@ -10,3 +10,14 @@ export const collectionRefWithFieldCheck = (collectionName, field, value) => {
     .collection(collectionName)
     .where(field, '==', value)
 }
+
+export const leagueDocRef = (leagueId) => {
+  return firestore().collection('leagues').doc(leagueId)
+}
+
+export const leagueCollectionRef = (leagueId, collectionName) => {
+  return firestore()
+    .collection('leagues')
+    .doc(leagueId)
+    .collection(collectionName)
+}
