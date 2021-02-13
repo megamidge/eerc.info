@@ -5,7 +5,7 @@
   },
   "hosting": [
     {
-      "site": "eerc-info",
+      "target": "production",
       "public": "dist/spa",
       "ignore": [
         "firebase.json",
@@ -20,7 +20,7 @@
       ]
     },
     {
-      "site": "eerc-info-beta",
+      "target": "beta",
       "public": "dist/spa",
       "ignore": [
         "firebase.json",
