@@ -1,8 +1,8 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
+  <q-layout view="lHh Lpr lff">
     <q-header elevated>
-      <q-toolbar>
-        <q-img src="/logos/logo_dark.svg" :ratio="1 / 1" class="logo q-ma-md" style="cursor:pointer;" @click="$router.push('/')"/>
+      <q-toolbar v-if="!$q.platform.is.mobile || !$q.screen.xs">
+        <q-img src="/logos/logo_dark.svg" :ratio="1 / 1" class="logo mobile" style="cursor:pointer;" @click="$router.push('/')"/>
         <q-btn
           v-for="headerLink in headerLinks"
           :key="headerLink.label"
@@ -14,11 +14,45 @@
         <q-space/>
         <q-btn icon="mdi-discord" @click="openURL(socials.discord)" flat label="Join our Discord!"/>
       </q-toolbar>
+      <q-toolbar elevated v-else>
+        <q-img src="/logos/logo_dark.svg" :ratio="1 / 1" class="logo mobile" style="cursor:pointer;" @click="$router.push('/')"/>
+        <q-space/>
+        <q-btn icon="mdi-menu" @click="drawer = true" flat padding="0"/>
+      </q-toolbar>
     </q-header>
 
     <q-page-container class="page-container">
       <router-view />
     </q-page-container>
+
+    <q-drawer v-model="drawer" v-if="$q.screen.xs" side="right" elevated content-class="flex flex-center bg-primary">
+      <q-list separator class="self-stretch justify-center">
+        <q-item
+          v-for="headerLink in headerLinks"
+          :key="headerLink.label"
+          :to="headerLink.link"
+          class="text-h2 text-bold"
+          active-class="text-accent"
+          exact
+        >
+          <q-item-label class="text-right fit">
+            {{ headerLink.label }}
+          </q-item-label>
+        </q-item>
+        <q-item class="text-h4 text-bold text-left"
+        clickable
+        @click="openURL(socials.discord)">
+          <q-item-section>
+            <q-item-label>
+              Discord
+            </q-item-label>
+          </q-item-section>
+          <q-item-section avatar>
+            <q-icon name="mdi-discord" size="2.4rem"/>
+          </q-item-section>
+        </q-item>
+      </q-list>
+    </q-drawer>
 
     <q-footer>
       <q-toolbar>
@@ -62,12 +96,13 @@ export default {
   name: 'MainLayout',
   data () {
     return {
+      drawer: false,
       openURL: openURL,
       socials: {
         discord: 'https://discord.gg/sZ8N33xPGf',
         twitter: 'https://twitter.com/EERC_Official',
-        instagram: 'https://www.instagram.com/eerc_official/',
-        youtube: 'https://www.youtube.com/channel/UC4kk8xdkgP1arwEgD7G4Nlw?sub_confirmation=1'
+        instagram: 'https://instagram.com/eerc_official/',
+        youtube: 'https://youtube.com/channel/UC4kk8xdkgP1arwEgD7G4Nlw?sub_confirmation=1'
       },
       headerLinks: [
         {
@@ -95,6 +130,10 @@ export default {
 .logo {
   max-height: 5rem;
   max-width: 5rem;
+  &.mobile {
+    max-height: 2rem;
+    max-width:2rem;
+  }
 }
 .page-container {
   background: linear-gradient(rgba(18,18,18, 0.65), rgba(18,18,18, 0.65)),
