@@ -1,7 +1,7 @@
 <template>
 <div class="q-py-md q-px-xs-none q-px-sm-md " style="cursor:pointer;" @click="$router.push(`/Leagues/${league.id}`)">
     <q-card class="full-height bg-secondary">
-        <q-card-section class="text-subtitle1 text-center">
+        <q-card-section class="text-subtitle1 text-center ellipsis">
             {{league.name}}
         </q-card-section>
         <q-card-section class="bg-dark">

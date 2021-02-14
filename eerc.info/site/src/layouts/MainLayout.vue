@@ -2,7 +2,7 @@
   <q-layout view="lHh Lpr lff">
     <q-header elevated>
       <q-toolbar v-if="!$q.platform.is.mobile && !$q.screen.xs">
-        <q-img src="/logos/logo_dark.svg" :ratio="1 / 1" class="logo mobile" style="cursor:pointer;" @click="$router.push('/')"/>
+        <q-img src="/logos/logo_dark.svg" :ratio="1 / 1" class="logo q-ma-md" style="cursor:pointer;" @click="$router.push('/')"/>
         <q-btn
           v-for="headerLink in headerLinks"
           :key="headerLink.label"
@@ -140,6 +140,22 @@ export default {
     max-width:2rem;
   }
 }
+
+@media screen and (min-width: $breakpoint-lg-min) {
+    %max-width {
+      margin: 0 auto;
+      max-width: $breakpoint-lg;
+    }
+    .q-page{
+      @extend %max-width;
+    }
+    .q-header, .q-footer{
+      .q-toolbar {
+        @extend %max-width;
+      }
+    }
+}
+
 .page-container {
   background: linear-gradient(rgba(18,18,18, 0.65), rgba(18,18,18, 0.65)),
     url('/images/background/eerc_background.png') no-repeat fixed,

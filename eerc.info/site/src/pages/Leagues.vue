@@ -8,7 +8,7 @@
           </q-card-section>
           <q-card-section class="row wrap items-stretch">
             <!-- League items here -->
-            <league-item v-for="league in leagues" :key="league.id" :league="league" class="col-xs-12 col-sm-4 col-md-3 col-lg-2 col-xl-1"/>
+            <league-item v-for="league in leagues" :key="league.id" :league="league" class="col-xs-12 col-sm-6 col-md-3 col-lg-2 col-xl-2"/>
           </q-card-section>
         </q-card>
       </div>
