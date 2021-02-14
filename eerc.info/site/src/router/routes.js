@@ -8,7 +8,13 @@ const routes = [
       { path: 'Gallery', component: () => import('pages/Gallery.vue') },
       { path: 'About', component: () => import('pages/About.vue') },
       { path: 'Leagues', component: () => import('pages/Leagues.vue') },
-      { path: 'Leagues/:league', component: () => import('pages/League.vue') }
+      {
+        path: 'Leagues/:league',
+        component: () => import('pages/League.vue'),
+        children: [
+          { path: ':season/:event/results', component: () => import('components/leagues/seasons/Results.vue') }
+        ]
+      }
     ]
   },
 

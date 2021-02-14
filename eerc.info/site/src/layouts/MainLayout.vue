@@ -72,14 +72,17 @@
             <small>Help fund EERC, donate with PayPal.</small>
             <small>Donations ensure EERC can continue to serve it's community and host events.</small>
           </div>
-          <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" class="q-py-md">
-            <!-- <img alt border="0" src="https://www.paypal.com/en_GB/i/scr/pixel.gif" width="1" height="1" /> -->
+          <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="top" class="q-py-md">
             <input type="hidden" name="cmd" value="_s-xclick" />
             <input type="hidden" name="hosted_button_id" value="WT96RWAPDAZ8S" />
-            <!-- <input type="image" src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" /> -->
             <q-btn label="Donate" type="submit" icon="mdi-charity" color="accent" class="text-bold text-h6" padding="sm"/>
           </form>
-          </div>
+        </div>
+      </q-toolbar>
+      <q-toolbar class="row fill justify-center">
+        <q-space v-if="!$q.platform.is.mobile && !$q.screen.xs"/>
+        <q-icon name="img:/icons/flag/1.png" class="q-mr-sm"/>
+        <div class="flagsAttribute text-italic text-caption">Icons made by <a class="text-bold" target="_blank" href="https://www.freepik.com" title="Freepik">Freepik</a> from <a class="text-bold" target="_blank" href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
       </q-toolbar>
       <q-toolbar class="bg-black">
         Primary<q-icon color="primary" name="mdi-circle"/>,
@@ -162,5 +165,18 @@ export default {
   rgb(18,18,18);
   background-position:center top;
   background-size:150%;
+}
+
+.flagsAttribute {
+  a {
+    color: unset;
+    text-decoration: none;
+  }
+  a:visited {
+    color: unset;
+  }
+  a:hover {
+    // color: var(--text-hover);
+  }
 }
 </style>

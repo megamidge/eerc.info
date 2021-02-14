@@ -1,7 +1,7 @@
 <template>
   <q-page class="column" v-if="league">
       <league-info :league="league" :seasons="leagueSeasons.length"/>
-      <league-seasons :seasons="leagueSeasons" v-if="leagueSeasons.length > 0"/>
+      <league-seasons :seasons="leagueSeasons" :leagueId="league.id" v-if="leagueSeasons.length > 0"/>
   </q-page>
   <q-page v-else class="flex flex-center">
       <q-spinner size="25vw" />
@@ -9,8 +9,8 @@
 </template>
 
 <script>
-import LeagueInfo from 'src/components/leagues/LeagueInfo.vue'
-import LeagueSeasons from 'src/components/leagues/LeagueSeasons.vue'
+import LeagueInfo from 'components/leagues/LeagueInfo.vue'
+import LeagueSeasons from 'components/leagues/LeagueSeasons.vue'
 export default {
   components: { LeagueInfo, LeagueSeasons },
   created () {

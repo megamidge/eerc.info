@@ -1,10 +1,6 @@
 <template>
 <q-card class="q-ma-md q-pa-none">
     <q-card-section class="q-pa-none">
-        <!-- <q-tabs
-        v-model="seasonTab">
-            <q-tab v-for="season in seasons" :key="season.id" :name="season.id" :label="season.id"/>
-        </q-tabs> -->
         <q-carousel
             v-model="seasonTab"
             arrows
@@ -13,17 +9,17 @@
             height="4rem"
             class="q-ma-none text-center bg-accent rounded-top-border"
         >
-            <q-carousel-slide :name="seasonTab">
-                <p class="q-ma-none text-h5 text-uppercase">{{ seasonTab }}</p>
-            </q-carousel-slide>
+          <q-carousel-slide v-for="season in seasons" :key="season.id" :name="season.id">
+              <p class="q-ma-none text-h5 text-uppercase">{{ season.id }}</p>
+          </q-carousel-slide>
         </q-carousel>
         <q-tab-panels
             v-model="seasonTab"
             animated
         >
-            <q-tab-panel v-for="season in seasons" :key="season.id" :name="season.id" class="q-py-none q-px-none">
-                <league-season :season="season"/>
-            </q-tab-panel>
+          <q-tab-panel v-for="season in seasons" :key="season.id" :name="season.id" class="q-py-none q-px-none">
+              <league-season :season="season" :leagueId="leagueId"/>
+          </q-tab-panel>
         </q-tab-panels>
     </q-card-section>
 </q-card>
@@ -34,6 +30,10 @@ import LeagueSeason from './LeagueSeason.vue'
 export default {
   components: { LeagueSeason },
   props: {
+    leagueId: {
+      type: String,
+      default: () => ''
+    },
     seasons: {
       type: Array,
       default: () => []

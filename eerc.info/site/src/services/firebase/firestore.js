@@ -16,8 +16,25 @@ export const leagueDocRef = (leagueId) => {
 }
 
 export const leagueCollectionRef = (leagueId, collectionName) => {
-  return firestore()
-    .collection('leagues')
-    .doc(leagueId)
+  return leagueDocRef(leagueId)
     .collection(collectionName)
+}
+
+export const leagueSeasonRef = (leagueId, seasonId) => {
+  return leagueDocRef(leagueId).collection('seasons').doc(seasonId)
+}
+export const leagueSeasonEventsRef = (leagueId, seasonId) => {
+  return leagueSeasonRef(leagueId, seasonId).collection('events')
+}
+
+export const leagueSeasonEventRef = (leagueId, seasonId, eventId) => {
+  return leagueSeasonRef(leagueId, seasonId).collection('events').doc(eventId)
+}
+
+export const leagueSeasonEventSessionsRef = (leagueId, seasonId, eventId, collection) => {
+  return leagueSeasonEventRef(leagueId, seasonId, eventId).collection(collection)
+}
+
+export const leagueSeasonEventSessionResultsRef = (leagueId, seasonId, eventId, sessionId, sessionsCollectionName) => {
+  return leagueSeasonEventSessionsRef(leagueId, seasonId, eventId, sessionsCollectionName).doc(sessionId).collection('results')
 }

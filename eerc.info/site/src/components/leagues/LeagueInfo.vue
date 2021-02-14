@@ -43,7 +43,6 @@ export default {
   },
   mounted () {
     this.imageSource()
-    console.log(this.$q.screen)
   },
   methods: {
     imageSource () {

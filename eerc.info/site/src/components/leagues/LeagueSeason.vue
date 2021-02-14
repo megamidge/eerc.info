@@ -13,22 +13,29 @@
         This would show the full season results (names/teams in order of classification, points accrued. Any other info i guess.)
 
     </q-card-section>
-    <q-card-section>
-        A display of each event will go here.
-        Perhaps if the event has results, the top 3 finishers can me shown on each event too.
-        Probably as tiles.
-        Each event can then be clicked on to view more info (if applicable) or its results.
-        This could be a dialogue or new page. Either way, being able to link to it would be nice.
+    <q-card-section class="row wrap">
+      <season-event v-for="event in events" :key="event.id" :event="event" :leagueId="leagueId" :seasonId="season.id" class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4"/>
     </q-card-section>
 </q-card>
 </template>
 
 <script>
+import SeasonEvent from './seasons/SeasonEvent.vue'
 export default {
+  components: { SeasonEvent },
   props: {
+    leagueId: {
+      type: String,
+      default: () => ''
+    },
     season: {
       type: Object,
       default: () => {}
+    }
+  },
+  computed: {
+    events () {
+      return this.$store.getters[`${this.leagueId}/${this.season.id}/seasonEvents`]
     }
   }
 }
