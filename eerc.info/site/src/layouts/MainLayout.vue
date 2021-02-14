@@ -55,25 +55,30 @@
     </q-drawer>
 
     <q-footer>
-      <q-toolbar>
+      <q-toolbar :class="{ 'column': $q.platform.is.mobile || $q.screen.xs}">
         <q-toolbar-title>
           <p class="text-caption q-ma-none">European Electronic Racing Community</p>
         </q-toolbar-title>
-        <q-btn icon="mdi-discord" @click="openURL(socials.discord)" flat/>
-        <q-btn icon="mdi-twitter" @click="openURL(socials.twitter)" flat/>
-        <q-btn icon="mdi-instagram" @click="openURL(socials.instagram)" flat/>
-        <q-btn icon="mdi-youtube" @click="openURL(socials.youtube)" flat/>
+        <div>
+          <q-btn icon="mdi-discord" @click="openURL(socials.discord)" flat/>
+          <q-btn icon="mdi-twitter" @click="openURL(socials.twitter)" flat/>
+          <q-btn icon="mdi-instagram" @click="openURL(socials.instagram)" flat/>
+          <q-btn icon="mdi-youtube" @click="openURL(socials.youtube)" flat/>
+        </div>
       </q-toolbar>
-      <q-toolbar class="flex-center">
-        <div class="paypal column justify-center items-center">
-          <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-            <img alt border="0" src="https://www.paypal.com/en_GB/i/scr/pixel.gif" width="1" height="1" />
+      <q-toolbar class="row fill">
+        <div class="row items-center full-width" :class="$q.platform.is.mobile || $q.screen.xs ? 'justify-center text-center' : 'justify-between'">
+          <div class="column q-py-md">
+            <small>Help fund EERC, donate with PayPal.</small>
+            <small>Donations ensure EERC can continue to serve it's community and host events.</small>
+          </div>
+          <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" class="q-py-md">
+            <!-- <img alt border="0" src="https://www.paypal.com/en_GB/i/scr/pixel.gif" width="1" height="1" /> -->
             <input type="hidden" name="cmd" value="_s-xclick" />
             <input type="hidden" name="hosted_button_id" value="WT96RWAPDAZ8S" />
-            <input type="image" src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
+            <!-- <input type="image" src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" /> -->
+            <q-btn label="Donate" type="submit" icon="mdi-charity" color="accent" class="text-bold text-h6" padding="sm"/>
           </form>
-          <small>Help fund the league by donating via PayPal</small>
-          <small>Donators may be entered into exclusive prize draws and more</small>
           </div>
       </q-toolbar>
       <q-toolbar class="bg-black">
