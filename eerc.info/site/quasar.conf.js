@@ -89,7 +89,7 @@ module.exports = function (/* ctx */) {
     framework: {
       iconSet: 'mdi-v5', // Quasar icon set
       lang: 'en-gb', // Quasar language pack
-
+      cssAddon: true,
       config: {
         notify: {
           position: 'bottom-middle',

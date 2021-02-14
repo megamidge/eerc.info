@@ -1,9 +1,9 @@
 <template>
-  <q-card class="row no-wrap q-ma-md">
-        <q-card-section class="q-pa-md col-3 flex flex-center">
+  <q-card class="no-wrap q-ma-md items-center" :class="$q.screen.width < $q.screen.sizes.sm ? 'column' : 'row'">
+        <q-card-section class="q-pa-md col-3 flex flex-center" style="min-width:8rem;max-width:12rem">
             <q-img :src="leagueImage" :ratio="1" contain/>
         </q-card-section>
-        <q-card-section class="column items-start col-9">
+        <q-card-section class="column items-start col">
             <p class="q-ma-none q-mb-xs text-h6">{{ league.name }}</p>
             <p class="q-ma-none text-body2 text-weight-light">{{ league.description }}</p>
             <q-btn color="accent" label="Join" class="full-width q-my-md" @click="openURL(league.signupLink)"/>
@@ -43,6 +43,7 @@ export default {
   },
   mounted () {
     this.imageSource()
+    console.log(this.$q.screen)
   },
   methods: {
     imageSource () {

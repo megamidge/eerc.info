@@ -17,9 +17,9 @@
 </template>
 
 <script>
-import leagueItem from 'src/components/leagues/leagueItem.vue'
+import LeagueItem from 'components/leagues/LeagueItem.vue'
 export default {
-  components: { leagueItem },
+  components: { LeagueItem },
   computed: {
     leagues () {
       return this.$store.getters['data/leagues']

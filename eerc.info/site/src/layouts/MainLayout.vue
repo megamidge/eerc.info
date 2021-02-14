@@ -1,7 +1,7 @@
 <template>
   <q-layout view="lHh Lpr lff">
     <q-header elevated>
-      <q-toolbar v-if="!$q.platform.is.mobile || !$q.screen.xs">
+      <q-toolbar v-if="!$q.platform.is.mobile && !$q.screen.xs">
         <q-img src="/logos/logo_dark.svg" :ratio="1 / 1" class="logo mobile" style="cursor:pointer;" @click="$router.push('/')"/>
         <q-btn
           v-for="headerLink in headerLinks"
@@ -25,7 +25,7 @@
       <router-view />
     </q-page-container>
 
-    <q-drawer v-model="drawer" v-if="$q.screen.xs" side="right" elevated content-class="flex flex-center bg-primary">
+    <q-drawer v-model="drawer" v-if="$q.platform.is.mobile || $q.screen.xs" side="right" elevated content-class="flex flex-center bg-primary">
       <q-list separator class="self-stretch justify-center">
         <q-item
           v-for="headerLink in headerLinks"
