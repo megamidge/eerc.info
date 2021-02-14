@@ -23,11 +23,13 @@
             <q-icon name="mdi-trophy-variant" color="blue-grey-8" size="2rem"/>
             <p class="ellipsis q-ma-none q-mr-sm q-pr-xs text-h6 text-grey-5 text-uppercase text-bold text-italic">{{results[1].driver.name}}</p>
             <q-icon :name="`img:/icons/flag/${results[1].driver.countryCode}.svg`" size="1rem"/>
+            <p class="q-ma-none q-ml-sm text-h6 text-italic text-grey-4 text-weight-light">+{{formatTime(timeDiff(results[0].time, results[1].time))}}</p>
           </div>
           <div class="row items-center no-wrap">
             <q-icon name="mdi-trophy-variant" color="brown-8" size="2rem"/>
             <p class="ellipsis q-ma-none q-mr-sm q-pr-xs text-grey-7 text-uppercase text-bold text-italic">{{results[2].driver.name}}</p>
             <q-icon :name="`img:/icons/flag/${results[2].driver.countryCode}.svg`" size="0.8rem"/>
+            <p class="q-ma-none q-ml-sm text-h6 text-italic text-grey-4 text-weight-light">+{{formatTime(timeDiff(results[0].time, results[2].time))}}</p>
           </div>
           <q-btn label="View Full Results" flat padding="sm" class="text-left text-italic text-caption self-start" :to="`/Leagues/${leagueId}/${seasonId}/${event.id}/results`"/>
             <router-view/>
@@ -94,6 +96,26 @@ export default {
     this.imageSource()
   },
   methods: {
+    formatTime (millis) {
+      var milliseconds = parseInt((millis % 1000)),
+        seconds = Math.floor((millis / 1000) % 60),
+        minutes = Math.floor((millis / (1000 * 60)) % 60),
+        hours = Math.floor((millis / (1000 * 60 * 60)) % 24)
+
+      hours = (hours < 10) ? '0' + hours : hours
+      minutes = (minutes < 10) ? '0' + minutes : minutes
+      seconds = (seconds < 10) ? '0' + seconds : seconds
+      if (hours > 0) {
+        return hours + ':' + minutes + ':' + seconds + '.' + milliseconds
+      } else if (minutes > 0) {
+        return minutes + ':' + seconds + '.' + milliseconds
+      } else {
+        return seconds + '.' + milliseconds
+      }
+    },
+    timeDiff (timeA, timeB) {
+      return timeB - timeA
+    },
     imageSource () {
       this.$firebase.leagueStorageRef().child(`${this.event.image}`)
         .getDownloadURL()

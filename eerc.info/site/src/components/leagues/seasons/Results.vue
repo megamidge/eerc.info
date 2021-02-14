@@ -1,19 +1,19 @@
 <template>
 <q-dialog value  @before-hide="goBack">
-    <q-card class="result-card">
-        <q-card-section class="bg-primary">
-            <div class="row justify-between items-center">
-                <div class="row">
-                    <p class="q-ma-none text-h3 text-bold" style="opacity:0.6">{{ eventId }}</p>
-                    <p class="q-ma-none q-ml-md text-h3 text-bold">Results</p>
-                </div>
-                <div class="row items-center">
-                    <div class="column justify-end text-right">
-                        <p class="q-ma-none text-h6 text-uppercase">{{event.location.region}}</p>
-                        <p class="q-ma-none text-subtitle1">{{event.location.country}}</p>
-                    </div>
-                    <q-icon name="img:/icons/flag/monaco.svg" size="2.8rem" class="q-ml-sm"/>
+  <q-card class="result-card">
+      <q-card-section class="bg-primary">
+        <div class="row justify-between items-center">
+          <div class="row items-center">
+            <p class="q-ma-none text-h3 text-bold" style="opacity:0.6">{{ eventId }}</p>
+            <q-icon name="img:/icons/flag/monaco.svg" size="2.8rem" class="q-mx-sm"/>
+            <div class="column justify-end text-left">
+              <p class="q-ma-none text-h6 text-uppercase">{{event.location.region}}</p>
+              <p class="q-ma-none text-subtitle1">{{event.location.country}}</p>
             </div>
+          </div>
+          <div class="row items-center">
+            <q-btn v-close-popup icon="mdi-close" size="1.2rem" round flat/>
+          </div>
         </div>
         </q-card-section>
         <q-card-section class="q-pa-none">
