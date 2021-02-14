@@ -6,7 +6,7 @@
         <q-card-section class="column items-start col-9">
             <p class="q-ma-none q-mb-xs text-h6">{{ league.name }}</p>
             <p class="q-ma-none text-body2 text-weight-light">{{ league.description }}</p>
-            <q-btn color="accent" label="Take part" class="full-width q-my-md" @click="openURL(league.signupLink)"/>
+            <q-btn color="accent" label="Join" class="full-width q-my-md" @click="openURL(league.signupLink)"/>
             <q-space/>
             <div class="row no-wrap justify-between self-stretch">
                 <div class="row items-center">
