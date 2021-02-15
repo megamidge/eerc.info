@@ -1,6 +1,6 @@
 <template>
   <q-layout view="lHh Lpr lff">
-    <q-header elevated>
+    <q-header elevated reveal>
       <q-toolbar v-if="!$q.platform.is.mobile && !$q.screen.xs">
         <q-img src="/logos/logo_dark.svg" :ratio="1 / 1" class="logo q-ma-md" style="cursor:pointer;" @click="$router.push('/')"/>
         <q-btn
