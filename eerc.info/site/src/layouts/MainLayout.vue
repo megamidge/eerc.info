@@ -25,13 +25,13 @@
       <router-view />
     </q-page-container>
 
-    <q-drawer v-model="drawer" v-if="$q.platform.is.mobile || $q.screen.xs" side="right" elevated content-class="flex flex-center bg-primary">
-      <q-list separator class="self-stretch justify-center">
+    <q-drawer v-model="drawer" v-if="$q.platform.is.mobile || $q.screen.xs" side="right" elevated content-class="column items-stretch justify-center q-pa-md bg-primary">
+      <q-list separator class="self-stretch justify-center full-height column">
         <q-item
           v-for="headerLink in headerLinks"
           :key="headerLink.label"
           :to="headerLink.link"
-          class="text-h2 text-bold"
+          class="text-h4 text-bold"
           active-class="text-accent"
           exact
         >
@@ -39,6 +39,7 @@
             {{ headerLink.label }}
           </q-item-label>
         </q-item>
+        <q-space/>
         <q-item class="text-h4 text-bold text-left"
         clickable
         @click="openURL(socials.discord)">
@@ -88,14 +89,14 @@
         {{ $q.screen.name }}
       </q-toolbar>
       <q-toolbar class="bg-black">
-        Primary<q-icon color="primary" name="mdi-circle"/>,
-        Secondary<q-icon color="secondary" name="mdi-circle"/>,
-        Accent<q-icon color="accent" name="mdi-circle"/>,
-        Dark<q-icon color="dark" name="mdi-circle"/>,
-        Positive<q-icon color="positive" name="mdi-circle"/>,
-        Negative<q-icon color="negative" name="mdi-circle"/>,
-        Info<q-icon color="info" name="mdi-circle"/>,
-        Warning<q-icon color="warning" name="mdi-circle"/>
+        <q-icon color="primary" name="mdi-circle"/>
+        <q-icon color="secondary" name="mdi-circle"/>
+        <q-icon color="accent" name="mdi-circle"/>
+        <q-icon color="dark" name="mdi-circle"/>
+        <q-icon color="positive" name="mdi-circle"/>
+        <q-icon color="negative" name="mdi-circle"/>
+        <q-icon color="info" name="mdi-circle"/>
+        <q-icon color="warning" name="mdi-circle"/>
       </q-toolbar>
     </q-footer>
   </q-layout>
