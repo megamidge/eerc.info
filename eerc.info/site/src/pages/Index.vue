@@ -5,7 +5,7 @@
       navigation
       infinite
       swipeable
-
+      autoplay
       arrows
       style="max-width:100vw; height:92vh;"
     >
