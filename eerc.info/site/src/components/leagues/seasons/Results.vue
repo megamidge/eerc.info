@@ -2,13 +2,13 @@
 <q-dialog value  @before-hide="goBack">
   <q-card class="result-card">
       <q-card-section class="bg-primary">
-        <div class="row justify-between items-center">
-          <div class="row items-center">
+        <div class="row no-wrap justify-between items-center">
+          <div class="row no-wrap items-center">
             <p class="q-ma-none text-h3 text-bold" style="opacity:0.6">{{ eventId }}</p>
             <q-icon name="img:/icons/flag/monaco.svg" size="2.8rem" class="q-mx-sm"/>
             <div class="column justify-end text-left">
-              <p class="q-ma-none text-h6 text-uppercase">{{event.location.region}}</p>
-              <p class="q-ma-none text-subtitle1">{{event.location.country}}</p>
+              <p class="q-ma-none text-h6 text-uppercase ellipsis">{{event.location.region}}</p>
+              <p class="q-ma-none text-subtitle1 ellipsis">{{event.location.country}}</p>
             </div>
           </div>
           <div class="row items-center">
@@ -45,29 +45,35 @@
                             :pagination="tables.rallyStageTable.pagination"
                             :data="results.find(r=>r.id===session.id).results"
                             square
+                            :ref="`table_${session.id}`"
                             class="bg-secondary"
+                            dense
+                            :visible-columns="narrowWindow ? [] : tables.rallyStageTable.columns.map(c=>c.name)"
                         >
                             <template v-slot:header="props">
-                                <q-tr :props="props" class="bg-accent squared-borders">
-                                    <q-th v-for="col in props.cols" :key="col.name" :props="props" class="text-bold text-uppercase">
+                                <q-tr :props="props" class="bg-accent">
+                                    <q-th auto-width v-for="col in props.cols" :key="col.name" :props="props" class="text-bold text-uppercase">
                                         {{ col.label }}
                                     </q-th>
                                 </q-tr>
                             </template>
-                            <template v-slot:body-cell-flag="props">
-                                <q-td :props="props" auto-width :class="{'tinted':props.rowIndex % 2 === 0}">
-                                    <q-icon :name="`img:/icons/flag/${props.value}.svg`"/>
+                            <template v-slot:body="props">
+                              <q-tr :props="props" :class="{'tinted':props.rowIndex % 2 === 0}">
+                                <q-td :props="props" v-for="col in props.cols" :key="col.name" auto-width>
+                                  <template v-if="col.name==='name'">
+                                    <div class="row no-wrap items-center">
+                                      <q-icon class="q-mr-xs" :name="`img:/icons/flag/${props.row.driver.countryCode}.svg`"/>
+                                      {{ col.value }}
+                                    </div>
+                                  </template>
+                                  <template v-else-if="col.name==='position'">
+                                    {{ props.rowIndex+1 }}
+                                  </template>
+                                  <template v-else>
+                                    {{col.value}}
+                                  </template>
                                 </q-td>
-                            </template>
-                            <template v-slot:body-cell-position="props">
-                                <q-td :props="props" auto-width :class="{'tinted':props.rowIndex % 2 === 0}">
-                                    {{props.rowIndex + 1}}
-                                </q-td>
-                            </template>
-                            <template v-slot:body-cell="props">
-                                <q-td :props="props" :class="{'tinted':props.rowIndex % 2 === 0}">
-                                    {{props.value}}
-                                </q-td>
+                              </q-tr>
                             </template>
                         </q-table>
                     </q-tab-panel>
@@ -78,6 +84,7 @@
                             :data="compoundResults"
                             square
                             class="bg-secondary"
+                            :visible-columns="narrowWindow ? [] : tables.rallyStageTable.columns.map(c=>c.name)"
                         >
                             <template v-slot:header="props">
                                 <q-tr :props="props" class="bg-accent squared-borders">
@@ -111,7 +118,7 @@
 </template>
 
 <script>
-// import { date as dateUtils } from 'quasar'
+import { extend } from 'quasar'
 export default {
   data () {
     return {
@@ -126,47 +133,49 @@ export default {
           columns: [
             {
               name: 'position',
-              align: 'left'
-            },
-            {
-              name: 'flag',
+              label: 'Pos.',
               align: 'left',
-              field: row => row.driver.countryCode
+              required: true
             },
             {
               name: 'name',
               label: 'Driver',
               field: row => row.driver.name,
               required: true,
-              align: 'left'
+              align: 'left',
+              classes: 'ellipsis'
             },
             {
               name: 'vehicle',
               label: 'Vehicle',
               field: 'vehicle',
-              required: true,
+              required: false,
               align: 'left'
             },
             {
               name: 'time',
-              label: 'Stage Time',
+              label: 'Event Time',
               field: 'time',
               required: true,
               align: 'left',
               sortable: true,
               sort: (a, b, rowA, rowB) => rowA.time - rowB.time,
               descending: true,
-              format: (val) => {
-                var milliseconds = parseInt((val % 1000)),
-                  seconds = Math.floor((val / 1000) % 60),
-                  minutes = Math.floor((val / (1000 * 60)) % 60),
-                  hours = Math.floor((val / (1000 * 60 * 60)) % 24)
-
-                hours = (hours < 10) ? '0' + hours : hours
-                minutes = (minutes < 10) ? '0' + minutes : minutes
-                seconds = (seconds < 10) ? '0' + seconds : seconds
-
-                return hours + ':' + minutes + ':' + seconds + '.' + milliseconds
+              format: (val) => this.formatTime(val)
+            },
+            {
+              name: 'total-time-difference',
+              label: 'Diff.',
+              required: true,
+              align: 'left',
+              field: row => {
+                const resultSet = this.compoundResults
+                const emptyArr = []
+                const rowsCopy = extend(true, emptyArr, resultSet)
+                const firstRow = rowsCopy.sort((a, b) => this.getRowTotalTime(a) - this.getRowTotalTime(b))[0]
+                if (row.driver.name === firstRow.driver.name) return 'Interval'
+                const time = this.formatTime(this.getRowTotalTime(row) - this.getRowTotalTime(firstRow), { stripHours: true })
+                return `+ ${time}`
               }
             }
           ]
@@ -180,25 +189,23 @@ export default {
           columns: [
             {
               name: 'position',
-              align: 'left'
-            },
-            {
-              name: 'flag',
+              label: 'Pos.',
               align: 'left',
-              field: row => row.driver.countryCode
+              required: true
             },
             {
               name: 'name',
               label: 'Driver',
               field: row => row.driver.name,
               required: true,
-              align: 'left'
+              align: 'left',
+              classes: 'ellipsis'
             },
             {
               name: 'vehicle',
               label: 'Vehicle',
               field: 'vehicle',
-              required: true,
+              required: false,
               align: 'left'
             },
             {
@@ -210,49 +217,51 @@ export default {
               sortable: true,
               sort: (a, b, rowA, rowB) => rowA.time - rowB.time,
               descending: true,
-              format: (val) => {
-                var milliseconds = parseInt((val % 1000)),
-                  seconds = Math.floor((val / 1000) % 60),
-                  minutes = Math.floor((val / (1000 * 60)) % 60),
-                  hours = Math.floor((val / (1000 * 60 * 60)) % 24)
-
-                hours = (hours < 10) ? '0' + hours : hours
-                minutes = (minutes < 10) ? '0' + minutes : minutes
-                seconds = (seconds < 10) ? '0' + seconds : seconds
-
-                return hours + ':' + minutes + ':' + seconds + '.' + milliseconds
+              format: (val) => this.formatTime(val)
+            },
+            {
+              name: 'time-difference',
+              label: 'Diff.',
+              align: 'left',
+              required: true,
+              field: row => {
+                const resultSet = this.results.find(r => r.id === this.resultsTab).results
+                const emptyArr = []
+                const rowsCopy = extend(true, emptyArr, resultSet)
+                const firstRow = rowsCopy.sort((a, b) => a.time - b.time)[0]
+                if (row.driver.name === firstRow.driver.name) return 'Interval'
+                const time = this.formatTime(row.time - firstRow.time, { stripHours: true })
+                return `+ ${time}`
               }
             },
             {
               name: 'total-time',
               label: 'Total Time',
-              field: row => {
-                var results = []
-                this.results.some(res => {
-                  var newRes = res.results.filter(r => r.driver.name.toLowerCase() === row.driver.name.toLowerCase())
-                  results.push(...newRes)
-                  if (res.id === this.resultsTab) return true
-                })
-
-                const reduced = results.reduce((total, current) => total + current.time, 0)
-                return reduced
-              },
-              required: true,
+              field: row => this.getRowTotalTime(row),
+              required: false,
               align: 'left',
               sortable: true,
-              sort: (a, b, rowA, rowB) => rowA.time - rowB.time,
+              sort: (a, b, rowA, rowB) => {
+                const totalTimeA = this.getRowTotalTime(rowA)
+                const totalTimeB = this.getRowTotalTime(rowB)
+                return totalTimeA - totalTimeB
+              },
               descending: true,
-              format: (val) => {
-                var milliseconds = parseInt((val % 1000)),
-                  seconds = Math.floor((val / 1000) % 60),
-                  minutes = Math.floor((val / (1000 * 60)) % 60),
-                  hours = Math.floor((val / (1000 * 60 * 60)) % 24)
-
-                hours = (hours < 10) ? '0' + hours : hours
-                minutes = (minutes < 10) ? '0' + minutes : minutes
-                seconds = (seconds < 10) ? '0' + seconds : seconds
-
-                return hours + ':' + minutes + ':' + seconds + '.' + milliseconds
+              format: (val) => this.formatTime(val)
+            },
+            {
+              name: 'total-time-difference',
+              label: 'Diff.',
+              required: false,
+              align: 'left',
+              field: row => {
+                const resultSet = this.results.find(r => r.id === this.resultsTab).results
+                const emptyArr = []
+                const rowsCopy = extend(true, emptyArr, resultSet)
+                const firstRow = rowsCopy.sort((a, b) => this.getRowTotalTime(a) - this.getRowTotalTime(b))[0]
+                if (row.driver.name === firstRow.driver.name) return 'Interval'
+                const time = this.formatTime(this.getRowTotalTime(row) - this.getRowTotalTime(firstRow), { stripHours: true })
+                return `+ ${time}`
               }
             }
           ]
@@ -261,6 +270,10 @@ export default {
     }
   },
   computed: {
+    narrowWindow () {
+      console.log(this.$q)
+      return this.$q.platform.is.mobile || this.$q.screen.width <= 770
+    },
     leagueId () {
       return this.$route.params.league
     },
@@ -313,6 +326,33 @@ export default {
   methods: {
     goBack () {
       this.$router.push(`/Leagues/${this.leagueId}/`)
+    },
+    // formats a millisecond timestamp as  hh:mm:ss:sss.
+    // strip object allows to omit hours, minutes, seconds from return value.
+    formatTime (val, strip = { stripHours: false, stripMinutes: false, stripSeconds: false }) {
+      var milliseconds = ('000' + parseInt((val % 1000))).slice(-3),
+        seconds = Math.floor((val / 1000) % 60),
+        minutes = Math.floor((val / (1000 * 60)) % 60),
+        hours = Math.floor((val / (1000 * 60 * 60)) % 24)
+
+      hours = (hours < 10) ? '0' + hours : hours
+      minutes = (minutes < 10) ? '0' + minutes : minutes
+      seconds = (seconds < 10) ? '0' + seconds : seconds
+      const hoursStr = strip.stripHours ? '' : `${hours}:`
+      const minuteStr = strip.stripMinutes ? '' : `${minutes}:`
+      const secondsStr = strip.stripSeconds ? '' : `${seconds}.`
+      return hoursStr + minuteStr + secondsStr + milliseconds
+    },
+    getRowTotalTime (row) {
+      var results = []
+      this.results.some(res => {
+        var newRes = res.results.filter(r => r.driver.name.toLowerCase() === row.driver.name.toLowerCase())
+        results.push(...newRes)
+        if (res.id === this.resultsTab) return true
+      })
+
+      const reduced = results.reduce((total, current) => total + current.time, 0)
+      return reduced
     }
   }
 }
@@ -325,5 +365,13 @@ export default {
 }
 .tinted {
     background:rgba(0,0,0,0.25)
+}
+</style>
+<style lang="scss">
+@media screen and (max-width:770px) {
+  .q-table td, .q-table th{
+      padding:1px !important;
+      max-width:75px;
+  }
 }
 </style>

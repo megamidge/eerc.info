@@ -84,6 +84,9 @@
         <q-icon name="img:/icons/flag/1.png" class="q-mr-sm"/>
         <div class="flagsAttribute text-italic text-caption">Icons made by <a class="text-bold" target="_blank" href="https://www.freepik.com" title="Freepik">Freepik</a> from <a class="text-bold" target="_blank" href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
       </q-toolbar>
+      <q-toolbar>
+        {{ $q.screen.name }}
+      </q-toolbar>
       <q-toolbar class="bg-black">
         Primary<q-icon color="primary" name="mdi-circle"/>,
         Secondary<q-icon color="secondary" name="mdi-circle"/>,
