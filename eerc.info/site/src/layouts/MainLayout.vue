@@ -12,7 +12,7 @@
           :to="headerLink.link"
         />
         <q-space/>
-        <q-btn icon="mdi-discord" @click="openURL(socials.discord)" flat label="Join our Discord!"/>
+        <q-btn icon="mdi-discord" @click="openURL(socials.discord)" flat :label="!$q.screen.sm ? 'Join our Discord!' : ''"/>
       </q-toolbar>
       <q-toolbar elevated v-else>
         <q-img src="/logos/logo_dark.svg" :ratio="1 / 1" class="logo mobile" style="cursor:pointer;" @click="$router.push('/')"/>
@@ -113,7 +113,7 @@ export default {
         discord: 'https://discord.gg/sZ8N33xPGf',
         twitter: 'https://twitter.com/EERC_Official',
         instagram: 'https://instagram.com/eerc_official/',
-        youtube: 'https://youtube.com/channel/UC4kk8xdkgP1arwEgD7G4Nlw?sub_confirmation=1'
+        youtube: 'https://youtube.com/c/EERCOfficial?sub_confirmation=1'
       },
       headerLinks: [
         {
