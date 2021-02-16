@@ -26,8 +26,15 @@
                 height="4rem"
                 class="q-ma-none text-center bg-accent"
             >
-                <q-carousel-slide v-for="session in sessions" :key="session.id" :name="session.id">
+                <q-carousel-slide v-for="session in sessions" :key="session.id" :name="session.id"
+                class="q-pa-sm column flex-center">
+                  <template v-if="!($q.platform.is.mobile || $q.screen.xs)">
                     <p class="q-ma-none text-h5 text-uppercase ellipsis">{{ session.id }} - {{ session.name }}</p>
+                  </template>
+                  <template v-else>
+                    <p class="q-ma-none text-subtitle1 text-uppercase ellipsis">{{ session.id }}</p>
+                    <p class="q-ma-none text-body2 text-uppercase ellipsis">{{ session.name }}</p>
+                  </template>
                 </q-carousel-slide>
                 <q-carousel-slide name="final">
                     <p class="q-ma-none text-h5 text-uppercase">Final</p>
