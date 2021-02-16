@@ -19,6 +19,10 @@
 <script>
 import LeagueItem from 'components/leagues/LeagueItem.vue'
 export default {
+  meta: {
+    title: 'Leagues',
+    titleTemplate: title => `${title} | EERC.INFO`
+  },
   components: { LeagueItem },
   computed: {
     leagues () {

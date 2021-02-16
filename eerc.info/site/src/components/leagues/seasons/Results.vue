@@ -129,6 +129,12 @@
 <script>
 import { extend } from 'quasar'
 export default {
+  meta () {
+    return {
+      title: `${this.leagueId} ${this.seasonId} ${this.event.name ? this.event.name : `Event ${this.eventId}`} ${this.resultsTab} Results`,
+      titleTemplate: title => `${title} | EERC.INFO`
+    }
+  },
   data () {
     return {
       resultsTab: 'final',
@@ -280,7 +286,6 @@ export default {
   },
   computed: {
     narrowWindow () {
-      console.log(this.$q)
       return this.$q.platform.is.mobile || this.$q.screen.width <= 770
     },
     leagueId () {

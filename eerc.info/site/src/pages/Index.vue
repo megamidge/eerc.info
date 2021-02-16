@@ -88,6 +88,10 @@
 import { openURL } from 'quasar'
 export default {
   name: 'PageIndex',
+  meta: {
+    title: 'Home',
+    titleTemplate: title => `${title} | EERC.INFO`
+  },
   data () {
     return {
       carousel: 1,

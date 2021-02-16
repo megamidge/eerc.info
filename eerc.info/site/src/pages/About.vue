@@ -5,6 +5,10 @@
 <script>
 export default {
 
+  meta: {
+    title: 'About',
+    titleTemplate: title => `${title} | EERC.INFO`
+  }
 }
 </script>
 

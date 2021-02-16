@@ -121,7 +121,7 @@ module.exports = function (/* ctx */) {
       // directives: [],
 
       // Quasar plugins
-      plugins: ['Notify']
+      plugins: ['Notify', 'Meta']
     },
 
     // animations: 'all', // --- includes all animations
@@ -138,13 +138,13 @@ module.exports = function (/* ctx */) {
       workboxPluginMode: 'GenerateSW', // 'GenerateSW' or 'InjectManifest'
       workboxOptions: {}, // only for GenerateSW
       manifest: {
-        name: 'EERC Website',
-        short_name: 'EERC Website',
-        description: 'EERC Frontend Website',
+        name: 'EERC.INFO',
+        short_name: 'EERC',
+        description: 'European Electronic Racing Community',
         display: 'standalone',
         orientation: 'portrait',
-        background_color: '#ffffff',
-        theme_color: '#027be3',
+        background_color: '#1e2429',
+        theme_color: '#35374f',
         icons: [
           {
             src: 'icons/icon-128x128.png',

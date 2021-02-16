@@ -12,6 +12,15 @@
 import LeagueInfo from 'components/leagues/LeagueInfo.vue'
 import LeagueSeasons from 'components/leagues/LeagueSeasons.vue'
 export default {
+  meta () {
+    return {
+      title: this.$route.params.league,
+      titleTemplate: title => `${title} | EERC.INFO`,
+      meta: {
+        description: { name: 'description', content: this.league ? this.league.description : 'League' }
+      }
+    }
+  },
   components: { LeagueInfo, LeagueSeasons },
   created () {
     // fetch the extra information for this league (seasons and events).
