@@ -1,6 +1,6 @@
 <template>
 <q-dialog value  @before-hide="goBack">
-  <q-card class="result-card">
+  <q-card class="result-card" >
       <q-card-section class="bg-primary">
         <div class="row no-wrap justify-between items-center">
           <div class="row no-wrap items-center">
@@ -16,7 +16,7 @@
           </div>
         </div>
         </q-card-section>
-        <q-card-section class="q-pa-none">
+        <q-card-section class="q-pa-none bg-secondary">
             <q-carousel
                 v-model="resultsTab"
                 arrows
@@ -29,7 +29,7 @@
                 <q-carousel-slide v-for="session in sessions" :key="session.id" :name="session.id">
                     <p class="q-ma-none text-h5 text-uppercase ellipsis">{{ session.id }} - {{ session.name }}</p>
                 </q-carousel-slide>
-                <q-carousel-slide name="full">
+                <q-carousel-slide name="final">
                     <p class="q-ma-none text-h5 text-uppercase">Final</p>
                 </q-carousel-slide>
             </q-carousel>
@@ -42,6 +42,7 @@
                     <q-tab-panel v-for="session in sessions" :key="session.id" :name="session.id" class="q-pa-none">
                         <q-table
                             :columns="tables.rallyStageTable.columns"
+                            :hide-pagination="true"
                             :pagination="tables.rallyStageTable.pagination"
                             :data="results.find(r=>r.id===session.id).results"
                             square
@@ -77,11 +78,13 @@
                             </template>
                         </q-table>
                     </q-tab-panel>
-                    <q-tab-panel name="full" class="q-pa-none">
+                    <q-tab-panel name="final" class="q-pa-none">
                         <q-table
                             :columns="tables.rallyFinalTable.columns"
+                            :hide-pagination="true"
                             :pagination="tables.rallyFinalTable.pagination"
                             :data="compoundResults"
+                            dense
                             square
                             class="bg-secondary"
                             :visible-columns="narrowWindow ? [] : tables.rallyStageTable.columns.map(c=>c.name)"
@@ -93,25 +96,31 @@
                                     </q-th>
                                 </q-tr>
                             </template>
-                            <template v-slot:body-cell-flag="props">
-                                <q-td :props="props" auto-width :class="{'tinted':props.rowIndex % 2 === 0}">
-                                    <q-icon :name="`img:/icons/flag/${props.value}.svg`"/>
+                            <template v-slot:body="props">
+                              <q-tr :props="props" :class="{'tinted':props.rowIndex % 2 === 0}">
+                                <q-td :props="props" v-for="col in props.cols" :key="col.name" auto-width>
+                                  <template v-if="col.name==='name'">
+                                    <div class="row no-wrap items-center">
+                                      <q-icon class="q-mr-xs" :name="`img:/icons/flag/${props.row.driver.countryCode}.svg`"/>
+                                      {{ col.value }}
+                                    </div>
+                                  </template>
+                                  <template v-else-if="col.name==='position'">
+                                    {{ props.rowIndex+1 }}
+                                  </template>
+                                  <template v-else>
+                                    {{col.value}}
+                                  </template>
                                 </q-td>
-                            </template>
-                            <template v-slot:body-cell-position="props">
-                                <q-td :props="props" auto-width :class="{'tinted':props.rowIndex % 2 === 0}">
-                                    {{props.rowIndex + 1}}
-                                </q-td>
-                            </template>
-                            <template v-slot:body-cell="props">
-                                <q-td :props="props" :class="{'tinted':props.rowIndex % 2 === 0}">
-                                    {{props.value}}
-                                </q-td>
+                              </q-tr>
                             </template>
                         </q-table>
                     </q-tab-panel>
                 </template>
             </q-tab-panels>
+            <p class="q-ma-none text-grey-5 text-center text-caption text-italic">
+              EERC {{ leagueId }} {{ seasonId }} {{ event.name ? event.name : `Event ${event.id}`}} {{ resultsTab }} results.
+            </p>
         </q-card-section>
     </q-card>
 </q-dialog>
@@ -122,13 +131,13 @@ import { extend } from 'quasar'
 export default {
   data () {
     return {
-      resultsTab: 'full',
+      resultsTab: 'final',
       tables: {
         rallyFinalTable: {
           pagination: {
             sortBy: 'time',
             descending: false,
-            rowsPerPage: 30
+            rowsPerPage: 0
           },
           columns: [
             {
@@ -184,7 +193,7 @@ export default {
           pagination: {
             sortBy: 'total-time',
             descending: false,
-            rowsPerPage: 30
+            rowsPerPage: 0
           },
           columns: [
             {
@@ -365,6 +374,9 @@ export default {
 }
 .tinted {
     background:rgba(0,0,0,0.25)
+}
+.q-dialog__inner--minimized > div {
+  max-height: calc(100vh - 48px) !important;
 }
 </style>
 <style lang="scss">
