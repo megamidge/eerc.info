@@ -38,3 +38,7 @@ export const leagueSeasonEventSessionsRef = (leagueId, seasonId, eventId, collec
 export const leagueSeasonEventSessionResultsRef = (leagueId, seasonId, eventId, sessionId, sessionsCollectionName) => {
   return leagueSeasonEventSessionsRef(leagueId, seasonId, eventId, sessionsCollectionName).doc(sessionId).collection('results')
 }
+
+export const publishLeagueChanges = (leagueId, data) => {
+  return leagueDocRef(leagueId).update(data)
+}

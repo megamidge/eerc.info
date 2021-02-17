@@ -16,6 +16,7 @@
     "@quasar/extras": "^1.0.0",
     "@quasar/quasar-app-extension-qenv": "^1.0.3",
     "core-js": "^3.6.5",
+    "deep-equal": "^2.0.5",
     "eslint": "^7.4.0",
     "firebase": "^7.15.5",
     "quasar": "^1.0.0",

@@ -1,5 +1,5 @@
 <template>
-    <q-input
+    <!-- <q-input
       @mouseover.native="hover = true"
       @mouseleave.native="hover = false"
       @keydown.enter="submit"
@@ -16,7 +16,20 @@
         <template v-slot:append>
           <q-icon v-if="!edit" name="mdi-pencil" :color="hover ?'grey-1':'grey-7'"/>
         </template>
-    </q-input>
+    </q-input> -->
+    <p
+      @mouseover="hover = true"
+      @mouseleave="hover = false"
+    >
+      {{ value }}
+      <q-icon name="mdi-pencil" :color="hover ? 'grey-1' : 'grey-7'"/>
+      <q-popup-edit v-model="val" cover auto-save buttons color="secondary" content-class="bg-grey-10" title="">
+        <template v-slot="{ value ,emitValue }">
+          <q-input :value="value" @input="emitValue" :type="type" class="bg-grey-9 q-px-sm rounded-borders" autofocus @keyup.enter.stop>
+          </q-input>
+        </template>
+      </q-popup-edit>
+    </p>
 </template>
 
 <script>
@@ -34,6 +47,14 @@ export default {
           width: `${this.value.length / 2 + 3}em`, minWidth: '6rem', maxWidth: '100%'
         }
       } else return {}
+    },
+    val: {
+      get () {
+        return this.value
+      },
+      set (newValue) {
+        this.$emit('input', newValue)
+      }
     }
   },
   props: {
@@ -46,11 +67,19 @@ export default {
     multiline: {
       type: Boolean,
       default: () => false
+    },
+    type: {
+      type: String,
+      default: () => 'text'
     }
   },
   methods: {
     submit () {
       this.$emit('submit')
+    },
+    shouldStop (event) {
+      console.log('shouldStop>', event)
+      event.preventDefault()
     }
   }
 }

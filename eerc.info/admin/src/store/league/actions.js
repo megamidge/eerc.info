@@ -5,7 +5,8 @@ export function someAction (context) {
 import { firestoreAction } from 'vuexfire'
 import {
   leagueDocRef,
-  leagueCollectionRef
+  leagueCollectionRef,
+  publishLeagueChanges
 } from 'services/firebase/firestore'
 /*
 export function someAction (context) {
@@ -32,4 +33,8 @@ function seasonWatcher (seasons, leagueId, context, dispatch) {
       dispatch(`${season.id}/setupSeason`, { leagueId, season })
     }
   })
+}
+
+export function publishChanges (context, { leagueId, changes }) {
+  return publishLeagueChanges(leagueId, changes)
 }

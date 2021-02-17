@@ -1,6 +1,6 @@
 <template>
   <div class="q-pa-sm">
-        <q-card class="full-height column items-stretch" @click="$router.push()">
+        <q-card class="full-height column items-stretch">
           <q-card-section class="row no-wrap items-center">
             <q-img :src="leagueImage" :ratio="1" height="2.6rem" width="2.6rem"/>
             <div class="column justify-start items-start col q-pl-md">
@@ -9,7 +9,7 @@
             </div>
           </q-card-section>
           <q-card-section>
-              <template v-if="seasons.length > 0">
+              <template v-if="seasons && seasons.length > 0">
                 <p class="q-ma-none text-subtitle1">{{ seasons[seasons.length-1].id }}</p>
                 <p class="q-ma-none">//Current/Upcoming event information. (I don't store dates yet lmaooo)</p>
               </template>
