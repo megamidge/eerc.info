@@ -1,86 +1,80 @@
 <template>
-  <q-layout view="hHh lpR fFf">
-    <template v-if="league">
-      <q-header>
-        <q-toolbar class="bg-secondary">
-            <q-btn flat round dense icon="arrow_back" @click="$router.push('/leagues')"/>
-            <q-toolbar-title>
-              <editable-text v-model="titleInput" @submit="submitNewTitle" :loading="loading" class="text-h6"/>
-            </q-toolbar-title>
-            <q-badge class="text-caption" color="dark">{{ league.id }}</q-badge>
-          </q-toolbar>
-      </q-header>
-      <q-page-container>
-        <q-page class="flex column items-center q-gutter-md" v-if="league">
-          <h1>{{ league.id }}</h1>
-          <p>{{ getLeague('DIRT') }}</p>
-          <settings :league="league"/>
-          <seasons :seasons="league.seasons"/>
-        </q-page>
-    </q-page-container>
-  </template>
-  <template v-else>
-    <q-page-container>
-      <q-page class="flex items-center justify-center">
-        <q-spinner size="10em"/>
-      </q-page>
-    </q-page-container>
-  </template>
-  </q-layout>
+  <q-page class="q-pa-md column" v-if="league">
+      <q-card>
+        <q-card-section class="column items-stretch">
+          <q-item :class="{'column items-center text-center':$q.platform.is.mobile || $q.screen.xs}">
+            <q-item-section avatar>
+              <q-icon :name="`img:${leagueImage}`" size="10rem"/>
+            </q-item-section>
+            <q-item-label>
+              <editable-text class="q-ma-none text-h5" v-model="league.name" :multiline="$q.platform.is.mobile || $q.screen.xs || $q.screen.sm"/>
+              <p class="q-ma-none text-caption">{{league.id}}</p>
+            </q-item-label>
+
+          </q-item>
+        </q-card-section>
+        <q-card-section>
+          <p class="q-ma-none text-subtitle1">Description</p>
+          <editable-text class="q-mt-none" v-model="league.description" style="max-width:75vw" multiline/>
+          <p class="q-ma-none text-subtitle1">Short Description</p>
+          <editable-text class="q-mt-none" v-model="league.description_short"/>
+          <p class="q-ma-none text-subtitle1">Game</p>
+          <editable-text class="q-mt-none" v-model="league.game"/>
+          <p class="q-ma-none text-subtitle1">Sign Up Link</p>
+          <p class="q-mt-none ellipsis text-link" style="max-width:75vw" @click="openURL(league.signupLink)">{{ league.signupLink }}</p>
+          <p class="q-ma-none text-subtitle1">Google Drive Link</p>
+          <p class="q-mt-none ellipsis text-link" style="max-width:75vw" @click="openURL(league.googleDrive)">{{ league.googleDrive }}</p>
+        </q-card-section>
+      </q-card>
+  </q-page>
+  <q-page class="flex flex-center" v-else>
+    <q-spinner size="50vw"/>
+  </q-page>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import EditableText from 'components/EditableText'
-import Settings from 'components/Leagues/Settings'
-import Seasons from 'components/Leagues/Seasons'
+import { openURL } from 'quasar'
+import EditableText from 'src/components/EditableText.vue'
 export default {
-  components: {
-    EditableText,
-    Settings,
-    Seasons
-  },
+  components: { EditableText },
   data () {
     return {
-      titleInput: '',
-      loading: false
+      leagueImage: '',
+      openURL: openURL
     }
   },
   computed: {
-    ...mapGetters('data', [
-      'getLeague'
-    ]),
+    leagueId () {
+      return this.$route.params.leagueId
+    },
     league () {
-      return this.getLeague(this.$route.params.leagueId)
+      return this.$store.getters['data/league'](this.leagueId)
     }
   },
-  methods: {
-    submitNewTitle () {
-      // this.titleEdit = false
-      if (this.titleInput === this.league.name)
-        return
-      this.loading = true
-      this.$fb.firestore().collection('leagues').doc(this.league.id).update({
-        name: this.titleInput
-      }).then(() => this.$q.notify({ message: 'Title updated', color: 'positive' }))
-        .catch(error => this.$q.notify({ message: `UwU somethings fucky wucky. ${error.message}` }))
-        .then(() => {
-          this.loading = false
-        })
-    },
-    init () {
-      this.titleInput = this.league.name
-    }
+  created () {
+    // fetch the extra information for this league (seasons and events).
+    if (!this.league) { this.leagueWatcher = this.$watch('league', this.leagueDispatch, { immediate: true }) } else this.leagueDispatch()
   },
   mounted () {
-    if (this.league) {
-      this.init()
-    }
+    this.imageSource()
   },
-  watch: {
-    league (newVal) {
-      if (newVal) {
-        this.init()
+  methods: {
+    imageSource () {
+      this.$firebase.leagueStorageRef().child(`${this.leagueId}.png`)
+        .getDownloadURL()
+        .then(url => {
+          this.leagueImage = url
+        })
+        .catch(error => {
+          console.error(error.message)
+        })
+    },
+    leagueDispatch () {
+      if (this.league) {
+        this.$store.dispatch('data/registerLeagueModule', this.league).then(() => {
+          // module has been resgister, get it to fetch data
+          this.$store.dispatch(`${this.league.id}/fetchLeague`, this.league.id)
+        })
       }
     }
   }
@@ -88,7 +82,5 @@ export default {
 </script>
 
 <style>
-.q-table--wrap td{
-  white-space: normal !important;
-}
+
 </style>

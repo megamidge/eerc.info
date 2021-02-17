@@ -1,0 +1,8 @@
+/* app global css */
+.text-link {
+    color: var(--q-color-secondary);
+    cursor: pointer;
+    &:hover {
+        text-decoration: underline;
+    }
+}

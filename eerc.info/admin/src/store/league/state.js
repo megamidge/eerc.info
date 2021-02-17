@@ -1,5 +1,6 @@
 export default function () {
   return {
-    leagues: null
+    leagueInfo: null,
+    seasons: null
   }
 }

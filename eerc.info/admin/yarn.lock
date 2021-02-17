@@ -1187,6 +1187,11 @@
   resolved "https://registry.yarnpkg.com/@positron/stack-trace/-/stack-trace-1.0.0.tgz#14fcc712a530038ef9be1ce6952315a839f466a8"
   integrity sha1-FPzHEqUwA475vhzmlSMVqDn0Zqg=
 
+"@posva/vuefire-core@^2.3.4":
+  version "2.3.4"
+  resolved "https://registry.yarnpkg.com/@posva/vuefire-core/-/vuefire-core-2.3.4.tgz#58a2561c957c982a9dea26a559c018756e30f035"
+  integrity sha512-jumUMMDBMDRtx9reIKCkC92TRwxJ/vG0+7iX2gQNXbS9cIVh4iI78PQm8e9ztCiBmdlALuBvfbcvDoD60cvJuw==
+
 "@protobufjs/aspromise@^1.1.1", "@protobufjs/aspromise@^1.1.2":
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/@protobufjs/aspromise/-/aspromise-1.1.2.tgz#9b8b0cc663d669a7d8f6f5d0893a14d348f30fbf"
@@ -9882,6 +9887,13 @@ vuex@3.4.0:
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/vuex/-/vuex-3.4.0.tgz#20cc086062d750769fce1febb34e7fceeaebde45"
   integrity sha512-ajtqwEW/QhnrBZQsZxCLHThZZaa+Db45c92Asf46ZDXu6uHXgbfVuBaJ4gzD2r4UX0oMJHstFwd2r2HM4l8umg==
+
+vuexfire@^3.2.5:
+  version "3.2.5"
+  resolved "https://registry.yarnpkg.com/vuexfire/-/vuexfire-3.2.5.tgz#d176b655d6a103b5bcee19bdeeb8b3ec6eeff48b"
+  integrity sha512-fztRzKljqTjNmNexAzKkk7b9h/xrNu3e2hI05VZAT6/hRljRUJavxO5ATXZCXG4rQE3kNHODpMJG6BiR2T8u0g==
+  dependencies:
+    "@posva/vuefire-core" "^2.3.4"
 
 watchpack-chokidar2@^2.0.0:
   version "2.0.0"

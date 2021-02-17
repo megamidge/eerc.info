@@ -14,9 +14,9 @@ export async function register ({ commit }, payload) {
   //   throw new Error(`${error.code}: ${error.message}`)
   // })
 
-  const $fb = this.$fb
+  const $firebase = this.$firebase
   const { email, password } = payload
-  return $fb.createUserWithEmail(email, password)
+  return $firebase.createUserWithEmail(email, password)
 }
 export async function signIn ({ commit }, payload) {
   // console.log('Here we are', payload)
@@ -28,14 +28,14 @@ export async function signIn ({ commit }, payload) {
   //   throw new Error(`${error.code}: ${error.message}`)
   // })
 
-  const $fb = this.$fb
+  const $firebase = this.$firebase
   const { email, password } = payload
-  return $fb.loginWithEmail(email, password)
+  return $firebase.loginWithEmail(email, password)
 }
 
 export async function logoutUser ({ commit, payload }) {
-  const $fb = this.$fb
-  await $fb.logoutUser()
+  const $firebase = this.$firebase
+  await $firebase.logoutUser()
 }
 
 export function routeUserToAuth () {

@@ -6,7 +6,7 @@
           flat
           dense
           round
-          icon="menu"
+          icon="mdi-menu"
           aria-label="Menu"
           @click="leftDrawerOpen = !leftDrawerOpen"
         />
@@ -16,7 +16,7 @@
         </q-toolbar-title>
         <q-chip
           :label="email"
-          icon="account_circle"
+          icon="mdi-account-circle"
           class="truncate-chip-labels cursor-pointer"
           style="max-width:30%; border-radius:0"
           square
@@ -29,7 +29,7 @@
             no-caps
             size="md"
             label="Logout"
-            icon="logout"
+            icon="mdi-logout"
             @click="logout"
             v-close-popup
             />
@@ -68,7 +68,7 @@
           </q-item>
         </q-list>
         <div class="fixed-bottom full-width flex justify-end desktop-only">
-          <q-btn :icon="miniState ? 'chevron_right' : 'chevron_left'" @click="miniState = !miniState" unelevated/>
+          <q-btn :icon="miniState ? 'mdi-chevron-right' : 'mdi-chevron-left'" @click="miniState = !miniState" unelevated/>
         </div>
     </q-drawer>
 
@@ -95,32 +95,32 @@ export default {
       links: [
         {
           title: 'Dashboard',
-          icon: 'home',
+          icon: 'mdi-home',
           link: '/'
         },
         {
           title: 'Leagues',
           caption: 'View and manage leagues',
-          icon: 'list',
-          link: '/leagues'
+          icon: 'mdi-view-list',
+          link: '/Leagues'
         },
         {
           title: 'Gallery',
           caption: 'Manage the gallery',
-          icon: 'image',
-          link: '/gallery'
+          icon: 'mdi-image',
+          link: '/Gallery'
         }
       ]
     }
   },
   computed: {
     email () {
-      return this.$fb.auth().currentUser.email
+      return this.$firebase.auth().currentUser.email
     }
   },
   methods: {
     logout () {
-      this.$fb.logoutUser().then(() => {
+      this.$firebase.logoutUser().then(() => {
         this.$q.notify({ color: 'neutral', message: 'Logged out' })
       })
     }

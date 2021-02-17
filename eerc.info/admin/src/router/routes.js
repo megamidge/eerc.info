@@ -9,22 +9,15 @@ const routes = [
     },
     children: [
       { path: '', component: () => import('pages/Index.vue') },
+      { path: 'Leagues', component: () => import('pages/Leagues/Leagues.vue') },
       {
-        path: 'leagues',
-        component: () => import('pages/Leagues/LeaguesPassthrough.vue'),
+        path: 'Leagues/:leagueId',
+        component: () => import('layouts/LeagueLayout.vue'),
         children: [
-          {
-            path: '',
-            component: () => import('pages/Leagues/Leagues.vue')
-          },
-          {
-            name: 'league',
-            path: 'league/:leagueId',
-            component: () => import('pages/Leagues/League.vue')
-          }
+          { path: '/', component: () => import('pages/Leagues/League.vue') }
         ]
       },
-      { path: 'gallery', component: () => import('pages/Gallery.vue') }
+      { path: 'Gallery', component: () => import('pages/Gallery.vue') }
     ]
   },
   {

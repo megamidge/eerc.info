@@ -13,8 +13,13 @@ export default ({ router, store, Vue }) => {
 
   firebaseService.routerBeforeEach(router, store)
 
-  Vue.prototype.$fb = firebaseService
-  store.$fb = firebaseService
+  Vue.prototype.$firebase = firebaseService
+  store.$firebase = firebaseService
 
-  console.log('Started firebase', firebaseService)
+  intialFetches(store)
+}
+
+// perform any fetches that need doing right off the bat.
+const intialFetches = (store) => {
+  store.dispatch('data/getLeagues')
 }
