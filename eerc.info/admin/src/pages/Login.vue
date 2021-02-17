@@ -8,7 +8,7 @@
   <q-page class="flex justify-center items-center column">
     <h5>admin.eerc.info</h5>
     <div class="flex row items-center justify-center">
-      <q-icon name="login" size="xl"/>
+      <q-icon name="mdi-login" size="xl"/>
       <h2 class="q-pa-none">Login</h2>
     </div>
     <q-form @submit.prevent class="flex column q-ma-md q-gutter-sm">
@@ -26,7 +26,7 @@
         filled>
         <template v-slot:append>
             <q-icon
-              :name="isPwd ? 'visibility_off' : 'visibility'"
+              :name="isPwd ? 'mdi-eye-off' : 'mdi-eye'"
               class="cursor-pointer"
               @click="isPwd = !isPwd"
             />
