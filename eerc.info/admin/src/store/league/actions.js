@@ -35,6 +35,10 @@ function seasonWatcher (seasons, leagueId, context, dispatch) {
   })
 }
 
-export function publishChanges (context, { leagueId, changes }) {
-  return publishLeagueChanges(leagueId, changes)
+export function publishChanges (context, changes) {
+  return publishLeagueChanges(context.state.leagueInfo.id, changes)
+}
+
+export function toggleActive (context, active) {
+  return publishLeagueChanges(context.state.leagueInfo.id, { active: active })
 }

@@ -1,10 +1,10 @@
 import { firestoreAction } from 'vuexfire'
 import {
-  collectionRefWithFieldCheck
+  collectionRef
 } from 'services/firebase/firestore.js'
 
 export const getLeagues = firestoreAction(({ bindFirestoreRef }) => {
-  return bindFirestoreRef('leagues', collectionRefWithFieldCheck('leagues', 'active', true))
+  return bindFirestoreRef('leagues', collectionRef('leagues'))
 })
 
 import leagueModule from '../league'

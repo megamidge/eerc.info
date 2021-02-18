@@ -1,5 +1,15 @@
 <template>
   <q-page class="q-pa-md column" v-if="league">
+      <q-card :class="league.active?'bg-positive': 'bg-negative'" class="q-mb-md">
+        <q-card-section class="row no-wrap justify-between items-center">
+          <div>
+          <p class="q-ma-none text-h6">{{league.active ? 'Active' : 'Inactive' }}</p>
+          <p v-if="league.active" class="q-ma-none text-caption">This league is visible on the leagues page.</p>
+          <p v-else class="q-ma-none text-caption">This league is hidden from the leagues page. <b>It is still accessible.</b></p>
+          </div>
+          <q-toggle :value="league.active" @input="toggleActive($event)" size="lg"/>
+        </q-card-section>
+      </q-card>
       <league-info :league="league" :leagueId="leagueId"/>
   </q-page>
   <q-page class="flex flex-center" v-else>
@@ -36,6 +46,9 @@ export default {
     this.imageSource()
   },
   methods: {
+    toggleActive (val) {
+      this.$store.dispatch(`${this.leagueId}/toggleActive`, val)
+    },
     imageSource () {
       this.$firebase.leagueStorageRef().child(`${this.leagueId}.png`)
         .getDownloadURL()

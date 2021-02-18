@@ -4,6 +4,10 @@ import 'firebase/firestore'
 export const firestore = () => firebase.firestore()
 export const fsInit = (app) => firebase.firestore(app)
 
+export const collectionRef = (collectionName) => {
+  return firestore()
+    .collection(collectionName)
+}
 // gets reference to collection of documents that match 'field' == 'value'
 export const collectionRefWithFieldCheck = (collectionName, field, value) => {
   return firestore()
