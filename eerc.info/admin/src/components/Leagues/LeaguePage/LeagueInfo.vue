@@ -26,9 +26,9 @@
           <p class="q-ma-none text-subtitle1">Game</p>
           <editable-text class="q-mt-none" v-model="editLeague.game"/>
           <p class="q-ma-none text-subtitle1">Sign Up Link</p>
-          <p class="q-mt-none ellipsis text-link" style="max-width:75vw" @click="openURL(league.signupLink)">{{ league.signupLink }}</p>
+          <editable-link v-model="editLeague.signupLink" class="q-mb-md"/>
           <p class="q-ma-none text-subtitle1">Google Drive Link</p>
-          <p class="q-mt-none ellipsis text-link" style="max-width:75vw" @click="openURL(league.googleDrive)">{{ league.googleDrive }}</p>
+          <editable-link v-model="editLeague.googleDrive" class="q-mb-md"/>
         </q-card-section>
       </q-card>
 </template>
@@ -37,8 +37,9 @@
 import deepEqual from 'deep-equal'
 import { openURL, extend } from 'quasar'
 import EditableText from 'src/components/EditableText.vue'
+import EditableLink from 'src/components/EditableLink.vue'
 export default {
-  components: { EditableText },
+  components: { EditableText, EditableLink },
   data () {
     return {
       leagueImage: '',

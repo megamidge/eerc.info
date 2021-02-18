@@ -23,7 +23,7 @@
     >
       {{ value }}
       <q-icon name="mdi-pencil" :color="hover ? 'grey-1' : 'grey-7'"/>
-      <q-popup-edit v-model="val" cover auto-save buttons color="secondary" content-class="bg-grey-10" title="">
+      <q-popup-edit v-model="val" cover auto-save buttons color="secondary" content-class="bg-grey-10">
         <template v-slot="{ value ,emitValue }">
           <q-input :value="value" @input="emitValue" :type="type" class="bg-grey-9 q-px-sm rounded-borders" autofocus @keyup.enter.stop>
           </q-input>
