@@ -4,6 +4,21 @@ import 'firebase/firestore'
 export const firestore = () => firebase.firestore()
 export const fsInit = (app) => firebase.firestore(app)
 
+// Logs an action. Can be part of a transaction if a transaction is passed.
+const logAction = (action, transaction) => {
+  const doc = firestore().collection('logs').doc()
+  const data = {
+    dateTime: firebase.firestore.Timestamp.now(),
+    userEmail: firebase.auth().currentUser.email,
+    userId: firebase.auth().currentUser.uid,
+    action: action
+  }
+  if (transaction)
+    return transaction.set(doc, data)
+  else
+    return firestore().collection('logs').doc().set(data)
+}
+
 export const collectionRef = (collectionName) => {
   return firestore()
     .collection(collectionName)
@@ -44,5 +59,16 @@ export const leagueSeasonEventSessionResultsRef = (leagueId, seasonId, eventId, 
 }
 
 export const publishLeagueChanges = (leagueId, data) => {
-  return leagueDocRef(leagueId).update(data)
+  return firestore().runTransaction(transaction => {
+    const docRef = leagueDocRef(leagueId)
+    transaction.update(docRef, data)
+
+    const action = {
+      name: 'publishLeagueChanges',
+      data: data
+    }
+    logAction(action, transaction)
+
+    return Promise.resolve()
+  })
 }

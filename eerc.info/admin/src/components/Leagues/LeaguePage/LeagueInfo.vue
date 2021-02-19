@@ -55,7 +55,7 @@ export default {
     },
     leagueId: {
       type: String,
-      default: () => null
+      default: () => ''
     }
   },
   computed: {

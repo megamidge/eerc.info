@@ -10,7 +10,8 @@
           <q-toggle :value="league.active" @input="toggleActive($event)" size="lg"/>
         </q-card-section>
       </q-card>
-      <league-info :league="league" :leagueId="leagueId"/>
+      <league-info :league="league" :leagueId="leagueId" class="q-mb-md"/>
+      <league-seasons :seasons="seasons" :leagueId="leagueId" v-if="seasons.length>0"/>
   </q-page>
   <q-page class="flex flex-center" v-else>
     <q-spinner size="50vw"/>
@@ -20,12 +21,14 @@
 <script>
 import { openURL } from 'quasar'
 import LeagueInfo from 'src/components/Leagues/LeaguePage/LeagueInfo.vue'
+import LeagueSeasons from 'src/components/Leagues/LeaguePage/LeagueSeasons.vue'
 export default {
-  components: { LeagueInfo },
+  components: { LeagueInfo, LeagueSeasons },
   data () {
     return {
       leagueImage: '',
-      openURL: openURL
+      openURL: openURL,
+      leagueWatcher: null
     }
   },
   computed: {
@@ -34,13 +37,14 @@ export default {
     },
     league () {
       return this.$store.getters['data/league'](this.leagueId)
+    },
+    seasons () {
+      return this.$store.getters[`${this.leagueId}/seasons`] || []
     }
   },
   created () {
     // fetch the extra information for this league (seasons and events).
-    if (!this.league) {
-      this.leagueWatcher = this.$watch('league', this.leagueDispatch, { immediate: true })
-    } else this.leagueDispatch()
+    if (!this.league) { this.leagueWatcher = this.$watch('league', this.leagueDispatch, { immediate: true }) } else this.leagueDispatch()
   },
   mounted () {
     this.imageSource()
@@ -65,6 +69,7 @@ export default {
           // module has been resgister, get it to fetch data
           this.$store.dispatch(`${this.league.id}/fetchLeague`, this.league.id)
         })
+        if (this.leagueWatcher) { this.leagueWatcher() }
       }
     }
   }

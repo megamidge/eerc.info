@@ -1,8 +1,12 @@
-/* app global css */
+// app global css
 .text-link {
     color: var(--q-color-secondary);
     cursor: pointer;
     &:hover {
         text-decoration: underline;
     }
+}
+
+.rounded-top-border {
+    border-radius: 4px 4px 0 0;
 }

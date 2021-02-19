@@ -41,7 +41,8 @@ export default {
   data () {
     return {
       openURL: openURL,
-      leagueImage: ''
+      leagueImage: '',
+      leagueWatcher: null
     }
   },
   props: {
@@ -87,6 +88,7 @@ export default {
           // module has been resgister, get it to fetch data
           this.$store.dispatch(`${this.league.id}/fetchLeague`, this.league.id)
         })
+        if (this.leagueWatcher) { this.leagueWatcher() }
       }
     }
   }
