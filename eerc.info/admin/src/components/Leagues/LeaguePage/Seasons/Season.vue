@@ -56,7 +56,6 @@ export default {
       return !deepEqual(this.editSeason, this.season)
     },
     events () {
-      console.log('events computed')
       return this.$store.getters[`${this.leagueId}/${this.season.id}/seasonEvents`]
     }
   },

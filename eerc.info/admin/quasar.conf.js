@@ -107,7 +107,7 @@ module.exports = function (/* ctx */) {
           positive: '#23873a',
           negative: '#8f2935',
           info: '#1accf0',
-          warning: '#d828f7'
+          warning: '#eb6b26'
         }
       },
 
