@@ -9,7 +9,7 @@
     </q-card-actions>
     <q-card-section>
         <p class="q-ma-none text-subtitle1">Vehicle Class</p>
-        <editable-text class="q-mt-none" v-model="editSeason.vehicleClass"/>
+        <editable-text class="q-mt-none" :value="season.vehicleClass" @input="changeSeasonProperty('vehicleClass', $event)"/>
     </q-card-section>
     <q-card-section class="bg-grey-9">
       <p class="q-mt-none text-subtitle1">Events</p>
@@ -29,10 +29,9 @@
 </template>
 
 <script>
-import deepEqual from 'deep-equal'
-import { extend } from 'quasar'
 import EditableText from 'components/EditableText'
 import Event from './Events/Event.vue'
+import deepEqual from 'deep-equal'
 export default {
   components: { EditableText, Event },
   props: {
@@ -47,29 +46,32 @@ export default {
   },
   data () {
     return {
-      editSeason: null,
       publishing: false
     }
   },
   computed: {
     hasChanges () {
-      return !deepEqual(this.editSeason, this.season)
+      const season = this.$store.getters[`${this.leagueId}/seasons`].find(s => s.id === this.season.id)
+      var seasonChanged = false
+      if (!season) seasonChanged = true
+      else seasonChanged = !deepEqual(this.season, season)
+      return seasonChanged
     },
     events () {
-      return this.$store.getters[`${this.leagueId}/${this.season.id}/seasonEvents`]
-    }
-  },
-  watch: {
-    season: {
-      immediate: true,
-      handler () {
-        this.editSeason = extend(true, {}, this.season)
-      }
+      return this.$store.getters[`edit_${this.leagueId}/${this.season.id}/seasonEvents`]
     }
   },
   methods: {
+    changeSeasonProperty (key, value) {
+      this.$store.commit(`edit_${this.leagueId}/setSeasonProperty`, { key, value, id: this.season.id })
+    },
+    eventChange ({ id, changed }) {
+      const index = this.editEventsChanged.findIndex(e => e.id === id)
+      if (index < 0) this.editEventsChanged.push({ id: id, changed: changed })
+      else this.editEventsChanged[index].changed = changed
+    },
     discardChanges () {
-      this.editSeason = extend(true, {}, this.season)
+      this.$store.dispatch(`edit_${this.leagueId}/${this.season.id}/reset`)
     },
     publishChanges () {
       // Dispatch the editLeague object as changes to publish.
@@ -79,24 +81,23 @@ export default {
         type: 'warning',
         message: 'Error: not implemented yet.'
       })
-      this.publishing = false
-    //   this.$store.dispatch(`${this.leagueId}/publishChanges`, this.editLeague)
-    //     .then(() => {
-    //       this.$q.notify({
-    //         position: 'top',
-    //         type: 'positive',
-    //         message: 'Your changes have been published.'
-    //       })
-    //     }).catch(error => {
-    //       console.error(error)
-    //       this.$q.notify({
-    //         position: 'top',
-    //         type: 'negative',
-    //         message: 'Oops. Something went wrong.'
-    //       })
-    //     }).finally(() => {
-    //       this.publishing = false
-    //     })
+      this.$store.dispatch(`edit_${this.leagueId}/${this.season.id}/publishSeasonChanges`, {})
+        .then(() => {
+          this.$q.notify({
+            position: 'top',
+            type: 'positive',
+            message: 'Your changes have been published.'
+          })
+        }).catch(error => {
+          console.error(error)
+          this.$q.notify({
+            position: 'top',
+            type: 'negative',
+            message: 'Oops. Something went wrong.'
+          })
+        }).finally(() => {
+          this.publishing = false
+        })
     }
   }
 }

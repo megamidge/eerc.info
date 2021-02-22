@@ -15,14 +15,14 @@
       <q-card-section>
           <p class="q-ma-none text-subtitle1">Location</p>
           <div class="row justify-start">
-            <div class="q-mr-lg" v-for="key in Object.keys(editEvent.location)" :key="key">
+            <div class="q-mr-lg" v-for="key in Object.keys(event.location)" :key="key">
                 <p class="q-ma-none text-subtitle2 text-capitalize">{{key}}</p>
-                <editable-text v-model="editEvent.location[key]"/>
+                <editable-text :value="event.location[key]" @input="changeEventProperty(`location.${key}`,$event)"/>
             </div>
           </div>
           <div>
             <p class="q-ma-none text-subtitle2 text-capitalize">Event Type</p>
-            <editable-text v-model="editEvent.type"/>
+            <editable-text v-model="event.type"/>
           </div>
       </q-card-section>
       <q-card-section>
@@ -30,7 +30,7 @@
           <div class="row justify-start items-stretch">
             <div
               class="q-pa-sm col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-3"
-              v-for="session in editSessions"
+              v-for="session in sessions"
               :key="session.id"
             >
               <session
@@ -54,16 +54,12 @@
 </template>
 
 <script>
-import { extend } from 'quasar'
 import EditableText from 'components/EditableText'
 import Session from 'components/Leagues/LeaguePage/Seasons/Events/Sessions/Session'
-import deepEqual from 'deep-equal'
 export default {
   components: { EditableText, Session },
   data () {
     return {
-      editSessions: [],
-      editEvent: null,
       deletedSession: null,
       deletedSessionIndex: null
     }
@@ -90,14 +86,16 @@ export default {
       }
     },
     sessions () {
-      return this.$store.getters[`${this.leagueId}/${this.seasonId}/${this.event.id}/sessions`]
+      return this.$store.getters[`edit_${this.leagueId}/${this.seasonId}/${this.event.id}/sessions`]
     },
     hasChanges () {
-      // mapping and stuff is required to make sure the 'id' field doesn't throw things off.
-      return !deepEqual(this.editSessions, this.sessions.map(s => { return { id: s.id, ...s } })) || !deepEqual(this.editEvent, { id: this.event.id, ...this.event })
+      return false
     }
   },
   methods: {
+    changeEventProperty (key, value) {
+      this.$store.commit(`edit_${this.leagueId}/${this.seasonId}/setEventProperty`, { key, value, id: this.event.id })
+    },
     addSession () {
       this.editSessions.push({
         id: `New ${this.sessionsLabel.substring(0, this.sessionsLabel.length - 1)} ${('000' + (Math.random() * 100)).slice(-3)}`,
@@ -105,59 +103,36 @@ export default {
       })
     },
     deleteSession (sessionId) {
-      const sessionIndex = this.editSessions.findIndex(s => s.id === sessionId)
-      this.deletedSession = extend(true, {}, this.editSessions[sessionIndex])
-      this.deletedSessionIndex = sessionIndex
-      this.$delete(this.editSessions, sessionIndex)
-      this.$q.notify({
-        group: 'delete',
-        position: 'bottom',
-        type: 'warning',
-        message: `${sessionId} deleted.`,
-        timeout: 5000,
-        classes: 'text-subtitle1 text-bold',
-        actions: [
-          { label: 'Undo', icon: 'mdi-undo', handler: this.undoSessionDelete }
-        ]
-      })
+      // const sessionIndex = this.editSessions.findIndex(s => s.id === sessionId)
+      // this.deletedSession = extend(true, {}, this.editSessions[sessionIndex])
+      // this.deletedSessionIndex = sessionIndex
+      // this.$delete(this.editSessions, sessionIndex)
+      // this.$q.notify({
+      //   group: 'delete',
+      //   position: 'bottom',
+      //   type: 'warning',
+      //   message: `${sessionId} deleted.`,
+      //   timeout: 5000,
+      //   classes: 'text-subtitle1 text-bold',
+      //   actions: [
+      //     { label: 'Undo', icon: 'mdi-undo', handler: this.undoSessionDelete }
+      //   ]
+      // })
     },
     undoSessionDelete () {
       this.editSessions.splice(this.deletedSessionIndex, 0, this.deletedSession)
     },
     discardChanges () {
-      this.editSessions = this.sessions.map(s => {
-        return {
-          id: s.id,
-          ...s
-        }
-      })
-      this.editEvent = {
-        id: this.event.id,
-        ...extend(true, {}, this.event)
-      }
-    }
-  },
-  watch: {
-    sessions: {
-      immediate: true,
-      handler () {
-        // Can't just extend as we need the ID, which is non-enumerable.
-        this.editSessions = this.sessions.map(s => {
-          return {
-            id: s.id,
-            ...s
-          }
-        })
-      }
-    },
-    event: {
-      immediate: true,
-      handler () {
-        this.editEvent = {
-          id: this.event.id,
-          ...extend(true, {}, this.event)
-        }
-      }
+      // this.editSessions = this.sessions.map(s => {
+      //   return {
+      //     id: s.id,
+      //     ...s
+      //   }
+      // })
+      // this.editEvent = {
+      //   id: this.event.id,
+      //   ...extend(true, {}, this.event)
+      // }
     }
   }
 }

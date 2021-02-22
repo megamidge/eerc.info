@@ -7,7 +7,7 @@ import {
   leagueSeasonEventSessionsRef
 } from 'services/firebase/firestore'
 
-export function setupEvent ({ dispatch, getters }, { leagueId, seasonId, event }) {
+export function setupEvent ({ dispatch, getters, commit }, { leagueId, seasonId, event, sync }) {
   // We need to tell the binding what the name of the events 'sessions' collection is.
   // By default, it will be sessions.
   // For different event types, this may be different. For rally, it is 'stages'.
@@ -20,21 +20,38 @@ export function setupEvent ({ dispatch, getters }, { leagueId, seasonId, event }
     default: collection = 'sessions'
       break
   }
-  dispatch('getEventSessions', { leagueId, seasonId: seasonId, eventId: event.id, collection })
+  commit('setSync', sync)
+  dispatch('getEventSessions', { leagueId, seasonId: seasonId, eventId: event.id, collection, sync })
 
-  this.watch(() => getters.sessions, (sessions) => sessionWatcher(sessions, leagueId, seasonId, event.id, collection, this, dispatch))
+  this.watch(() => getters.sessions, (sessions) => sessionWatcher(sessions, leagueId, seasonId, event.id, collection, this, dispatch, sync))
 }
 
-export const getEventSessions = firestoreAction(({ bindFirestoreRef }, { leagueId, seasonId, eventId, collection }) => {
-  return bindFirestoreRef('sessions', leagueSeasonEventSessionsRef(leagueId, seasonId, eventId, collection))
+export const getEventSessions = firestoreAction(({ bindFirestoreRef, commit }, { leagueId, seasonId, eventId, collection, sync }) => {
+  if (sync)
+    return bindFirestoreRef('sessions', leagueSeasonEventSessionsRef(leagueId, seasonId, eventId, collection))
+  else {
+    leagueSeasonEventSessionsRef(leagueId, seasonId, eventId, collection).get().then(snap => {
+      const data = snap.docs.map(doc => {
+        var docData = { ...doc.data() }
+        Object.defineProperty(docData, 'id', { value: doc.id, enumerable: false })
+        return docData
+      })
+      commit('setSessions', data)
+    })
+  }
 })
 
 import sessionModule from '../session'
-function sessionWatcher (sessions, leagueId, seasonId, eventId, collection, context, dispatch) {
+function sessionWatcher (sessions, leagueId, seasonId, eventId, collection, context, dispatch, sync) {
+  var leagueModuleName = sync ? leagueId : `edit_${leagueId}`
   sessions.forEach(session => {
-    if (!context.hasModule([leagueId, seasonId, eventId, session.id])) {
-      context.registerModule([leagueId, seasonId, eventId, session.id], sessionModule)
-      dispatch(`${session.id}/setupSession`, { leagueId, seasonId, eventId, session, collection })
+    if (!context.hasModule([leagueModuleName, seasonId, eventId, session.id])) {
+      context.registerModule([leagueModuleName, seasonId, eventId, session.id], sessionModule)
+      dispatch(`${session.id}/setupSession`, { leagueId, seasonId, eventId, session, collection, sync })
     }
   })
+}
+
+export function reset () {
+  console.log('reset event')
 }

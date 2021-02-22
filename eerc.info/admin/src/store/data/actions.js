@@ -8,9 +8,12 @@ export const getLeagues = firestoreAction(({ bindFirestoreRef }) => {
 })
 
 import leagueModule from '../league'
-export function registerLeagueModule (context, league) {
-  if (!this.hasModule(league.id)) {
+export function registerLeagueModule (context, leagueId) {
+  if (!this.hasModule(leagueId)) {
     // only register the module if it doesn't already exist
-    this.registerModule(league.id, leagueModule)
+    this.registerModule(leagueId, leagueModule)
+  }
+  if (!this.hasModule(`edit_${leagueId}`)) {
+    this.registerModule(`edit_${leagueId}`, leagueModule)
   }
 }

@@ -36,15 +36,15 @@ export default {
       return this.$route.params.leagueId
     },
     league () {
-      return this.$store.getters['data/league'](this.leagueId)
+      return this.$store.getters[`edit_${this.leagueId}/info`]
     },
     seasons () {
-      return this.$store.getters[`${this.leagueId}/seasons`] || []
+      return this.$store.getters[`edit_${this.leagueId}/seasons`] || []
     }
   },
   created () {
     // fetch the extra information for this league (seasons and events).
-    if (!this.league) { this.leagueWatcher = this.$watch('league', this.leagueDispatch, { immediate: true }) } else this.leagueDispatch()
+    this.leagueDispatch()
   },
   mounted () {
     this.imageSource()
@@ -64,13 +64,12 @@ export default {
         })
     },
     leagueDispatch () {
-      if (this.league) {
-        this.$store.dispatch('data/registerLeagueModule', this.league).then(() => {
-          // module has been resgister, get it to fetch data
-          this.$store.dispatch(`${this.league.id}/fetchLeague`, this.league.id)
-        })
-        if (this.leagueWatcher) { this.leagueWatcher() }
-      }
+      this.$store.dispatch('data/registerLeagueModule', this.leagueId).then(() => {
+        // module has been resgister, get it to fetch data
+        this.$store.dispatch(`${this.leagueId}/fetchLeague`, { leagueId: this.leagueId, sync: true })
+        this.$store.dispatch(`edit_${this.leagueId}/fetchLeague`, { leagueId: this.leagueId, sync: false })
+      })
+      if (this.leagueWatcher) { this.leagueWatcher() }
     }
   }
 }

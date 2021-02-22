@@ -5,20 +5,20 @@
             <p class="q-ma-none text-h6">Results</p>
             <p class="q-ma-none text-body-2">{{session.id}}: {{session.name}}</p>
           </div>
-          <q-btn :disable="hasChanges" icon="mdi-close" v-close-popup flat round/>
+          <q-btn icon="mdi-close" v-close-popup flat round/>
       </q-card-section>
       <q-card-actions v-if="hasChanges" class="bg-info row items-center justify-between">
           <p class="q-ma-none text-subtitle2">You have unsaved changes.</p>
           <div class="row no-wrap">
             <q-btn unelevated class="q-mr-sm" label="Discard" @click="discardChanges"/>
-            <q-btn unelevated color="white" text-color="info"  label="Save and Close" @click="saveChanges"/>
           </div>
       </q-card-actions>
       <q-card-section class="q-pa-xs">
           <q-table
+            v-if="results.length > 0"
             :columns="tables[eventType].columns"
             :pagination="tables[eventType].pagination"
-            :data="editResults"
+            :data="results"
             dense
             flat
             hide-pagination
@@ -89,6 +89,18 @@ export default {
       type: Object,
       default: () => {}
     },
+    leagueId: {
+      type: String,
+      default: () => ''
+    },
+    seasonId: {
+      type: String,
+      default: () => ''
+    },
+    eventId: {
+      type: String,
+      default: () => ''
+    },
     eventType: {
       type: String,
       default: () => ''
@@ -97,7 +109,6 @@ export default {
   data () {
     return {
       countryCodes: countryCodes.codes,
-      editResults: null,
       tables: {
         rally: {
           pagination: {
@@ -128,10 +139,10 @@ export default {
               classes: 'ellipsis',
               editable: true,
               edit: (val, row) => {
-                const rowToModify = this.editResults.findIndex(r => {
+                const rowToModify = this.results.findIndex(r => {
                   return deepEqual(r, row)
                 })
-                this.editResults[rowToModify].driver = val
+                this.results[rowToModify].driver = val
               }
             },
             {
@@ -142,10 +153,10 @@ export default {
               align: 'left',
               editable: true,
               edit: (val, row) => {
-                const rowToModify = this.editResults.findIndex(r => {
+                const rowToModify = this.results.findIndex(r => {
                   return deepEqual(r, row)
                 })
-                this.editResults[rowToModify].vehicle = val
+                this.results[rowToModify].vehicle = val
               }
             },
             {
@@ -171,11 +182,10 @@ export default {
                 if (seconds && !isNaN(seconds)) totalMillis += seconds * 1000
                 if (minutes && !isNaN(minutes)) totalMillis += minutes * 60000
                 if (hours && !isNaN(hours)) totalMillis += hours * 3600000
-                const rowToModify = this.editResults.findIndex(r => {
+                const rowToModify = this.results.findIndex(r => {
                   return deepEqual(r, row)
                 })
-                // this.editResults[rowToModify].time = totalMillis
-                this.editResults[rowToModify].time = parseInt(totalMillis)
+                this.results[rowToModify].time = parseInt(totalMillis)
               }
             },
             {
@@ -184,7 +194,7 @@ export default {
               align: 'left',
               required: true,
               field: row => {
-                const resultSet = this.editResults
+                const resultSet = this.results
                 const emptyArr = []
                 const rowsCopy = extend(true, emptyArr, resultSet)
                 const firstRow = rowsCopy.sort((a, b) => a.time - b.time)[0]
@@ -201,29 +211,26 @@ export default {
   },
   computed: {
     hasChanges () {
-      return !deepEqual(this.results, this.editResults)
+      console.log(`${this.leagueId}/${this.seasonId}/${this.eventId}/${this.session.id}/results`)
+      return !deepEqual(this.results, this.$store.getters[`${this.leagueId}/${this.seasonId}/${this.eventId}/${this.session.id}/results`])
     }
   },
   methods: {
     discardChanges () {
-      this.editResults = extend(true, [], this.results)
-    },
-    saveChanges () {
-      this.$emit('input', this.editResults)
-      this.$emit('close')
+      this.$store.dispatch(`edit_${this.leagueId}/${this.seasonId}/${this.eventId}/${this.session.id}/reset`)
     },
     deleteRow (row) {
-      const rowToDel = this.editResults.findIndex(r => {
+      const rowToDel = this.results.findIndex(r => {
         return deepEqual(r, row)
       })
-      this.$delete(this.editResults, rowToDel)
+      this.$delete(this.results, rowToDel)
     },
     addRow () {
       console.log('addRow')
       // switch based on eventType...
       switch (this.eventType) {
         case 'rally': {
-          this.editResults.push({
+          this.results.push({
             driver: {
               name: 'New Driver',
               countryCode: 'european-union'
@@ -251,14 +258,6 @@ export default {
       const minuteStr = strip.stripMinutes ? '' : `${minutes}:`
       const secondsStr = strip.stripSeconds ? '' : `${seconds}.`
       return hoursStr + minuteStr + secondsStr + milliseconds
-    }
-  },
-  watch: {
-    results: {
-      immediate: true,
-      handler () {
-        this.editResults = extend(true, [], this.results)
-      }
     }
   }
 }

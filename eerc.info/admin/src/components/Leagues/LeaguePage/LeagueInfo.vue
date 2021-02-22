@@ -10,41 +10,40 @@
         <q-card-section class="column items-stretch">
           <q-item :class="{'column items-center text-center':$q.platform.is.mobile || $q.screen.xs}">
             <q-item-section avatar>
-              <q-icon :name="`img:${leagueImage}`" size="10rem"/>
+              <q-img :src="leagueImage" width="10rem" :ratio="1"/>
             </q-item-section>
             <q-item-label>
-              <editable-text class="q-ma-none text-h5" v-model="editLeague.name" :multiline="$q.platform.is.mobile || $q.screen.xs || $q.screen.sm"/>
+              <editable-text class="q-ma-none text-h5" :value="league.name" @input="changeLeagueProperty('name', $event)" :multiline="$q.platform.is.mobile || $q.screen.xs || $q.screen.sm"/>
               <p class="q-ma-none text-caption">{{league.id}}</p>
             </q-item-label>
           </q-item>
         </q-card-section>
         <q-card-section>
           <p class="q-ma-none text-subtitle1">Description</p>
-          <editable-text class="q-mt-none" v-model="editLeague.description" style="max-width:75vw" type="textarea"/>
+          <editable-text class="q-mt-none" :value="league.description" @input="changeLeagueProperty('description', $event)" style="max-width:75vw" type="textarea"/>
           <p class="q-ma-none text-subtitle1">Short Description</p>
-          <editable-text class="q-mt-none" v-model="editLeague.description_short"/>
+          <editable-text class="q-mt-none" :value="league.description_short" @input="changeLeagueProperty('description_short',$event)"/>
           <p class="q-ma-none text-subtitle1">Game</p>
-          <editable-text class="q-mt-none" v-model="editLeague.game"/>
+          <editable-text class="q-mt-none" :value="league.game" @input="changeLeagueProperty('game',$event)"/>
           <p class="q-ma-none text-subtitle1">Sign Up Link</p>
-          <editable-link v-model="editLeague.signupLink" class="q-mb-md"/>
+          <editable-link :value="league.signupLink" @input="changeLeagueProperty('signupLink',$event)" class="q-mb-md"/>
           <p class="q-ma-none text-subtitle1">Google Drive Link</p>
-          <editable-link v-model="editLeague.googleDrive" class="q-mb-md"/>
+          <editable-link :value="league.googleDrive" @input="changeLeagueProperty('googleDrive', $event)" class="q-mb-md"/>
         </q-card-section>
       </q-card>
 </template>
 
 <script>
-import deepEqual from 'deep-equal'
 import { openURL, extend } from 'quasar'
 import EditableText from 'src/components/EditableText.vue'
 import EditableLink from 'src/components/EditableLink.vue'
+import deepEqual from 'deep-equal'
 export default {
   components: { EditableText, EditableLink },
   data () {
     return {
       leagueImage: '',
       openURL: openURL,
-      editLeague: null,
       publishing: false
     }
   },
@@ -60,20 +59,24 @@ export default {
   },
   computed: {
     hasChanges () {
-      return !deepEqual(this.editLeague, this.league)
+      return !deepEqual(this.league, this.$store.getters[`${this.leagueId}/info`])
     }
   },
   mounted () {
     this.imageSource()
   },
   methods: {
+    changeLeagueProperty (key, value) {
+      this.$store.commit(`edit_${this.leagueId}/setLeagueProperty`, { key: key, value: value })
+    },
     discardChanges () {
-      this.editLeague = extend(true, {}, this.league)
+      // this.editLeague = extend(true, {}, this.league)
+      this.$store.dispatch(`edit_${this.leagueId}/resetLeagueInfo`)
     },
     publishChanges () {
       // Dispatch the editLeague object as changes to publish.
       this.publishing = true
-      this.$store.dispatch(`${this.leagueId}/publishChanges`, this.editLeague)
+      this.$store.dispatch(`edit_${this.leagueId}/publishInfoChanges`)
         .then(() => {
           this.$q.notify({
             position: 'top',
