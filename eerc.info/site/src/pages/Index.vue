@@ -5,8 +5,8 @@
       navigation
       infinite
       swipeable
-      autoplay
       arrows
+      autoplay
       style="max-width:100vw; height:92vh;"
     >
       <q-carousel-slide :name="1"
@@ -24,13 +24,13 @@
         class="column no-wrap justifycenter items-start q-px-xl q-py-xl"
         img-src="/images/carousel/discord-hero.png"
       >
-        <div class="column no-wrap" style="max-width:75vw">
+        <div class="column no-wrap full-width" style="max-width:75vw">
           <h1 class="text-uppercase text-bold q-ma-none"
             :class="{ 'text-h2':$q.screen.xs || $q.platform.is.mobile }"
           >Discord</h1>
           <h6 class="q-ma-none text-uppercase text-justify">Join our discord server and be a part of the community.</h6>
         </div>
-        <q-space/>
+        <iframe v-if="!($q.platform.is.mobile || $q.screen.xs)" class="self-end" src="https://discord.com/widget?id=499941840683008006&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
         <q-btn class="self-end" size="xl" label="join" icon="mdi-discord" flat
         :class="$q.screen.xs || $q.platform.is.mobile ? 'self-center' : 'self-end'"
         @click="openURL('https://discord.gg/sZ8N33xPGf')"/>
