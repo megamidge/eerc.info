@@ -3,9 +3,9 @@ import {
 } from 'services/firebase/firestore'
 import { firestoreAction } from 'vuexfire'
 
-export function setupSession ({ dispatch, commit }, { leagueId, seasonId, eventId, session, collection, sync }) {
+export function setupSession ({ dispatch, commit }, { leagueId, seasonId, eventId, sessionId, collection, sync }) {
   commit('setSync', sync)
-  dispatch('getSessionResults', { leagueId, seasonId, eventId, sessionId: session.id, collection, sync })
+  dispatch('getSessionResults', { leagueId, seasonId, eventId, sessionId, collection, sync })
 }
 
 export const getSessionResults = firestoreAction(({ bindFirestoreRef, commit }, { leagueId, seasonId, eventId, sessionId, collection, sync }) => {
@@ -21,6 +21,10 @@ export const getSessionResults = firestoreAction(({ bindFirestoreRef, commit }, 
   })
 })
 
-export function reset () {
-  console.log('reset event')
+export function reset ({ dispatch }, { leagueId, seasonId, eventId, sessionId, collection, sync }) {
+  dispatch('setupSession', { leagueId, seasonId, eventId, sessionId, collection, sync })
+}
+
+export function resetResults ({ dispatch }, { leagueId, seasonId, eventId, sessionId, collection, sync }) {
+  dispatch('getSessionResults', { leagueId, seasonId, eventId, sessionId, collection, sync })
 }

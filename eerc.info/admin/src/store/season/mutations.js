@@ -14,3 +14,8 @@ export function setEventProperty (state, { key, value, id }) {
   const index = state.events.findIndex(e => e.id === id)
   state.events[index][key] = value
 }
+
+export function setEventLocationProperty (state, { key, value, id }) {
+  const index = state.events.findIndex(e => e.id === id)
+  state.events[index].location[key] = value
+}

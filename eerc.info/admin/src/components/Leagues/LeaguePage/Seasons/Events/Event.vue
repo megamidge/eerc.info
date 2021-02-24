@@ -17,16 +17,17 @@
           <div class="row justify-start">
             <div class="q-mr-lg" v-for="key in Object.keys(event.location)" :key="key">
                 <p class="q-ma-none text-subtitle2 text-capitalize">{{key}}</p>
-                <editable-text :value="event.location[key]" @input="changeEventProperty(`location.${key}`,$event)"/>
+                <editable-text :value="event.location[key]" @input="changeEventLocationProperty(key,$event)"/>
             </div>
           </div>
           <div>
             <p class="q-ma-none text-subtitle2 text-capitalize">Event Type</p>
-            <editable-text v-model="event.type"/>
+            <editable-text :value="event.type" @input="changeEventProperty('type', $event)"/>
+            <!-- TODO: This should be a combo-box. Options = [rally, rally-cross, race, ...]. Basically an option for each basic event structure that requires something more than a default. -->
           </div>
       </q-card-section>
       <q-card-section>
-          <p class="q-ma-none text-subtitle1">{{sessionsLabel}}</p>
+          <p class="q-ma-none text-subtitle1">{{ sessionsLabel }}</p>
           <div class="row justify-start items-stretch">
             <div
               class="q-pa-sm col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-3"
@@ -56,6 +57,7 @@
 <script>
 import EditableText from 'components/EditableText'
 import Session from 'components/Leagues/LeaguePage/Seasons/Events/Sessions/Session'
+import deepEqual from 'deep-equal'
 export default {
   components: { EditableText, Session },
   data () {
@@ -89,38 +91,45 @@ export default {
       return this.$store.getters[`edit_${this.leagueId}/${this.seasonId}/${this.event.id}/sessions`]
     },
     hasChanges () {
-      return false
+      return !deepEqual(this.event, this.$store.getters[`${this.leagueId}/${this.seasonId}/event`](this.event.id)) ||
+        !deepEqual(this.sessions, this.$store.getters[`${this.leagueId}/${this.seasonId}/${this.event.id}/sessions`]) ||
+        this.sessions.some(session => {
+          return !deepEqual(
+            this.$store.getters[`edit_${this.leagueId}/${this.seasonId}/${this.event.id}/${session.id}/results`],
+            this.$store.getters[`${this.leagueId}/${this.seasonId}/${this.event.id}/${session.id}/results`]
+          )
+        })
     }
   },
   methods: {
     changeEventProperty (key, value) {
       this.$store.commit(`edit_${this.leagueId}/${this.seasonId}/setEventProperty`, { key, value, id: this.event.id })
     },
+    changeEventLocationProperty (key, value) {
+      this.$store.commit(`edit_${this.leagueId}/${this.seasonId}/setEventLocationProperty`, { key, value, id: this.event.id })
+    },
     addSession () {
-      this.editSessions.push({
+      const newSession = {
         id: `New ${this.sessionsLabel.substring(0, this.sessionsLabel.length - 1)} ${('000' + (Math.random() * 100)).slice(-3)}`,
         name: 'Stage/Qualifying/Race, etc'
-      })
+      }
+      this.$store.commit(`edit_${this.leagueId}/${this.seasonId}/${this.event.id}/createSession`, newSession)
     },
     deleteSession (sessionId) {
-      // const sessionIndex = this.editSessions.findIndex(s => s.id === sessionId)
-      // this.deletedSession = extend(true, {}, this.editSessions[sessionIndex])
-      // this.deletedSessionIndex = sessionIndex
-      // this.$delete(this.editSessions, sessionIndex)
-      // this.$q.notify({
-      //   group: 'delete',
-      //   position: 'bottom',
-      //   type: 'warning',
-      //   message: `${sessionId} deleted.`,
-      //   timeout: 5000,
-      //   classes: 'text-subtitle1 text-bold',
-      //   actions: [
-      //     { label: 'Undo', icon: 'mdi-undo', handler: this.undoSessionDelete }
-      //   ]
-      // })
+      this.$store.commit(`edit_${this.leagueId}/${this.seasonId}/${this.event.id}/deleteSession`, sessionId)
+      this.$q.notify({
+        position: 'bottom',
+        type: 'warning',
+        message: `${sessionId} deleted.`,
+        timeout: 5000,
+        classes: 'text-subtitle1 text-bold',
+        actions: [
+          { label: 'Undo', icon: 'mdi-undo', handler: () => this.undoSessionDelete(sessionId) }
+        ]
+      })
     },
-    undoSessionDelete () {
-      this.editSessions.splice(this.deletedSessionIndex, 0, this.deletedSession)
+    undoSessionDelete (sessionId) {
+      this.$store.commit(`edit_${this.leagueId}/${this.seasonId}/${this.event.id}/undoSessionDelete`, sessionId)
     },
     discardChanges () {
       // this.editSessions = this.sessions.map(s => {

@@ -8,3 +8,8 @@ export function info (state) {
 export function seasons (state) {
   return state.seasons
 }
+export function season (state) {
+  return (id) => {
+    return state.seasons.find(s => s.id === id)
+  }
+}

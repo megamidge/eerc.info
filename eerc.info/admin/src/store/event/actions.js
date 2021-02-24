@@ -47,7 +47,7 @@ function sessionWatcher (sessions, leagueId, seasonId, eventId, collection, cont
   sessions.forEach(session => {
     if (!context.hasModule([leagueModuleName, seasonId, eventId, session.id])) {
       context.registerModule([leagueModuleName, seasonId, eventId, session.id], sessionModule)
-      dispatch(`${session.id}/setupSession`, { leagueId, seasonId, eventId, session, collection, sync })
+      dispatch(`${session.id}/setupSession`, { leagueId, seasonId, eventId, sessionId: session.id, collection, sync })
     }
   })
 }

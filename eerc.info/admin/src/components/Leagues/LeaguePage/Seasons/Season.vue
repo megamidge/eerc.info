@@ -51,11 +51,19 @@ export default {
   },
   computed: {
     hasChanges () {
-      const season = this.$store.getters[`${this.leagueId}/seasons`].find(s => s.id === this.season.id)
-      var seasonChanged = false
-      if (!season) seasonChanged = true
-      else seasonChanged = !deepEqual(this.season, season)
-      return seasonChanged
+      return !deepEqual(this.season, this.$store.getters[`${this.leagueId}/season`](this.season.id)) ||
+        this.events
+          .some(event => {
+            return !deepEqual(event, this.$store.getters[`${this.leagueId}/${this.season.id}/event`](event.id)) ||
+            !deepEqual(this.$store.getters[`edit_${this.leagueId}/${this.season.id}/${event.id}/sessions`], this.$store.getters[`${this.leagueId}/${this.season.id}/${event.id}/sessions`]) ||
+            this.$store.getters[`edit_${this.leagueId}/${this.season.id}/${event.id}/sessions`]
+              .some(session => {
+                return !deepEqual(
+                  this.$store.getters[`edit_${this.leagueId}/${this.season.id}/${event.id}/${session.id}/results`],
+                  this.$store.getters[`${this.leagueId}/${this.season.id}/${event.id}/${session.id}/results`]
+                )
+              })
+          })
     },
     events () {
       return this.$store.getters[`edit_${this.leagueId}/${this.season.id}/seasonEvents`]

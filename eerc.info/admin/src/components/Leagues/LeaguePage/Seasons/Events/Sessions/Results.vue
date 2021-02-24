@@ -15,14 +15,13 @@
       </q-card-actions>
       <q-card-section class="q-pa-xs">
           <q-table
-            v-if="results.length > 0"
             :columns="tables[eventType].columns"
             :pagination="tables[eventType].pagination"
             :data="results"
             dense
             flat
             hide-pagination
-            row-key="name"
+            row-key="id"
           >
             <template v-slot:header="props">
                 <q-tr :props="props" class="bg-secondary">
@@ -32,7 +31,7 @@
                 </q-tr>
             </template>
             <template v-slot:body="props">
-                <q-tr :props="props" :class="{'tinted':props.rowIndex%2===0}" :key="props.row.driver.name">
+                <q-tr :props="props" :class="{'tinted':props.rowIndex%2===0}" :key="props.row.id">
                     <q-td :props="props" v-for="col in props.cols" :key="col.name"
                         :auto-width="col.name === 'position' || col.name === 'delete'"
                         class="flash-in"
@@ -139,10 +138,7 @@ export default {
               classes: 'ellipsis',
               editable: true,
               edit: (val, row) => {
-                const rowToModify = this.results.findIndex(r => {
-                  return deepEqual(r, row)
-                })
-                this.results[rowToModify].driver = val
+                this.modifyResult(row.id, 'driver', val)
               }
             },
             {
@@ -153,10 +149,7 @@ export default {
               align: 'left',
               editable: true,
               edit: (val, row) => {
-                const rowToModify = this.results.findIndex(r => {
-                  return deepEqual(r, row)
-                })
-                this.results[rowToModify].vehicle = val
+                this.modifyResult(row.id, 'vehicle', val)
               }
             },
             {
@@ -182,10 +175,7 @@ export default {
                 if (seconds && !isNaN(seconds)) totalMillis += seconds * 1000
                 if (minutes && !isNaN(minutes)) totalMillis += minutes * 60000
                 if (hours && !isNaN(hours)) totalMillis += hours * 3600000
-                const rowToModify = this.results.findIndex(r => {
-                  return deepEqual(r, row)
-                })
-                this.results[rowToModify].time = parseInt(totalMillis)
+                this.modifyResult(row.id, 'time', totalMillis)
               }
             },
             {
@@ -211,37 +201,48 @@ export default {
   },
   computed: {
     hasChanges () {
-      console.log(`${this.leagueId}/${this.seasonId}/${this.eventId}/${this.session.id}/results`)
       return !deepEqual(this.results, this.$store.getters[`${this.leagueId}/${this.seasonId}/${this.eventId}/${this.session.id}/results`])
     }
   },
   methods: {
+    modifyResult (resultId, field, value) {
+      this.$store.commit(`edit_${this.leagueId}/${this.seasonId}/${this.eventId}/${this.session.id}/setResult`, {
+        id: resultId,
+        field: field,
+        value: value
+      })
+    },
     discardChanges () {
-      this.$store.dispatch(`edit_${this.leagueId}/${this.seasonId}/${this.eventId}/${this.session.id}/reset`)
+      this.$store.dispatch(`edit_${this.leagueId}/${this.seasonId}/${this.eventId}/${this.session.id}/resetResults`, {
+        leagueId: this.leagueId,
+        seasonId: this.seasonId,
+        eventId: this.eventId,
+        sessionId: this.session.id,
+        collection: this.eventType === 'rally' ? 'stages' : 'sessions',
+        sync: false
+      })
     },
     deleteRow (row) {
-      const rowToDel = this.results.findIndex(r => {
-        return deepEqual(r, row)
-      })
-      this.$delete(this.results, rowToDel)
+      this.$store.commit(`edit_${this.leagueId}/${this.seasonId}/${this.eventId}/${this.session.id}/deleteResult`, row.id)
     },
     addRow () {
-      console.log('addRow')
-      // switch based on eventType...
+      var newResult
       switch (this.eventType) {
-        case 'rally': {
-          this.results.push({
+        case 'rally':
+          newResult = {
             driver: {
               name: 'New Driver',
               countryCode: 'european-union'
             },
             vehicle: 'Vehicle',
             time: null
-          })
+          }
           break
-        }
-        default:break
+
+        default:
+          break
       }
+      this.$store.commit(`edit_${this.leagueId}/${this.seasonId}/${this.eventId}/${this.session.id}/addResult`, newResult)
     },
     // formats a millisecond timestamp as  hh:mm:ss:sss.
     // strip object allows to omit hours, minutes, seconds from return value.
