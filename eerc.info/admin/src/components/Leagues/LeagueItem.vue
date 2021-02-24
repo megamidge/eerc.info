@@ -84,9 +84,9 @@ export default {
     },
     leagueDispatch () {
       if (this.league) {
-        this.$store.dispatch('data/registerLeagueModule', this.league).then(() => {
+        this.$store.dispatch('data/registerLeagueModule', this.league.id).then(() => {
           // module has been resgister, get it to fetch data
-          this.$store.dispatch(`${this.league.id}/fetchLeague`, this.league.id)
+          this.$store.dispatch(`${this.league.id}/fetchLeague`, { leagueId: this.league.id, sync: true })
         })
         if (this.leagueWatcher) { this.leagueWatcher() }
       }
