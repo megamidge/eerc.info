@@ -123,7 +123,10 @@ export default {
     publishChanges () {
       // Dispatch the editLeague object as changes to publish.
       this.publishing = true
-      this.$store.dispatch(`edit_${this.leagueId}/${this.season.id}/publishSeasonChanges`, {})
+      this.$store.dispatch(`edit_${this.leagueId}/${this.season.id}/publishSeasonChanges`, {
+        leagueId: this.leagueId,
+        seasonId: this.season.id
+      })
         .then(() => {
           this.$q.notify({
             position: 'top',

@@ -52,6 +52,7 @@ function sessionWatcher (sessions, leagueId, seasonId, eventId, collection, cont
   })
 }
 
-export function reset ({ dispatch }, { leagueId, seasonId, eventId, collection, sync }) {
+export function reset ({ dispatch, commit }, { leagueId, seasonId, eventId, collection, sync }) {
+  commit('clearDeletedSessions')
   dispatch('getEventSessions', { leagueId, seasonId, eventId, collection, sync })
 }

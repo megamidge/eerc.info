@@ -40,3 +40,6 @@ export function undoSessionDelete (state, sessionId) {
   console.log(deletedSession.index)
   state.sessions.splice(deletedSession.index, 0, deletedSession.value)
 }
+export function clearDeletedSessions (state) {
+  state.deletedSessions = []
+}

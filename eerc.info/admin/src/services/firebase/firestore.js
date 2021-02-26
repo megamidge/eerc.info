@@ -72,3 +72,39 @@ export const publishLeagueChanges = (leagueId, data) => {
     return Promise.resolve()
   })
 }
+export const publishSeasonChanges = (changes) => {
+  // changes is an array in the format { path, id, data }
+  // the path indicates where the document is
+  // the id is.. the document id
+  // the data is the new data that should be in the document
+  // if id is undefined, blank, null, we need to create a new document
+  // if data blank, undefined, null, we need to DELETE the document
+  // if both ID and DATA happen to be blank (shouldn't happen), ignore it honestly.
+  return firestore().runTransaction(transaction => {
+    changes.forEach(change => {
+      console.log('change', change)
+
+      var ref
+      if (change.id) {
+        ref = firestore().collection(change.path).doc(change.id)
+      } else {
+        ref = firestore().collection(change.path).doc()
+      }
+      if (change.data) {
+        // set (might as well merge it)
+        console.log('set', JSON.stringify(change.data))
+        transaction.set(ref, change.data, { merge: true })
+      } else {
+        // delete
+        transaction.delete(ref)
+      }
+    })
+
+    const action = {
+      name: 'publishSeasonChanges',
+      data: changes.map(c => ({ ...c, id: c.id ? c.id : 'new' }))
+    }
+    logAction(action, transaction)
+    return Promise.resolve()
+  })
+}

@@ -1,6 +1,7 @@
 import { firestoreAction } from 'vuexfire'
 import {
-  leagueSeasonEventsRef
+  leagueSeasonEventsRef,
+  publishSeasonChanges as fsPublishSeasonChanges
 } from 'src/services/firebase/firestore'
 /*
 export function someAction (context) {
@@ -43,6 +44,79 @@ export function reset ({ dispatch }, { leagueId, seasonId, sync }) {
   dispatch('getSeasonEvents', { leagueId, seasonId, sync })
 }
 
-export function publishSeasonChanges (context) {
-  console.log('Publish season [NOT IMPLEMENTED]')
+import deepEqual from 'deep-equal'
+export function publishSeasonChanges (context, { leagueId, seasonId }) {
+  const changes = [] // any items that are different to the synced/live version of the data are pushed into this array in {path,id,data} format.
+  // if the change is a DELETE, data should be undefined or null or an empty object.
+  // if the ID is undefined, firebase should create one for us.
+  console.log('context', context)
+  const season = context.rootGetters[`edit_${leagueId}/season`](seasonId)
+  // console.log('season', season.id, season)
+  if (!deepEqual(season, context.rootGetters[`${leagueId}/season`](seasonId))) {
+    changes.push({
+      path: `leagues/${leagueId}/seasons`,
+      id: season.id,
+      data: { ...season }
+    })
+  }
+  const events = context.getters.seasonEvents
+  events.forEach(event => {
+    // console.log('event', event.id, event)
+    if (!deepEqual(event, context.rootGetters[`${leagueId}/${seasonId}/event`](event.id))) {
+      changes.push({
+        path: `leagues/${leagueId}/seasons/${seasonId}/events`,
+        id: event.id,
+        data: { ...event }
+      })
+    }
+    const collectionName = event.type === 'rally' ? 'stages' : 'sessions'
+    const sessions = context.getters[`${event.id}/sessions`]
+    const deletedSessions = context.getters[`${event.id}/sessionsDeleted`]
+    deletedSessions.forEach(session => {
+      changes.push({
+        path: `leagues/${leagueId}/seasons/${seasonId}/events/${event.id}/${collectionName}`,
+        id: session.value.id,
+        data: null
+      })
+    })
+    sessions.forEach(session => {
+      // console.log('session', session.id, session)
+      if (!deepEqual(session, context.rootGetters[`${leagueId}/${seasonId}/${event.id}/session`](session.id))) {
+        changes.push({
+          path: `leagues/${leagueId}/seasons/${seasonId}/events/${event.id}/${collectionName}`,
+          id: session.id,
+          data: { ...session }
+        })
+      }
+
+      const liveResults = context.rootGetters[`${leagueId}/${seasonId}/${event.id}/${session.id}/results`]
+      const results = context.getters[`${event.id}/${session.id}/results`]
+      // find all the results that are in `liveResults` but not in `results`.
+      if (liveResults) {
+        // this only needs doing if there are actually any liveResults for this session :)
+        const difference = liveResults.filter(lr => {
+          return !results.find(r => r.id === lr.id)
+        })
+        // push those results as delete changes...
+        difference.forEach(result => {
+          changes.push({
+            path: `leagues/${leagueId}/seasons/${seasonId}/events/${event.id}/${collectionName}/${session.id}/results`,
+            id: result.id,
+            data: null
+          })
+        })
+      }
+      results.forEach(result => {
+        // console.log('result', result.id, result)
+        if (!deepEqual(result, context.rootGetters[`${leagueId}/${seasonId}/${event.id}/${session.id}/result`](result.id))) {
+          changes.push({
+            path: `leagues/${leagueId}/seasons/${seasonId}/events/${event.id}/${collectionName}/${session.id}/results`,
+            id: result.id,
+            data: { ...result }
+          })
+        }
+      })
+    })
+  })
+  fsPublishSeasonChanges(changes)
 }

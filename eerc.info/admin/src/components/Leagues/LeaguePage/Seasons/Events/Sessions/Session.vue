@@ -75,7 +75,6 @@ export default {
   },
   methods: {
     changeSessionProperty (key, value) {
-      console.log('changeSessionProperty', key, value)
       this.$store.commit(`edit_${this.leagueId}/${this.seasonId}/${this.eventId}/setSessionProperty`, { key, value, id: this.session.id })
     },
     discardChanges () {
