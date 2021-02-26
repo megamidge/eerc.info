@@ -9,7 +9,11 @@ export function setSessions (state, sessions) {
 
 export function setSession (state, { sessionId, newData }) {
   const index = state.sessions.findIndex(s => s.id === sessionId)
-  Vue.set(state.sessions, index, newData)
+  var updatedSession = {
+    ...newData
+  }
+  Object.defineProperty(updatedSession, 'id', { value: sessionId, enumerable: false })
+  Vue.set(state.sessions, index, updatedSession)
 }
 
 export function setSessionProperty (state, { key, value, id }) {
@@ -18,7 +22,9 @@ export function setSessionProperty (state, { key, value, id }) {
 }
 
 export function createSession (state, newSession) {
-  state.sessions.push(newSession)
+  var session = { name: newSession.name }
+  Object.defineProperty(session, 'id', { value: newSession.id, enumerable: false })
+  state.sessions.push(session)
 }
 export function deleteSession (state, sessionId) {
   const index = state.sessions.findIndex(s => s.id === sessionId)

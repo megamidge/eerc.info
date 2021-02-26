@@ -79,16 +79,50 @@ export default {
       else this.editEventsChanged[index].changed = changed
     },
     discardChanges () {
-      this.$store.dispatch(`edit_${this.leagueId}/${this.season.id}/reset`)
+      this.$store.commit(`edit_${this.leagueId}/setSeason`, {
+        seasonId: this.season.id,
+        newData: this.$store.getters[`${this.leagueId}/season`](this.season.id)
+      })
+      this.$store.dispatch(`edit_${this.leagueId}/${this.season.id}/reset`, {
+        leagueId: this.leagueId,
+        seasonId: this.season.id,
+        sync: false
+      })
+      this.events.forEach(event => {
+        if (this.$store.getters[`${this.leagueId}/${this.season.id}/event`](event.id)) {
+          this.$store.commit(`edit_${this.leagueId}/${this.season.id}/setEvent`, {
+            eventId: event.id,
+            newData: this.$store.getters[`${this.leagueId}/${this.season.id}/event`](event.id)
+          })
+          this.$store.dispatch(`edit_${this.leagueId}/${this.season.id}/${event.id}/reset`, {
+            leagueId: this.leagueId,
+            seasonId: this.season.id,
+            eventId: event.id,
+            collection: event.type === 'rally' ? 'stages' : 'sessions',
+            sync: false
+          })
+          this.$store.getters[`edit_${this.leagueId}/${this.season.id}/${event.id}/sessions`].forEach(session => {
+            if (this.$store.getters[`${this.leagueId}/${this.season.id}/${event.id}/session`](session.id)) {
+              this.$store.commit(`edit_${this.leagueId}/${this.season.id}/${event.id}/setSession`, {
+                sessionId: session.id,
+                newData: this.$store.getters[`${this.leagueId}/${this.season.id}/${event.id}/session`](session.id)
+              })
+              this.$store.dispatch(`edit_${this.leagueId}/${this.season.id}/${event.id}/${session.id}/resetResults`, {
+                leagueId: this.leagueId,
+                seasonId: this.season.id,
+                eventId: event.id,
+                sessionId: session.id,
+                collection: event.type === 'rally' ? 'stages' : 'sessions',
+                sync: false
+              })
+            }
+          })
+        }
+      })
     },
     publishChanges () {
       // Dispatch the editLeague object as changes to publish.
       this.publishing = true
-      this.$q.notify({
-        position: 'top',
-        type: 'warning',
-        message: 'Error: not implemented yet.'
-      })
       this.$store.dispatch(`edit_${this.leagueId}/${this.season.id}/publishSeasonChanges`, {})
         .then(() => {
           this.$q.notify({

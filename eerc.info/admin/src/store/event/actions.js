@@ -52,6 +52,6 @@ function sessionWatcher (sessions, leagueId, seasonId, eventId, collection, cont
   })
 }
 
-export function reset () {
-  console.log('reset event')
+export function reset ({ dispatch }, { leagueId, seasonId, eventId, collection, sync }) {
+  dispatch('getEventSessions', { leagueId, seasonId, eventId, collection, sync })
 }

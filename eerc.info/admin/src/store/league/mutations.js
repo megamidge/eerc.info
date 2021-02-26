@@ -28,3 +28,13 @@ export function setSeasonClass (state, { seasonId, vehicleClass }) {
   if (index >= 0)
     state.seasons[index].vehicleClass = vehicleClass
 }
+
+import Vue from 'vue'
+export function setSeason (state, { seasonId, newData }) {
+  const index = state.seasons.findIndex(s => s.id === seasonId)
+  var updatedSeason = {
+    ...newData
+  }
+  Object.defineProperty(updatedSeason, 'id', { value: seasonId, enumerable: false })
+  Vue.set(state.seasons, index, updatedSeason)
+}

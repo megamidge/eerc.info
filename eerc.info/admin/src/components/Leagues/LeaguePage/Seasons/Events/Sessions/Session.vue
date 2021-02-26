@@ -1,7 +1,7 @@
 <template>
   <q-card>
       <q-card-section>
-          <editable-text class="q-ma-none text-body1" :value="session.id" @input="changeSessionProperty('id', $event)"/>
+          <p class="q-ma-none text-body1">{{ session.id }}</p>
           <editable-text class="q-ma-none text-body2" :value="session.name" @input="changeSessionProperty('name', $event)"/>
       </q-card-section>
       <q-card-section class="row justify-between items-center">

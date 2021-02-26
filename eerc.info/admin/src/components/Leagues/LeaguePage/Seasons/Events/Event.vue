@@ -45,9 +45,27 @@
               />
             </div>
             <div class="q-pa-sm col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
-              <q-card flat class="bg-dark full-height flex flex-center transparent add-stage" @click="addSession">
+              <q-card flat class="bg-dark full-height flex flex-center transparent add-stage" @click="showAddSessionDialog = true">
                 <q-btn flat :label="`Add ${sessionsLabel.substring(0,sessionsLabel.length-1)}`"/>
               </q-card>
+              <q-dialog v-model="showAddSessionDialog">
+                <q-card>
+                  <q-card-section>
+                    <p class="q-ma-none text-subtitle1">Add {{ sessionsLabelSingular }}</p>
+                  </q-card-section>
+                  <q-card-section>
+                    <div class="row">
+                      <q-input v-model="newSessionId" :label="`New ${sessionsLabelSingular} ID`" :hint="`Enter an ID for the new ${sessionsLabelSingular}`" :disable="autoNewSessionId" />
+                      <q-checkbox v-model="autoNewSessionId" label="Auto ID"/>
+                    </div>
+                    <p class="text-secondary q-mb-none q-mt-md text-bold">This cannot be changed later.</p>
+                  </q-card-section>
+                  <q-card-actions class="row justify-end">
+                    <q-btn color="secondary" flat label="Cancel" @click="()=>{showAddSessionDialog = false;newSessionId=null}"/>
+                    <q-btn color="secondary" unelevated label="Confirm" @click="()=>{showAddSessionDialog = false; addSession()}"/>
+                  </q-card-actions>
+                </q-card>
+              </q-dialog>
             </div>
           </div>
       </q-card-section>
@@ -63,7 +81,10 @@ export default {
   data () {
     return {
       deletedSession: null,
-      deletedSessionIndex: null
+      deletedSessionIndex: null,
+      showAddSessionDialog: false,
+      autoNewSessionId: true,
+      privNewSessionId: null
     }
   },
   props: {
@@ -81,11 +102,33 @@ export default {
     }
   },
   computed: {
+    newSessionId: {
+      get () {
+        if (this.autoNewSessionId) {
+          const newSessionNumber = ('0' + (this.sessions.length + 1)).slice(-2)
+          switch (this.event.type) {
+            case 'rally': {
+              return `Stage ${newSessionNumber}`
+            }
+            default: {
+              return `Session ${newSessionNumber}`
+            }
+          }
+        } else
+          return this.privNewSessionId
+      },
+      set (value) {
+        this.privNewSessionId = value
+      }
+    },
     sessionsLabel () {
       switch (this.event.type) {
         case 'rally': return 'Stages'
         default: return 'Sessions'
       }
+    },
+    sessionsLabelSingular () {
+      return this.sessionsLabel.substring(0, this.sessionsLabel.length - 1)
     },
     sessions () {
       return this.$store.getters[`edit_${this.leagueId}/${this.seasonId}/${this.event.id}/sessions`]
@@ -110,7 +153,7 @@ export default {
     },
     addSession () {
       const newSession = {
-        id: `New ${this.sessionsLabel.substring(0, this.sessionsLabel.length - 1)} ${('000' + (Math.random() * 100)).slice(-3)}`,
+        id: this.newSessionId,
         name: 'Stage/Qualifying/Race, etc'
       }
       this.$store.commit(`edit_${this.leagueId}/${this.seasonId}/${this.event.id}/createSession`, newSession)
@@ -132,16 +175,33 @@ export default {
       this.$store.commit(`edit_${this.leagueId}/${this.seasonId}/${this.event.id}/undoSessionDelete`, sessionId)
     },
     discardChanges () {
-      // this.editSessions = this.sessions.map(s => {
-      //   return {
-      //     id: s.id,
-      //     ...s
-      //   }
-      // })
-      // this.editEvent = {
-      //   id: this.event.id,
-      //   ...extend(true, {}, this.event)
-      // }
+      this.$store.commit(`edit_${this.leagueId}/${this.seasonId}/setEvent`, {
+        eventId: this.event.id,
+        newData: this.$store.getters[`${this.leagueId}/${this.seasonId}/event`](this.event.id)
+      })
+      this.$store.dispatch(`edit_${this.leagueId}/${this.seasonId}/${this.event.id}/reset`, {
+        leagueId: this.leagueId,
+        seasonId: this.seasonId,
+        eventId: this.event.id,
+        collection: this.event.type === 'rally' ? 'stages' : 'sessions',
+        sync: false
+      })
+      this.sessions.forEach(session => {
+        if (this.$store.getters[`${this.leagueId}/${this.seasonId}/${this.event.id}/session`](session.id)) {
+          this.$store.commit(`edit_${this.leagueId}/${this.seasonId}/${this.event.id}/setSession`, {
+            sessionId: session.id,
+            newData: this.$store.getters[`${this.leagueId}/${this.seasonId}/${this.event.id}/session`](session.id)
+          })
+          this.$store.dispatch(`edit_${this.leagueId}/${this.seasonId}/${this.event.id}/${session.id}/resetResults`, {
+            leagueId: this.leagueId,
+            seasonId: this.seasonId,
+            eventId: this.event.id,
+            sessionId: session.id,
+            collection: this.event.type === 'rally' ? 'stages' : 'sessions',
+            sync: false
+          })
+        }
+      })
     }
   }
 }

@@ -39,8 +39,8 @@ function eventWatcher (events, leagueId, seasonId, context, dispatch, sync) {
   })
 }
 
-export function reset (context) {
-  console.log('Reset season [NOT IMPLEMENTED]')
+export function reset ({ dispatch }, { leagueId, seasonId, sync }) {
+  dispatch('getSeasonEvents', { leagueId, seasonId, sync })
 }
 
 export function publishSeasonChanges (context) {
