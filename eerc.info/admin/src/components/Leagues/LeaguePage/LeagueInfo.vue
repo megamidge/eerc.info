@@ -71,7 +71,7 @@ export default {
     },
     discardChanges () {
       // this.editLeague = extend(true, {}, this.league)
-      this.$store.dispatch(`edit_${this.leagueId}/resetLeagueInfo`)
+      this.$store.dispatch(`edit_${this.leagueId}/resetLeagueInfo`, { leagueId: this.leagueId, sync: false })
     },
     publishChanges () {
       // Dispatch the editLeague object as changes to publish.

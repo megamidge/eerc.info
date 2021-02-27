@@ -57,9 +57,8 @@ function seasonWatcher (seasons, leagueId, context, dispatch, sync) {
   })
 }
 
-export function resetLeagueInfo ({ dispatch, getters }) {
-  console.log('resetLeagueInfo', getters)
-  // dispatch('getLeagueInfo')
+export function resetLeagueInfo ({ dispatch }, { leagueId, sync }) {
+  dispatch('getLeagueInfo', { leagueId, sync })
 }
 
 export function publishInfoChanges ({ state }) {
