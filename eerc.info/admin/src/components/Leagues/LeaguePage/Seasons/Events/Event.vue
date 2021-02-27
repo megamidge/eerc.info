@@ -22,9 +22,31 @@
           </div>
           <div>
             <p class="q-ma-none text-subtitle2 text-capitalize">Event Type</p>
-            <editable-text :value="event.type" @input="changeEventProperty('type', $event)"/>
-            <!-- TODO: This should be a combo-box. Options = [rally, rally-cross, race, ...]. Basically an option for each basic event structure that requires something more than a default. -->
+            <q-select :value="event.type" @input="changeEventProperty('type',$event)" :options="eventTypes"/>
           </div>
+            <q-btn label="Delete" class="q-my-md" unelevated icon="mdi-delete" color="negative" @click="showDeleteEventConfirmation = true">
+              <q-tooltip>
+                Deletes this event.
+              </q-tooltip>
+            </q-btn>
+            <q-dialog v-model="showDeleteEventConfirmation" persistent>
+              <q-card class="bg-primary">
+                <q-card-section>
+                  <p class="q-ma-none text-subtitle1">Delete Event</p>
+                </q-card-section>
+                <q-card-section>
+                  <p class="q-ma-none">
+                    You are about to delete event {{ event.id }}.
+                    This event has {{ sessions.length }} {{ sessionsLabel }}.
+                  </p>
+                  <p class="q-ma-none text-secondary text-bold">Are you sure?</p>
+                </q-card-section>
+                <q-card-actions class="row justify-end">
+                  <q-btn unelevated label="Cancel" icon="mdi-cancel" v-close-popup color="secondary"/>
+                  <q-btn unelevated flat label="Confirm" icon="mdi-check-circle" @click="deleteEvent" color="secondary"/>
+                </q-card-actions>
+              </q-card>
+            </q-dialog>
       </q-card-section>
       <q-card-section>
           <p class="q-ma-none text-subtitle1">{{ sessionsLabel }}</p>
@@ -80,6 +102,8 @@ export default {
   components: { EditableText, Session },
   data () {
     return {
+      eventTypes: ['rally', 'rally-cross', 'race'],
+      showDeleteEventConfirmation: false,
       deletedSession: null,
       deletedSessionIndex: null,
       showAddSessionDialog: false,
@@ -145,6 +169,10 @@ export default {
     }
   },
   methods: {
+    deleteEvent () {
+      this.showDeleteEventConfirmation = false
+      this.$emit('delete')
+    },
     changeEventProperty (key, value) {
       this.$store.commit(`edit_${this.leagueId}/${this.seasonId}/setEventProperty`, { key, value, id: this.event.id })
     },

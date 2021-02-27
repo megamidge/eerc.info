@@ -24,7 +24,8 @@
           :leagueId="leagueId"
           :seasonId="season.id"
           :event="event"
-          class="col-12"
+          class="col-12 q-mb-xs"
+          @delete="deleteEvent(event.id)"
         />
       </div>
     </q-card-section>
@@ -57,6 +58,7 @@ export default {
   computed: {
     hasChanges () {
       return !deepEqual(this.season, this.$store.getters[`${this.leagueId}/season`](this.season.id)) ||
+        !deepEqual(this.events, this.$store.getters[`${this.leagueId}/${this.season.id}/seasonEvents`]) ||
         this.events
           .some(event => {
             return !deepEqual(event, this.$store.getters[`${this.leagueId}/${this.season.id}/event`](event.id)) ||
@@ -75,6 +77,23 @@ export default {
     }
   },
   methods: {
+    deleteEvent (eventId) {
+      this.$store.commit(`edit_${this.leagueId}/${this.season.id}/deleteEvent`, eventId)
+      this.$q.notify({
+        position: 'bottom',
+        type: 'warning',
+        message: `Event ${eventId} deleted.`,
+        timeout: 5000,
+        classes: 'text-subtitle1 text-bold',
+        icon: 'mdi-delete',
+        actions: [
+          { label: 'Undo', icon: 'mdi-undo', handler: () => this.undoEventDelete(eventId) }
+        ]
+      })
+    },
+    undoEventDelete (eventId) {
+      this.$store.commit(`edit_${this.leagueId}/${this.season.id}/undoEventDelete`, eventId)
+    },
     addEvent (event) {
       this.showAddEvent = false
       this.$store.commit(`edit_${this.leagueId}/${this.season.id}/createEvent`,

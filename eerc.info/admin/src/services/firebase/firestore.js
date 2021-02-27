@@ -85,8 +85,6 @@ export const publishSeasonChanges = (changes) => {
   // if both ID and DATA happen to be blank (shouldn't happen), ignore it honestly.
   return firestore().runTransaction(transaction => {
     changes.forEach(change => {
-      console.log('change', change)
-
       var ref
       if (change.id) {
         ref = firestore().collection(change.path).doc(change.id)
@@ -95,7 +93,6 @@ export const publishSeasonChanges = (changes) => {
       }
       if (change.data) {
         // set (might as well merge it)
-        console.log('set', JSON.stringify(change.data))
         transaction.set(ref, change.data, { merge: true })
       } else {
         // delete

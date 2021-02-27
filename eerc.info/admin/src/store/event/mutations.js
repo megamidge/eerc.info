@@ -26,6 +26,7 @@ export function createSession (state, newSession) {
   Object.defineProperty(session, 'id', { value: newSession.id, enumerable: false })
   state.sessions.push(session)
 }
+
 export function deleteSession (state, sessionId) {
   const index = state.sessions.findIndex(s => s.id === sessionId)
   state.deletedSessions.push({ index: index, value: state.sessions[index] })
@@ -37,7 +38,6 @@ export function undoSessionDelete (state, sessionId) {
   const deletedSession = state.deletedSessions.find(ds => ds.value.id === sessionId)
   const deletedIndex = state.deletedSessions.findIndex(ds => ds.value.id === sessionId)
   Vue.delete(state.deletedSessions, deletedIndex)
-  console.log(deletedSession.index)
   state.sessions.splice(deletedSession.index, 0, deletedSession.value)
 }
 export function clearDeletedSessions (state) {

@@ -40,7 +40,8 @@ function eventWatcher (events, leagueId, seasonId, context, dispatch, sync) {
   })
 }
 
-export function reset ({ dispatch }, { leagueId, seasonId, sync }) {
+export function reset ({ dispatch, commit }, { leagueId, seasonId, sync }) {
+  commit('clearDeletedEvents')
   dispatch('getSeasonEvents', { leagueId, seasonId, sync })
 }
 
@@ -59,6 +60,14 @@ export function publishSeasonChanges (context, { leagueId, seasonId }) {
       data: { ...season }
     })
   }
+  const deletedEvents = context.getters.eventsDeleted
+  deletedEvents.forEach(event => {
+    changes.push({
+      path: `leagues/${leagueId}/seasons/${seasonId}/events`,
+      id: event.value.id,
+      data: null
+    })
+  })
   const events = context.getters.seasonEvents
   events.forEach(event => {
     // console.log('event', event.id, event)
