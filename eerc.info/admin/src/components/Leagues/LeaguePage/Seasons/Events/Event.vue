@@ -158,7 +158,8 @@ export default {
       return this.$store.getters[`edit_${this.leagueId}/${this.seasonId}/${this.event.id}/sessions`]
     },
     hasChanges () {
-      return !deepEqual(this.event, this.$store.getters[`${this.leagueId}/${this.seasonId}/event`](this.event.id)) ||
+      const eventGet = this.$store.getters[`${this.leagueId}/${this.seasonId}/event`]
+      return !deepEqual(this.event, eventGet ? eventGet(this.event.id) : {}) ||
         !deepEqual(this.sessions, this.$store.getters[`${this.leagueId}/${this.seasonId}/${this.event.id}/sessions`]) ||
         this.sessions.some(session => {
           return !deepEqual(

@@ -6,7 +6,8 @@ import { firestoreAction } from 'vuexfire'
 import {
   leagueDocRef,
   leagueCollectionRef,
-  publishLeagueChanges
+  publishLeagueChanges,
+  publishSeasonChanges
 } from 'services/firebase/firestore'
 /*
 export function someAction (context) {
@@ -60,6 +61,10 @@ function seasonWatcher (seasons, leagueId, context, dispatch, sync) {
 export function resetLeagueInfo ({ dispatch }, { leagueId, sync }) {
   dispatch('getLeagueInfo', { leagueId, sync })
 }
+export function reset ({ dispatch, commit }, { leagueId, sync }) {
+  dispatch('getLeagueSeasons', { leagueId, sync })
+  commit('clearDeletedSeasons')
+}
 
 export function publishInfoChanges ({ state }) {
   console.log('state', state)
@@ -69,7 +74,19 @@ export function publishInfoChanges ({ state }) {
 export function publishChanges (context, changes) {
   return publishLeagueChanges(context.state.leagueInfo.id, changes)
 }
-
+export function publishDeletedSeasons (context, { leagueId }) {
+  var changes = []
+  context.state.deletedSeasons.forEach(deletedSeason => {
+    changes.push({
+      path: `leagues/${leagueId}/seasons`,
+      id: deletedSeason.value.id,
+      data: null
+    })
+  })
+  context.commit('clearDeletedSeasons')
+  console.log('Deleted Seasons', changes)
+  return publishSeasonChanges(changes)
+}
 export function toggleActive (context, active) {
   return publishLeagueChanges(context.state.leagueInfo.id, { active: active })
 }

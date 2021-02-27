@@ -50,7 +50,6 @@ export function publishSeasonChanges (context, { leagueId, seasonId }) {
   const changes = [] // any items that are different to the synced/live version of the data are pushed into this array in {path,id,data} format.
   // if the change is a DELETE, data should be undefined or null or an empty object.
   // if the ID is undefined, firebase should create one for us.
-  console.log('context', context)
   const season = context.rootGetters[`edit_${leagueId}/season`](seasonId)
   // console.log('season', season.id, season)
   if (!deepEqual(season, context.rootGetters[`${leagueId}/season`](seasonId))) {
@@ -71,7 +70,8 @@ export function publishSeasonChanges (context, { leagueId, seasonId }) {
   const events = context.getters.seasonEvents
   events.forEach(event => {
     // console.log('event', event.id, event)
-    if (!deepEqual(event, context.rootGetters[`${leagueId}/${seasonId}/event`](event.id))) {
+    const eventGet = context.rootGetters[`${leagueId}/${seasonId}/event`]
+    if (!deepEqual(event, eventGet ? eventGet(event.id) : {})) {
       changes.push({
         path: `leagues/${leagueId}/seasons/${seasonId}/events`,
         id: event.id,

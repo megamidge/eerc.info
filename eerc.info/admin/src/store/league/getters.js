@@ -13,3 +13,7 @@ export function season (state) {
     return state.seasons.find(s => s.id === id)
   }
 }
+
+export function deletedSeasons (state) {
+  return state.deletedSeasons
+}

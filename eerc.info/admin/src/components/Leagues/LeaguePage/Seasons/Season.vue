@@ -29,6 +29,31 @@
         />
       </div>
     </q-card-section>
+    <q-card-section class="row justify-end">
+      <q-btn label="Delete" class="q-my-md" unelevated icon="mdi-delete" color="negative" @click="showDeleteSeasonConfirmation = true">
+          <q-tooltip>
+            Deletes this season.
+          </q-tooltip>
+        </q-btn>
+        <q-dialog v-model="showDeleteSeasonConfirmation" persistent>
+          <q-card class="bg-primary">
+            <q-card-section>
+              <p class="q-ma-none text-subtitle1">Delete Season</p>
+            </q-card-section>
+            <q-card-section>
+              <p class="q-ma-none">
+                You are about to delete season {{ season.id }}.
+                This season has {{ events.length }} events.
+              </p>
+              <p class="q-ma-none text-secondary text-bold">Are you sure?</p>
+            </q-card-section>
+            <q-card-actions class="row justify-end">
+              <q-btn unelevated label="Cancel" icon="mdi-cancel" v-close-popup color="secondary"/>
+              <q-btn unelevated flat label="Confirm" icon="mdi-check-circle" @click="deleteSeason" color="secondary"/>
+            </q-card-actions>
+          </q-card>
+        </q-dialog>
+    </q-card-section>
   </q-card>
 </template>
 
@@ -52,12 +77,14 @@ export default {
   data () {
     return {
       publishing: false,
-      showAddEvent: false
+      showAddEvent: false,
+      showDeleteSeasonConfirmation: false
     }
   },
   computed: {
     hasChanges () {
-      return !deepEqual(this.season, this.$store.getters[`${this.leagueId}/season`](this.season.id)) ||
+      const seasonGetter = this.$store.getters[`${this.leagueId}/season`]
+      return !deepEqual(this.season, seasonGetter ? seasonGetter(this.season.id) : {}) ||
         !deepEqual(this.events, this.$store.getters[`${this.leagueId}/${this.season.id}/seasonEvents`]) ||
         this.events
           .some(event => {
@@ -77,6 +104,10 @@ export default {
     }
   },
   methods: {
+    deleteSeason () {
+      this.showDeleteEventConfirmation = false
+      this.$emit('delete')
+    },
     deleteEvent (eventId) {
       this.$store.commit(`edit_${this.leagueId}/${this.season.id}/deleteEvent`, eventId)
       this.$q.notify({
@@ -150,7 +181,6 @@ export default {
       })
     },
     publishChanges () {
-      // Dispatch the editLeague object as changes to publish.
       this.publishing = true
       this.$store.dispatch(`edit_${this.leagueId}/${this.season.id}/publishSeasonChanges`, {
         leagueId: this.leagueId,
