@@ -125,7 +125,7 @@ export default {
       return timeB - timeA
     },
     imageSource () {
-      this.$firebase.leagueStorageRef().child(`${this.event.image}`)
+      this.$firebase.leagueStorageRef().child(`EventImages/${this.event.image}`)
         .getDownloadURL()
         .then(url => {
           this.eventImage = url

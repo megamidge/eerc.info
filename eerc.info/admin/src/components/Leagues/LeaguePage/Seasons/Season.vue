@@ -13,16 +13,19 @@
     </q-card-section>
     <q-card-section class="bg-grey-9">
       <p class="q-mt-none text-subtitle1">Events</p>
+      <q-btn label="Add Event" icon="mdi-plus" class="q-mb-md full-width" unelevated color="primary" @click="showAddEvent = true"/>
+      <q-dialog v-model="showAddEvent">
+        <add-event @submit="addEvent($event)"/>
+      </q-dialog>
       <div class="row">
-
-      <event
-        v-for="event in events"
-        :key="event.id"
-        :leagueId="leagueId"
-        :seasonId="season.id"
-        :event="event"
-        class="col-12"
-      />
+        <event
+          v-for="event in events"
+          :key="event.id"
+          :leagueId="leagueId"
+          :seasonId="season.id"
+          :event="event"
+          class="col-12"
+        />
       </div>
     </q-card-section>
   </q-card>
@@ -32,8 +35,9 @@
 import EditableText from 'components/EditableText'
 import Event from './Events/Event.vue'
 import deepEqual from 'deep-equal'
+import AddEvent from './Events/AddEvent.vue'
 export default {
-  components: { EditableText, Event },
+  components: { EditableText, Event, AddEvent },
   props: {
     leagueId: {
       type: String,
@@ -46,7 +50,8 @@ export default {
   },
   data () {
     return {
-      publishing: false
+      publishing: false,
+      showAddEvent: false
     }
   },
   computed: {
@@ -70,13 +75,18 @@ export default {
     }
   },
   methods: {
+    addEvent (event) {
+      this.showAddEvent = false
+      this.$store.commit(`edit_${this.leagueId}/${this.season.id}/createEvent`,
+        {
+          newEvent: event,
+          leagueId: this.leagueId,
+          seasonId: this.season.id
+        }
+      )
+    },
     changeSeasonProperty (key, value) {
       this.$store.commit(`edit_${this.leagueId}/setSeasonProperty`, { key, value, id: this.season.id })
-    },
-    eventChange ({ id, changed }) {
-      const index = this.editEventsChanged.findIndex(e => e.id === id)
-      if (index < 0) this.editEventsChanged.push({ id: id, changed: changed })
-      else this.editEventsChanged[index].changed = changed
     },
     discardChanges () {
       this.$store.commit(`edit_${this.leagueId}/setSeason`, {

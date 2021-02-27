@@ -21,6 +21,15 @@ export function setEvent (state, { eventId, newData }) {
   Vue.set(state.events, index, updatedEvent)
 }
 
+import { generateID } from 'services/firebase/firestore'
+export function createEvent (state, { newEvent, leagueId, seasonId }) {
+  var event = { ...newEvent }
+  const id = generateID(`leagues/${leagueId}/seasons/${seasonId}/events`)
+  console.log('createEvent')
+  Object.defineProperty(event, 'id', { value: id, enumerable: false })
+  state.events.push(event)
+}
+
 export function setEventProperty (state, { key, value, id }) {
   const index = state.events.findIndex(e => e.id === id)
   state.events[index][key] = value

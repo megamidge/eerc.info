@@ -81,7 +81,8 @@ export function publishSeasonChanges (context, { leagueId, seasonId }) {
     })
     sessions.forEach(session => {
       // console.log('session', session.id, session)
-      if (!deepEqual(session, context.rootGetters[`${leagueId}/${seasonId}/${event.id}/session`](session.id))) {
+      const seshGet = context.rootGetters[`${leagueId}/${seasonId}/${event.id}/session`]
+      if (!deepEqual(session, seshGet ? seshGet(session.id) : {})) {
         changes.push({
           path: `leagues/${leagueId}/seasons/${seasonId}/events/${event.id}/${collectionName}`,
           id: session.id,
@@ -108,7 +109,8 @@ export function publishSeasonChanges (context, { leagueId, seasonId }) {
       }
       results.forEach(result => {
         // console.log('result', result.id, result)
-        if (!deepEqual(result, context.rootGetters[`${leagueId}/${seasonId}/${event.id}/${session.id}/result`](result.id))) {
+        const resultGet = context.rootGetters[`${leagueId}/${seasonId}/${event.id}/${session.id}/result`]
+        if (!deepEqual(result, resultGet ? (result.id) : {})) {
           changes.push({
             path: `leagues/${leagueId}/seasons/${seasonId}/events/${event.id}/${collectionName}/${session.id}/results`,
             id: result.id,

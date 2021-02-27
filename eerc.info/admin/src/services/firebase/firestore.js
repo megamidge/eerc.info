@@ -18,7 +18,10 @@ const logAction = (action, transaction) => {
   else
     return firestore().collection('logs').doc().set(data)
 }
-
+export function generateID (path) {
+  console.log('generateID', firestore().collection(path))
+  return firestore().collection(path).doc().id
+}
 export const collectionRef = (collectionName) => {
   return firestore()
     .collection(collectionName)

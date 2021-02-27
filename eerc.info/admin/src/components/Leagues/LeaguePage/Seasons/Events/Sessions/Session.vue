@@ -70,7 +70,10 @@ export default {
       return this.$store.getters[`edit_${this.leagueId}/${this.seasonId}/${this.eventId}/${this.session.id}/results`] || []
     },
     hasChanges () {
-      return !deepEqual(this.results, this.$store.getters[`${this.leagueId}/${this.seasonId}/${this.eventId}/${this.session.id}/results`] || []) || !deepEqual(this.session, this.$store.getters[`${this.leagueId}/${this.seasonId}/${this.eventId}/session`](this.session.id))
+      const seshGet = this.$store.getters[`${this.leagueId}/${this.seasonId}/${this.eventId}/session`]
+
+      return !deepEqual(this.results, this.$store.getters[`${this.leagueId}/${this.seasonId}/${this.eventId}/${this.session.id}/results`] || []) ||
+      !deepEqual(this.session, seshGet ? seshGet(this.session.id) : {})
     }
   },
   methods: {
