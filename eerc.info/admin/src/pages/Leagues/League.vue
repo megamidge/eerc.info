@@ -11,7 +11,7 @@
         </q-card-section>
       </q-card>
       <league-info :league="league" :leagueId="leagueId" class="q-mb-md"/>
-      <league-seasons :seasons="seasons" :leagueId="leagueId" v-if="seasons.length>0"/>
+      <league-seasons :seasons="seasons" :leagueId="leagueId" />
   </q-page>
   <q-page class="flex flex-center" v-else>
     <q-spinner size="50vw"/>

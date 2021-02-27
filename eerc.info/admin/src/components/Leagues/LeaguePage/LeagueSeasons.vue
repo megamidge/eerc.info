@@ -7,30 +7,44 @@
         <q-btn label="Undo" unelevated @click="undoDeletes" :disable="publishing"/>
         <q-btn label="Delete Permanently" color="white" text-color="info" unelevated @click="publishDeletes" :loading="publishing"/>
     </q-card-actions>
-    <div class="bg-primary row no-wrap justify-end">
-      <q-carousel
-        v-model="seasonTab"
-        class="col q-ma-none text-center bg-primary rounded-top-border"
-        arrows animated swipeable height="4rem"
-      >
-        <q-carousel-slide v-for="season in seasons" :name="season.id" :key="season.id">
-          <p class="q-ma-none text-h5 text-uppercase">{{ season.id }}</p>
-        </q-carousel-slide>
-      </q-carousel>
-      <q-btn icon="mdi-plus-box" flat @click="showAddSeasonDialog = true">
-        <q-tooltip>
-          <p class="q-ma-none text-center">Create a new season.</p>
-        </q-tooltip>
-      </q-btn>
-      <q-dialog v-model="showAddSeasonDialog">
-        <add-season @submit="addSeason"/>
-      </q-dialog>
-    </div>
-    <q-tab-panels v-model="seasonTab" animated>
-      <q-tab-panel v-for="season in seasons" :key="season.id" :name="season.id" class="q-pa-none">
-        <season :season="season" :leagueId="leagueId" @delete="deleteSeason(season.id)"/>
-      </q-tab-panel>
-    </q-tab-panels>
+    <template v-if="seasons.length>0">
+      <div class="bg-primary row no-wrap justify-end">
+        <q-carousel
+          v-model="seasonTab"
+          class="col q-ma-none text-center bg-primary rounded-top-border"
+          arrows animated swipeable height="4rem"
+        >
+          <q-carousel-slide v-for="season in seasons" :name="season.id" :key="season.id">
+            <p class="q-ma-none text-h5 text-uppercase">{{ season.id }}</p>
+          </q-carousel-slide>
+        </q-carousel>
+        <q-btn icon="mdi-plus-box" flat @click="showAddSeasonDialog = true">
+          <q-tooltip>
+            <p class="q-ma-none text-center">Create a new season.</p>
+          </q-tooltip>
+        </q-btn>
+        <q-dialog v-model="showAddSeasonDialog">
+          <add-season @submit="addSeason"/>
+        </q-dialog>
+      </div>
+      <q-tab-panels v-model="seasonTab" animated>
+        <q-tab-panel v-for="season in seasons" :key="season.id" :name="season.id" class="q-pa-none">
+          <season :season="season" :leagueId="leagueId" @delete="deleteSeason(season.id)"/>
+        </q-tab-panel>
+      </q-tab-panels>
+    </template>
+    <template v-else>
+      <q-card-section class="bg-primary">
+        <q-btn class="full-width" label="Add a Season" icon="mdi-plus-box" flat @click="showAddSeasonDialog = true">
+          <q-tooltip>
+            <p class="q-ma-none text-center">Create a new season.</p>
+          </q-tooltip>
+        </q-btn>
+        <q-dialog v-model="showAddSeasonDialog">
+          <add-season @submit="addSeason"/>
+        </q-dialog>
+      </q-card-section>
+    </template>
   </q-card>
 </template>
 
@@ -106,7 +120,8 @@ export default {
           { label: 'Undo', icon: 'mdi-undo', handler: () => this.undoSeasonDelete(seasonId) }
         ]
       })
-      this.seasonTab = this.seasons[this.seasons.length - 1].id
+      if (this.seasons.length > 0)
+        this.seasonTab = this.seasons[this.seasons.length - 1].id
     },
     undoSeasonDelete (seasonId) {
       this.$store.commit(`edit_${this.leagueId}/undoSeasonDelete`, seasonId)
@@ -119,11 +134,13 @@ export default {
           leagueId: this.leagueId
         }
       )
-      this.seasonTab = this.seasons[this.seasons.length - 1].id
+      if (this.seasons.length > 0)
+        this.seasonTab = this.seasons[this.seasons.length - 1].id
     }
   },
   mounted () {
-    this.seasonTab = this.seasons[this.seasons.length - 1].id
+    if (this.seasons.length > 0)
+      this.seasonTab = this.seasons[this.seasons.length - 1].id
   }
 }
 </script>
