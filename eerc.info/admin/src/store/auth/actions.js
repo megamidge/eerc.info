@@ -1,33 +1,10 @@
 // import firebase from '../../firebase'
 export async function register ({ commit }, payload) {
-  // const email = payload.email
-  // const password = payload.password
-  // const passwordConfirm = payload.passwordConfirm
-  // if (!email.includes('@'))
-  //   throw new Error('Email must be a valid email address')
-  // if (password.length < 8)
-  //   throw new Error('Password must be at least 8 characters.')
-  // if (password !== passwordConfirm)
-  //   throw new Error('Password and Confirm password must match.')
-
-  // await firebase.auth.createUserWithEmailAndPassword(email, password).catch(error => {
-  //   throw new Error(`${error.code}: ${error.message}`)
-  // })
-
   const $firebase = this.$firebase
   const { email, password } = payload
   return $firebase.createUserWithEmail(email, password)
 }
 export async function signIn ({ commit }, payload) {
-  // console.log('Here we are', payload)
-  // const email = payload.email
-  // const password = payload.password
-  // await firebase.auth.signInWithEmailAndPassword(email, password).then(() => {
-  // }).catch(error => {
-  //   console.log('fug')
-  //   throw new Error(`${error.code}: ${error.message}`)
-  // })
-
   const $firebase = this.$firebase
   const { email, password } = payload
   return $firebase.loginWithEmail(email, password)
@@ -41,3 +18,12 @@ export async function logoutUser ({ commit, payload }) {
 export function routeUserToAuth () {
   this.$router.push('/login')
 }
+
+import { firestoreAction } from 'vuexfire'
+import { userRef } from 'services/firebase/firestore'
+export const getCurrentUser = firestoreAction(({ bindFirestoreRef }, id) => {
+  return bindFirestoreRef('currentUser', userRef(id))
+})
+export const loseCurrentUser = firestoreAction(({ unbindFirestoreRef }) => {
+  return unbindFirestoreRef('currentUser')
+})

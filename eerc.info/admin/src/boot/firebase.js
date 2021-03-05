@@ -4,6 +4,7 @@ export default ({ router, store, Vue }) => {
   const config = process.env.environments.FIREBASE_CONFIG
   var app = firebaseService.fBInit(config)
   firebaseService.fsInit(app)
+  firebaseService.functionsInit(app)
 
   firebaseService.auth().onAuthStateChanged(user => {
     firebaseService.handleOnAuthStateChanged(store, user)

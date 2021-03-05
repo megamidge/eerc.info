@@ -1,5 +1,6 @@
 import firebase from 'firebase/app'
 import 'firebase/auth'
+import 'firebase/functions'
 import { Notify } from 'quasar'
 export const auth = () => {
   return firebase.auth()
@@ -7,6 +8,31 @@ export const auth = () => {
 
 export const fBInit = (config) => {
   return firebase.initializeApp(config)
+}
+
+let app = null
+export const functionsInit = (inApp) => {
+  app = inApp
+  return firebase.functions(inApp)
+}
+
+export const functions = () => {
+  return app.functions('europe-west2')
+}
+
+export const ensureHaveCurrentUser = (store) => {
+  if (!firebase.auth().currentUser) return false
+  if (store.getters['auth/currentUser']) return true
+  return new Promise((resolve, reject) => {
+    const unsubscribe = store.subscribe((mutation, state) => {
+      if (state.auth.currentUser) {
+        resolve()
+        unsubscribe()
+      }
+    }, () => {
+      reject(new Error('An error occurred while subscribing to store changes.'))
+    })
+  })
 }
 
 export const ensureAuthIsInitialised = async (store) => {
@@ -45,7 +71,15 @@ export const routerBeforeEach = async (router, store) => {
   router.beforeEach(async (to, from, next) => {
     try {
       await ensureAuthIsInitialised(store)
-      if (to.matched.some(record => record.meta.requiresAuth)) {
+      await ensureHaveCurrentUser(store)
+      const user = store.getters['auth/currentUser']
+      if (to.matched.some(record => record.meta.staffOnly)) {
+        if (!user) {
+          next('/')
+        } else if (!user.staff) {
+          next('/must-be-staff')
+        }
+      } else if (to.matched.some(record => record.meta.requiresAuth)) {
         if (isAuthenticated(store)) {
           next()
         } else {
