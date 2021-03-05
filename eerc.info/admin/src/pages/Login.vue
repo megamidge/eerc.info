@@ -115,13 +115,16 @@ export default {
       this.registering = true
       this.$store.dispatch('auth/register', { email: this.email, password: this.password, passwordConfirm: this.passwordConfirm })
         .then(() => {
-          let path = '/'
-          if (this.$route.query && this.$route.query.source) {
-            path = this.$route.query.source
-          }
-          this.registering = false
-          this.$router.push(path)
           this.$q.notify({ type: 'positive', message: 'Successfully registered.' })
+          this.$store.dispatch('auth/signIn', { email: this.email, password: this.password }).then(() => {
+            this.$q.notify({ type: 'positive', message: 'Logged in.' })
+            let path = '/'
+            if (this.$route.query && this.$route.query.source) {
+              path = this.$route.query.source
+            }
+            this.registering = false
+            this.$router.push(path)
+          })
         }).catch(err => {
           this.registering = false
           this.$q.notify({ type: 'negative', message: `Failed to register: ${err.message}` })

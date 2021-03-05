@@ -36,7 +36,8 @@ export default {
         'You cannot consoom this.',
         'Commit go away.',
         "I'm shy 😳",
-        "I'm sorry, I can't let you do that."
+        "I'm sorry, I can't let you do that.",
+        'You have 7 days left to live.'
       ]
     }
   },

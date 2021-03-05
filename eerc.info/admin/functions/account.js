@@ -13,7 +13,7 @@ exports.createUserWithEmailAndPassword = functions.region('europe-west2').https.
     }
     await globals.firebase.auth().createUser({ email: uEmail, password: uPassword }).then(async (user) => {
       const uDoc = globals.firestore.collection('users').doc(user.uid)
-      transaction.set(userDoc, userData)
+      transaction.set(uDoc, userData)
       return Promise.resolve()
     }).catch(error => {
       throw new Error(error.message)

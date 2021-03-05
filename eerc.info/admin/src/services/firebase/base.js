@@ -38,7 +38,7 @@ export const ensureHaveCurrentUser = (store) => {
 export const ensureAuthIsInitialised = async (store) => {
   if (store.state.auth.isReady) return true
   return new Promise((resolve, reject) => {
-    const unsubscribe = firebase.auth().onAuthStateChanged(user => {
+    const unsubscribe = firebase.auth().onAuthStateChanged(() => {
       resolve()
       unsubscribe()
     }, () => {
@@ -58,13 +58,26 @@ export const logoutUser = () => {
 
 export const handleOnAuthStateChanged = async (store, currentUser) => {
   const initialAuthState = isAuthenticated(store)
-  store.commit('auth/setAuthState', {
-    isAuthenticated: currentUser !== null,
-    isReady: true
-  })
+  // Get & bind the current user
+  if (currentUser !== null) {
+    await store.dispatch('auth/getCurrentUser', currentUser.uid)
+    // TODO: re-implement when staff(if) staff levels are introduced.
+    // if (store.getters['auth/currentUser'].staff)
+    //   await store.dispatch('auth/getStaffLevels')
+  }
+
+  // If the user loses authentication route them to the login page
   if (!currentUser && initialAuthState) {
+    store.dispatch('auth/loseCurrentUser')
     store.dispatch('auth/routeUserToAuth')
   }
+
+  // Save to store
+  store.commit('auth/setAuthState', {
+    isAuthenticated: currentUser !== null,
+    isReady: true,
+    uid: (currentUser ? currentUser.uid : '')
+  })
 }
 
 export const routerBeforeEach = async (router, store) => {
@@ -74,26 +87,27 @@ export const routerBeforeEach = async (router, store) => {
       await ensureHaveCurrentUser(store)
       const user = store.getters['auth/currentUser']
       if (to.matched.some(record => record.meta.staffOnly)) {
+        // const staffLevelRequired = to.meta.staffLevel || 1
         if (!user) {
-          next('/')
-        } else if (!user.staff) {
+          next('/login')
+        } else if (!user.staff)
           next('/must-be-staff')
-        }
+        // else if (!user.staffLevel || user.staffLevel < staffLevelRequired)
+        //   next('/must-be-staff')
+        else
+          next()
       } else if (to.matched.some(record => record.meta.requiresAuth)) {
         if (isAuthenticated(store)) {
           next()
         } else {
-          next({ path: '/login', query: { source: to.path } })
+          next('/login')
         }
-      } else if (to.path === '/login' && isAuthenticated(store)) {
-        next('/')
       } else {
         next()
       }
     } catch (err) {
-      console.log('Route error:', err)
       Notify.create({
-        message: `${err}`,
+        message: `ROUTER BEFORE EACH: ${err}`,
         color: 'negative'
       })
     }
