@@ -14,7 +14,7 @@
 
     </q-card-section>
     <q-card-section class="row wrap">
-      <season-event v-for="event in events" :key="event.id" :event="event" :leagueId="leagueId" :seasonId="season.id" class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4"/>
+      <season-event v-for="(event,index) in events" :key="event.id" :index="index+1" :event="event" :leagueId="leagueId" :seasonId="season.id" class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4"/>
     </q-card-section>
 </q-card>
 </template>

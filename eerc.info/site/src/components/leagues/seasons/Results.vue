@@ -4,12 +4,17 @@
       <q-card-section class="bg-primary">
         <div class="row no-wrap justify-between items-center">
           <div class="row no-wrap items-center">
-            <p class="q-ma-none text-h3 text-bold" style="opacity:0.6">{{ eventId }}</p>
+            <!-- <p class="q-ma-none text-h3 text-bold" style="opacity:0.6">{{ eventId }}</p> -->
             <q-icon name="img:/icons/flag/monaco.svg" size="2.8rem" class="q-mx-sm"/>
             <div class="column justify-end text-left">
               <p class="q-ma-none text-h6 text-uppercase ellipsis">{{event.location.region}}</p>
               <p class="q-ma-none text-subtitle1 ellipsis">{{event.location.country}}</p>
             </div>
+          </div>
+          <q-space/>
+          <div class="column justify-between text-right self-stretch q-ml-md">
+            <p class="q-ma-none text-h6">{{formatDateTime(event.datetime)}}</p>
+            <p class="q-ma-none text-subtitle2">Duration: {{formatDuration(event.duration)}}</p>
           </div>
           <div class="row items-center">
             <q-btn v-close-popup icon="mdi-close" size="1.2rem" round flat/>
@@ -134,7 +139,7 @@
 </template>
 
 <script>
-import { extend } from 'quasar'
+import { extend, date } from 'quasar'
 export default {
   meta () {
     return {
@@ -374,6 +379,24 @@ export default {
 
       const reduced = results.reduce((total, current) => total + current.time, 0)
       return reduced
+    },
+    formatDateTime (value) {
+      const timestamp = new Date(value.seconds * 1000)
+      const ret = date.formatDate(timestamp, 'DD/MM/YYYY HH:mm')
+      return ret
+    },
+    formatDuration (val, strip = { stripDays: true }) {
+      var minutes = Math.floor((val / (1000 * 60)) % 60),
+        hours = Math.floor((val / (1000 * 60 * 60)) % 24),
+        days = Math.floor((val / (1000 * 60 * 60 * 24)))
+
+      days = (days < 10) ? '0' + days : days
+      hours = (hours < 10) ? '0' + hours : hours
+      minutes = (minutes < 10) ? '0' + minutes : minutes
+      const daysStr = strip.stripDays && days <= 0 ? '' : `${days}:`
+      const hoursStr = strip.stripHours ? '' : `${hours}:`
+      const minuteStr = strip.stripMinutes ? '' : `${minutes}`
+      return daysStr + hoursStr + minuteStr
     }
   }
 }
