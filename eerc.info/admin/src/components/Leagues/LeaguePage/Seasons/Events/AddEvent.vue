@@ -6,7 +6,23 @@
       <q-card-section>
           <q-select label="Type" v-model="newEvent.type" :options="eventTypes"/>
           <q-input label="Image" v-model="newEvent.image" disable/>
-          <q-input label="Country" v-model="newEvent.location.country"/>
+          <q-select label="Country" v-model="newEvent.location.country"
+            popup-content-class="bg-primary" color="secondary" class="text-capitalize" :options="countryCodes"
+          >
+            <template v-slot:prepend>
+              <q-icon :name="`img:/icons/flag/${newEvent.location.country}.svg`"/>
+            </template>
+            <template v-slot:option="scope">
+              <q-item v-bind="scope.itemProps" v-on="scope.itemEvents">
+                <q-item-section avatar>
+                  <q-icon :name="`img:/icons/flag/${scope.opt}.svg`"/>
+                </q-item-section>
+                <q-item-section>
+                  <q-item-label class="text-capitalize">{{scope.opt}}</q-item-label>
+                </q-item-section>
+              </q-item>
+            </template>
+          </q-select>
           <q-input label="Region" v-model="newEvent.location.region"/>
           <q-input v-if="newEvent.type !== 'rally'" label="Track" v-model="newEvent.location.track"/>
           <q-input label="Date & Time" :value="formatValue(newEvent.datetime)" @input="dateTimeInput($event)">
@@ -43,10 +59,12 @@
 </template>
 
 <script>
+import countryCodes from 'assets/countryCodes.json'
 import { date } from 'quasar'
 export default {
   data () {
     return {
+      countryCodes: countryCodes.codes,
       newEvent: {
         image: 'default.png',
         location: {

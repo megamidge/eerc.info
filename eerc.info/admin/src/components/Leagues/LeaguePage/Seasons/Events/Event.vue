@@ -29,7 +29,28 @@
           <div class="row justify-start">
             <div class="q-mr-lg" v-for="key in Object.keys(event.location)" :key="key">
                 <p class="q-ma-none text-subtitle2 text-capitalize">{{key}}</p>
-                <editable-text :value="event.location[key]" @input="changeEventLocationProperty(key,$event)"/>
+                <template v-if="key === 'country'">
+                  <q-select label="Country" :value="event.location[key]" @input="changeEventLocationProperty(key,$event)"
+                    popup-content-class="bg-primary" color="secondary" class="text-capitalize" :options="countryCodes"
+                  >
+                    <template v-slot:prepend>
+                      <q-icon :name="`img:/icons/flag/${event.location.country}.svg`"/>
+                    </template>
+                    <template v-slot:option="scope">
+                      <q-item v-bind="scope.itemProps" v-on="scope.itemEvents">
+                        <q-item-section avatar>
+                          <q-icon :name="`img:/icons/flag/${scope.opt}.svg`"/>
+                        </q-item-section>
+                        <q-item-section>
+                          <q-item-label class="text-capitalize">{{scope.opt}}</q-item-label>
+                        </q-item-section>
+                      </q-item>
+                    </template>
+                  </q-select>
+                </template>
+                <template v-else>
+                  <editable-text :value="event.location[key]" @input="changeEventLocationProperty(key,$event)"/>
+                </template>
             </div>
           </div>
           <div>
@@ -113,10 +134,12 @@ import Session from 'components/Leagues/LeaguePage/Seasons/Events/Sessions/Sessi
 import deepEqual from 'deep-equal'
 import EditableDateTime from 'components/EditableDateTime'
 import EditableTime from 'src/components/EditableTime.vue'
+import countryCodes from 'assets/countryCodes.json'
 export default {
   components: { EditableText, Session, EditableDateTime, EditableTime },
   data () {
     return {
+      countryCodes: countryCodes.codes,
       eventTypes: ['rally', 'rally-cross', 'race'],
       showDeleteEventConfirmation: false,
       deletedSession: null,
