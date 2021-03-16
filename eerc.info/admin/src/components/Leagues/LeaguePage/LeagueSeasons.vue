@@ -70,7 +70,8 @@ export default {
     return {
       seasonTab: '',
       showAddSeasonDialog: false,
-      publishing: false
+      publishing: false,
+      seasonsWatcher: null
     }
   },
   computed: {
@@ -120,8 +121,7 @@ export default {
           { label: 'Undo', icon: 'mdi-undo', handler: () => this.undoSeasonDelete(seasonId) }
         ]
       })
-      if (this.seasons.length > 0)
-        this.seasonTab = this.seasons[this.seasons.length - 1].id
+      this.viewLatestSeason()
     },
     undoSeasonDelete (seasonId) {
       this.$store.commit(`edit_${this.leagueId}/undoSeasonDelete`, seasonId)
@@ -134,13 +134,18 @@ export default {
           leagueId: this.leagueId
         }
       )
+      this.viewLatestSeason()
+    },
+    viewLatestSeason () {
       if (this.seasons.length > 0)
         this.seasonTab = this.seasons[this.seasons.length - 1].id
+
+      if (this.seasonsWatcher)
+        this.seasonsWatcher()
     }
   },
-  mounted () {
-    if (this.seasons.length > 0)
-      this.seasonTab = this.seasons[this.seasons.length - 1].id
+  created () {
+    this.seasonsWatcher = this.$watch('seasons', this.viewLatestSeason)
   }
 }
 </script>
