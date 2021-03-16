@@ -5,7 +5,7 @@
     <div class="absolute-full column no-wrap justify-between items-stretch event">
       <div class="row justify-between items-center">
         <div class="row items-center">
-          <q-icon :name="`img:/icons/flag/${event.location.country}.svg`" size="2.8rem" class="q-mr-sm"/>
+          <q-icon :name="`img:/icons/flag/${event.location.country.toLowerCase()}.svg`" size="2.8rem" class="q-mr-sm"/>
           <div class="column justify-start">
             <p class="q-ma-none text-h6 text-uppercase">{{event.location.region}}</p>
             <p class="q-ma-none text-subtitle1">{{formatCountry(event.location.country)}}</p>
