@@ -19,6 +19,11 @@ export function deleteResult (state, id) {
   Vue.delete(state.results, index)
 }
 
-export function addResult (state, newResult) {
-  state.results.push(newResult)
+import { generateID } from 'services/firebase/firestore'
+export function addResult (state, { newResult, leagueID, seasonID, eventID, stagesOrSessions, sessionID }) {
+  const newResultWithID = {
+    ...newResult,
+    id: generateID(`leagues/${leagueID}/seasons/${seasonID}/events/${eventID}/${stagesOrSessions}/${sessionID}/results`)
+  }
+  state.results.push(newResultWithID)
 }

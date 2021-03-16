@@ -120,10 +120,11 @@ export function publishSeasonChanges (context, { leagueId, seasonId }) {
         // console.log('result', result.id, result)
         const resultGet = context.rootGetters[`${leagueId}/${seasonId}/${event.id}/${session.id}/result`]
         if (!deepEqual(result, resultGet ? (result.id) : {})) {
+          const { id, ...resultData } = result
           changes.push({
             path: `leagues/${leagueId}/seasons/${seasonId}/events/${event.id}/${collectionName}/${session.id}/results`,
             id: result.id,
-            data: { ...result }
+            data: { ...resultData }
           })
         }
       })

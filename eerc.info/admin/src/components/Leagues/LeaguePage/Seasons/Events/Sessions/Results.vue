@@ -201,7 +201,9 @@ export default {
   },
   computed: {
     hasChanges () {
-      return !deepEqual(this.results, this.$store.getters[`${this.leagueId}/${this.seasonId}/${this.eventId}/${this.session.id}/results`])
+      const ret = !deepEqual(this.results, this.$store.getters[`${this.leagueId}/${this.seasonId}/${this.eventId}/${this.session.id}/results`])
+      console.log('results.vue hasChanges', ret, this.results, this.$store.getters[`${this.leagueId}/${this.seasonId}/${this.eventId}/${this.session.id}/results`])
+      return ret
     }
   },
   methods: {
@@ -242,7 +244,15 @@ export default {
         default:
           break
       }
-      this.$store.commit(`edit_${this.leagueId}/${this.seasonId}/${this.eventId}/${this.session.id}/addResult`, newResult)
+      const payload = {
+        newResult,
+        leagueID: this.leagueId,
+        seasonID: this.seasonId,
+        eventID: this.eventId,
+        sessionID: this.sessionId,
+        stagesOrSessions: this.eventType === 'rally' ? 'stages' : 'sessions'
+      }
+      this.$store.commit(`edit_${this.leagueId}/${this.seasonId}/${this.eventId}/${this.session.id}/addResult`, payload)
     },
     // formats a millisecond timestamp as  hh:mm:ss:sss.
     // strip object allows to omit hours, minutes, seconds from return value.
