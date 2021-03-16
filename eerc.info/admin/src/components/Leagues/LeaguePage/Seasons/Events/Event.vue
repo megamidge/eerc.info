@@ -2,6 +2,9 @@
   <q-expansion-item class="bg-grey-10" header-class="bg-primary"
           group="event-group">
       <template v-slot:header>
+          <q-item-section avatar>
+            <q-icon :name="`img:/icons/flag/${event.location.country}.svg`"/>
+          </q-item-section>
           <q-item-section>
             <p class="q-ma-none text-h6">{{event.type === 'rally' ? 'Event': ''}} {{index}}: {{ eventBasicName }} <span class="text-grey-5 text-subtitle1">{{formatDateTime(event.datetime)}}</span></p>
             <p class="q-ma-none text-subtitle1">{{ sessions.length }} {{ sessionsLabel }}</p>
@@ -171,7 +174,7 @@ export default {
     eventBasicName () {
       if (this.event.location.track)
         return this.event.location.track
-      else return `${this.event.location.region}, ${this.event.location.country}`
+      else return `${this.event.location.region}, ${this.formatCountry(this.event.location.country)}`
     },
     newSessionId: {
       get () {
@@ -278,6 +281,11 @@ export default {
           })
         }
       })
+    },
+    formatCountry (country) {
+      const arr = country.split('-')
+      const capitalised = arr.map(item => item.charAt(0).toUpperCase() + item.slice(1))
+      return capitalised.join(' ')
     },
     formatDateTime (value) {
       const timestamp = new Date(value.seconds * 1000)

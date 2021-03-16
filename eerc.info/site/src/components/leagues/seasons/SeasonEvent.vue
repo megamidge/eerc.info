@@ -5,10 +5,10 @@
     <div class="absolute-full column no-wrap justify-between items-stretch event">
       <div class="row justify-between items-center">
         <div class="row items-center">
-          <q-icon :name="`img:/icons/flag/${event.location.flag ? event.location.flag + '.svg' : '1.png'}`" size="2.8rem" class="q-mr-sm"/>
+          <q-icon :name="`img:/icons/flag/${event.location.country}.svg`" size="2.8rem" class="q-mr-sm"/>
           <div class="column justify-start">
             <p class="q-ma-none text-h6 text-uppercase">{{event.location.region}}</p>
-            <p class="q-ma-none text-subtitle1">{{event.location.country}}</p>
+            <p class="q-ma-none text-subtitle1">{{formatCountry(event.location.country)}}</p>
           </div>
         </div>
         <p class="q-ma-none text-h3 text-bold" style="opacity:0.6">{{ index }}</p>
@@ -114,6 +114,11 @@ export default {
     this.imageSource()
   },
   methods: {
+    formatCountry (country) {
+      const arr = country.split('-')
+      const capitalised = arr.map(item => item.charAt(0).toUpperCase() + item.slice(1))
+      return capitalised.join(' ')
+    },
     gotoResult (event) {
       if (this.results && this.results.length > 0) this.$router.push(`/Leagues/${this.leagueId}/${this.seasonId}/${this.event.id}/results`)
     },
