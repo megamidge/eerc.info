@@ -1,8 +1,9 @@
 <template>
-  <q-expansion-item class="bg-grey-10" header-class="bg-primary">
+  <q-expansion-item class="bg-grey-10" header-class="bg-primary"
+          group="event-group">
       <template v-slot:header>
           <q-item-section>
-            <p class="q-ma-none text-h6">{{event.type === 'rally' ? 'Event': ''}} {{event.id}}</p>
+            <p class="q-ma-none text-h6">{{event.type === 'rally' ? 'Event': ''}} {{index}}: {{ eventBasicName }} <span class="text-grey-5 text-subtitle1">{{formatDateTime(event.datetime)}}</span></p>
             <p class="q-ma-none text-subtitle1">{{ sessions.length }} {{ sessionsLabel }}</p>
           </q-item-section>
       </template>
@@ -13,6 +14,17 @@
         </div>
       </q-card-actions>
       <q-card-section>
+          <p class="q-ma-none text-subtitle1">Date, Time and Duration</p>
+          <div class="row justify-start q-mb-md">
+            <div class="q-mr-lg">
+              <p class="q-ma-none text-subtitle2">Date & Time</p>
+              <editable-date-time :value="event.datetime" @input="changeEventProperty('datetime',$event)"/>
+            </div>
+            <div class="q-mr-lg">
+              <p class="q-ma-none text-subtitle2">Duration (dd:hh:mm)</p>
+              <editable-time :value="formatTime(event.duration)" @input="changeEventProperty('duration', parseDuration($event))"/>
+            </div>
+          </div>
           <p class="q-ma-none text-subtitle1">Location</p>
           <div class="row justify-start">
             <div class="q-mr-lg" v-for="key in Object.keys(event.location)" :key="key">
@@ -95,11 +107,14 @@
 </template>
 
 <script>
+import { date } from 'quasar'
 import EditableText from 'components/EditableText'
 import Session from 'components/Leagues/LeaguePage/Seasons/Events/Sessions/Session'
 import deepEqual from 'deep-equal'
+import EditableDateTime from 'components/EditableDateTime'
+import EditableTime from 'src/components/EditableTime.vue'
 export default {
-  components: { EditableText, Session },
+  components: { EditableText, Session, EditableDateTime, EditableTime },
   data () {
     return {
       eventTypes: ['rally', 'rally-cross', 'race'],
@@ -120,12 +135,21 @@ export default {
       type: String,
       default: () => ''
     },
+    index: {
+      type: Number,
+      default: () => 0
+    },
     event: {
       type: Object,
       default: () => {}
     }
   },
   computed: {
+    eventBasicName () {
+      if (this.event.location.track)
+        return this.event.location.track
+      else return `${this.event.location.region}, ${this.event.location.country}`
+    },
     newSessionId: {
       get () {
         if (this.autoNewSessionId) {
@@ -231,6 +255,35 @@ export default {
           })
         }
       })
+    },
+    formatDateTime (value) {
+      const timestamp = new Date(value.seconds * 1000)
+      const ret = date.formatDate(timestamp, 'DD/MM/YYYY HH:mm')
+      return ret
+    },
+    formatTime (val, strip = { stripDays: true }) {
+      var minutes = Math.floor((val / (1000 * 60)) % 60),
+        hours = Math.floor((val / (1000 * 60 * 60)) % 24),
+        days = Math.floor((val / (1000 * 60 * 60 * 24)))
+
+      days = (days < 10) ? '0' + days : days
+      hours = (hours < 10) ? '0' + hours : hours
+      minutes = (minutes < 10) ? '0' + minutes : minutes
+      const daysStr = strip.stripDays && days <= 0 ? '' : `${days}:`
+      const hoursStr = strip.stripHours ? '' : `${hours}:`
+      const minuteStr = strip.stripMinutes ? '' : `${minutes}`
+      return daysStr + hoursStr + minuteStr
+    },
+    parseDuration (value) {
+      const split = value.split(':').reverse() // reverse so we can go in order of smallest unit to largest unit (smallest always present, large maybe not)
+      var minutes = parseInt(split[0])
+      var hours = parseInt(split[1])
+      var days = parseInt(split[2])
+      var totalMillis = 0
+      if (minutes && !isNaN(minutes)) totalMillis += minutes * 60000
+      if (hours && !isNaN(hours)) totalMillis += hours * 3600000
+      if (days && !isNaN(days)) totalMillis += days * 86400000
+      return totalMillis
     }
   }
 }

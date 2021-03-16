@@ -19,11 +19,12 @@
       </q-dialog>
       <div class="row">
         <event
-          v-for="event in events"
+          v-for="(event,index) in events"
           :key="event.id"
           :leagueId="leagueId"
           :seasonId="season.id"
           :event="event"
+          :index="index+1"
           class="col-12 q-mb-xs"
           @delete="deleteEvent(event.id)"
         />
