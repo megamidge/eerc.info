@@ -6,8 +6,9 @@
       infinite
       swipeable
       arrows
-      autoplay
+      :autoplay="autoplayCarousel"
       style="max-width:100vw; height:92vh;"
+      @click="autoplayCarousel = false"
     >
       <q-carousel-slide :name="1"
         class="column no-wrap justify-center items-start q-px-xl"
@@ -75,7 +76,7 @@
         <p class="q-ma-none text-subtitle1">Consider donating with PayPal</p>
         <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="top" class="q-py-md">
             <input type="hidden" name="cmd" value="_s-xclick" />
-            <input type="hidden" name="hosted_button_id" value="WT96RWAPDAZ8S" />
+            <input type="hidden" name="hosted_button_id" value="BDNH6NGVW5W24" />
             <q-btn label="Donate" type="submit" icon="mdi-charity" color="accent" class="text-bold text-h6" padding="sm" size="2.6rem"/>
         </form>
         <p class="q-ma-none text-caption">Donations help EERC serve the community.</p>
@@ -95,7 +96,8 @@ export default {
   data () {
     return {
       carousel: 1,
-      openURL: openURL
+      openURL: openURL,
+      autoplayCarousel: true
     }
   }
 }
