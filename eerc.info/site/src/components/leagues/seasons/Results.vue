@@ -5,7 +5,7 @@
         <div class="row no-wrap justify-between items-center">
           <div class="row no-wrap items-center">
             <!-- <p class="q-ma-none text-h3 text-bold" style="opacity:0.6">{{ eventId }}</p> -->
-            <q-icon name="img:/icons/flag/monaco.svg" size="2.8rem" class="q-mx-sm"/>
+            <q-icon :name="`img:/icons/flag/${event.location.country.toLowerCase()}.svg`" size="2.8rem" class="q-mx-sm"/>
             <div class="column justify-end text-left">
               <p class="q-ma-none text-h6 text-uppercase ellipsis">{{event.location.region}}</p>
               <p class="q-ma-none text-subtitle1 ellipsis">{{event.location.country}}</p>
