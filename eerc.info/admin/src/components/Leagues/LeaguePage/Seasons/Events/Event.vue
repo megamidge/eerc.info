@@ -3,7 +3,7 @@
           group="event-group">
       <template v-slot:header>
           <q-item-section avatar>
-            <q-icon :name="`img:/icons/flag/${event.location.toLowerCase()}.svg`"/>
+            <q-icon :name="`img:/icons/flag/${event.location.country.toLowerCase()}.svg`"/>
           </q-item-section>
           <q-item-section>
             <p class="q-ma-none text-h6">{{event.type === 'rally' ? 'Event': ''}} {{index}}: {{ eventBasicName }} <span class="text-grey-5 text-subtitle1">{{formatDateTime(event.datetime)}}</span></p>
