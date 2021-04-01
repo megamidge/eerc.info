@@ -12,6 +12,7 @@
           :to="headerLink.link"
         />
         <q-space/>
+        <q-img src="/logos/grid-finder-partner-logo.png" :ratio="1 / 1" class="logo q-ma-md" style="cursor:pointer;" @click="openURL(socials.gridFinder)"/>
         <q-btn icon="mdi-discord" @click="openURL(socials.discord)" flat :label="!$q.screen.sm ? 'Join our Discord!' : ''"/>
       </q-toolbar>
       <q-toolbar elevated v-else>
@@ -40,6 +41,7 @@
           </q-item-label>
         </q-item>
         <q-space/>
+        <q-img src="/logos/grid-finder-partner-logo.png" :ratio="1 / 1" class="logo q-ma-md" style="cursor:pointer;"/>
         <q-item class="text-h4 text-bold text-left"
         clickable
         @click="openURL(socials.discord)">
@@ -114,7 +116,8 @@ export default {
         discord: 'https://discord.gg/sZ8N33xPGf',
         twitter: 'https://twitter.com/EERC_Official',
         instagram: 'https://instagram.com/eerc_official/',
-        youtube: 'https://youtube.com/c/EERCOfficial?sub_confirmation=1'
+        youtube: 'https://youtube.com/c/EERCOfficial?sub_confirmation=1',
+        gridFinder: 'https://www.grid-finder.com/'
       },
       headerLinks: [
         {
@@ -142,6 +145,7 @@ export default {
 .logo {
   max-height: 5rem;
   max-width: 5rem;
+  object-fit:contain;
   &.mobile {
     max-height: 2rem;
     max-width:2rem;
