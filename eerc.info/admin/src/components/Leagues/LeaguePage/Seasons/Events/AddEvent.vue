@@ -10,7 +10,8 @@
             popup-content-class="bg-primary" color="secondary" class="text-capitalize" :options="countryCodes"
           >
             <template v-slot:prepend>
-              <q-icon :name="`img:/icons/flag/${newEvent.location.country}.svg`"/>
+              <q-icon v-if="newEvent.location.country" :name="`img:/icons/flag/${newEvent.location.country.toLowerCase()}.svg`"/>
+              <q-icon v-else name="mdi-earth"/>
             </template>
             <template v-slot:option="scope">
               <q-item v-bind="scope.itemProps" v-on="scope.itemEvents">
@@ -25,30 +26,7 @@
           </q-select>
           <q-input label="Region" v-model="newEvent.location.region"/>
           <q-input v-if="newEvent.type !== 'rally'" label="Track" v-model="newEvent.location.track"/>
-          <q-input label="Date & Time" :value="formatValue(newEvent.datetime)" @input="dateTimeInput($event)">
-            <template v-slot:prepend>
-              <q-icon name="mdi-calendar" class="cursor-pointer">
-                <q-popup-proxy transition-show="scale" transition-hide="scale">
-                  <q-date :value="formatValue(newEvent.datetime)" @input="dateTimeInput($event)" mask="YYYY/MM/DD HH:mm">
-                    <div class="row items-center justify-end">
-                      <q-btn v-close-popup label="Close" color="primary" flat />
-                    </div>
-                  </q-date>
-                </q-popup-proxy>
-              </q-icon>
-            </template>
-            <template v-slot:append>
-              <q-icon name="mdi-clock-outline" class="cursor-pointer">
-                <q-popup-proxy transition-show="scale" transition-hide="scale">
-                  <q-time :value="formatValue(newEvent.datetime)" @input="dateTimeInput($event)" mask="YYYY/MM/DD HH:mm" format24h>
-                    <div class="row items-center justify-end">
-                      <q-btn v-close-popup label="Close" color="primary" flat />
-                    </div>
-                  </q-time>
-                </q-popup-proxy>
-              </q-icon>
-            </template>
-          </q-input>
+          <date-time-input label="Date and Time" v-model="newEvent.datetime"/>
           <q-input label="Duration" hint="format as 'days:hours:minutes'" :value="formatTime(newEvent.duration)" @input="newEvent.duration = parseDuration($event)"/>
       </q-card-section>
       <q-card-actions class="row justify-end">
@@ -61,9 +39,12 @@
 <script>
 import countryCodes from 'assets/countryCodes.json'
 import { date } from 'quasar'
+import DateTimeInput from 'components/DateTimeInput.vue'
 export default {
+  components: { DateTimeInput },
   data () {
     return {
+      datetimeFormat: 'YYYY/MM/DD HH:mm',
       countryCodes: countryCodes.codes,
       newEvent: {
         image: 'default.png',
@@ -81,9 +62,9 @@ export default {
   },
   methods: {
     dateTimeInput (value) {
-      const dateObj = new Date(value)
-      console.log('dti', dateObj.getTime() / 1000)
-      this.newEvent.dateTime = {
+      const dateObj = date.extractDate(value, this.datetimeFormat)
+      console.log('dti', dateObj)
+      this.newEvent.datetime = {
         seconds: dateObj.getTime() / 1000,
         nanoseconds: 0
       }

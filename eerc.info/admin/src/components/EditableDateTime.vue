@@ -11,7 +11,7 @@
           <template v-slot:prepend>
             <q-icon name="mdi-calendar" class="cursor-pointer">
               <q-popup-proxy transition-show="scale" transition-hide="scale">
-                <q-date :value="formatValue(value)" @input="dateTimeInput($event,emitValue)" mask="YYYY/MM/DD HH:mm">
+                <q-date :value="formatValue(value)" @input="dateTimeInput($event,emitValue)" :mask="datetimeFormat">
                   <div class="row items-center justify-end">
                     <q-btn v-close-popup label="Close" color="primary" flat />
                   </div>
@@ -23,7 +23,7 @@
           <template v-slot:append>
             <q-icon name="mdi-clock-outline" class="cursor-pointer">
               <q-popup-proxy transition-show="scale" transition-hide="scale">
-                <q-time :value="formatValue(value)" @input="dateTimeInput($event,emitValue)" mask="YYYY/MM/DD HH:mm" format24h>
+                <q-time :value="formatValue(value)" @input="dateTimeInput($event,emitValue)" :mask="datetimeFormat" format24h>
                   <div class="row items-center justify-end">
                     <q-btn v-close-popup label="Close" color="primary" flat />
                   </div>
@@ -49,17 +49,26 @@ export default {
       })
     }
   },
+  data () {
+    return {
+      datetimeFormat: 'DD/MM/YYYY HH:mm',
+      hover: false,
+      editValue: {
+        seconds: 0,
+        nanoseconds: 0
+      }
+    }
+  },
   computed: {
     valueFormatted () {
       const timestamp = new Date(this.value.seconds * 1000)
-      const ret = date.formatDate(timestamp, 'DD/MM/YYYY HH:mm')
+      const ret = date.formatDate(timestamp, this.datetimeFormat)
       return ret
     }
   },
   methods: {
     dateTimeInput (value, emitValue) {
-      const dateObj = new Date(value)
-      console.log('dti', dateObj.getTime() / 1000)
+      const dateObj = date.extractDate(value, this.datetimeFormat)
       emitValue({
         seconds: dateObj.getTime() / 1000,
         nanoseconds: 0
@@ -67,17 +76,8 @@ export default {
     },
     formatValue (value) {
       const timestamp = new Date(value.seconds * 1000)
-      const ret = date.formatDate(timestamp, 'DD/MM/YYYY HH:mm')
+      const ret = date.formatDate(timestamp, this.datetimeFormat)
       return ret
-    }
-  },
-  data () {
-    return {
-      hover: false,
-      editValue: {
-        seconds: 0,
-        nanoseconds: 0
-      }
     }
   }
 }
