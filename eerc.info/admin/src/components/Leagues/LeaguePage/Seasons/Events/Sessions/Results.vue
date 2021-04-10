@@ -13,6 +13,10 @@
             <q-btn unelevated class="q-mr-sm" label="Discard" @click="discardChanges"/>
           </div>
       </q-card-actions>
+      <q-card-section>
+
+                            <q-select value="speed" use-input fill-input input-debounce="0" dense />
+      </q-card-section>
       <q-card-section class="q-pa-xs">
           <q-table
             :columns="tables[eventType].columns"
@@ -46,7 +50,10 @@
                             <q-btn dense icon="mdi-delete" flat @click="deleteRow(props.row)"/>
                         </template>
                         <template v-else-if="col.name === 'time'">
-                            <editable-time class="q-ma-none" :value="col.value" @input="col.edit($event,props.row)"/>
+                            <editable-time :use-popup="false" class="q-ma-none" :value="col.value" @input="col.edit($event,props.row)"/>
+                        </template>
+                        <template v-else-if="col.name === 'vehicle'">
+                            <q-select :value="col.value" @input-value="col.edit($event, props.row)" use-input fill-input input-debounce="0" dense :options="allVehicles"/>
                         </template>
                         <template v-else-if="col.editable">
                             <q-input dense :value="col.value" @input="col.edit($event, props.row)"/>
@@ -149,6 +156,7 @@ export default {
               align: 'left',
               editable: true,
               edit: (val, row) => {
+                console.log(val, row)
                 this.modifyResult(row.id, 'vehicle', val)
               }
             },
@@ -202,8 +210,10 @@ export default {
   computed: {
     hasChanges () {
       const ret = !deepEqual(this.results, this.$store.getters[`${this.leagueId}/${this.seasonId}/${this.eventId}/${this.session.id}/results`])
-      console.log('results.vue hasChanges', ret, this.results, this.$store.getters[`${this.leagueId}/${this.seasonId}/${this.eventId}/${this.session.id}/results`])
       return ret
+    },
+    allVehicles () {
+      return this.$store.getters[`edit_${this.leagueId}/${this.seasonId}/${this.eventId}/vehicles`]
     }
   },
   methods: {

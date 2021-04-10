@@ -2,6 +2,7 @@
   <p
     @mouseover="hover = true"
     @mouseleave="hover = false"
+    v-if="usePopup"
   >
     {{value}}
     <q-icon name="mdi-pencil" :color="hover ? 'grey-1' : 'grey-7'"/>
@@ -17,6 +18,7 @@
         </template>
     </q-popup-edit>
   </p>
+  <q-input v-else dense :value="value" @input="$emit('input', $event)"/>
 </template>
 
 <script>
@@ -25,6 +27,10 @@ export default {
     value: {
       type: String,
       default: () => '00:00:00.000'
+    },
+    usePopup: {
+      type: Boolean,
+      default: () => true
     }
   },
   data () {
