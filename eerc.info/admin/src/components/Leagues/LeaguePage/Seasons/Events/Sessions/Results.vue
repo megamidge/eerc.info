@@ -53,7 +53,7 @@
                             <editable-time :use-popup="false" class="q-ma-none" :value="col.value" @input="col.edit($event,props.row)"/>
                         </template>
                         <template v-else-if="col.name === 'vehicle'">
-                            <q-select :value="col.value" @input-value="col.edit($event, props.row)" use-input fill-input input-debounce="0" dense :options="allVehicles"/>
+                            <q-select :value="col.value" @input-value="col.edit($event, props.row)" use-input hide-selected fill-input input-debounce="0" dense :options="allVehicles"/>
                         </template>
                         <template v-else-if="col.editable">
                             <q-input dense :value="col.value" @input="col.edit($event, props.row)"/>
