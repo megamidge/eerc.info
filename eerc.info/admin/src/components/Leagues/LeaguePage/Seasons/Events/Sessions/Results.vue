@@ -1,80 +1,99 @@
 <template>
   <q-card class="result-card">
-      <q-card-section class="row items-start justify-between">
-          <div>
-            <p class="q-ma-none text-h6">Results</p>
-            <p class="q-ma-none text-body-2">{{session.id}}: {{session.name}}</p>
-          </div>
-          <q-btn icon="mdi-close" v-close-popup flat round/>
-      </q-card-section>
-      <q-card-actions v-if="hasChanges" class="bg-info row items-center justify-between">
-          <p class="q-ma-none text-subtitle2">You have unsaved changes.</p>
-          <div class="row no-wrap">
-            <q-btn unelevated class="q-mr-sm" label="Discard" @click="discardChanges"/>
-          </div>
-      </q-card-actions>
-      <q-card-section>
-
-                            <q-select value="speed" use-input fill-input input-debounce="0" dense />
-      </q-card-section>
-      <q-card-section class="q-pa-xs">
-          <q-table
-            :columns="tables[eventType].columns"
-            :pagination="tables[eventType].pagination"
-            :data="results"
-            dense
-            flat
-            hide-pagination
-            row-key="id"
-          >
-            <template v-slot:header="props">
-                <q-tr :props="props" class="bg-secondary">
-                    <q-th auto-width v-for="col in props.cols" :key="col.name" :props="props" class="text-bold text-upeprcase">
-                        {{ col.label }}
-                    </q-th>
-                </q-tr>
-            </template>
-            <template v-slot:body="props">
-                <q-tr :props="props" :class="{'tinted':props.rowIndex%2===0}" :key="props.row.id">
-                    <q-td :props="props" v-for="col in props.cols" :key="col.name"
-                        :auto-width="col.name === 'position' || col.name === 'delete'"
-                        class="flash-in"
-                    >
-                        <template v-if="col.name==='name'">
-                            <editable-driver :value="props.row.driver" @input="col.edit($event, props.row)"/>
-                        </template>
-                        <template v-else-if="col.name==='position'">
-                            {{ props.rowIndex + 1 }}
-                        </template>
-                        <template v-else-if="col.name==='delete'">
-                            <q-btn dense icon="mdi-delete" flat @click="deleteRow(props.row)"/>
-                        </template>
-                        <template v-else-if="col.name === 'time'">
-                            <editable-time :use-popup="false" class="q-ma-none" :value="col.value" @input="col.edit($event,props.row)"/>
-                        </template>
-                        <template v-else-if="col.name === 'vehicle'">
-                            <q-select :value="col.value" @input-value="col.edit($event, props.row)" use-input hide-selected fill-input input-debounce="0" dense :options="allVehicles"/>
-                        </template>
-                        <template v-else-if="col.editable">
-                            <q-input dense :value="col.value" @input="col.edit($event, props.row)"/>
-                        </template>
-                        <template v-else>
-                            {{col.value}}
-                        </template>
-                    </q-td>
-                </q-tr>
-            </template>
-            <template v-slot:bottom-row>
-                <q-tr>
-                    <q-td colspan="100%">
-                        <div class="row items-center justify-center">
-                            <q-btn label="Add Row" icon="mdi-plus-circle" @click="addRow"/>
-                        </div>
-                    </q-td>
-                </q-tr>
-            </template>
-          </q-table>
-      </q-card-section>
+    <q-card-section class="row items-start justify-between">
+      <div>
+        <p class="q-ma-none text-h6">Results</p>
+        <p class="q-ma-none text-body-2">{{ session.id }}: {{ session.name }}</p>
+      </div>
+      <q-btn icon="mdi-close" v-close-popup flat round />
+    </q-card-section>
+    <q-card-actions v-if="hasChanges" class="bg-info row items-center justify-between">
+      <p class="q-ma-none text-subtitle2">You have unsaved changes.</p>
+      <div class="row no-wrap">
+        <q-btn unelevated class="q-mr-sm" label="Discard" @click="discardChanges" />
+      </div>
+    </q-card-actions>
+    <q-card-actions class="row no-wrap justify-center items-center">
+      <q-btn label="Use CSV" icon="mdi-file-delimited" color="positive" @click="showCsvUpload = true" />
+      <q-dialog v-model="showCsvUpload">
+        <csv-uploader @input="parseCSV" />
+      </q-dialog>
+    </q-card-actions>
+    <q-card-section class="q-pa-xs">
+      <q-table
+        :columns="tables[eventType].columns"
+        :pagination="tables[eventType].pagination"
+        :data="results"
+        dense
+        flat
+        hide-pagination
+        row-key="id"
+      >
+        <template v-slot:header="props">
+          <q-tr :props="props" class="bg-secondary">
+            <q-th auto-width v-for="col in props.cols" :key="col.name" :props="props" class="text-bold text-upeprcase">
+              {{ col.label }}
+            </q-th>
+          </q-tr>
+        </template>
+        <template v-slot:body="props">
+          <q-tr :props="props" :class="{ tinted: props.rowIndex % 2 === 0 }" :key="props.row.id">
+            <q-td
+              :props="props"
+              v-for="col in props.cols"
+              :key="col.name"
+              :auto-width="col.name === 'position' || col.name === 'delete'"
+              class="flash-in"
+            >
+              <template v-if="col.name === 'name'">
+                <editable-driver :value="props.row.driver" @input="col.edit($event, props.row)" />
+              </template>
+              <template v-else-if="col.name === 'position'">
+                {{ props.rowIndex + 1 }}
+              </template>
+              <template v-else-if="col.name === 'delete'">
+                <q-btn dense icon="mdi-delete" flat @click="deleteRow(props.row)" />
+              </template>
+              <template v-else-if="col.name === 'time'">
+                <editable-time
+                  :use-popup="false"
+                  class="q-ma-none"
+                  :value="col.value"
+                  @input="col.edit($event, props.row)"
+                />
+              </template>
+              <template v-else-if="col.name === 'vehicle'">
+                <q-select
+                  :value="col.value"
+                  @input-value="col.edit($event, props.row)"
+                  use-input
+                  hide-selected
+                  fill-input
+                  input-debounce="0"
+                  dense
+                  :options="allVehicles"
+                />
+              </template>
+              <template v-else-if="col.editable">
+                <q-input dense :value="col.value" @input="col.edit($event, props.row)" />
+              </template>
+              <template v-else>
+                {{ col.value }}
+              </template>
+            </q-td>
+          </q-tr>
+        </template>
+        <template v-slot:bottom-row>
+          <q-tr>
+            <q-td colspan="100%">
+              <div class="row items-center justify-center">
+                <q-btn label="Add Row" icon="mdi-plus-circle" @click="addRow" />
+              </div>
+            </q-td>
+          </q-tr>
+        </template>
+      </q-table>
+    </q-card-section>
   </q-card>
 </template>
 
@@ -84,8 +103,9 @@ import deepEqual from 'deep-equal'
 import EditableTime from 'components/EditableTime'
 import countryCodes from 'assets/countryCodes.json'
 import EditableDriver from 'src/components/EditableDriver.vue'
+import CsvUploader from './CsvUploader.vue'
 export default {
-  components: { EditableTime, EditableDriver },
+  components: { EditableTime, EditableDriver, CsvUploader },
   props: {
     results: {
       type: Array,
@@ -112,8 +132,9 @@ export default {
       default: () => ''
     }
   },
-  data () {
+  data() {
     return {
+      showCsvUpload: false,
       countryCodes: countryCodes.codes,
       tables: {
         rally: {
@@ -139,7 +160,7 @@ export default {
             {
               name: 'name',
               label: 'Driver',
-              field: row => row.driver.name,
+              field: (row) => row.driver.name,
               required: true,
               align: 'left',
               classes: 'ellipsis',
@@ -173,17 +194,7 @@ export default {
               editable: true,
               edit: (val, row) => {
                 // parse the input and apply it.
-                const split1 = val.split('.') // seperate the millis from the others
-                var millis = parseInt(split1[1].padEnd(3, '0'))
-                const split2 = split1[0].split(':').reverse() // reverse so we can go in order to get each bit.
-                var seconds = parseInt(split2[0])
-                var minutes = parseInt(split2[1])
-                var hours = parseInt(split2[2])
-                var totalMillis = millis
-                if (seconds && !isNaN(seconds)) totalMillis += seconds * 1000
-                if (minutes && !isNaN(minutes)) totalMillis += minutes * 60000
-                if (hours && !isNaN(hours)) totalMillis += hours * 3600000
-                this.modifyResult(row.id, 'time', totalMillis)
+                this.modifyResult(row.id, 'time', this.timeStringToMillis(val))
               }
             },
             {
@@ -191,13 +202,15 @@ export default {
               label: 'Diff.',
               align: 'left',
               required: true,
-              field: row => {
+              field: (row) => {
                 const resultSet = this.results
                 const emptyArr = []
                 const rowsCopy = extend(true, emptyArr, resultSet)
                 const firstRow = rowsCopy.sort((a, b) => a.time - b.time)[0]
                 if (row.driver.name === firstRow.driver.name) return 'Interval'
-                const time = this.formatTime(row.time - firstRow.time, { stripHours: true })
+                const time = this.formatTime(row.time - firstRow.time, {
+                  stripHours: true
+                })
                 return `+ ${time}`
               },
               editable: false
@@ -208,23 +221,61 @@ export default {
     }
   },
   computed: {
-    hasChanges () {
-      const ret = !deepEqual(this.results, this.$store.getters[`${this.leagueId}/${this.seasonId}/${this.eventId}/${this.session.id}/results`])
+    hasChanges() {
+      const ret = !deepEqual(
+        this.results,
+        this.$store.getters[`${this.leagueId}/${this.seasonId}/${this.eventId}/${this.session.id}/results`]
+      )
       return ret
     },
-    allVehicles () {
+    allVehicles() {
       return this.$store.getters[`edit_${this.leagueId}/${this.seasonId}/${this.eventId}/vehicles`]
     }
   },
   methods: {
-    modifyResult (resultId, field, value) {
+    timeStringToMillis(timeStr) {
+      const split1 = timeStr.split('.') // seperate the millis from the others
+      var millis = parseInt(split1[1].padEnd(3, '0'))
+      const split2 = split1[0].split(':').reverse() // reverse so we can go in order to get each bit.
+      var seconds = parseInt(split2[0])
+      var minutes = parseInt(split2[1])
+      var hours = parseInt(split2[2])
+      var totalMillis = millis
+      if (seconds && !isNaN(seconds)) totalMillis += seconds * 1000
+      if (minutes && !isNaN(minutes)) totalMillis += minutes * 60000
+      if (hours && !isNaN(hours)) totalMillis += hours * 3600000
+      return totalMillis
+    },
+    parseCSV(csvLines) {
+      this.showCsvUpload = false
+      console.log('parseCSV', csvLines)
+      const lines = csvLines
+      lines.shift()
+      const records = lines
+        .filter((line) => line !== '')
+        .map((line) => {
+          const columns = line.split(',')
+          return {
+            driver: {
+              countryCode: columns[0].toLowerCase(),
+              name: columns[1]
+            },
+            time: this.timeStringToMillis(columns[3]),
+            vehicle: columns[2]
+          }
+        })
+      records.forEach((record) => {
+        this.addRow(record)
+      })
+    },
+    modifyResult(resultId, field, value) {
       this.$store.commit(`edit_${this.leagueId}/${this.seasonId}/${this.eventId}/${this.session.id}/setResult`, {
         id: resultId,
         field: field,
         value: value
       })
     },
-    discardChanges () {
+    discardChanges() {
       this.$store.dispatch(`edit_${this.leagueId}/${this.seasonId}/${this.eventId}/${this.session.id}/resetResults`, {
         leagueId: this.leagueId,
         seasonId: this.seasonId,
@@ -234,20 +285,27 @@ export default {
         sync: false
       })
     },
-    deleteRow (row) {
-      this.$store.commit(`edit_${this.leagueId}/${this.seasonId}/${this.eventId}/${this.session.id}/deleteResult`, row.id)
+    deleteRow(row) {
+      this.$store.commit(
+        `edit_${this.leagueId}/${this.seasonId}/${this.eventId}/${this.session.id}/deleteResult`,
+        row.id
+      )
     },
-    addRow () {
+    addRow(overrideData) {
       var newResult
       switch (this.eventType) {
         case 'rally':
-          newResult = {
-            driver: {
-              name: 'New Driver',
-              countryCode: 'european-union'
-            },
-            vehicle: 'Vehicle',
-            time: null
+          if (!overrideData) {
+            newResult = {
+              driver: {
+                name: 'New Driver',
+                countryCode: 'european-union'
+              },
+              vehicle: 'Vehicle',
+              time: null
+            }
+          } else {
+            newResult = overrideData
           }
           break
 
@@ -266,15 +324,15 @@ export default {
     },
     // formats a millisecond timestamp as  hh:mm:ss:sss.
     // strip object allows to omit hours, minutes, seconds from return value.
-    formatTime (val, strip = { stripHours: false, stripMinutes: false, stripSeconds: false }) {
-      var milliseconds = ('000' + parseInt((val % 1000))).slice(-3),
+    formatTime(val, strip = { stripHours: false, stripMinutes: false, stripSeconds: false }) {
+      var milliseconds = ('000' + parseInt(val % 1000)).slice(-3),
         seconds = Math.floor((val / 1000) % 60),
         minutes = Math.floor((val / (1000 * 60)) % 60),
         hours = Math.floor((val / (1000 * 60 * 60)) % 24)
 
-      hours = (hours < 10) ? '0' + hours : hours
-      minutes = (minutes < 10) ? '0' + minutes : minutes
-      seconds = (seconds < 10) ? '0' + seconds : seconds
+      hours = hours < 10 ? '0' + hours : hours
+      minutes = minutes < 10 ? '0' + minutes : minutes
+      seconds = seconds < 10 ? '0' + seconds : seconds
       const hoursStr = strip.stripHours ? '' : `${hours}:`
       const minuteStr = strip.stripMinutes ? '' : `${minutes}:`
       const secondsStr = strip.stripSeconds ? '' : `${seconds}.`
@@ -286,11 +344,11 @@ export default {
 
 <style lang="scss" scoped>
 .result-card {
-    width:100vw;
-    max-width:$breakpoint-lg-min;
+  width: 100vw;
+  max-width: $breakpoint-lg-min;
 }
 .tinted {
-    background:rgba(0,0,0,0.25)
+  background: rgba(0, 0, 0, 0.25);
 }
 @keyframes flash-in {
   0% {
@@ -301,19 +359,19 @@ export default {
   }
 }
 .flash-in {
-    position: relative;
-    &:after {
-        content: '';
-        position:absolute;
-        left: 0;
-        right: 0;
-        top: 0;
-        bottom: 0;
-        background-color: var(--q-color-secondary);
-        opacity: 0;
-        animation-name: flash-in;
-        animation-duration: 1s;
-        animation-iteration-count: 1;
-    }
+  position: relative;
+  &:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: var(--q-color-secondary);
+    opacity: 0;
+    animation-name: flash-in;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+  }
 }
 </style>
