@@ -7,6 +7,9 @@
       "hosting": {
         "beta": [
           "eerc-info-beta"
+        ],
+        "release": [
+          "eerc-info"
         ]
       }
     }

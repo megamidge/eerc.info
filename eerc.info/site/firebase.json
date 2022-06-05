@@ -20,7 +20,7 @@
       ]
     },
     {
-      "target": "beta",
+      "target": "release",
       "public": "dist/spa",
       "ignore": [
         "firebase.json",
